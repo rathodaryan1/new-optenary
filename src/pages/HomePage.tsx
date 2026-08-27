@@ -83,7 +83,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased">
       <SEO 
-        title="Optenary | Custom Software Development &amp; AI Solutions Agency"
+        title="Optenary | Custom Software Development &amp; AI Solutions"
         description="Optenary is a global technology partner engineering custom software, web platforms, mobile apps, and autonomous AI agents designed to scale operations and boost efficiency."
         keywords="custom software development, AI solutions, web development services, mobile app development, AI agents, workflow automation, Optenary"
         canonicalPath="/"

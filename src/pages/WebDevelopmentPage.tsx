@@ -30,13 +30,20 @@ export default function WebDevelopmentPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/web-development#webpage",
+        "url": "https://optenary.in/services/web-development",
+        "name": "Web Development Services | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Custom Web Application Development Services",
         "description": "Optenary provides custom web app development services and progressive web app solutions built for scalability, speed, and business impact.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "Web Development"
@@ -181,7 +188,7 @@ export default function WebDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Web Development Services | Custom Web Applications &amp; SaaS"
+        title="Web Development Services | Optenary"
         description="Custom web application development services using React, Next.js, and Node.js. Build scalable SaaS platforms, progressive web apps, and custom databases."
         keywords="custom web app development, web app development agency, web development services India, progressive web app, SaaS platform development"
         canonicalPath="/services/web-development"

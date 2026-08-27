@@ -30,13 +30,20 @@ export default function CustomSoftwarePage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/custom-software#webpage",
+        "url": "https://optenary.in/services/custom-software",
+        "name": "Custom Software Development | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Custom Software Development & Engineering Services",
         "description": "Optenary engineers custom software solutions, enterprise ERP/CRM portals, scalable API gateways, and DevOps cloud infrastructures.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "Custom Software Development"
@@ -186,7 +193,7 @@ export default function CustomSoftwarePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom Software Development Company | Enterprise SaaS &amp; Tools"
+        title="Custom Software Development | Optenary"
         description="Optenary engineers tailored custom software systems, SaaS platforms, ERP networks, and internal business tools designed to scale operations and boost efficiency."
         keywords="custom software development, enterprise software engineering, API gateways, ERP development, database design, cloud backend"
         canonicalPath="/services/custom-software"

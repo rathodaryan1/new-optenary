@@ -27,13 +27,20 @@ export default function ShopifyDevelopmentPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/shopify-development#webpage",
+        "url": "https://optenary.in/services/shopify-development",
+        "name": "Shopify Development Services | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Shopify & Headless E-Commerce Development Services",
         "description": "Optenary builds premium custom Shopify themes and headless Hydrogen storefronts with order sync, custom apps, and automated inventory sync.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "Shopify Development"
@@ -142,7 +149,7 @@ export default function ShopifyDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Shopify Development Services | Custom Themes &amp; Custom Apps"
+        title="Shopify Development Services | Optenary"
         description="Hire certified Shopify developers to engineer bespoke storefronts, custom theme designs, private apps, and optimized conversions for fast e-commerce growth."
         keywords="Shopify development company, Shopify developer, headless Shopify, Shopify Hydrogen, custom Shopify apps, Shopify Liquid theme"
         canonicalPath="/services/shopify-development"

@@ -30,13 +30,20 @@ export default function MobileDevelopmentPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/mobile-development#webpage",
+        "url": "https://optenary.in/services/mobile-development",
+        "name": "Mobile App Development | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Mobile Application Development Services",
         "description": "Optenary builds high-performance, secure, and native-grade iOS & Android applications using Swift, Kotlin, React Native, and Flutter.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "Mobile App Development"
@@ -171,7 +178,7 @@ export default function MobileDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Mobile App Development Services | React Native &amp; Flutter"
+        title="Mobile App Development | Optenary"
         description="Top-tier mobile app development services for iOS &amp; Android. Custom React Native and Flutter apps optimized for performance, security, and app store approval."
         keywords="mobile app development, iOS app development, Android app development, React Native agency, Flutter app development, app development services India"
         canonicalPath="/services/mobile-development"

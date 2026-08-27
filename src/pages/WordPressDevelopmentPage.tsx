@@ -27,13 +27,20 @@ export default function WordPressDevelopmentPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/wordpress-development#webpage",
+        "url": "https://optenary.in/services/wordpress-development",
+        "name": "WordPress Development Services | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "WordPress & WooCommerce Development Services",
         "description": "Optenary builds premium custom WordPress themes, custom Gutenberg React blocks, and secure, high-speed WooCommerce shopping storefronts.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "WordPress Development"
@@ -141,7 +148,7 @@ export default function WordPressDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="WordPress Development Services | Custom Themes &amp; Headless WP"
+        title="WordPress Development Services | Optenary"
         description="Custom WordPress development services including custom theme engineering, Elementor builds, headless WordPress setups, and secure enterprise migrations."
         keywords="WordPress development agency, custom WordPress theme, WooCommerce developer, Gutenberg block editor, headless WordPress, custom PHP CMS"
         canonicalPath="/services/wordpress-development"

@@ -20,13 +20,20 @@ export default function DesktopDevelopmentPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/desktop-development#webpage",
+        "url": "https://optenary.in/services/desktop-development",
+        "name": "Desktop Application Development | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Desktop Application Development Services",
         "description": "Optenary builds high-performance, secure cross-platform desktop applications for Windows, macOS, and Linux.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "Desktop Application Development"
@@ -106,7 +113,7 @@ export default function DesktopDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Desktop Application Development Services | Electron &amp; Native"
+        title="Desktop Application Development | Optenary"
         description="High-performance native cross-platform desktop application development using Electron, C#, and modern frameworks. Secure, offline-capable, and optimized."
         keywords="desktop development, native app development, tauri development, electron app development, custom desktop software"
         canonicalPath="/services/desktop-development"

@@ -31,13 +31,20 @@ export default function CustomEcommercePage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/custom-ecommerce-development#webpage",
+        "url": "https://optenary.in/services/custom-ecommerce-development",
+        "name": "Custom E-commerce Development | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "Custom E-Commerce Development Services",
         "description": "Optenary engineers custom headless e-commerce platforms, multi-vendor marketplaces, subscription systems, and Stripe payment gateway architectures.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "E-Commerce Development"
@@ -178,7 +185,7 @@ export default function CustomEcommercePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom E-commerce Development Services | Scalable Online Stores"
+        title="Custom E-commerce Development | Optenary"
         description="Custom database-driven e-commerce platform engineering with secure payment integrations, inventory synch pipelines, and rapid checkouts."
         keywords="custom e-commerce development, headless e-commerce, multi-vendor platforms, subscription payment integrations, Stripe, Razorpay integrations"
         canonicalPath="/services/custom-ecommerce-development"

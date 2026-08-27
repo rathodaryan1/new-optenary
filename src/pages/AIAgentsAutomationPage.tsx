@@ -30,13 +30,20 @@ export default function AIAgentsAutomationPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebPage",
+        "@id": "https://optenary.in/services/ai-agents-automation#webpage",
+        "url": "https://optenary.in/services/ai-agents-automation",
+        "name": "AI Automation & AI Agent Development | Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
+      },
+      {
         "@type": "Service",
         "name": "AI Agents & Workflow Automation Services",
         "description": "Optenary designs autonomous AI agents, voice AI assistants, and backend workflow automations using LLMs, n8n, Make, and vector database pipelines.",
         "provider": {
-          "@type": "Organization",
-          "name": "Optenary",
-          "url": "https://optenary.in/"
+          "@id": "https://optenary.in/#organization"
         },
         "areaServed": "Global",
         "serviceType": "AI & Automation"
@@ -192,7 +199,7 @@ export default function AIAgentsAutomationPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="AI Agents &amp; Workflow Automation Services | n8n &amp; Make"
+        title="AI Automation &amp; AI Agent Development | Optenary"
         description="Deploy autonomous AI voice agents, custom RAG chatbots, and intelligent background workflow automation pipelines using n8n, Make, Vapi, and Retell."
         keywords="AI agents, workflow automation, autonomous agents, voice AI assistants, vector DB pipelines, OpenAI integrations, n8n automation"
         canonicalPath="/services/ai-agents-automation"

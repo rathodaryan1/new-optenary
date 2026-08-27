@@ -12,7 +12,10 @@ export default function AboutPage() {
         "@type": "AboutPage",
         "@id": "https://optenary.in/about#webpage",
         "url": "https://optenary.in/about",
-        "name": "About Us - Optenary"
+        "name": "About Us - Optenary",
+        "isPartOf": {
+          "@id": "https://optenary.in/#website"
+        }
       },
       {
         "@type": "Person",
@@ -103,7 +106,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO
-        title="About Optenary | Custom Software &amp; AI Development Team"
+        title="About Optenary | Custom Software &amp; AI Development"
         description="Learn about Optenary, a global technology partner founded by Aryan Rathod and Arjun Parmar. We specialize in custom software engineering, mobile apps, and AI workflow automations."
         keywords="about optenary, aryan rathod, arjun parmar, custom software development company, tech partner, app development agency"
         canonicalPath="/about"
