@@ -3,6 +3,7 @@
   "short_name": "Optenary",
   "description": "Custom web apps, AI agents, and mobile development for modern businesses.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#050607",
   "theme_color": "#10b981",
