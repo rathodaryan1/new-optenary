@@ -13,7 +13,9 @@ interface SEOProps {
 export default function SEO({ title, description, keywords, author, schema, canonicalPath, noindex }: SEOProps) {
   useEffect(() => {
     // Update Document Title
-    document.title = `${title} | Optenary`;
+    const brandName = 'Optenary';
+    const formattedTitle = title.includes(brandName) ? title : `${title} | ${brandName}`;
+    document.title = formattedTitle;
 
     // Update Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -55,14 +57,14 @@ export default function SEO({ title, description, keywords, author, schema, cano
 
     // Update Open Graph Tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', `${title} | Optenary`);
+    if (ogTitle) ogTitle.setAttribute('content', formattedTitle);
 
     let ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) ogDescription.setAttribute('content', description);
 
     // Update Twitter Tags
     let twitterTitle = document.querySelector('meta[property="twitter:title"]');
-    if (twitterTitle) twitterTitle.setAttribute('content', `${title} | Optenary`);
+    if (twitterTitle) twitterTitle.setAttribute('content', formattedTitle);
 
     let twitterDescription = document.querySelector('meta[property="twitter:description"]');
     if (twitterDescription) twitterDescription.setAttribute('content', description);
