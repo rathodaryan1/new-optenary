@@ -28,16 +28,37 @@ const webFaqs = [
 export default function WebDevelopmentPage() {
   const webSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Custom Web Application Development Services",
-    "description": "Optenary provides custom web app development services and progressive web app solutions built for scalability, speed, and business impact.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "Web Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Custom Web Application Development Services",
+        "description": "Optenary provides custom web app development services and progressive web app solutions built for scalability, speed, and business impact.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "Web Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Web Development",
+            "item": "https://optenary.in/services/web-development"
+          }
+        ]
+      }
+    ]
   };
 
   const [activeBuildStep, setActiveBuildStep] = useState<number | null>(null);
@@ -160,8 +181,8 @@ export default function WebDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom Web App Development Service"
-        description="Optenary is a custom web app development agency providing scalable web application development services and progressive web app solutions."
+        title="Web Development Services | Custom Web Applications &amp; SaaS"
+        description="Custom web application development services using React, Next.js, and Node.js. Build scalable SaaS platforms, progressive web apps, and custom databases."
         keywords="custom web app development, web app development agency, web development services India, progressive web app, SaaS platform development"
         canonicalPath="/services/web-development"
         schema={webSchema}
@@ -230,7 +251,7 @@ export default function WebDevelopmentPage() {
               Web Application Development <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              As a trusted web app development agency, Optenary supports businesses with scalable platforms and modern digital solutions across global markets. We deliver reliable web application development services India companies depend on, while also working with international clients through clear communication and product-focused execution.
+              As a trusted web app development agency, Optenary supports businesses with <a href="/services/custom-software" className="text-brand-orange hover:underline font-semibold">custom software platforms</a> and modern <a href="/services/custom-ecommerce-development" className="text-brand-orange hover:underline font-semibold">e-commerce solutions</a> across global markets. We deliver reliable web application development services India companies depend on, while also working with international clients through clear communication and product-focused execution.
             </p>
           </div>
         </section>

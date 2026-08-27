@@ -28,16 +28,37 @@ const aiFaqs = [
 export default function AIAgentsAutomationPage() {
   const aiSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "AI Agents & Workflow Automation Services",
-    "description": "Optenary designs autonomous AI agents, voice AI assistants, and backend workflow automations using LLMs, n8n, Make, and vector database pipelines.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "AI & Automation"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "AI Agents & Workflow Automation Services",
+        "description": "Optenary designs autonomous AI agents, voice AI assistants, and backend workflow automations using LLMs, n8n, Make, and vector database pipelines.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "AI & Automation"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI & Automation",
+            "item": "https://optenary.in/services/ai-agents-automation"
+          }
+        ]
+      }
+    ]
   };
 
   const [activeBuildStep, setActiveBuildStep] = useState<number | null>(null);
@@ -171,8 +192,8 @@ export default function AIAgentsAutomationPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="AI Agents & Workflow Automation Services"
-        description="Optenary designs autonomous AI agents, voice AI assistants, and backend workflow automations using LLMs, n8n, Make, and vector database pipelines."
+        title="AI Agents &amp; Workflow Automation Services | n8n &amp; Make"
+        description="Deploy autonomous AI voice agents, custom RAG chatbots, and intelligent background workflow automation pipelines using n8n, Make, Vapi, and Retell."
         keywords="AI agents, workflow automation, autonomous agents, voice AI assistants, vector DB pipelines, OpenAI integrations, n8n automation"
         canonicalPath="/services/ai-agents-automation"
         schema={aiSchema}
@@ -236,7 +257,7 @@ export default function AIAgentsAutomationPage() {
               AI & Workflow Automation <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              Optenary delivers fast, secure, and production-ready AI solutions with custom vector indexes, streaming voice agents, and robust n8n backend architectures. We help enterprises eliminate routine tasks and reduce operational costs.
+              Optenary delivers fast, secure, and production-ready AI solutions with custom vector indexes, streaming voice agents, and robust n8n backend architectures. We help enterprises eliminate routine tasks, integrate <a href="/services/custom-software" className="text-brand-orange hover:underline font-semibold">custom software systems</a>, and optimize frontend <a href="/services/web-development" className="text-brand-orange hover:underline font-semibold">web applications</a> for cost savings.
             </p>
           </div>
         </section>

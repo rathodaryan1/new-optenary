@@ -29,16 +29,37 @@ const ecommFaqs = [
 export default function CustomEcommercePage() {
   const ecommerceSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Custom E-Commerce Development Services",
-    "description": "Optenary engineers custom headless e-commerce platforms, multi-vendor marketplaces, subscription systems, and Stripe payment gateway architectures.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "E-Commerce Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Custom E-Commerce Development Services",
+        "description": "Optenary engineers custom headless e-commerce platforms, multi-vendor marketplaces, subscription systems, and Stripe payment gateway architectures.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "E-Commerce Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Custom E-Commerce Development",
+            "item": "https://optenary.in/services/custom-ecommerce-development"
+          }
+        ]
+      }
+    ]
   };
 
   const whatWeBuild = [
@@ -157,10 +178,10 @@ export default function CustomEcommercePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom E-Commerce Development - Headless Solutions"
-        description="Optenary engineers custom headless e-commerce platforms, multi-vendor marketplaces, subscription systems, and Stripe payment gateway architectures."
+        title="Custom E-commerce Development Services | Scalable Online Stores"
+        description="Custom database-driven e-commerce platform engineering with secure payment integrations, inventory synch pipelines, and rapid checkouts."
         keywords="custom e-commerce development, headless e-commerce, multi-vendor platforms, subscription payment integrations, Stripe, Razorpay integrations"
-        canonicalPath="/services/custom-ecommerce"
+        canonicalPath="/services/custom-ecommerce-development"
         schema={ecommerceSchema}
       />
       <Header />
@@ -222,7 +243,7 @@ export default function CustomEcommercePage() {
               Custom E-Commerce Development <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              Optenary designs robust custom store engines, high-speed API checkouts, and fully secure multi-vendor databases. We build architectures that load products and process payouts automatically without vendor fees or limits.
+              Optenary designs robust custom store engines, high-speed API checkouts, and fully secure multi-vendor databases. We build architectures that load products and process payouts automatically without vendor fees or limits. For standard stores, we provide expert integration using <a href="/services/shopify-development" className="text-brand-orange hover:underline font-semibold">custom Shopify designs</a> and <a href="/services/wordpress-development" className="text-brand-orange hover:underline font-semibold">WordPress WooCommerce portals</a>.
             </p>
           </div>
         </section>

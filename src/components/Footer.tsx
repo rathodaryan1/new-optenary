@@ -129,16 +129,16 @@ export default function Footer() {
 
           <div className="lg:col-span-2">
             <h4 className="text-white font-semibold text-sm tracking-wider uppercase mb-6">
-              Projects
+              Services
             </h4>
             <ul className="space-y-3.5 text-sm">
               {[
-                { name: 'Web Application', href: '/services/web-development' },
-                { name: 'Mobile Application', href: '/services/mobile-development' },
-                { name: 'Custom Software', href: '/services/custom-software' },
-                { name: 'AI & Automation', href: '/services/ai-agents-automation' },
-                { name: 'Shopify Store', href: '/services/shopify-development' },
-                { name: 'WordPress Portal', href: '/services/wordpress-development' }
+                { name: 'Web Development', href: '/services/web-development' },
+                { name: 'Mobile App Development', href: '/services/mobile-development' },
+                { name: 'Custom Software Development', href: '/services/custom-software' },
+                { name: 'AI Agents & Automation', href: '/services/ai-agents-automation' },
+                { name: 'Shopify Development', href: '/services/shopify-development' },
+                { name: 'WordPress Development', href: '/services/wordpress-development' }
               ].map((item) => (
                 <li key={item.name}>
                   <a

@@ -27,9 +27,9 @@ export default function Header() {
   }, []);
 
   const servicesList: ServiceItem[] = [
-    { name: "Web Application", href: "/services/web-development" },
-    { name: "Mobile Application", href: "/services/mobile-development" },
-    { name: "Custom Software", href: "/services/custom-software" },
+    { name: "Web Development", href: "/services/web-development" },
+    { name: "Mobile App Development", href: "/services/mobile-development" },
+    { name: "Custom Software Development", href: "/services/custom-software" },
     { name: "Desktop Development", href: "/services/desktop-development" },
     { name: "AI Agents & Automation", href: "/services/ai-agents-automation" },
     { 

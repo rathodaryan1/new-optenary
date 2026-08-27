@@ -18,16 +18,37 @@ const desktopFaqs = [
 export default function DesktopDevelopmentPage() {
   const desktopSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Desktop Application Development Services",
-    "description": "Optenary builds high-performance, secure cross-platform desktop applications for Windows, macOS, and Linux.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "Desktop Application Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Desktop Application Development Services",
+        "description": "Optenary builds high-performance, secure cross-platform desktop applications for Windows, macOS, and Linux.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "Desktop Application Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Desktop Development",
+            "item": "https://optenary.in/services/desktop-development"
+          }
+        ]
+      }
+    ]
   };
 
   const whatWeBuild = [
@@ -85,8 +106,8 @@ export default function DesktopDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Desktop Application Development - Optenary"
-        description="Optenary engineers native and cross-platform desktop applications for Windows, macOS, and Linux using Tauri, Electron, and C#."
+        title="Desktop Application Development Services | Electron &amp; Native"
+        description="High-performance native cross-platform desktop application development using Electron, C#, and modern frameworks. Secure, offline-capable, and optimized."
         keywords="desktop development, native app development, tauri development, electron app development, custom desktop software"
         canonicalPath="/services/desktop-development"
         schema={desktopSchema}
@@ -121,7 +142,7 @@ export default function DesktopDevelopmentPage() {
             transition={{ delay: 0.2 }}
             className="text-dark-muted max-w-4xl mx-auto text-sm md:text-base leading-relaxed mb-10"
           >
-            Optenary designs and develops low-latency, secure, and deeply integrated desktop applications that run close to the metal. From custom local database engines to hardware integrations and multi-threaded tools, we deliver native-grade desktop solutions across Windows, macOS, and Linux.
+            Optenary designs and develops low-latency, secure, and deeply integrated desktop applications that run close to the metal. From custom local database engines to hardware integrations and multi-threaded tools, we deliver native-grade desktop solutions across Windows, macOS, and Linux. When building desktop products, we integrate with secure <a href="/services/custom-software" className="text-brand-orange hover:underline font-semibold">custom software backends</a> and enterprise databases.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

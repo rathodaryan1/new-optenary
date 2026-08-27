@@ -28,16 +28,37 @@ const mobileFaqs = [
 export default function MobileDevelopmentPage() {
   const mobileSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Mobile Application Development Services",
-    "description": "Optenary builds high-performance, secure, and native-grade iOS & Android applications using Swift, Kotlin, React Native, and Flutter.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "Mobile App Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Mobile Application Development Services",
+        "description": "Optenary builds high-performance, secure, and native-grade iOS & Android applications using Swift, Kotlin, React Native, and Flutter.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "Mobile App Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Mobile App Development",
+            "item": "https://optenary.in/services/mobile-development"
+          }
+        ]
+      }
+    ]
   };
 
   const [activeBuildStep, setActiveBuildStep] = useState<number | null>(null);
@@ -150,8 +171,8 @@ export default function MobileDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Mobile App Development Services - iOS & Android"
-        description="Optenary builds high-performance, secure, and native-grade iOS & Android applications using Swift, Kotlin, React Native, and Flutter."
+        title="Mobile App Development Services | React Native &amp; Flutter"
+        description="Top-tier mobile app development services for iOS &amp; Android. Custom React Native and Flutter apps optimized for performance, security, and app store approval."
         keywords="mobile app development, iOS app development, Android app development, React Native agency, Flutter app development, app development services India"
         canonicalPath="/services/mobile-development"
         schema={mobileSchema}
@@ -215,7 +236,7 @@ export default function MobileDevelopmentPage() {
               Mobile Application Development <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              Optenary delivers secure enterprise-grade mobile app development services with scalable architectures, real-time sync systems, and optimized UI/UX flows that drive customer loyalty and mobile business growth across global markets.
+              Optenary delivers secure enterprise-grade mobile app development services with <a href="/services/custom-software" className="text-brand-orange hover:underline font-semibold">custom software platforms</a>, real-time sync systems, and optimized UI/UX flows that drive customer loyalty and mobile business growth across global markets. If your app requires automated background pipelines, we integrate custom <a href="/services/ai-agents-automation" className="text-brand-orange hover:underline font-semibold">AI workflow automations</a>.
             </p>
           </div>
         </section>

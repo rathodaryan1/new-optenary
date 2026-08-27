@@ -119,6 +119,55 @@ function ArticleCard({ article, index }: { article: typeof articles[0]; index: n
 }
 
 function FullArticle({ article }: { article: typeof articles[0] }) {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `https://optenary.in/blog/${article.slug}#entry`,
+        "mainEntityOfPage": `https://optenary.in/blog/${article.slug}`,
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": "2025-05-24", // Standardize/approximate from metadata
+        "author": {
+          "@type": "Person",
+          "name": article.author
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://optenary.in/images/logo.webp"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://optenary.in/blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": article.title,
+            "item": `https://optenary.in/blog/${article.slug}`
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-dark-bg text-white antialiased flex flex-col">
       <SEO
@@ -126,6 +175,7 @@ function FullArticle({ article }: { article: typeof articles[0] }) {
         description={article.excerpt}
         keywords={`${article.category.toLowerCase()}, optenary blog, mobile app, software development`}
         canonicalPath={`/blog/${article.slug}`}
+        schema={articleSchema}
       />
       <Header />
       <main className="flex-grow">
@@ -191,13 +241,33 @@ export default function BlogPage({ slug }: { slug?: string }) {
     setEmail('');
   };
 
+  const blogListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://optenary.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://optenary.in/blog"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Tech Blog - Web Development, AI & Mobile App Insights"
-        description="Read Optenary's tech blog for practical guides on mobile app costs, native vs hybrid development, AI automation, and software agency insights."
+        title="Optenary Tech Blog | Web Development, AI &amp; Mobile Insights"
+        description="Read the Optenary tech blog for practical guides, engineering deep-dives, pricing structures, and insights on custom software and AI automation."
         keywords="optenary blog, mobile app cost india, native vs hybrid app, web development guide, AI automation insights, software agency blog"
         canonicalPath="/blog"
+        schema={blogListSchema}
       />
       <Header />
       <main className="flex-grow">

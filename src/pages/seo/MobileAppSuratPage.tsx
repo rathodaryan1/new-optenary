@@ -22,22 +22,42 @@ const stats = [
   { icon: Star, value: '4.9★', label: 'Average App Rating' },
 ];
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Optenary — Mobile App Developer Surat',
-  url: 'https://optenary.in/mobile-app-developer-surat',
-  description: 'Top mobile app development company in Surat offering React Native, Flutter, iOS and Android app development for startups and businesses.',
-  areaServed: ['Surat', 'Gujarat', 'India'],
-  serviceType: 'Mobile App Development',
-};
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Optenary — Mobile App Developer Surat',
+    url: 'https://optenary.in/mobile-app-developer-surat',
+    description: 'Top mobile app development company in Surat offering React Native, Flutter, iOS and Android app development for startups and businesses.',
+    areaServed: ['Surat', 'Gujarat', 'India'],
+    serviceType: 'Mobile App Development',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://optenary.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Mobile App Developer Surat',
+        item: 'https://optenary.in/mobile-app-developer-surat',
+      }
+    ]
+  }
+];
 
 export default function MobileAppSuratPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Mobile App Developer Surat — iOS & Android App Development"
-        description="Optenary is a top mobile app development company in Surat, Gujarat. We build React Native, Flutter, iOS, and Android apps for startups, SMBs, and enterprises. Fast delivery, fixed price."
+        title="Mobile App Developer Surat | iOS &amp; Android Apps"
+        description="Top mobile app development company in Surat. We build custom iOS, Android, Flutter, and React Native apps optimized for performance and approved on app stores."
         keywords="mobile app developer Surat, app development company Surat, React Native developer Surat, iOS app development Surat, Android app developer Surat, mobile app development Gujarat"
         canonicalPath="/mobile-app-developer-surat"
         schema={schema}

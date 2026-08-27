@@ -12,13 +12,33 @@ const industries = [
 ];
 
 export default function ProjectsPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://optenary.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://optenary.in/projects"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Our Projects - Case Studies & Ventures"
-        description="Explore Optenary's portfolio of 20+ custom web systems, mobile applications, AI agents, and enterprise digital solutions across 10+ industries."
+        title="Optenary Portfolio | Custom Software &amp; AI Case Studies"
+        description="Explore Optenary's portfolio of custom web platforms, mobile applications, AI agents, and enterprise digital solutions shipped globally across 10+ industries."
         keywords="optenary portfolio, software engineering case studies, web development projects, mobile app case studies, AI automation projects, custom software projects"
         canonicalPath="/projects"
+        schema={breadcrumbSchema}
       />
       <Header />
 

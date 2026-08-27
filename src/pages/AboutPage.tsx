@@ -41,6 +41,24 @@ export default function AboutPage() {
         "url": "https://optenary.in/about",
         "sameAs": "https://www.linkedin.com/in/arjun-parmar-7b6663241/",
         "description": "Arjun Parmar is an operations and business strategy leader and COO of Optenary, specializing in streamlining processes and managing operations."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://optenary.in/about#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": "https://optenary.in/about"
+          }
+        ]
       }
     ]
   };
@@ -85,8 +103,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO
-        title="About Us - Reaching Product Excellence"
-        description="Learn about Optenary, a global technology partner specializing in custom software development, AI automation, and scalable web & mobile apps."
+        title="About Optenary | Custom Software &amp; AI Development Team"
+        description="Learn about Optenary, a global technology partner founded by Aryan Rathod and Arjun Parmar. We specialize in custom software engineering, mobile apps, and AI workflow automations."
         keywords="about optenary, aryan rathod, arjun parmar, custom software development company, tech partner, app development agency"
         canonicalPath="/about"
         schema={aboutSchema}

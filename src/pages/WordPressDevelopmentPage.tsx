@@ -25,16 +25,37 @@ const wpFaqs = [
 export default function WordPressDevelopmentPage() {
   const wpSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "WordPress & WooCommerce Development Services",
-    "description": "Optenary builds premium custom WordPress themes, custom Gutenberg React blocks, and secure, high-speed WooCommerce shopping storefronts.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "WordPress Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "WordPress & WooCommerce Development Services",
+        "description": "Optenary builds premium custom WordPress themes, custom Gutenberg React blocks, and secure, high-speed WooCommerce shopping storefronts.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "WordPress Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "WordPress Development",
+            "item": "https://optenary.in/services/wordpress-development"
+          }
+        ]
+      }
+    ]
   };
 
   const whatWeBuild = [
@@ -120,8 +141,8 @@ export default function WordPressDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="WordPress & WooCommerce Development Services"
-        description="Optenary builds premium custom WordPress themes, custom Gutenberg React blocks, and secure, high-speed WooCommerce shopping storefronts."
+        title="WordPress Development Services | Custom Themes &amp; Headless WP"
+        description="Custom WordPress development services including custom theme engineering, Elementor builds, headless WordPress setups, and secure enterprise migrations."
         keywords="WordPress development agency, custom WordPress theme, WooCommerce developer, Gutenberg block editor, headless WordPress, custom PHP CMS"
         canonicalPath="/services/wordpress-development"
         schema={wpSchema}
@@ -185,7 +206,7 @@ export default function WordPressDevelopmentPage() {
               WordPress & WooCommerce <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              Optenary delivers secure enterprise-grade WordPress development services with custom databases, headless integrations, and WooCommerce checkouts. We keep CMS systems protected with automated security auditing and hosting configuration updates.
+              Optenary delivers secure enterprise-grade WordPress development services with custom databases, headless integrations, and WooCommerce checkouts. We keep CMS systems protected with automated security auditing and hosting configuration updates. For clients looking for other e-commerce setups, we also provide <a href="/services/shopify-development" className="text-brand-orange hover:underline font-semibold">custom Shopify stores</a> and specialized database-driven <a href="/services/custom-ecommerce-development" className="text-brand-orange hover:underline font-semibold">custom e-commerce platforms</a>.
             </p>
           </div>
         </section>

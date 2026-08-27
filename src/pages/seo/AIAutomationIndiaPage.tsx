@@ -62,6 +62,24 @@ const schema = [
         text: faq.answer
       }
     }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://optenary.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'AI Automation Agency India',
+        item: 'https://optenary.in/ai-automation-agency-india',
+      }
+    ]
   }
 ];
 
@@ -69,8 +87,8 @@ export default function AIAutomationIndiaPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="AI Automation Agency India — AI Agents, Chatbots & Workflow Automation"
-        description="Optenary is India's leading AI automation agency. We build AI voice agents, WhatsApp bots, CRM automation, and workflow systems that save your team 40+ hours per week."
+        title="AI Automation Agency India | AI Voice Agents &amp; n8n"
+        description="Leading AI automation agency in India deploying autonomous AI voice agents, smart WhatsApp chatbots, and custom workflow automations using n8n and Make."
         keywords="AI automation agency India, AI agent India, chatbot development India, workflow automation India, AI voice agent India, business automation India, WhatsApp bot development India"
         canonicalPath="/ai-automation-agency-india"
         schema={schema}

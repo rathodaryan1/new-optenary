@@ -62,6 +62,24 @@ const schema = [
         text: faq.answer
       }
     }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://optenary.in/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Web Development Company India',
+        item: 'https://optenary.in/web-development-company-india',
+      }
+    ]
   }
 ];
 
@@ -69,8 +87,8 @@ export default function WebDevIndiaPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Web Development Company India — Custom Web Apps & Portals"
-        description="Optenary is a leading web development company in India. We build custom web apps, React/Next.js platforms, e-commerce solutions, and enterprise portals for Indian and global businesses."
+        title="Web Development Company India | Custom Web Platforms"
+        description="Optenary is a premier web development company in India, offering high-performance web platforms, SaaS applications, and off-shore engineering services."
         keywords="web development company India, custom web application India, React developer India, web app development India, software development company India, website development agency India"
         canonicalPath="/web-development-company-india"
         schema={schema}

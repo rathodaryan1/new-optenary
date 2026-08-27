@@ -46,7 +46,7 @@ export default function HomePage() {
         "@id": "https://optenary.in/#website",
         "url": "https://optenary.in/",
         "name": "Optenary",
-        "description": "AI Automation & Custom Software Development Partner",
+        "description": "Custom Software Development & AI Solutions Partner",
         "publisher": {
           "@id": "https://optenary.in/#organization"
         }
@@ -62,8 +62,20 @@ export default function HomePage() {
           "@type": "PostalAddress",
           "addressCountry": "IN"
         },
-        "description": "Optenary is a global technology partner offering custom software development, mobile app development, web development, and AI agent automation services.",
+        "description": "Optenary is a global technology partner engineering custom software, mobile apps, web development, and autonomous AI agent automation services.",
         "areaServed": "Global"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://optenary.in/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          }
+        ]
       }
     ]
   };
@@ -71,9 +83,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased">
       <SEO 
-        title="Web Development Services & AI Automation Agency"
-        description="Optenary is your global technology partner specializing in web development services, AI agents, custom software, automated workflows, and scalable mobile apps."
-        keywords="web development services, AI automation, custom software, web development agency, workflow automation, Optenary"
+        title="Optenary | Custom Software Development &amp; AI Solutions Agency"
+        description="Optenary is a global technology partner engineering custom software, web platforms, mobile apps, and autonomous AI agents designed to scale operations and boost efficiency."
+        keywords="custom software development, AI solutions, web development services, mobile app development, AI agents, workflow automation, Optenary"
         canonicalPath="/"
         schema={homeSchema}
       />

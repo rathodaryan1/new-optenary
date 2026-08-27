@@ -28,16 +28,37 @@ const customSoftFaqs = [
 export default function CustomSoftwarePage() {
   const softwareSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Custom Software Development & Engineering Services",
-    "description": "Optenary engineers custom software solutions, enterprise ERP/CRM portals, scalable API gateways, and DevOps cloud infrastructures.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Optenary",
-      "url": "https://optenary.in/"
-    },
-    "areaServed": "Global",
-    "serviceType": "Custom Software Development"
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Custom Software Development & Engineering Services",
+        "description": "Optenary engineers custom software solutions, enterprise ERP/CRM portals, scalable API gateways, and DevOps cloud infrastructures.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Optenary",
+          "url": "https://optenary.in/"
+        },
+        "areaServed": "Global",
+        "serviceType": "Custom Software Development"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://optenary.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Custom Software",
+            "item": "https://optenary.in/services/custom-software"
+          }
+        ]
+      }
+    ]
   };
 
   const [activeBuildStep, setActiveBuildStep] = useState<number | null>(null);
@@ -165,8 +186,8 @@ export default function CustomSoftwarePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom Software Development & Engineering Services"
-        description="Optenary engineers custom software solutions, enterprise ERP/CRM portals, scalable API gateways, and DevOps cloud infrastructures."
+        title="Custom Software Development Company | Enterprise SaaS &amp; Tools"
+        description="Optenary engineers tailored custom software systems, SaaS platforms, ERP networks, and internal business tools designed to scale operations and boost efficiency."
         keywords="custom software development, enterprise software engineering, API gateways, ERP development, database design, cloud backend"
         canonicalPath="/services/custom-software"
         schema={softwareSchema}
@@ -230,7 +251,7 @@ export default function CustomSoftwarePage() {
               Custom Software Development <span className="text-brand-orange">Partner Worldwide</span>
             </h2>
             <p className="text-sm md:text-base text-dark-muted leading-relaxed">
-              Optenary designs robust backend applications, high-performance database infrastructures, and fully secure internal platforms. We translate complicated, manual business steps into optimized, automated systems that reduce overhead.
+              Optenary designs robust backend applications, high-performance database infrastructures, and fully secure internal platforms. We build custom <a href="/services/web-development" className="text-brand-orange hover:underline font-semibold">web portals</a>, <a href="/services/mobile-development" className="text-brand-orange hover:underline font-semibold">mobile app integrations</a>, and autonomous <a href="/services/ai-agents-automation" className="text-brand-orange hover:underline font-semibold">AI workflow agents</a> to translate complicated, manual business steps into optimized systems.
             </p>
           </div>
         </section>
