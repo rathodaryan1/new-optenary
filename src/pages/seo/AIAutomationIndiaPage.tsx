@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Contact from '../../components/Contact';
 import SEO from '../../components/SEO';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
 const services = [
@@ -87,9 +88,9 @@ export default function AIAutomationIndiaPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="AI Automation Agency India | AI Voice Agents &amp; n8n"
-        description="Leading AI automation agency in India deploying autonomous AI voice agents, smart WhatsApp chatbots, and custom workflow automations using n8n and Make."
-        keywords="AI automation agency India, AI agent India, chatbot development India, workflow automation India, AI voice agent India, business automation India, WhatsApp bot development India"
+        title="AI Automation Agency India | AI Agent Development | Optenary"
+        description="Optenary is a leading AI automation agency in India deploying autonomous AI voice agents, smart chatbots, and custom workflow automations."
+        keywords="AI automation agency India, AI agent development, AI voice agent India, workflow automation India, WhatsApp bot development India, Optenary"
         canonicalPath="/ai-automation-agency-india"
         schema={schema}
       />
@@ -101,6 +102,7 @@ export default function AIAutomationIndiaPage() {
           <header className="relative pt-28 pb-20 px-6 md:px-12 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-brand-orange/5 blur-[180px] pointer-events-none" />
             <div className="max-w-5xl mx-auto relative z-10">
+              <Breadcrumbs items={[{ name: 'AI Automation Agency India' }]} className="mb-6" />
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-semibold uppercase tracking-wider mb-6">
                 AI Automation Agency · India

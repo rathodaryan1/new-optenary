@@ -136,9 +136,11 @@ export default function Footer() {
                 { name: 'Web Development', href: '/services/web-development' },
                 { name: 'Mobile App Development', href: '/services/mobile-development' },
                 { name: 'Custom Software Development', href: '/services/custom-software' },
+                { name: 'Desktop App Development', href: '/services/desktop-development' },
                 { name: 'AI Agents & Automation', href: '/services/ai-agents-automation' },
                 { name: 'Shopify Development', href: '/services/shopify-development' },
-                { name: 'WordPress Development', href: '/services/wordpress-development' }
+                { name: 'WordPress Development', href: '/services/wordpress-development' },
+                { name: 'Custom E-Commerce', href: '/services/custom-ecommerce-development' }
               ].map((item) => (
                 <li key={item.name}>
                   <a

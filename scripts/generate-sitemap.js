@@ -28,6 +28,7 @@ const routes = [
 
   // Trust & Portfolio Pages
   { path: '/projects', priority: '0.8', changefreq: 'weekly', lastmod: today },
+  { path: '/projects/mehta-dairy', priority: '0.8', changefreq: 'monthly', lastmod: today },
   { path: '/integrations', priority: '0.7', changefreq: 'monthly', lastmod: today },
   { path: '/blog', priority: '0.8', changefreq: 'daily', lastmod: today },
   { path: '/blog/cost-of-mobile-app-india', priority: '0.7', changefreq: 'monthly', lastmod: '2025-05-24' },

@@ -7,10 +7,10 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Terms of Service"
+        title="Terms of Service | Optenary"
         description="Review the terms and conditions for engaging with Optenary's custom software development, AI automation, and web/mobile development services."
         keywords="terms of service, optenary terms, engagement contract, intellectual property terms"
-        canonicalPath="/terms"
+        canonicalPath="/terms-of-service"
       />
       <Header />
       <main className="flex-grow pt-28 pb-20 px-6 md:px-12 max-w-4xl mx-auto relative z-10 w-full">

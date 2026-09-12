@@ -5,6 +5,7 @@ import { lazy, type ComponentType } from 'react';
  * If a dynamic import fails due to a network glitch or a new production deployment,
  * it attempts a single retry / page reload to fetch the latest chunk.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function lazyWithRetry<T extends ComponentType<any>>(
   componentImport: () => Promise<{ default: T }>
 ) {

@@ -16,6 +16,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const webFaqs = [
   { q: 'How long does it take to build a custom website?', a: 'A typical business website takes 4–8 weeks from kickoff to launch. Complex platforms with custom backends, integrations, or e-commerce can take 3–6 months depending on scope.' },
@@ -188,9 +189,9 @@ export default function WebDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Web Development Services | Optenary"
-        description="Custom web application development services using React, Next.js, and Node.js. Build scalable SaaS platforms, progressive web apps, and custom databases."
-        keywords="custom web app development, web app development agency, web development services India, progressive web app, SaaS platform development"
+        title="Web Development Company India | Custom Web Application Services | Optenary"
+        description="Optenary is a leading web development company in India engineering custom web applications, SaaS platforms, progressive web apps, and modern frontends built with React, Next.js & Node.js."
+        keywords="web development company India, website development company India, website development services, custom web app development, progressive web apps, React web development, Optenary"
         canonicalPath="/services/web-development"
         schema={webSchema}
       />
@@ -206,6 +207,7 @@ export default function WebDevelopmentPage() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293708_1px,transparent_1px),linear-gradient(to_bottom,#1f293708_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'Web Development' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

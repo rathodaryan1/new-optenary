@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Contact from '../../components/Contact';
 import SEO from '../../components/SEO';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
 const services = [
@@ -56,9 +57,9 @@ export default function MobileAppSuratPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Mobile App Developer Surat | iOS &amp; Android Apps"
-        description="Top mobile app development company in Surat. We build custom iOS, Android, Flutter, and React Native apps optimized for performance and approved on app stores."
-        keywords="mobile app developer Surat, app development company Surat, React Native developer Surat, iOS app development Surat, Android app developer Surat, mobile app development Gujarat"
+        title="Mobile App Developer Surat | Custom iOS &amp; Android App Development | Optenary"
+        description="Optenary is a leading mobile app developer in Surat, Gujarat. We build custom iOS, Android, Flutter, and React Native mobile apps for businesses &amp; startups."
+        keywords="mobile app developer Surat, app development company Surat, mobile app development Gujarat, React Native developer Surat, web development company Gujarat, Optenary"
         canonicalPath="/mobile-app-developer-surat"
         schema={schema}
       />
@@ -69,6 +70,7 @@ export default function MobileAppSuratPage() {
         <section className="relative pt-28 pb-20 px-6 md:px-12 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-brand-orange/5 blur-[180px] pointer-events-none" />
           <div className="max-w-5xl mx-auto relative z-10">
+            <Breadcrumbs items={[{ name: 'Mobile App Developer Surat' }]} className="mb-6" />
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-semibold uppercase tracking-wider mb-6">
               Mobile App Development · Surat, Gujarat

@@ -5,12 +5,13 @@ interface SEOProps {
   description: string;
   keywords?: string;
   author?: string;
+  ogImage?: string;
   schema?: object;
   canonicalPath?: string;
   noindex?: boolean;
 }
 
-export default function SEO({ title, description, keywords, author, schema, canonicalPath, noindex }: SEOProps) {
+export default function SEO({ title, description, keywords, author, ogImage, schema, canonicalPath, noindex }: SEOProps) {
   useEffect(() => {
     // Update Document Title
     const brandName = 'Optenary';
@@ -62,12 +63,29 @@ export default function SEO({ title, description, keywords, author, schema, cano
     const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) ogDescription.setAttribute('content', description);
 
+    const imageUrl = ogImage || 'https://optenary.in/images/og-image.webp';
+    let ogImgTag = document.querySelector('meta[property="og:image"]');
+    if (!ogImgTag) {
+      ogImgTag = document.createElement('meta');
+      ogImgTag.setAttribute('property', 'og:image');
+      document.head.appendChild(ogImgTag);
+    }
+    ogImgTag.setAttribute('content', imageUrl);
+
     // Update Twitter Tags
     const twitterTitle = document.querySelector('meta[property="twitter:title"]');
     if (twitterTitle) twitterTitle.setAttribute('content', formattedTitle);
 
     const twitterDescription = document.querySelector('meta[property="twitter:description"]');
     if (twitterDescription) twitterDescription.setAttribute('content', description);
+
+    let twitterImgTag = document.querySelector('meta[property="twitter:image"]');
+    if (!twitterImgTag) {
+      twitterImgTag = document.createElement('meta');
+      twitterImgTag.setAttribute('property', 'twitter:image');
+      document.head.appendChild(twitterImgTag);
+    }
+    twitterImgTag.setAttribute('content', imageUrl);
 
     // Update Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -102,7 +120,7 @@ export default function SEO({ title, description, keywords, author, schema, cano
       }
     }
 
-  }, [title, description, keywords, author, schema, canonicalPath, noindex]);
+  }, [title, description, keywords, author, ogImage, schema, canonicalPath, noindex]);
 
   return null;
 }

@@ -6,6 +6,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const desktopFaqs = [
   { q: 'What technologies do you use for desktop development?', a: 'We build native and cross-platform desktop applications using Tauri, Electron, Rust, C#, and Qt. We choose the stack based on system performance requirements and target operating systems (Windows, macOS, or Linux).' },
@@ -113,9 +114,9 @@ export default function DesktopDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Desktop Application Development | Optenary"
-        description="High-performance native cross-platform desktop application development using Electron, C#, and modern frameworks. Secure, offline-capable, and optimized."
-        keywords="desktop development, native app development, tauri development, electron app development, custom desktop software"
+        title="Desktop Application Development Services | Windows, macOS &amp; Linux | Optenary"
+        description="Optenary engineers high-performance, native &amp; cross-platform desktop applications using Tauri, Electron, C#, and Rust for Windows, macOS, and Linux."
+        keywords="desktop application development, Tauri development, Electron app developer, Windows software development, macOS desktop app, cross platform desktop apps, Optenary"
         canonicalPath="/services/desktop-development"
         schema={desktopSchema}
       />
@@ -128,6 +129,7 @@ export default function DesktopDevelopmentPage() {
 
         {/* Hero Section */}
         <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10 text-center">
+          <Breadcrumbs items={[{ name: 'Services' }, { name: 'Desktop Development' }]} className="justify-center mb-6" />
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

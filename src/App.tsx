@@ -24,6 +24,7 @@ const ShopifyDevelopmentPage   = lazyWithRetry(() => import('./pages/ShopifyDeve
 const WordPressDevelopmentPage = lazyWithRetry(() => import('./pages/WordPressDevelopmentPage'));
 const CustomEcommercePage      = lazyWithRetry(() => import('./pages/CustomEcommercePage'));
 const ProjectsPage             = lazyWithRetry(() => import('./pages/ProjectsPage'));
+const MehtaDairyCaseStudyPage  = lazyWithRetry(() => import('./pages/MehtaDairyCaseStudyPage'));
 const FAQPage                  = lazyWithRetry(() => import('./pages/FAQPage'));
 const ContactPage              = lazyWithRetry(() => import('./pages/ContactPage'));
 const PrivacyPolicyPage        = lazyWithRetry(() => import('./pages/PrivacyPolicyPage'));
@@ -72,9 +73,10 @@ function AnimatedRoutes() {
           <Route path="/home" element={<PageTransition><HomePage /></PageTransition>} />
 
           {/* Core pages */}
-          <Route path="/about"        element={<PageTransition><AboutPage /></PageTransition>} />
-          <Route path="/projects"     element={<PageTransition><ProjectsPage /></PageTransition>} />
-          <Route path="/integrations" element={<PageTransition><IntegrationsPage /></PageTransition>} />
+          <Route path="/about"                element={<PageTransition><AboutPage /></PageTransition>} />
+          <Route path="/projects"             element={<PageTransition><ProjectsPage /></PageTransition>} />
+          <Route path="/projects/mehta-dairy" element={<PageTransition><MehtaDairyCaseStudyPage /></PageTransition>} />
+          <Route path="/integrations"         element={<PageTransition><IntegrationsPage /></PageTransition>} />
           <Route path="/faq"          element={<PageTransition><FAQPage /></PageTransition>} />
           <Route path="/contact"      element={<PageTransition><ContactPage /></PageTransition>} />
           {/* Blog */}

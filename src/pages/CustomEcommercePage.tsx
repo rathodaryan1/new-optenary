@@ -17,6 +17,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const ecommFaqs = [
   { q: 'Why build a custom e-commerce platform instead of using Shopify or WooCommerce?', a: 'Custom e-commerce is ideal when you need unique checkout flows, multi-vendor marketplaces, complex pricing logic, or deep ERP/CRM integrations that off-the-shelf platforms can’t support without expensive workarounds.' },
@@ -185,9 +186,9 @@ export default function CustomEcommercePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom E-commerce Development | Optenary"
-        description="Custom database-driven e-commerce platform engineering with secure payment integrations, inventory synch pipelines, and rapid checkouts."
-        keywords="custom e-commerce development, headless e-commerce, multi-vendor platforms, subscription payment integrations, Stripe, Razorpay integrations"
+        title="Custom Ecommerce Website Development Company | Optenary"
+        description="Optenary is a custom ecommerce website development company engineering headless storefronts, multi-vendor marketplaces, B2B portals & custom checkouts."
+        keywords="ecommerce website development, custom ecommerce development, custom ecommerce website development, headless commerce, B2B ecommerce portal, Optenary"
         canonicalPath="/services/custom-ecommerce-development"
         schema={ecommerceSchema}
       />
@@ -200,6 +201,7 @@ export default function CustomEcommercePage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'Custom E-Commerce' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

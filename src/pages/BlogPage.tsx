@@ -4,6 +4,7 @@ import { BookOpen, Clock, ArrowRight, Rss, Mail, Calendar, User } from 'lucide-r
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
 const articles = [
@@ -180,6 +181,7 @@ function FullArticle({ article }: { article: typeof articles[0] }) {
       <Header />
       <main className="flex-grow">
         <article className="max-w-3xl mx-auto px-6 md:px-12 pt-28 pb-24">
+          <Breadcrumbs items={[{ name: 'Blog', path: '/blog' }, { name: article.title }]} className="mb-6" />
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
             <span className={`text-xs font-bold uppercase tracking-wider ${article.accent}`}>{article.category}</span>
             <h1 className="text-3xl md:text-5xl font-extrabold text-white mt-3 mb-4 leading-tight">{article.title}</h1>
@@ -275,6 +277,7 @@ export default function BlogPage({ slug }: { slug?: string }) {
         <section className="relative pt-28 pb-16 px-6 md:px-12 overflow-hidden">
           <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-brand-orange/5 blur-[160px] pointer-events-none" />
           <div className="max-w-4xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Blog' }]} className="justify-center mb-6" />
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-semibold uppercase tracking-wider mb-6">
               <Rss size={12} /> Optenary Blog

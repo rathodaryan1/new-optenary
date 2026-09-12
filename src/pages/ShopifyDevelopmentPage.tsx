@@ -13,6 +13,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const shopifyFaqs = [
   { q: 'Can you migrate my existing WooCommerce or Magento store to Shopify?', a: 'Yes. We handle full platform migrations including products, customer records, order history, and SEO URL mappings. We ensure zero downtime during the transition.' },
@@ -149,9 +150,9 @@ export default function ShopifyDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Shopify Development Services | Optenary"
-        description="Hire certified Shopify developers to engineer bespoke storefronts, custom theme designs, private apps, and optimized conversions for fast e-commerce growth."
-        keywords="Shopify development company, Shopify developer, headless Shopify, Shopify Hydrogen, custom Shopify apps, Shopify Liquid theme"
+        title="Shopify Development Services | Custom Shopify Stores &amp; Headless | Optenary"
+        description="Optenary offers custom Shopify development services, headless Hydrogen storefronts, custom Liquid themes, private app integrations, and conversion rate optimization."
+        keywords="Shopify development services, Shopify development company, custom Shopify store, Shopify developer India, headless Shopify Hydrogen, Optenary"
         canonicalPath="/services/shopify-development"
         schema={shopifySchema}
       />
@@ -164,6 +165,7 @@ export default function ShopifyDevelopmentPage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'Shopify Development' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

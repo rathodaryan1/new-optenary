@@ -7,7 +7,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Privacy Policy"
+        title="Privacy Policy | Optenary"
         description="Learn how Optenary collects, processes, and protects your personal information and project data."
         keywords="privacy policy, data protection, optenary privacy, compliance"
         canonicalPath="/privacy-policy"

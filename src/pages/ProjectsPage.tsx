@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Portfolio from '../components/Portfolio';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -50,6 +51,8 @@ export default function ProjectsPage() {
           <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-brand-orangeLight/5 blur-[160px] pointer-events-none" />
 
           <div className="max-w-7xl mx-auto relative z-10">
+
+            <Breadcrumbs items={[{ name: 'Projects' }]} className="justify-center mb-6" />
 
             {/* Badge */}
             <motion.div

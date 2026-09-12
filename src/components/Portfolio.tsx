@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, X, Check, Code, Shield, Briefcase, Sparkles, ExternalLink, Layers } from 'lucide-react';
 
 interface ProjectItem {
@@ -13,6 +14,7 @@ interface ProjectItem {
   industry: string;
   status: string;
   liveUrl?: string;
+  caseStudyUrl?: string;
   stack: string[];
   services: string[];
   features?: string[];
@@ -27,7 +29,7 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'challenges' | 'solution' | 'impact'>('overview');
 
-  const projects = [
+  const projects: ProjectItem[] = [
     {
       title: "Mehta Dairy",
       sub: "Premium Sweets & Farsan E-Commerce Storefront",
@@ -39,6 +41,7 @@ export default function Portfolio() {
       industry: "FoodTech & Sweets Retail",
       status: "Live / Completed",
       liveUrl: "https://mehtadairy.com",
+      caseStudyUrl: "/projects/mehta-dairy",
       stack: ["React", "Vite", "Node.js", "Tailwind CSS", "Razorpay / UPI", "WhatsApp Business API"],
       services: [
         "Storefront Engineering",
@@ -361,13 +364,23 @@ export default function Portfolio() {
 
                 {/* Card Action Buttons */}
                 <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/5 mt-auto">
-                  <button
-                    onClick={() => { setSelectedProject(project); setActiveTab('overview'); }}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-light hover:bg-brand-orange hover:text-dark-bg text-xs font-bold uppercase tracking-wider text-white transition-all border border-dark-border hover:border-brand-orange"
-                  >
-                    <span>View Case Study</span>
-                    <Sparkles size={13} />
-                  </button>
+                  {project.caseStudyUrl ? (
+                    <Link
+                      to={project.caseStudyUrl}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-light hover:bg-brand-orange hover:text-dark-bg text-xs font-bold uppercase tracking-wider text-white transition-all border border-dark-border hover:border-brand-orange"
+                    >
+                      <span>View Case Study</span>
+                      <Sparkles size={13} />
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => { setSelectedProject(project); setActiveTab('overview'); }}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-light hover:bg-brand-orange hover:text-dark-bg text-xs font-bold uppercase tracking-wider text-white transition-all border border-dark-border hover:border-brand-orange"
+                    >
+                      <span>View Case Study</span>
+                      <Sparkles size={13} />
+                    </button>
+                  )}
 
                   {project.liveUrl && (
                     <a

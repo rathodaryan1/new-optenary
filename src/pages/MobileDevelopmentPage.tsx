@@ -16,6 +16,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const mobileFaqs = [
   { q: 'Should I build a native app or cross-platform app?', a: 'For most startups, we recommend React Native or Flutter to ship faster and cover both iOS and Android with one codebase. Native (Swift/Kotlin) is ideal when you need deep device hardware access or very high performance.' },
@@ -178,9 +179,9 @@ export default function MobileDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Mobile App Development | Optenary"
-        description="Top-tier mobile app development services for iOS &amp; Android. Custom React Native and Flutter apps optimized for performance, security, and app store approval."
-        keywords="mobile app development, iOS app development, Android app development, React Native agency, Flutter app development, app development services India"
+        title="Mobile App Development Company | iOS &amp; Android Apps | Optenary"
+        description="Optenary is a premier mobile app development company engineering high-performance React Native, Flutter, iOS, and Android mobile applications built for scale."
+        keywords="mobile app development company, iOS app development, Android app development, React Native app development, Flutter app development, mobile app developer India, Optenary"
         canonicalPath="/services/mobile-development"
         schema={mobileSchema}
       />
@@ -193,6 +194,7 @@ export default function MobileDevelopmentPage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'Mobile App Development' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

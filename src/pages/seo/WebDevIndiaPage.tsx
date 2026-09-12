@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Contact from '../../components/Contact';
 import SEO from '../../components/SEO';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { Link } from 'react-router-dom';
 
 const services = [
@@ -87,9 +88,9 @@ export default function WebDevIndiaPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Web Development Company India | Custom Web Platforms"
-        description="Optenary is a premier web development company in India, offering high-performance web platforms, SaaS applications, and off-shore engineering services."
-        keywords="web development company India, custom web application India, React developer India, web app development India, software development company India, website development agency India"
+        title="Web Development Company India | Website Development Services | Optenary"
+        description="Optenary is a top web development company in India offering custom website development services, SaaS platforms, React apps &amp; e-commerce solutions."
+        keywords="web development company India, website development company India, website development services, web development company Gujarat, Optenary"
         canonicalPath="/web-development-company-india"
         schema={schema}
       />
@@ -101,6 +102,7 @@ export default function WebDevIndiaPage() {
           <header className="relative pt-28 pb-20 px-6 md:px-12 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-brand-orange/5 blur-[180px] pointer-events-none" />
             <div className="max-w-5xl mx-auto relative z-10">
+              <Breadcrumbs items={[{ name: 'Web Development Company India' }]} className="mb-6" />
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs font-semibold uppercase tracking-wider mb-6">
                 Web Development Company · India

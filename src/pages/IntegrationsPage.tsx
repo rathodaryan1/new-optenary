@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { BrandLogo } from '../components/BrandLogos';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 interface Integration {
   name: string;
@@ -14,30 +15,25 @@ interface Integration {
   slug?: string;
 }
 
-export default function IntegrationsPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+const categories = [
+  'All',
+  'Payments & Billing',
+  'Communication & Messaging',
+  'AI & LLMs',
+  'Notifications & Engagement',
+  'Analytics & Monitoring',
+  'CRM & Customer Support',
+  'Cloud & Infrastructure',
+  'Maps & Location',
+  'Marketing & Social',
+  'Logistics & Fulfillment',
+  'App Distribution',
+  'Automation & Workflows',
+  'Scheduling & Meetings',
+  'Headless CMS'
+];
 
-  const categories = [
-    'All',
-    'Payments & Billing',
-    'Communication & Messaging',
-    'AI & LLMs',
-    'Notifications & Engagement',
-    'Analytics & Monitoring',
-    'CRM & Customer Support',
-    'Cloud & Infrastructure',
-    'Maps & Location',
-    'Marketing & Social',
-    'Logistics & Fulfillment',
-    'App Distribution',
-    'Automation & Workflows',
-    'Scheduling & Meetings',
-    'Headless CMS'
-  ];
-
-  const integrations: Integration[] = [
+const integrations: Integration[] = [
     // Payments & Billing
     {
       name: 'Stripe',
@@ -342,6 +338,11 @@ export default function IntegrationsPage() {
     }
   ];
 
+export default function IntegrationsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   const filteredIntegrations = useMemo(() => {
     return integrations.filter((item) => {
       const matchCategory = selectedCategory === 'All' || item.category === selectedCategory;
@@ -349,14 +350,14 @@ export default function IntegrationsPage() {
                          item.desc.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCategory && matchQuery;
     });
-  }, [selectedCategory, searchQuery, integrations]);
+  }, [selectedCategory, searchQuery]);
 
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="API Integrations & Third-Party Platforms"
-        description="Explore the third-party integrations we ship, from payments (Stripe, Razorpay) and AI models to analytics, CRMs, logistics, and mapping APIs."
-        keywords="third-party integrations, API connectors, Stripe integration, Razorpay integration, OpenAI integrations, CRM sync"
+        title="API Integrations &amp; Third-Party Platform Connectors | Optenary"
+        description="Explore third-party API integrations shipped by Optenary: Stripe, Razorpay, OpenAI, WhatsApp API, Twilio, CRM platforms, and cloud databases."
+        keywords="third-party integrations, API connectors, Stripe integration, Razorpay integration, OpenAI integrations, CRM sync, Optenary"
         canonicalPath="/integrations"
       />
       {/* Shared Header Navigation */}
@@ -373,6 +374,7 @@ export default function IntegrationsPage() {
           {/* HEADER HERO AREA                                         */}
           {/* ======================================================== */}
           <div className="text-center mb-16">
+            <Breadcrumbs items={[{ name: 'Integrations' }]} className="justify-center mb-6" />
             <motion.span 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

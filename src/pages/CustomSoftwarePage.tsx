@@ -16,8 +16,9 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
-const customSoftFaqs = [
+const softwareFaqs = [
   { q: 'What is custom software and why is it better than off-the-shelf tools?', a: 'Custom software is built specifically for your workflows, data, and users. Unlike off-the-shelf tools, it has no licensing fees, no feature bloat, and scales precisely with your business without forcing you to adapt to someone else’s product.' },
   { q: 'How do you scope and price a custom software project?', a: 'We start with a free discovery call to map your requirements. We then provide a fixed-price scope document with milestones, delivery dates, and a detailed tech specification. No hidden charges.' },
   { q: 'Can you migrate our data from an existing system to the new software?', a: 'Yes. Data migration is a core part of our implementation service. We write ETL scripts to map, clean, and migrate your existing records from spreadsheets, legacy databases, or third-party tools to the new system.' },
@@ -193,9 +194,9 @@ export default function CustomSoftwarePage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="Custom Software Development | Optenary"
-        description="Optenary engineers tailored custom software systems, SaaS platforms, ERP networks, and internal business tools designed to scale operations and boost efficiency."
-        keywords="custom software development, enterprise software engineering, API gateways, ERP development, database design, cloud backend"
+        title="Custom Software Development Company | Enterprise Systems | Optenary"
+        description="Optenary is a custom software development company engineering enterprise systems, SaaS platforms, ERP portals, and tailored business tools designed to scale operations."
+        keywords="custom software development company, enterprise software development, SaaS platform engineering, B2B software development, custom software developer India, Optenary"
         canonicalPath="/services/custom-software"
         schema={softwareSchema}
       />
@@ -208,6 +209,7 @@ export default function CustomSoftwarePage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'Custom Software' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -498,7 +500,7 @@ export default function CustomSoftwarePage() {
           </div>
         </section>
 
-        <ServiceFAQ faqs={customSoftFaqs} title="Custom Software FAQs" />
+        <ServiceFAQ faqs={softwareFaqs} title="Custom Software FAQs" />
 
         <Contact />
       </main>

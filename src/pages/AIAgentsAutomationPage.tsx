@@ -16,6 +16,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const aiFaqs = [
   { q: 'What is an AI Voice Agent and how does it help my business?', a: 'An AI Voice Agent is an automated system that handles inbound/outbound calls, answers customer queries, books appointments, and escalates complex issues — all without a human agent. It operates 24/7, reducing your support cost by up to 60%.' },
@@ -199,9 +200,9 @@ export default function AIAgentsAutomationPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="AI Automation &amp; AI Agent Development | Optenary"
-        description="Deploy autonomous AI voice agents, custom RAG chatbots, and intelligent background workflow automation pipelines using n8n, Make, Vapi, and Retell."
-        keywords="AI agents, workflow automation, autonomous agents, voice AI assistants, vector DB pipelines, OpenAI integrations, n8n automation"
+        title="AI Automation Agency India | AI Agent Development Services | Optenary"
+        description="Optenary is a leading AI automation agency in India engineering autonomous AI agents, voice assistants, RAG vector pipelines, and 24/7 workflow automation."
+        keywords="AI automation agency India, AI agent development, AI agent development services, AI voice agents, autonomous AI agents, LLM workflow automation, Optenary"
         canonicalPath="/services/ai-agents-automation"
         schema={aiSchema}
       />
@@ -214,6 +215,7 @@ export default function AIAgentsAutomationPage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'AI Agents & Automation' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

@@ -13,6 +13,7 @@ import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import SEO from '../components/SEO';
 import ServiceFAQ from '../components/ServiceFAQ';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 const wpFaqs = [
   { q: 'Is WordPress good for SEO?', a: 'WordPress is one of the most SEO-friendly platforms when properly configured. With the right theme, caching, image optimization, and an SEO plugin like Rank Math or Yoast, WordPress sites consistently rank at the top of search results.' },
@@ -148,9 +149,9 @@ export default function WordPressDevelopmentPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
       <SEO 
-        title="WordPress Development Services | Optenary"
-        description="Custom WordPress development services including custom theme engineering, Elementor builds, headless WordPress setups, and secure enterprise migrations."
-        keywords="WordPress development agency, custom WordPress theme, WooCommerce developer, Gutenberg block editor, headless WordPress, custom PHP CMS"
+        title="WordPress Development Services | Custom Themes &amp; WooCommerce | Optenary"
+        description="Optenary delivers custom WordPress development services, bespoke theme engineering, WooCommerce e-commerce builds, and headless WordPress setups."
+        keywords="WordPress development services, WordPress development company, custom WordPress theme, WooCommerce developer, headless WordPress, Optenary"
         canonicalPath="/services/wordpress-development"
         schema={wpSchema}
       />
@@ -163,6 +164,7 @@ export default function WordPressDevelopmentPage() {
           <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-brand-orange/5 blur-[150px] pointer-events-none" />
 
           <div className="max-w-5xl mx-auto text-center relative z-10">
+            <Breadcrumbs items={[{ name: 'Services' }, { name: 'WordPress Development' }]} className="justify-center mb-6" />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
