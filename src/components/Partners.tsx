@@ -1,7 +1,8 @@
-import { Building2, ShoppingBag, ShieldAlert, Film } from 'lucide-react';
+import { Building2, ShoppingBag, ShieldAlert, Film, Store } from 'lucide-react';
 
 export default function Partners() {
   const projects = [
+    { name: "Mehta Dairy", icon: Store },
     { name: "PG Management", icon: Building2 },
     { name: "Vishal Masala", icon: ShoppingBag },
     { name: "Shree Enterprise", icon: ShieldAlert },

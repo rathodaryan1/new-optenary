@@ -34,9 +34,9 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col">
       <SEO
-        title="Optenary Portfolio | Custom Software &amp; AI Case Studies"
-        description="Explore Optenary's portfolio of custom web platforms, mobile applications, AI agents, and enterprise digital solutions shipped globally across 10+ industries."
-        keywords="optenary portfolio, software engineering case studies, web development projects, mobile app case studies, AI automation projects, custom software projects"
+        title="Optenary Portfolio | Custom Software &amp; Mehta Dairy E-Commerce Case Studies"
+        description="Explore Optenary's portfolio of custom web platforms, e-commerce case studies including Mehta Dairy, mobile apps, and enterprise digital solutions shipped globally across 10+ industries."
+        keywords="optenary portfolio, mehta dairy e-commerce case study, mehta dairy website, software engineering case studies, web development projects, custom e-commerce platforms"
         canonicalPath="/projects"
         schema={breadcrumbSchema}
       />

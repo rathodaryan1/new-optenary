@@ -349,7 +349,7 @@ export default function IntegrationsPage() {
                          item.desc.toLowerCase().includes(searchQuery.toLowerCase());
       return matchCategory && matchQuery;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, integrations]);
 
   return (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">

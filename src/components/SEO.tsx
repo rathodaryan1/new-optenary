@@ -56,17 +56,17 @@ export default function SEO({ title, description, keywords, author, schema, cano
     metaRobots.setAttribute('content', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');
 
     // Update Open Graph Tags
-    let ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) ogTitle.setAttribute('content', formattedTitle);
 
-    let ogDescription = document.querySelector('meta[property="og:description"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
     if (ogDescription) ogDescription.setAttribute('content', description);
 
     // Update Twitter Tags
-    let twitterTitle = document.querySelector('meta[property="twitter:title"]');
+    const twitterTitle = document.querySelector('meta[property="twitter:title"]');
     if (twitterTitle) twitterTitle.setAttribute('content', formattedTitle);
 
-    let twitterDescription = document.querySelector('meta[property="twitter:description"]');
+    const twitterDescription = document.querySelector('meta[property="twitter:description"]');
     if (twitterDescription) twitterDescription.setAttribute('content', description);
 
     // Update Canonical URL
@@ -80,10 +80,10 @@ export default function SEO({ title, description, keywords, author, schema, cano
     canonical.setAttribute('href', fullCanonicalUrl);
 
     // Update Open Graph URL
-    let ogUrl = document.querySelector('meta[property="og:url"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) ogUrl.setAttribute('content', fullCanonicalUrl);
 
-    let twitterUrl = document.querySelector('meta[property="twitter:url"]');
+    const twitterUrl = document.querySelector('meta[property="twitter:url"]');
     if (twitterUrl) twitterUrl.setAttribute('content', fullCanonicalUrl);
 
     // Update JSON-LD Structured Data Schema script

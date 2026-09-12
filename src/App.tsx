@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, useParams } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
@@ -6,38 +6,41 @@ import PageTransition from './components/PageTransition';
 import PageSkeleton from './components/PageSkeleton';
 import HomePage from './pages/HomePage';
 
-const StickyBookCTA = lazy(() => import('./components/StickyBookCTA'));
-const CookieConsent = lazy(() => import('./components/CookieConsent'));
+import ErrorBoundary from './components/ErrorBoundary';
+import { lazyWithRetry } from './utils/lazyWithRetry';
+
+const StickyBookCTA = lazyWithRetry(() => import('./components/StickyBookCTA'));
+const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
-const AboutPage                = lazy(() => import('./pages/AboutPage'));
-const IntegrationsPage         = lazy(() => import('./pages/IntegrationsPage'));
-const WebDevelopmentPage       = lazy(() => import('./pages/WebDevelopmentPage'));
-const MobileDevelopmentPage    = lazy(() => import('./pages/MobileDevelopmentPage'));
-const CustomSoftwarePage       = lazy(() => import('./pages/CustomSoftwarePage'));
-const DesktopDevelopmentPage    = lazy(() => import('./pages/DesktopDevelopmentPage'));
-const AIAgentsAutomationPage   = lazy(() => import('./pages/AIAgentsAutomationPage'));
-const ShopifyDevelopmentPage   = lazy(() => import('./pages/ShopifyDevelopmentPage'));
-const WordPressDevelopmentPage = lazy(() => import('./pages/WordPressDevelopmentPage'));
-const CustomEcommercePage      = lazy(() => import('./pages/CustomEcommercePage'));
-const ProjectsPage             = lazy(() => import('./pages/ProjectsPage'));
-const FAQPage                  = lazy(() => import('./pages/FAQPage'));
-const ContactPage              = lazy(() => import('./pages/ContactPage'));
-const PrivacyPolicyPage        = lazy(() => import('./pages/PrivacyPolicyPage'));
-const TermsPage                = lazy(() => import('./pages/TermsPage'));
-const BlogPage                 = lazy(() => import('./pages/BlogPage'));
-const NotFoundPage             = lazy(() => import('./pages/NotFoundPage'));
+const AboutPage                = lazyWithRetry(() => import('./pages/AboutPage'));
+const IntegrationsPage         = lazyWithRetry(() => import('./pages/IntegrationsPage'));
+const WebDevelopmentPage       = lazyWithRetry(() => import('./pages/WebDevelopmentPage'));
+const MobileDevelopmentPage    = lazyWithRetry(() => import('./pages/MobileDevelopmentPage'));
+const CustomSoftwarePage       = lazyWithRetry(() => import('./pages/CustomSoftwarePage'));
+const DesktopDevelopmentPage    = lazyWithRetry(() => import('./pages/DesktopDevelopmentPage'));
+const AIAgentsAutomationPage   = lazyWithRetry(() => import('./pages/AIAgentsAutomationPage'));
+const ShopifyDevelopmentPage   = lazyWithRetry(() => import('./pages/ShopifyDevelopmentPage'));
+const WordPressDevelopmentPage = lazyWithRetry(() => import('./pages/WordPressDevelopmentPage'));
+const CustomEcommercePage      = lazyWithRetry(() => import('./pages/CustomEcommercePage'));
+const ProjectsPage             = lazyWithRetry(() => import('./pages/ProjectsPage'));
+const FAQPage                  = lazyWithRetry(() => import('./pages/FAQPage'));
+const ContactPage              = lazyWithRetry(() => import('./pages/ContactPage'));
+const PrivacyPolicyPage        = lazyWithRetry(() => import('./pages/PrivacyPolicyPage'));
+const TermsPage                = lazyWithRetry(() => import('./pages/TermsPage'));
+const BlogPage                 = lazyWithRetry(() => import('./pages/BlogPage'));
+const NotFoundPage             = lazyWithRetry(() => import('./pages/NotFoundPage'));
 // SEO Landing pages
-const WebDevIndiaPage          = lazy(() => import('./pages/seo/WebDevIndiaPage'));
-const MobileAppSuratPage       = lazy(() => import('./pages/seo/MobileAppSuratPage'));
-const AIAutomationIndiaPage    = lazy(() => import('./pages/seo/AIAutomationIndiaPage'));
+const WebDevIndiaPage          = lazyWithRetry(() => import('./pages/seo/WebDevIndiaPage'));
+const MobileAppSuratPage       = lazyWithRetry(() => import('./pages/seo/MobileAppSuratPage'));
+const AIAutomationIndiaPage    = lazyWithRetry(() => import('./pages/seo/AIAutomationIndiaPage'));
 
 // Blog slug wrapper — reads :slug from URL and passes it to BlogPage
 function BlogSlugPage() {
   const { slug } = useParams<{ slug: string }>();
   return <_BlogPage slug={slug} />;
 }
-const _BlogPage = lazy(() => import('./pages/BlogPage'));
+const _BlogPage = lazyWithRetry(() => import('./pages/BlogPage'));
 
 // ─── Scroll helper ────────────────────────────────────────────────────────────
 function ScrollToHash() {
@@ -108,22 +111,24 @@ function AnimatedRoutes() {
 // ─── App ──────────────────────────────────────────────────────────────────────
 function App() {
   return (
-    <BrowserRouter>
-      {/* Vercel Analytics */}
-      <Analytics />
+    <ErrorBoundary>
+      <BrowserRouter>
+        {/* Vercel Analytics */}
+        <Analytics />
 
-      {/* Scroll restoration */}
-      <ScrollToHash />
+        {/* Scroll restoration */}
+        <ScrollToHash />
 
-      {/* Animated route transitions */}
-      <AnimatedRoutes />
+        {/* Animated route transitions */}
+        <AnimatedRoutes />
 
-      {/* Global floating UI */}
-      <Suspense fallback={null}>
-        <StickyBookCTA />
-        <CookieConsent />
-      </Suspense>
-    </BrowserRouter>
+        {/* Global floating UI */}
+        <Suspense fallback={null}>
+          <StickyBookCTA />
+          <CookieConsent />
+        </Suspense>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

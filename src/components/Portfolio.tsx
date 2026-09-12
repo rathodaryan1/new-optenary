@@ -1,12 +1,93 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, X, Check, Code, Shield, Briefcase, Sparkles } from 'lucide-react';
+import { ArrowUpRight, X, Check, Code, Shield, Briefcase, Sparkles, ExternalLink, Layers } from 'lucide-react';
+
+interface ProjectItem {
+  title: string;
+  sub: string;
+  tags: string[];
+  color: string;
+  accent: string;
+  desc: string;
+  type: string;
+  industry: string;
+  status: string;
+  liveUrl?: string;
+  stack: string[];
+  services: string[];
+  features?: string[];
+  overview: string;
+  challenges: string;
+  solution: string;
+  impact: string;
+  mock: React.ReactNode;
+}
 
 export default function Portfolio() {
-  const [selectedProject, setSelectedProject] = useState<any | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'challenges' | 'solution' | 'impact'>('overview');
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'challenges' | 'solution' | 'impact'>('overview');
 
   const projects = [
+    {
+      title: "Mehta Dairy",
+      sub: "Premium Sweets & Farsan E-Commerce Storefront",
+      tags: ["E-Commerce Website", "Live / Completed", "D2C & Retail"],
+      color: "from-amber-600/25 via-orange-600/20 to-yellow-600/25",
+      accent: "text-amber-400",
+      desc: "A modern e-commerce website for Mehta Dairy, bringing traditional sweets, farsan and dairy products online with a premium, smooth and mobile-friendly shopping experience.",
+      type: "E-Commerce Website",
+      industry: "FoodTech & Sweets Retail",
+      status: "Live / Completed",
+      liveUrl: "https://mehtadairy.com",
+      stack: ["React", "Vite", "Node.js", "Tailwind CSS", "Razorpay / UPI", "WhatsApp Business API"],
+      services: [
+        "Storefront Engineering",
+        "Product Catalog Architecture",
+        "Cart & Checkout Systems",
+        "Online Payment Integration",
+        "WhatsApp Assistant Integration",
+        "Performance & Mobile Optimization"
+      ],
+      features: [
+        "Online Shopping",
+        "Product Catalog",
+        "Cart & Checkout",
+        "Online Payments",
+        "Order Management",
+        "Delivery Tracking",
+        "Customer Accounts",
+        "WhatsApp Integration",
+        "Responsive Design",
+        "Performance Optimization"
+      ],
+      overview: "A modern e-commerce website for Mehta Dairy, bringing traditional sweets, farsan and dairy products online with a premium, smooth and mobile-friendly shopping experience. Established in 1972 in Palitana, Gujarat, Mehta Dairy's digital storefront connects sweet lovers pan-India with handcrafted delicacies made from 100% pure cow ghee.",
+      challenges: "Digitalizing a 50+ year legacy confectionery brand without losing customer trust. The platform needed to support dynamic weight-based pricing (250g, 500g, 1kg), seamless online payments, instant WhatsApp order communication, fast page load speeds during festival peak surges, and an effortless checkout experience for all age groups.",
+      solution: "Engineered a custom high-performance e-commerce platform featuring an intuitive product catalog, weight & quantity variant selection, instant cart & checkout workflows, integrated online payments (UPI, Credit/Debit Cards, NetBanking), automated order management, delivery tracking, customer accounts, direct WhatsApp support, and responsive mobile optimization.",
+      impact: "Successfully launched mehtadairy.com live in production, processing pan-India orders with a 1.1s average page load speed, 99.9% uptime, and significantly increased direct-to-consumer sales during major festival seasons.",
+      mock: (
+        <div className="w-full h-full bg-dark-bg rounded-lg border border-white/10 overflow-hidden flex flex-col shadow-2xl">
+          {/* Browser header */}
+          <div className="h-4 bg-dark-card border-b border-white/5 flex items-center gap-1 px-2 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5f56]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ffbd2e]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#27c93f]" />
+            <div className="flex-grow text-[6px] text-dark-muted font-mono truncate text-center select-none bg-dark-bg/60 rounded py-0.5 mx-2 max-w-[150px]">
+              mehtadairy.com
+            </div>
+          </div>
+          {/* Browser page content */}
+          <div className="flex-grow relative overflow-hidden bg-black group/img">
+            <img
+              src="/images/mehta_dairy.png"
+              alt="Mehta Dairy E-Commerce Website"
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      )
+    },
     {
       title: "Urban Nest",
       sub: "Enterprise Co-Living & Housing SaaS Platform",
@@ -16,8 +97,18 @@ export default function Portfolio() {
       desc: "An enterprise-grade property management ecosystem designed to streamline tenant lifecycles, automate digital rent collections, optimize bed allocation, and coordinate maintenance logistics for modern co-living providers.",
       type: "PropTech SaaS Product",
       industry: "Real Estate & Co-Living",
+      status: "Live Project",
+      liveUrl: "https://urbannest1.vercel.app",
       stack: ["React", "Node.js", "PostgreSQL", "Tailwind CSS"],
       services: ["Product Architecture", "UI/UX Design Strategy", "Full-Stack Development", "Automated Billing Systems"],
+      features: [
+        "Tenant Lifecycle Management",
+        "Automated Rent Collection",
+        "Interactive Floor Maps",
+        "Maintenance Logistics",
+        "Multi-Tenant Command Center",
+        "Responsive Mobile App"
+      ],
       overview: "A comprehensive, multi-tenant digital housing ecosystem engineered to unify hostel operations, tenant invoicing, room mapping, and administrative workflows into a single dashboard.",
       challenges: "Property managers lose significant operating efficiency due to fragmented tenant communication, manual bank reconciliation, poor occupancy visibility, and delayed maintenance responses.",
       solution: "Engineered an administrative command center paired with a resident application. Integrated instant UPI payment routing, real-time interactive floor/bed allocation maps, and an SLA-driven maintenance dispatch pipeline.",
@@ -39,7 +130,7 @@ export default function Portfolio() {
               src="/images/pg_management.webp"
               alt="Urban Nest PG Management"
               className="w-full h-full object-cover object-top"
-            loading="lazy" decoding="async" />
+              loading="lazy" decoding="async" />
           </div>
         </div>
       )
@@ -53,8 +144,18 @@ export default function Portfolio() {
       desc: "A custom headless e-commerce architecture engineered for high-throughput spice retailing and bulk distribution, featuring instant product indexing, multi-faceted filtering, and seamless custom shipping calculators.",
       type: "Client Platform",
       industry: "E-Commerce / FoodTech",
+      status: "Live Project",
+      liveUrl: "https://vishalmasala.vercel.app",
       stack: ["React", "Vite", "Node.js", "Stripe API", "Tailwind CSS"],
       services: ["UI/UX Interface Design", "Headless Storefront Engineering", "Custom Payment Integrations", "Fulfillment Automation"],
+      features: [
+        "Headless Commerce Architecture",
+        "Bulk Wholesale Ordering",
+        "Weight-Based Shipping Logic",
+        "Instant Product Search",
+        "Custom Payment Checkout",
+        "Fulfillment Automation"
+      ],
       overview: "A bespoke headless storefront designed for Vishal Masala to digitalize their heritage spices business, optimizing page performance, product discoverability, and purchase conversion rates.",
       challenges: "Standard out-of-the-box e-commerce templates restricted layout customizability for bulk commercial accounts, suffered from slow page loads, and lacked flexible logic for weight-based multi-tier shipping rates.",
       solution: "Developed an optimized React storefront decoupled from a secure transactional backend. Designed an intuitive one-page retail/wholesale layout alongside dynamic shipping and checkout API integrations.",
@@ -76,7 +177,7 @@ export default function Portfolio() {
               src="/images/vishal_masala.webp"
               alt="Vishal Masala E-Commerce"
               className="w-full h-full object-cover object-top"
-            loading="lazy" decoding="async" />
+              loading="lazy" decoding="async" />
           </div>
         </div>
       )
@@ -90,8 +191,17 @@ export default function Portfolio() {
       desc: "A corporate safety portal showcasing industrial fire protection solutions, featuring custom safety compliance calculators, a digital equipment index, and a automated client quotation engine.",
       type: "Client Portal",
       industry: "Industrial Safety & Compliance",
+      status: "Live Project",
+      liveUrl: "https://shreeenterprisebhavnagar.com",
       stack: ["React", "Vite", "PDFKit", "Tailwind CSS"],
       services: ["Enterprise Platform Engineering", "Interactive Audit Calculators", "Dynamic Document Generation"],
+      features: [
+        "Safety Audit Calculators",
+        "Automated PDF Quote Engine",
+        "Equipment Catalog Index",
+        "B2B Inquiry Workflows",
+        "Compliance Reporting"
+      ],
       overview: "A premium B2B digital gateway engineered to streamline how industrial safety consultants and building contractors audit safety specifications and request certified safety equipment.",
       challenges: "B2B procurement agents found standard quote request forms tedious, resulting in long sales cycles and manual estimation delays for custom fire installation layouts.",
       solution: "Created an interactive self-audit checklist calculator and dynamic catalog search, backed by an automated system that instantly drafts itemized custom quotes as downloadable PDFs.",
@@ -113,7 +223,7 @@ export default function Portfolio() {
               src="/images/shree_enterprise.webp"
               alt="Shree Enterprise Fire Safety"
               className="w-full h-full object-cover object-top"
-            loading="lazy" decoding="async" />
+              loading="lazy" decoding="async" />
           </div>
         </div>
       )
@@ -127,8 +237,17 @@ export default function Portfolio() {
       desc: "An experiential cinematic landing page built to promote the theatrical launch of the movie 'Laalo', featuring high-impact video environments, fluid timelines, and ticketing integrations.",
       type: "Internal Creative Project",
       industry: "Media & Entertainment",
+      status: "Live Project",
+      liveUrl: "https://laalo-movie.vercel.app",
       stack: ["React", "Vite", "Framer Motion", "Tailwind CSS"],
       services: ["Creative Front-End Direction", "Fluid Motion Graphic Design", "Ticketing Funnel Integration"],
+      features: [
+        "Cinematic Hero Environment",
+        "Interactive Motion Graphics",
+        "Behind-The-Scenes Gallery",
+        "Box Office Ticket Funnel",
+        "Responsive Sound & Video Layers"
+      ],
       overview: "A highly immersive, motion-focused entertainment web campaign engineered to build pre-release momentum, host behind-the-scenes content, and drive advance ticket sales.",
       challenges: "Standard promotional websites fail to translate the visual scale, emotional theme, and dynamic narrative of a theatrical film release to the web browser.",
       solution: "Engineered a cinematic dark-mode application featuring optimized background video layers, fluid scroll-triggered layouts, responsive cast timeline cards, and a seamless box office widget.",
@@ -150,7 +269,7 @@ export default function Portfolio() {
               src="/images/laalo_movie.webp"
               alt="Laalo Movie Portfolio Website"
               className="w-full h-full object-cover object-top"
-            loading="lazy" decoding="async" />
+              loading="lazy" decoding="async" />
           </div>
         </div>
       )
@@ -210,7 +329,7 @@ export default function Portfolio() {
               className="group rounded-2xl bg-dark-card/50 border border-dark-border hover:border-brand-orange/30 overflow-hidden flex flex-col shadow-glow"
             >
               {/* Card visual mockup window */}
-              <div className={`h-48 bg-gradient-to-br ${project.color} p-4 flex items-center justify-center border-b border-dark-border relative overflow-hidden`}>
+              <div className={`h-52 bg-gradient-to-br ${project.color} p-4 flex items-center justify-center border-b border-dark-border relative overflow-hidden`}>
                 <div className="w-full h-full transform group-hover:scale-[1.02] transition-transform duration-300">
                   {project.mock}
                 </div>
@@ -219,30 +338,49 @@ export default function Portfolio() {
               {/* Card content text details */}
               <div className="p-6 flex flex-col flex-grow justify-between">
                 <div>
-                  <div className="flex gap-2 mb-2">
+                  <div className="flex flex-wrap gap-1.5 mb-2.5">
                     {project.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="text-[10px] uppercase font-bold tracking-wider text-dark-muted px-2 py-0.5 rounded bg-dark-light/50 border border-dark-border">
+                      <span key={tIdx} className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded border ${
+                        tag.includes('Live') 
+                          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' 
+                          : 'text-dark-muted bg-dark-light/50 border-dark-border'
+                      }`}>
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-brand-orange transition-colors">
-                    {project.title}
+                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-brand-orange transition-colors flex items-center justify-between">
+                    <span>{project.title}</span>
                   </h3>
-                  <span className="text-xs text-brand-orangeLight/80 font-medium block mb-2">{project.sub}</span>
+                  <span className="text-xs text-brand-orangeLight/80 font-medium block mb-3">{project.sub}</span>
                   <p className="text-xs md:text-sm text-dark-muted leading-relaxed mb-6">
                     {project.desc}
                   </p>
                 </div>
 
-                <button
-                  onClick={() => { setSelectedProject(project); setActiveTab('overview'); }}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-white group-hover:text-brand-orange transition-colors mt-auto text-left"
-                >
-                  <span>View Project Details</span>
-                  <ArrowUpRight size={14} />
-                </button>
+                {/* Card Action Buttons */}
+                <div className="flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/5 mt-auto">
+                  <button
+                    onClick={() => { setSelectedProject(project); setActiveTab('overview'); }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-light hover:bg-brand-orange hover:text-dark-bg text-xs font-bold uppercase tracking-wider text-white transition-all border border-dark-border hover:border-brand-orange"
+                  >
+                    <span>View Case Study</span>
+                    <Sparkles size={13} />
+                  </button>
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brand-orange/10 hover:bg-brand-orange text-brand-orange hover:text-dark-bg text-xs font-bold uppercase tracking-wider transition-all border border-brand-orange/30 hover:border-brand-orange"
+                    >
+                      <span>View Live Website</span>
+                      <ExternalLink size={13} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -259,7 +397,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-[#0b0d0e] border border-dark-border rounded-3xl w-full max-w-5xl h-[90vh] md:h-[80vh] overflow-hidden flex flex-col md:flex-row relative shadow-2xl"
+              className="bg-[#0b0d0e] border border-dark-border rounded-3xl w-full max-w-5xl h-[90vh] md:h-[82vh] overflow-hidden flex flex-col md:flex-row relative shadow-2xl"
             >
               {/* Close Button */}
               <button
@@ -273,8 +411,8 @@ export default function Portfolio() {
               {/* Left Side: Specs & Hero Visual */}
               <div className="md:w-2/5 border-b md:border-b-0 md:border-r border-dark-border flex flex-col h-1/2 md:h-full bg-dark-card/20 overflow-y-auto">
                 {/* Visual Header */}
-                <div className={`h-40 bg-gradient-to-br ${selectedProject.color} p-4 flex items-center justify-center border-b border-dark-border relative overflow-hidden shrink-0`}>
-                  <div className="w-full h-full scale-[0.85]">
+                <div className={`h-44 bg-gradient-to-br ${selectedProject.color} p-4 flex items-center justify-center border-b border-dark-border relative overflow-hidden shrink-0`}>
+                  <div className="w-full h-full scale-[0.88]">
                     {selectedProject.mock}
                   </div>
                 </div>
@@ -296,7 +434,7 @@ export default function Portfolio() {
                       <span className="text-dark-muted flex items-center gap-1.5"><Shield size={12} className="text-brand-orange" /> Industry</span>
                       <span className="font-bold text-white/90">{selectedProject.industry}</span>
                     </div>
-                    <div className="flex flex-col gap-1.5 py-1">
+                    <div className="flex flex-col gap-1.5 py-1 border-b border-white/5">
                       <span className="text-dark-muted flex items-center gap-1.5"><Code size={12} className="text-brand-orange" /> Tech Stack</span>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {selectedProject.stack.map((tech: string, i: number) => (
@@ -306,6 +444,19 @@ export default function Portfolio() {
                         ))}
                       </div>
                     </div>
+                    {selectedProject.liveUrl && (
+                      <div className="flex justify-between items-center py-1">
+                        <span className="text-dark-muted flex items-center gap-1.5"><ExternalLink size={12} className="text-brand-orange" /> Live Website</span>
+                        <a 
+                          href={selectedProject.liveUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="font-bold text-brand-orange hover:underline text-[11px] truncate max-w-[160px]"
+                        >
+                          {selectedProject.liveUrl.replace('https://', '')}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -314,7 +465,7 @@ export default function Portfolio() {
               <div className="md:w-3/5 flex flex-col h-1/2 md:h-full bg-[#070809]">
                 {/* Tabs selection bar */}
                 <div className="flex border-b border-dark-border px-6 pt-4 gap-1.5 overflow-x-auto shrink-0 scrollbar-none">
-                  {(['overview', 'challenges', 'solution', 'impact'] as const).map((tab) => (
+                  {(['overview', 'features', 'challenges', 'solution', 'impact'] as const).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
@@ -323,7 +474,7 @@ export default function Portfolio() {
                           : 'border-transparent text-dark-muted hover:text-white'
                         }`}
                     >
-                      {tab === 'solution' ? 'Solution' : tab}
+                      {tab === 'solution' ? 'Solution' : tab === 'features' ? 'Key Features' : tab}
                     </button>
                   ))}
                 </div>
@@ -357,6 +508,27 @@ export default function Portfolio() {
                                 </div>
                               ))}
                             </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {activeTab === 'features' && (
+                        <div>
+                          <h4 className="text-sm font-bold uppercase tracking-widest text-brand-orange mb-3 flex items-center gap-2">
+                            <Layers size={14} /> Key Features & Capabilities
+                          </h4>
+                          <p className="text-xs text-dark-muted mb-4">
+                            Core functional modules and user experience features shipped in this project:
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {(selectedProject.features || selectedProject.services).map((feat: string, i: number) => (
+                              <div key={i} className="flex items-center gap-2.5 text-xs text-white/90 bg-[#111317]/70 p-3 rounded-xl border border-white/5 hover:border-brand-orange/30 transition-all">
+                                <span className="w-6 h-6 rounded-lg bg-brand-orange/10 flex items-center justify-center text-brand-orange font-bold text-[10px] shrink-0">
+                                  {i + 1}
+                                </span>
+                                <span className="font-semibold text-white/90">{feat}</span>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       )}
@@ -397,18 +569,31 @@ export default function Portfolio() {
                   </AnimatePresence>
                 </div>
 
-                {/* Footer close option */}
-                <div className="p-4 border-t border-dark-border bg-[#090b0c] flex justify-end gap-3 shrink-0">
+                {/* Footer options */}
+                <div className="p-4 border-t border-dark-border bg-[#090b0c] flex flex-wrap items-center justify-end gap-3 shrink-0">
                   <button
                     onClick={() => setSelectedProject(null)}
-                    className="px-5 py-2.5 rounded-xl bg-dark-light hover:bg-dark-card border border-dark-border text-white text-xs font-bold uppercase tracking-wider transition-colors"
+                    className="px-4 py-2.5 rounded-xl bg-dark-light hover:bg-dark-card border border-dark-border text-white text-xs font-bold uppercase tracking-wider transition-colors"
                   >
-                    Close Details
+                    Close Case Study
                   </button>
+
+                  {selectedProject.liveUrl && (
+                    <a
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2.5 rounded-xl bg-brand-orange/15 hover:bg-brand-orange hover:text-dark-bg border border-brand-orange/40 text-brand-orange text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5"
+                    >
+                      <span>View Live Website</span>
+                      <ExternalLink size={13} />
+                    </a>
+                  )}
+
                   <a
                     href="/contact"
                     onClick={() => setSelectedProject(null)}
-                    className="px-5 py-2.5 rounded-xl bg-brand-orange hover:bg-brand-orangeDark text-dark-bg text-xs font-bold uppercase tracking-wider transition-all shadow-glow flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-brand-orangeDark text-dark-bg text-xs font-bold uppercase tracking-wider transition-all shadow-glow flex items-center gap-1.5"
                   >
                     <span>Start Similar Project</span>
                     <ArrowUpRight size={13} />
