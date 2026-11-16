@@ -92,18 +92,18 @@ export default function HomePage() {
       <main>
         {/* Exact Reachwise Hero Experience Clone as per image */}
         <RwHero
-          eyebrow="Now booking Q4 · 3 spots left"
-          heading="Get seen by|the *right crowd.*"
-          subCopy="Optenary is a digital marketing & technology studio. We run SEO, social media and paid ads that put your brand in front of the people who buy, and we report every result in plain numbers."
-          primary="Book a strategy call"
-          primaryLink="#contact"
-          secondary="See our work"
-          secondaryLink="#work"
-          hint="MOVE TO REACH · CLICK TO LAUNCH A CAMPAIGN"
-          counterLabel="PEOPLE REACHED FOR CLIENTS THIS MONTH"
-          counterStart={1295949}
-          services="SEO, Social media, Paid ads, Content"
-          navCta="Book a call"
+          eyebrow="WHERE TECHNOLOGY EVOLVES"
+          heading="We turn ambitious ideas into|*powerful digital experiences.*"
+          subCopy="Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions that help businesses evolve."
+          primary="Explore Our Work"
+          primaryLink="/work"
+          secondary="Start a Project"
+          secondaryLink="/contact"
+          hint="MOVE TO REACH · CLICK TO EXPLORE CAPABILITIES"
+          counterLabel="PRODUCTION LINES OF CODE DELIVERED"
+          counterStart={248690}
+          services="Web, Mobile, SaaS, AI, E-Commerce"
+          navCta="Start a project"
         />
 
         {/* Exact Reachwise Client Sonar Radar */}
@@ -123,21 +123,21 @@ export default function HomePage() {
 
         {/* Exact Reachwise (05) The Numbers Client Report Section */}
         <RwNumbers
-          eyebrow="(05) The numbers"
-          heading="What our clients|*got* last year."
-          intro="Every client gets this report each month. These are the averages across all of them."
-          kpis="212%:average organic growth:up;6.2×:return on ad spend:up;38M:people reached in 2025:up;140+:brands grown since 2018:up"
-          events="New lead · Haven Realty · 2 min ago;Call booked · Northside Dental · 6 min ago;Reel passed 48k views · Kettlebrook Coffee · 11 min ago;ROAS 6.4× today · Fitloop · 18 min ago;#1 for “skin clinic near me” · Lumen Skin · 26 min ago;5-star review · Orbit Legal · 34 min ago;New lead · Northside Dental · 41 min ago;212 new followers · Lumen Skin · 1 h ago"
+          eyebrow="(05) Engineering Standards"
+          heading="Engineering standards|*you can inspect.*"
+          intro="Every project is built to strict engineering principles. These are the benchmarks we commit to across all client builds."
+          kpis="99.9%:Target System Uptime:up;100%:Client Code & IP Ownership:up;< 1.2s:Target Page Load Speed:up;24/7:Production Monitoring & Support:up"
+          events="Git commit deployed to production · Mehta Dairy · 4 min ago;Automated security audit passed · 0 vulnerabilities · 12 min ago;API integration test suite 100% green · Urban Nest · 19 min ago;Database backup snapshot verified · PostgreSQL cluster · 32 min ago;Core Web Vitals scored 98+ · Vishal Masala · 45 min ago;Sprint demo approved · Client portal · 1 h ago"
         />
 
         {/* Exact Reachwise (06) Content Social Media Feed Section */}
         <RwFeed
-          eyebrow="(06) Content"
-          heading="Content that|*stops the scroll.*"
-          subCopy="We plan, shoot, edit and post for our clients every month. Reels, carousels and stories made for how each platform actually works."
-          stats="18 REELS LAST MONTH;94% SAVES;+112% REACH"
-          button="Social media service"
-          buttonLink="/services/social-media"
+          eyebrow="(06) Engineering Insights"
+          heading="Software built for|*the real world.*"
+          subCopy="We architect systems that endure real-world loads. From resilient database transactions to fluid, 60fps micro-interactions."
+          stats="100% TYPESCRIPT;CI/CD AUTOMATED;SUB-SECOND TTFB"
+          button="Custom software service"
+          buttonLink="/services/custom-software"
         />
 
         {/* Exact Reachwise (07) Team Specialists Section */}

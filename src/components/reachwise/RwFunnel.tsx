@@ -1284,19 +1284,19 @@ const SEED: Record<string, CmsRow[]> = {
     site: [
         {
             slug: "site",
-            f1: "Reachwise",
-            f2: "Digital marketing agency",
-            f3: "SEO, social media and paid ads that bring the right people to your door.",
-            f4: "hello@reachwisestudio.com",
-            f5: "+1 (212) 555-0186",
+            f1: "Optenary",
+            f2: "Digital Product & Technology Studio",
+            f3: "Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions.",
+            f4: "hello@optenary.in",
+            f5: "+91 93166 88014",
             f6: "/contact",
-            f7: "New York",
-            f8: "America/New_York",
+            f7: "India (HQ)",
+            f8: "Asia/Kolkata",
             f9: "4.9",
             f10: "126",
-            f11: "Instagram:https://instagram.com,TikTok:https://tiktok.com,LinkedIn:https://linkedin.com,X:https://x.com",
-            f12: "Now booking Q4 · 3 spots left",
-            f13: "140+",
+            f11: "Instagram:https://www.instagram.com/optenary/,LinkedIn:https://www.linkedin.com/company/optenary/",
+            f12: "WHERE TECHNOLOGY EVOLVES",
+            f13: "Verified",
             n1: "1",
         },
     ],
@@ -1385,14 +1385,14 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),
         phone: g("f5"),
         book: g("f6") || "/contact",
         city: g("f7"),
-        tz: g("f8") || "America/New_York",
+        tz: g("f8") || "Asia/Kolkata",
         rating: g("f9") || "4.9",
         reviews: g("f10"),
         socials: g("f11"),
@@ -1610,13 +1610,13 @@ const FnRow = ({
 }
 export default function RwFunnel(props: Partial<FunnelProps> = {}) {
     const {
-        eyebrow = "(04) How we work",
-        heading = "From attention|to *clients*.",
-        intro = "Every retainer runs the same four steps. You see the funnel fill in your report each week.",
-        foot = "A typical client funnel · last 90 days",
+        eyebrow = "(04) How We Work",
+        heading = "From architecture|to *deployment*.",
+        intro = "Every project runs the same structured four engineering phases. Clear sprint deliverables, continuous testing, and on-time launches.",
+        foot = "Standard engineering delivery pipeline · Optenary Studio",
         bpHint = "auto",
-        stages = "Reach:1,284,300;Clicks:48,120;Leads:2,940;Clients:312",
-        steps = "Audit · Week 1: We study your site, ads and competitors and find the fastest wins.;Launch · Week 2–3: Campaigns, content and fixes go live.;Optimise · Month 2: We test creatives, keywords and pages every week.;Scale · Month 3+: We put more budget and content behind what works.",
+        stages = "Discovery:Sprint 1;Design:Sprint 2;Develop:Sprint 3-4;Launch:Sprint 5+",
+        steps = "Discovery & Architecture · Sprint 1: System requirements, database schema design, and technical feasibility.;UI/UX & System Design · Sprint 2: Interactive prototypes, component library, and design sign-off.;Agile Development · Sprints 3–4: Scalable code, API integrations, and weekly preview builds.;Testing & Cloud Launch · Launch: Rigorous automated QA, security compliance, and zero-downtime deployment.",
     } = props
     const c = colorsOf(props)
     const { D, B, M } = fontsOf(props)

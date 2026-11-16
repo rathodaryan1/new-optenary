@@ -12,8 +12,8 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[#08090A] text-white antialiased">
       <SEO
-        title="Pricing — Simple Monthly Retainers | Optenary"
-        description="Pick the channels you need. Every plan comes with a strategist, a live dashboard and plain-number reports."
+        title="Pricing — Transparent Engineering Engagements | Optenary"
+        description="Transparent sprint and dedicated squad engagements. Every build comes with full source code ownership, automated testing, and guaranteed SLAs."
         canonicalPath="/pricing"
       />
 
@@ -23,14 +23,14 @@ export default function PricingPage() {
         <RwPageHero
           ground="dark"
           object="pulse"
-          eyebrow="(08) Pricing"
-          title="Simple monthly|*retainers.*"
-          lead="Pick the channels you need. Every plan comes with a strategist, a live dashboard and plain-number reports."
-          primary="Choose a plan"
+          eyebrow="(08) Engagements & Pricing"
+          title="Transparent sprint|*investments.*"
+          lead="Choose a dedicated sprint cadence or embedded engineering squad. Every engagement delivers production-grade architecture, complete source code ownership, and weekly staging previews."
+          primary="Explore Engagements"
           primaryLink="#pricing"
-          secondary="Talk to us"
+          secondary="Architecture Discovery Call"
           secondaryLink="/contact"
-          meta="SEO;Social media;Paid ads;Content;Web design;Branding"
+          meta="Web Dev;Mobile Apps;SaaS;AI Agents;Cloud DevOps"
         />
 
         <RwPricing id="pricing" />

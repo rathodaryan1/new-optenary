@@ -22,8 +22,8 @@ export default function ServicesPage() {
         "@type": "WebPage",
         "@id": "https://optenary.in/services#webpage",
         "url": "https://optenary.in/services",
-        "name": "Services — Six channels. One growth plan. | Optenary",
-        "description": "SEO, social media, paid ads, content, web design and branding from one team, planned together and reported in plain numbers."
+        "name": "Services — Engineering Digital Platforms & Scalable Software | Optenary",
+        "description": "Web development, mobile apps, UI/UX design, custom software & SaaS, AI agents & automation, and modern digital commerce engineered by one unified studio."
       },
       {
         "@type": "Organization",
@@ -31,12 +31,10 @@ export default function ServicesPage() {
         "name": "Optenary",
         "url": "https://optenary.in/",
         "email": "hello@optenary.in",
-        "telephone": "+12125550186",
+        "telephone": "+919316688014",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "New York",
-          "addressRegion": "NY",
-          "addressCountry": "US"
+          "addressLocality": "Surat", "addressRegion": "Gujarat", "addressCountry": "IN"
         }
       }
     ]
@@ -54,7 +52,7 @@ export default function ServicesPage() {
     >
       <SEO
         title="Services — Optenary Digital Product Studio"
-        description="SEO, social media, paid ads, content, web design and branding from one team, planned together and reported in plain numbers."
+        description="Web development, mobile apps, UI/UX design, custom software & SaaS, AI agents & automation, and modern digital commerce engineered by one unified studio."
         keywords="marketing channels, SEO, social media, paid ads, content marketing, web design, branding, Optenary services"
         canonicalPath="/services"
         schema={servicesSchema}
@@ -66,26 +64,26 @@ export default function ServicesPage() {
           ground="chalk"
           object="search"
           eyebrow="(02) Services"
-          title="Six channels.|*One growth*|plan."
-          lead="SEO, social media, paid ads, content, web design and branding from one team, planned together and reported in plain numbers."
-          primary="Book a call"
+          title="Six core capabilities.|*One engineering*|studio."
+          lead="Web development, mobile apps, UI/UX design, custom software & SaaS, AI agents & automation, and modern digital commerce engineered by one unified studio."
+          primary="Start a Project"
           primaryLink="/contact"
-          secondary="See pricing"
+          secondary="Our Engagements"
           secondaryLink="/pricing"
-          meta="SEO;Social media;Paid ads;Content;Web design;Branding"
+          meta="Web Dev;Mobile Apps;UI/UX;Custom Software;AI Agents;E-Commerce"
           scrollCue="Scroll"
-          query="marketing agency near me"
-          ourTitle="Optenary · Digital marketing agency in New York"
+          query="top software development company"
+          ourTitle="Optenary · Digital Product & Technology Studio"
           ourDomain="optenary.in"
-          searchPop="+318 clicks this week"
+          searchPop="Production Ready · Scalable"
         />
 
         {/* Exact Reachwise (01) Channel Wall Grid Section */}
         <RwServiceGrid
-          eyebrow="(01) All channels"
-          heading="Pick one channel,|or *all six*."
-          intro="Every channel below is run by a senior specialist, reported in one dashboard and billed as one monthly retainer. Mix them as you grow."
-          button="Book a call"
+          eyebrow="(01) Core Services"
+          heading="Pick one capability,|or *an end-to-end stack*."
+          intro="Every solution below is architected by dedicated engineers, documented with clean architecture, and built with modern tech. Scale seamlessly from MVP to enterprise."
+          button="Start a project"
           buttonLink="/contact"
           fromLabel="From"
           exploreLabel="Explore"
@@ -97,13 +95,13 @@ export default function ServicesPage() {
         {/* Exact Reachwise (04) How We Work Funnel Section */}
         <RwFunnel
           eyebrow="(04) How we work"
-          heading="From attention|to *clients*."
+          heading="From architecture|to *deployment*."
         />
 
         {/* Exact Reachwise (09) FAQ Accordion Section */}
         <RwFaq
           eyebrow="(09) FAQ"
-          heading="Questions,|*answered*."
+          heading="Engineering & process,|*clarified*."
         />
 
         {/* Exact Reachwise (11) Free Audit CTA Section */}
@@ -112,7 +110,7 @@ export default function ServicesPage() {
 
       {/* Exact Reachwise (12) Giant Wordmark Footer */}
       <RwFooter
-        blurb="SEO, social media and paid ads that bring the right people to your door."
+        blurb="Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions."
         wordmark="Optenary"
       />
     </div>

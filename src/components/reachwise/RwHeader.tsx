@@ -44,7 +44,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
         const d = new Date()
         setTime(
           d.toLocaleTimeString("en-US", {
-            timeZone: "America/New_York",
+            timeZone: "Asia/Kolkata",
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit",
@@ -52,7 +52,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
           })
         )
       } catch (e) {
-        setTime("04:17:50")
+        setTime("10:00:00")
       }
     }
     updateTime()
@@ -252,11 +252,11 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
                 <a href="tel:+919316688014">+91 93166 88014</a>
               </div>
               <div>
-                <p className="rwhd-dr-k">Office</p>
-                <span>New York, NY</span>
+                <p className="rwhd-dr-k">Studio</p>
+                <span>India (HQ) · Global</span>
                 <p className="rwhd-time">
                   <span className="rwhd-live" />
-                  <span>NYC: {time}</span>
+                  <span>IST: {time}</span>
                 </p>
               </div>
               <div className="rwhd-dr-cta">

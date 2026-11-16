@@ -10,7 +10,7 @@ import '../components/reachwise/reachwise.css';
 
 export default function AboutPage() {
   useEffect(() => {
-    document.title = 'About Optenary — Digital Marketing Agency in New York';
+    document.title = 'About Optenary — Digital Product & Technology Studio';
     window.scrollTo(0, 0);
   }, []);
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
         "@id": "https://optenary.in/about#webpage",
         "url": "https://optenary.in/about",
         "name": "About Us - Optenary",
-        "description": "Optenary is a digital product & technology studio helping brands get found on search, stopped on social and chosen over the competition."
+        "description": "Optenary is a digital product & technology studio designing and engineering modern web platforms, mobile applications, custom SaaS software, and intelligent AI solutions."
       },
       {
         "@type": "Organization",
@@ -30,12 +30,10 @@ export default function AboutPage() {
         "name": "Optenary",
         "url": "https://optenary.in/",
         "email": "hello@optenary.in",
-        "telephone": "+12125550186",
+        "telephone": "+919316688014",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "New York",
-          "addressRegion": "NY",
-          "addressCountry": "US"
+          "addressLocality": "Surat", "addressRegion": "Gujarat", "addressCountry": "IN"
         }
       }
     ]
@@ -53,8 +51,8 @@ export default function AboutPage() {
     >
       <SEO
         title="About Us | Optenary Digital Product Studio"
-        description="Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition."
-        keywords="Optenary about, marketing agency New York, SEO team, digital marketing agency, growth team"
+        description="Optenary is a digital product & technology studio based in India. We engineer scalable web platforms, mobile applications, custom software, and AI solutions."
+        keywords="Optenary about, software engineering company India, web development, custom software, AI solutions, digital product studio"
         canonicalPath="/about"
         schema={aboutSchema}
       />
@@ -66,24 +64,24 @@ export default function AboutPage() {
         {/* Exact Reachwise About Section: Hero + Story Signal Line + Values + Careers Strip */}
         <RwAbout
           eyebrow="About Optenary"
-          heading="We put brands|*in front of people*."
-          lead="Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers."
-          facts="Founded 2016;38 people;New York + remote"
-          primary="Book a call"
+          heading="We build digital platforms|*that scale with you*."
+          lead="Optenary is a digital technology studio based in India. We design and engineer modern web platforms, mobile applications, custom SaaS software, and intelligent AI solutions."
+          facts="Founded 2023;100% Code Ownership;India + Global"
+          primary="Start a project"
           primaryLink="/contact"
           secondary="See our work"
           secondaryLink="/work"
-          captions="Monday strategy review;Content sprint · week 32;Client workshop · Lumen Skin"
-          storyEyebrow="(01) Our story"
-          storyHeading="Ten years of|*reaching people*."
-          story="2016:Two people, one laptop in Brooklyn;2018:First 20 clients, all local;2020:Paid ads team joins;2022:38 people, New York + remote;2025:140+ brands grown;2026:Your brand next"
+          captions="Architecture design review;Sprint demo · production release;Engineering workshop · Mehta Dairy"
+          storyEyebrow="(01) Our Journey"
+          storyHeading="Engineering software|*that matters*."
+          story="2023:Optenary founded with an engineering-first vision;2024:Delivered scalable platforms for dairy, e-commerce, and real estate;2025:Expanded into autonomous AI agents, enterprise SaaS, and mobile apps;2026:Architecting next-generation digital products globally;Now:Your project next"
           scrollHint="Scroll to follow the signal"
-          valuesEyebrow="(02) How we work"
-          valuesHeading="Three rules we|*don't break*."
-          values="Numbers over opinions:Every decision starts with data from your own accounts, not a hunch or a trend.;One team, every channel:SEO, social, ads and content are planned together, so they all push the same way.;No long contracts:Month to month after the first 90 days. We keep clients by getting results."
-          hiringLabel="We're hiring"
-          hiringCount="3 roles"
-          hiringText="SEO strategist, social media producer, paid ads specialist"
+          valuesEyebrow="(02) Engineering Standards"
+          valuesHeading="Three principles we|*stand by*."
+          values="Code Quality over Shortcuts:Clean architecture, type safety with TypeScript, and comprehensive testing in every repo.;100% IP & Source Code Ownership:Every line of code, Docker file, and database schema belongs to the client from day one.;Transparent Sprints:Weekly video walkthroughs, live staging environments, and direct engineer communication."
+          hiringLabel="Open Roles"
+          hiringCount="2 roles"
+          hiringText="Full-stack engineer (React / Node.js), AI systems developer (Python / LangChain)"
           hiringLink="/contact"
           hiringButton="See open roles"
         />
@@ -91,8 +89,8 @@ export default function AboutPage() {
         {/* Specialists Team Section */}
         <RwTeam
           eyebrow="(03) Team"
-          heading="Specialists,|not *generalists*."
-          subCopy="Every account gets a senior lead for each channel you buy. No juniors learning on your budget, no hand-offs."
+          heading="Engineers & architects,|not *middlemen*."
+          subCopy="You work directly with senior software engineers, system architects, and UI/UX designers who write the code and ship your product."
           button="Meet the team"
           buttonLink="/about#team"
         />
@@ -100,8 +98,8 @@ export default function AboutPage() {
         {/* Client Reviews Section (iPhone lock screen cards) */}
         <RwReviews
           eyebrow="(04) Client reviews"
-          heading="Clients who|*stayed*."
-          subCopy="Our average client has been with us for 2.4 years. These are the messages that land in our inbox when the numbers move."
+          heading="Trusted by founders|*and enterprises*."
+          subCopy="Real feedback from the business leaders whose platforms, systems, and digital stores we have engineered."
         />
 
         {/* Free Audit CTA Section with Live NYC Clock */}
@@ -110,7 +108,7 @@ export default function AboutPage() {
 
       {/* Giant Wordmark Footer */}
       <RwFooter
-        blurb="SEO, social media and paid ads that bring the right people to your door."
+        blurb="Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions."
         wordmark="Optenary"
       />
     </div>

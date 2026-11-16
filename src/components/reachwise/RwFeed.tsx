@@ -1284,18 +1284,18 @@ const SEED: Record<string, CmsRow[]> = {
         {
             slug: "site",
             f1: "Optenary",
-            f2: "Digital marketing agency",
-            f3: "SEO, social media and paid ads that bring the right people to your door.",
+            f2: "Digital Product & Technology Studio",
+            f3: "Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions.",
             f4: "hello@optenary.in",
-            f5: "+1 (212) 555-0186",
+            f5: "+91 93166 88014",
             f6: "/contact",
-            f7: "New York",
-            f8: "America/New_York",
+            f7: "India (HQ)",
+            f8: "Asia/Kolkata",
             f9: "4.9",
             f10: "126",
-            f11: "Instagram:https://instagram.com,TikTok:https://tiktok.com,LinkedIn:https://linkedin.com,X:https://x.com",
-            f12: "Now booking Q4 · 3 spots left",
-            f13: "140+",
+            f11: "Instagram:https://www.instagram.com/optenary/,LinkedIn:https://www.linkedin.com/company/optenary/",
+            f12: "WHERE TECHNOLOGY EVOLVES",
+            f13: "Verified",
             n1: "1",
         },
     ],
@@ -1391,7 +1391,7 @@ function useSite() {
         phone: g("f5"),
         book: g("f6") || "/contact",
         city: g("f7"),
-        tz: g("f8") || "America/New_York",
+        tz: g("f8") || "Asia/Kolkata",
         rating: g("f9") || "4.9",
         reviews: g("f10"),
         socials: g("f11"),
@@ -1497,7 +1497,7 @@ export interface FeedProps extends Partial<Pal> {
 // ---- THE WALL: a feed of client posts in columns that scroll at different speeds and directions (odd up, even down), bending with scroll velocity.
 // Hover a post: the heart pops pink, a lime ring pings out of it and the like count rolls +1. ----
 const FEED_POSTS =
-    "https://framerusercontent.com/images/xbfdpTvZzzafiJOwtXCs0luyp2I.webp|@kettlebrook.coffee|2418|post;https://framerusercontent.com/images/1DPklcMWo4iq1F5uWVjcytvrsc.webp|@lumenskin|8114|carousel|5;https://framerusercontent.com/images/yOk3vEq9TQ9CWpwuFmZY86mAVY.webp|@fitloop|3912|reel|48k;https://framerusercontent.com/images/s0jwUqVTFxGplLAwU0WLa8rbdw.webp|@parcel.co|5630|post;https://framerusercontent.com/images/YpYjh1duUyRdFMaCaQZ6JVDbmko.webp|@tallow.kitchen|1204|post;https://framerusercontent.com/images/HeKFyo7MfYy7GEQSGOPGXvhVHvo.webp|@brightline.run|9870|reel|112k;https://framerusercontent.com/images/oSWgZWTjPoakKUa7CvtJ6TXueP0.webp|@lumenskin|3307|carousel|3;https://framerusercontent.com/images/3nqFQlS1bXsh1PS74cijri0AhSM.webp|@verde.studio|1786|post;https://framerusercontent.com/images/yg9StsTkn2mS5VxfA3YnyrJNM1Q.webp|@haven.realty|2205|reel|21k;https://framerusercontent.com/images/mnE5eA5CunHm89doTbOt2H7pHdE.webp|@verde.studio|2874|carousel|4;https://framerusercontent.com/images/uYN9bcKFZFsqzLzQWUSswf4QIs.webp|@tallow.kitchen|2951|carousel|6;https://framerusercontent.com/images/eMqxq3byjv5ceZYESvRLuMWVug.webp|@parcel.co|3690|post;https://framerusercontent.com/images/xbfdpTvZzzafiJOwtXCs0luyp2I.webp|@kettlebrook.coffee|1932|post;https://framerusercontent.com/images/yOk3vEq9TQ9CWpwuFmZY86mAVY.webp|@fitloop|4480|reel|64k;https://framerusercontent.com/images/1DPklcMWo4iq1F5uWVjcytvrsc.webp|@lumenskin|2660|carousel|3;https://framerusercontent.com/images/3nqFQlS1bXsh1PS74cijri0AhSM.webp|@verde.studio|1417|post;https://framerusercontent.com/images/HeKFyo7MfYy7GEQSGOPGXvhVHvo.webp|@brightline.run|6042|reel|31k;https://framerusercontent.com/images/oSWgZWTjPoakKUa7CvtJ6TXueP0.webp|@lumenskin|1118|carousel|5;https://framerusercontent.com/images/s0jwUqVTFxGplLAwU0WLa8rbdw.webp|@parcel.co|2336|post;https://framerusercontent.com/images/uYN9bcKFZFsqzLzQWUSswf4QIs.webp|@tallow.kitchen|2074|carousel|4"
+    "https://framerusercontent.com/images/xbfdpTvZzzafiJOwtXCs0luyp2I.webp|@optenary|2418|post;https://framerusercontent.com/images/1DPklcMWo4iq1F5uWVjcytvrsc.webp|@mehtadairy|8114|carousel|5;https://framerusercontent.com/images/yOk3vEq9TQ9CWpwuFmZY86mAVY.webp|@urbannest|3912|reel|48k;https://framerusercontent.com/images/s0jwUqVTFxGplLAwU0WLa8rbdw.webp|@vishalmasala|5630|post;https://framerusercontent.com/images/YpYjh1duUyRdFMaCaQZ6JVDbmko.webp|@shreeenterprise|1204|post;https://framerusercontent.com/images/HeKFyo7MfYy7GEQSGOPGXvhVHvo.webp|@laalo.film|9870|reel|112k;https://framerusercontent.com/images/oSWgZWTjPoakKUa7CvtJ6TXueP0.webp|@mehtadairy|3307|carousel|3;https://framerusercontent.com/images/3nqFQlS1bXsh1PS74cijri0AhSM.webp|@optenary.design|1786|post;https://framerusercontent.com/images/yg9StsTkn2mS5VxfA3YnyrJNM1Q.webp|@optenary.tech|2205|reel|21k;https://framerusercontent.com/images/mnE5eA5CunHm89doTbOt2H7pHdE.webp|@optenary.design|2874|carousel|4;https://framerusercontent.com/images/uYN9bcKFZFsqzLzQWUSswf4QIs.webp|@shreeenterprise|2951|carousel|6;https://framerusercontent.com/images/eMqxq3byjv5ceZYESvRLuMWVug.webp|@vishalmasala|3690|post;https://framerusercontent.com/images/xbfdpTvZzzafiJOwtXCs0luyp2I.webp|@optenary|1932|post;https://framerusercontent.com/images/yOk3vEq9TQ9CWpwuFmZY86mAVY.webp|@urbannest|4480|reel|64k;https://framerusercontent.com/images/1DPklcMWo4iq1F5uWVjcytvrsc.webp|@mehtadairy|2660|carousel|3;https://framerusercontent.com/images/3nqFQlS1bXsh1PS74cijri0AhSM.webp|@optenary.design|1417|post;https://framerusercontent.com/images/HeKFyo7MfYy7GEQSGOPGXvhVHvo.webp|@laalo.film|6042|reel|31k;https://framerusercontent.com/images/oSWgZWTjPoakKUa7CvtJ6TXueP0.webp|@mehtadairy|1118|carousel|5;https://framerusercontent.com/images/s0jwUqVTFxGplLAwU0WLa8rbdw.webp|@vishalmasala|2336|post;https://framerusercontent.com/images/uYN9bcKFZFsqzLzQWUSswf4QIs.webp|@shreeenterprise|2074|carousel|4"
 type FeedPost = {
     src: string
     handle: string
@@ -1557,12 +1557,12 @@ const Heart = () => (
 )
 export default function RwFeed(props: Partial<FeedProps> = {}) {
     const {
-        eyebrow = "(06) Content",
+        eyebrow = "(06) Engineering Insights",
         heading = "Content that|*stops the scroll.*",
-        subCopy = "We plan, shoot, edit and post for our clients every month. Reels, carousels and stories made for how each platform actually works.",
-        stats = "18 REELS LAST MONTH;94% SAVES;+112% REACH",
-        button = "Social media service",
-        buttonLink = "/services/social-media",
+        subCopy = "We architect systems that endure real-world loads. From resilient database transactions to fluid, 60fps micro-interactions.",
+        stats = "100% TYPESCRIPT;CI/CD AUTOMATED;SUB-SECOND TTFB",
+        button = "Custom software service",
+        buttonLink = "/services/custom-software",
         posts = FEED_POSTS,
         reelLabel = "views",
         bpHint = "auto",

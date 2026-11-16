@@ -237,7 +237,7 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       const anchor = target.closest('a') as HTMLAnchorElement | null;
       const transEl = target.closest('[data-rw-trans="true"]') as HTMLElement | null;
 
-      let href = anchor?.getAttribute('href') || transEl?.getAttribute('data-href');
+      const href = anchor?.getAttribute('href') || transEl?.getAttribute('data-href');
       if (!href) return;
 
       // Exclude special protocols & external links

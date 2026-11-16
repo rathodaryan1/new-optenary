@@ -18,8 +18,8 @@ export default function ContactPage() {
         "@type": "ContactPage",
         "@id": "https://optenary.in/contact#webpage",
         "url": "https://optenary.in/contact",
-        "name": "Contact Optenary — Digital Marketing Agency",
-        "description": "Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
+        "name": "Contact Optenary — Digital Product & Technology Studio",
+        "description": "Tell us about your product, timeline and technical requirements. Our engineering team reviews every brief and replies within 24 hours."
       },
       {
         "@type": "Organization",
@@ -27,12 +27,10 @@ export default function ContactPage() {
         "name": "Optenary",
         "url": "https://optenary.in/",
         "email": "hello@optenary.in",
-        "telephone": "+12125550186",
+        "telephone": "+919316688014",
         "address": {
           "@type": "PostalAddress",
-          "addressLocality": "New York",
-          "addressRegion": "NY",
-          "addressCountry": "US"
+          "addressLocality": "Surat", "addressRegion": "Gujarat", "addressCountry": "IN"
         }
       }
     ]
@@ -50,8 +48,8 @@ export default function ContactPage() {
     >
       <SEO
         title="Contact — Optenary Digital Product Studio"
-        description="Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
-        keywords="contact Optenary, marketing agency contact, hire digital marketing agency, SEO agency New York, marketing strategy call"
+        description="Tell us about your product, timeline and technical requirements. Our engineering team reviews every brief and replies within 24 hours."
+        keywords="contact Optenary, hire software engineers, custom web development, mobile app development India, AI solutions"
         canonicalPath="/contact"
         schema={contactSchema}
       />
@@ -60,7 +58,7 @@ export default function ContactPage() {
         <RwContact />
       </main>
       <RwFooter
-        blurb="SEO, social media and paid ads that bring the right people to your door."
+        blurb="Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions."
         wordmark="Optenary"
       />
     </div>

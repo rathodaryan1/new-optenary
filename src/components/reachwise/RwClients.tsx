@@ -1287,19 +1287,19 @@ const SEED: Record<string, CmsRow[]> = {
     site: [
         {
             slug: "site",
-            f1: "Reachwise",
-            f2: "Digital marketing agency",
-            f3: "SEO, social media and paid ads that bring the right people to your door.",
-            f4: "hello@reachwisestudio.com",
-            f5: "+1 (212) 555-0186",
+            f1: "Optenary",
+            f2: "Digital Product & Technology Studio",
+            f3: "Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions.",
+            f4: "hello@optenary.in",
+            f5: "+91 93166 88014",
             f6: "/contact",
-            f7: "New York",
-            f8: "America/New_York",
+            f7: "India (HQ)",
+            f8: "Asia/Kolkata",
             f9: "4.9",
             f10: "126",
-            f11: "Instagram:https://instagram.com,TikTok:https://tiktok.com,LinkedIn:https://linkedin.com,X:https://x.com",
-            f12: "Now booking Q4 · 3 spots left",
-            f13: "140+",
+            f11: "Instagram:https://www.instagram.com/optenary/,LinkedIn:https://www.linkedin.com/company/optenary/",
+            f12: "WHERE TECHNOLOGY EVOLVES",
+            f13: "Verified",
             n1: "1",
         },
     ],
@@ -1388,14 +1388,14 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),
         phone: g("f5"),
         book: g("f6") || "/contact",
         city: g("f7"),
-        tz: g("f8") || "America/New_York",
+        tz: g("f8") || "Asia/Kolkata",
         rating: g("f9") || "4.9",
         reviews: g("f10"),
         socials: g("f11"),
@@ -1533,14 +1533,14 @@ const clPolar = (n: number) =>
 const clNorm = (a: number) => ((a % 360) + 360) % 360
 export default function RwClients(props: Partial<ClientsProps> = {}) {
     const {
-        eyebrow = "(00) Clients",
-        heading = "{n} brands|*on our radar*.",
-        line = "Local clinics, cafés and online shops to national brands. Every one of them came to us to be found by more of the right people.",
-        clientsCount = "",
+        eyebrow = "(00) Clients & Stack",
+        heading = "{n} projects|*on our radar*.",
+        line = "From established enterprises and high-growth businesses to venture-backed platforms. Every product is engineered with precision, reliability, and modern architecture.",
+        clientsCount = "Verified",
         ratingLine = "",
-        clients = "Northside Dental, Kettlebrook Coffee, Fitloop, Haven Realty, Lumen Skin, Orbit Legal, Parcel & Co, Verde Studio, Tallow, Brightline",
-        badges = "+212%;+96k;6.2×;+122;$142k;57 consults;+88%;+3.1×;+64%;+41k",
-        rings = "Local;Regional;National;Global",
+        clients = "Mehta Dairy, Urban Nest, Vishal Masala, Shree Enterprise, Laalo, React, Next.js, TypeScript, PostgreSQL, Flutter",
+        badges = "Live;Live;Live;Live;Live;Stack;Stack;Stack;Stack;Stack",
+        rings = "Core;Stack;Cloud;Global",
         readout = "Last ping",
         bpHint = "auto",
     } = props
@@ -1934,7 +1934,7 @@ addPropertyControls(RwClients, {
         description: "Comma list — each becomes a blip on the radar",
         displayTextArea: true,
         defaultValue:
-            "Northside Dental, Kettlebrook Coffee, Fitloop, Haven Realty, Lumen Skin, Orbit Legal, Parcel & Co, Verde Studio, Tallow, Brightline",
+            "Mehta Dairy, Urban Nest, Vishal Masala, Shree Enterprise, Laalo, React, Next.js, TypeScript, PostgreSQL, Flutter",
     },
     badges: {
         type: ControlType.String,
@@ -1942,7 +1942,7 @@ addPropertyControls(RwClients, {
         description: "; list, same order as the names",
         displayTextArea: true,
         defaultValue:
-            "+212%;+96k;6.2×;+122;$142k;57 consults;+88%;+3.1×;+64%;+41k",
+            "Live;Live;Live;Live;Live;Stack;Stack;Stack;Stack;Stack",
     },
     rings: {
         type: ControlType.String,
