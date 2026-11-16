@@ -26,3 +26,26 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Scratch and extraction files
+*.cjs
+*.mjs
+scratch_*
+find_*
+inspect_*
+fetch_*
+extract_*
+analyze_*
+hero_reachwise*
+rwsg_*
+rwtr*
+rw_loader*
+rw_pagetrans*
+ref_reachwise*
+services_page*
+sg_compiled*
+style_rwsg*
+step_52.txt
+chunks.json
+rwhero.tsx
+rw

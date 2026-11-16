@@ -7,12 +7,15 @@ import PageSkeleton from './components/PageSkeleton';
 import HomePage from './pages/HomePage';
 
 import ErrorBoundary from './components/ErrorBoundary';
+import RwPageTrans from './components/reachwise/RwPageTrans';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const StickyBookCTA = lazyWithRetry(() => import('./components/StickyBookCTA'));
 const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
+const ServicesPage             = lazyWithRetry(() => import('./pages/ServicesPage'));
+const PricingPage              = lazyWithRetry(() => import('./pages/PricingPage'));
 const AboutPage                = lazyWithRetry(() => import('./pages/AboutPage'));
 const IntegrationsPage         = lazyWithRetry(() => import('./pages/IntegrationsPage'));
 const WebDevelopmentPage       = lazyWithRetry(() => import('./pages/WebDevelopmentPage'));
@@ -23,7 +26,7 @@ const AIAgentsAutomationPage   = lazyWithRetry(() => import('./pages/AIAgentsAut
 const ShopifyDevelopmentPage   = lazyWithRetry(() => import('./pages/ShopifyDevelopmentPage'));
 const WordPressDevelopmentPage = lazyWithRetry(() => import('./pages/WordPressDevelopmentPage'));
 const CustomEcommercePage      = lazyWithRetry(() => import('./pages/CustomEcommercePage'));
-const ProjectsPage             = lazyWithRetry(() => import('./pages/ProjectsPage'));
+const WorkPage                  = lazyWithRetry(() => import('./pages/WorkPage'));
 const MehtaDairyCaseStudyPage  = lazyWithRetry(() => import('./pages/MehtaDairyCaseStudyPage'));
 const FAQPage                  = lazyWithRetry(() => import('./pages/FAQPage'));
 const ContactPage              = lazyWithRetry(() => import('./pages/ContactPage'));
@@ -73,8 +76,11 @@ function AnimatedRoutes() {
           <Route path="/home" element={<PageTransition><HomePage /></PageTransition>} />
 
           {/* Core pages */}
+          <Route path="/services"             element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/work"                 element={<PageTransition><WorkPage /></PageTransition>} />
           <Route path="/about"                element={<PageTransition><AboutPage /></PageTransition>} />
-          <Route path="/projects"             element={<PageTransition><ProjectsPage /></PageTransition>} />
+          <Route path="/pricing"              element={<PageTransition><PricingPage /></PageTransition>} />
+          <Route path="/projects"             element={<PageTransition><WorkPage /></PageTransition>} />
           <Route path="/projects/mehta-dairy" element={<PageTransition><MehtaDairyCaseStudyPage /></PageTransition>} />
           <Route path="/integrations"         element={<PageTransition><IntegrationsPage /></PageTransition>} />
           <Route path="/faq"          element={<PageTransition><FAQPage /></PageTransition>} />
@@ -88,6 +94,12 @@ function AnimatedRoutes() {
           <Route path="/terms-of-service" element={<PageTransition><TermsPage /></PageTransition>} />
 
           {/* Services */}
+          <Route path="/services/seo"                          element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/social-media"                 element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/paid-ads"                     element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/content"                      element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/web-design"                   element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/branding"                     element={<PageTransition><ServicesPage /></PageTransition>} />
           <Route path="/services/web-development"              element={<PageTransition><WebDevelopmentPage /></PageTransition>} />
           <Route path="/services/mobile-development"           element={<PageTransition><MobileDevelopmentPage /></PageTransition>} />
           <Route path="/services/custom-software"              element={<PageTransition><CustomSoftwarePage /></PageTransition>} />
@@ -115,20 +127,22 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        {/* Vercel Analytics */}
-        <Analytics />
+        <RwPageTrans>
+          {/* Vercel Analytics */}
+          <Analytics />
 
-        {/* Scroll restoration */}
-        <ScrollToHash />
+          {/* Scroll restoration */}
+          <ScrollToHash />
 
-        {/* Animated route transitions */}
-        <AnimatedRoutes />
+          {/* Animated route transitions */}
+          <AnimatedRoutes />
 
-        {/* Global floating UI */}
-        <Suspense fallback={null}>
-          <StickyBookCTA />
-          <CookieConsent />
-        </Suspense>
+          {/* Global floating UI */}
+          <Suspense fallback={null}>
+            <StickyBookCTA />
+            <CookieConsent />
+          </Suspense>
+        </RwPageTrans>
       </BrowserRouter>
     </ErrorBoundary>
   );

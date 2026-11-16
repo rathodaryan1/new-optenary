@@ -7,20 +7,23 @@ interface Props {
 interface State {
   hasError: boolean;
   error: Error | null;
+  errorInfo: ErrorInfo | null;
 }
 
 export default class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
     error: null,
+    errorInfo: null,
   };
 
   public static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { hasError: true, error, errorInfo: null };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error in React component tree:', error, errorInfo);
+    this.setState({ errorInfo });
   }
 
   private handleReload = () => {
@@ -39,9 +42,18 @@ export default class ErrorBoundary extends Component<Props, State> {
             </svg>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold font-heading mb-3">Something went wrong</h1>
-          <p className="text-dark-muted text-sm max-w-md mb-8">
+          <p className="text-dark-muted text-sm max-w-md mb-4">
             An unexpected error occurred while loading this page. Please try refreshing to load the latest version.
           </p>
+
+          {/* Detailed Error for Debugging */}
+          {this.state.error && (
+            <div className="max-w-2xl w-full p-4 mb-6 rounded-xl bg-red-950/60 border border-red-500/40 text-left font-mono text-xs text-red-200 overflow-x-auto">
+              <div className="font-bold text-red-400 mb-1">{this.state.error.name}: {this.state.error.message}</div>
+              <pre className="text-[10px] text-red-300/80 whitespace-pre-wrap">{this.state.error.stack}</pre>
+            </div>
+          )}
+
           <button
             onClick={this.handleReload}
             className="px-6 py-3 rounded-xl bg-brand-orange hover:bg-brand-orangeDark text-dark-bg font-bold text-xs uppercase tracking-wider transition-colors shadow-glow"

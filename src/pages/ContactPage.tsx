@@ -1,44 +1,68 @@
-import Header from '../components/Header';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
+import RwHeader from '../components/reachwise/RwHeader';
+import RwContact from '../components/reachwise/RwContact';
+import RwFooter from '../components/reachwise/RwFooter';
+import '../components/reachwise/reachwise.css';
 
 export default function ContactPage() {
-  const breadcrumbSchema = {
+  useEffect(() => {
+    document.title = 'Contact — Reachwise Digital Marketing Agency';
+    window.scrollTo(0, 0);
+  }, []);
+
+  const contactSchema = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
+    "@graph": [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://optenary.in/"
+        "@type": "ContactPage",
+        "@id": "https://reachwisestudio.com/contact#webpage",
+        "url": "https://reachwisestudio.com/contact",
+        "name": "Contact Reachwise — Digital Marketing Agency",
+        "description": "Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
       },
       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Contact",
-        "item": "https://optenary.in/contact"
+        "@type": "Organization",
+        "@id": "https://reachwisestudio.com/#organization",
+        "name": "Reachwise",
+        "url": "https://reachwisestudio.com/",
+        "email": "hello@reachwisestudio.com",
+        "telephone": "+12125550186",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "New York",
+          "addressRegion": "NY",
+          "addressCountry": "US"
+        }
       }
     ]
   };
 
   return (
-    <div className="min-h-screen bg-dark-[#0b0d0e] bg-dark-bg text-white selection:bg-brand-orange selection:text-dark-bg antialiased flex flex-col justify-between">
-      <SEO 
-        title="Contact Optenary | Start Your Web, Mobile or AI Project"
-        description="Get in touch with Optenary to discuss your web development, mobile app, custom software, or AI agent automation project. Get a free project scope &amp; quote."
-        keywords="contact optenary, hire developers, software intake form, project inquiry, hire custom software agency, Optenary"
+    <div
+      className="reachwise-site"
+      style={{
+        background: '#EEEEE8',
+        minHeight: '100vh',
+        color: '#0D0E10',
+        overflowX: 'clip',
+      }}
+    >
+      <SEO
+        title="Contact — Reachwise Digital Marketing Agency"
+        description="Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
+        keywords="contact Reachwise, marketing agency contact, hire digital marketing agency, SEO agency New York, marketing strategy call"
         canonicalPath="/contact"
-        schema={breadcrumbSchema}
+        schema={contactSchema}
       />
-      <Header />
-      <main className="flex-grow pt-28 px-6 md:px-12 max-w-7xl mx-auto w-full">
-        <Breadcrumbs items={[{ name: 'Contact' }]} className="mb-6" />
-        <Contact />
+      <RwHeader active="contact" ground="light" />
+      <main>
+        <RwContact />
       </main>
-      <Footer />
+      <RwFooter
+        blurb="SEO, social media and paid ads that bring the right people to your door."
+        wordmark="Reachwise"
+      />
     </div>
   );
 }
