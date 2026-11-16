@@ -74,7 +74,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
         <header className={`rwhd-top ${glass ? "is-glass" : ""} ${isLight ? "is-lt" : ""}`}>
           <div className="rwhd-bar">
             {/* Logo */}
-            <a className="rwhd-logo" href="/" aria-label="Reachwise home">
+            <a className="rwhd-logo" href="/" aria-label="Optenary home">
               <svg
                 width="30"
                 height="30"
@@ -92,7 +92,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
                   strokeLinecap="round"
                 />
               </svg>
-              <span>Reachwise</span>
+              <span>Optenary</span>
             </a>
 
             {/* Desktop Navigation pill */}
@@ -246,10 +246,10 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
             <div className="rwhd-dr-info">
               <div>
                 <p className="rwhd-dr-k">Contact</p>
-                <a href="mailto:hello@reachwisestudio.com">
-                  hello@reachwisestudio.com
+                <a href="mailto:hello@optenary.in">
+                  hello@optenary.in
                 </a>
-                <a href="tel:+12125550186">+1 (212) 555-0186</a>
+                <a href="tel:+919316688014">+91 93166 88014</a>
               </div>
               <div>
                 <p className="rwhd-dr-k">Office</p>

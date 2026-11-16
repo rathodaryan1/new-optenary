@@ -10,7 +10,7 @@ import '../components/reachwise/reachwise.css';
 
 export default function AboutPage() {
   useEffect(() => {
-    document.title = 'About Reachwise — Digital Marketing Agency in New York';
+    document.title = 'About Optenary — Digital Marketing Agency in New York';
     window.scrollTo(0, 0);
   }, []);
 
@@ -19,17 +19,17 @@ export default function AboutPage() {
     "@graph": [
       {
         "@type": "AboutPage",
-        "@id": "https://reachwisestudio.com/about#webpage",
-        "url": "https://reachwisestudio.com/about",
-        "name": "About Us - Reachwise",
-        "description": "Reachwise is a digital marketing agency in New York helping brands get found on search, stopped on social and chosen over the competition."
+        "@id": "https://optenary.in/about#webpage",
+        "url": "https://optenary.in/about",
+        "name": "About Us - Optenary",
+        "description": "Optenary is a digital product & technology studio helping brands get found on search, stopped on social and chosen over the competition."
       },
       {
         "@type": "Organization",
-        "@id": "https://reachwisestudio.com/#organization",
-        "name": "Reachwise",
-        "url": "https://reachwisestudio.com/",
-        "email": "hello@reachwisestudio.com",
+        "@id": "https://optenary.in/#organization",
+        "name": "Optenary",
+        "url": "https://optenary.in/",
+        "email": "hello@optenary.in",
         "telephone": "+12125550186",
         "address": {
           "@type": "PostalAddress",
@@ -43,7 +43,7 @@ export default function AboutPage() {
 
   return (
     <div
-      className="reachwise-site"
+      className="optenary-site"
       style={{
         background: '#EEEEE8',
         minHeight: '100vh',
@@ -52,9 +52,9 @@ export default function AboutPage() {
       }}
     >
       <SEO
-        title="About Us | Reachwise Digital Marketing Agency"
-        description="Reachwise is a digital marketing agency in New York. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition."
-        keywords="Reachwise about, marketing agency New York, SEO team, digital marketing agency, growth team"
+        title="About Us | Optenary Digital Product Studio"
+        description="Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition."
+        keywords="Optenary about, marketing agency New York, SEO team, digital marketing agency, growth team"
         canonicalPath="/about"
         schema={aboutSchema}
       />
@@ -65,9 +65,9 @@ export default function AboutPage() {
       <main>
         {/* Exact Reachwise About Section: Hero + Story Signal Line + Values + Careers Strip */}
         <RwAbout
-          eyebrow="About Reachwise"
+          eyebrow="About Optenary"
           heading="We put brands|*in front of people*."
-          lead="Reachwise is a digital marketing agency in New York. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers."
+          lead="Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers."
           facts="Founded 2016;38 people;New York + remote"
           primary="Book a call"
           primaryLink="/contact"
@@ -111,7 +111,7 @@ export default function AboutPage() {
       {/* Giant Wordmark Footer */}
       <RwFooter
         blurb="SEO, social media and paid ads that bring the right people to your door."
-        wordmark="Reachwise"
+        wordmark="Optenary"
       />
     </div>
   );

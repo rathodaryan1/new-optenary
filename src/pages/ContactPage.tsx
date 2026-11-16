@@ -7,7 +7,7 @@ import '../components/reachwise/reachwise.css';
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = 'Contact — Reachwise Digital Marketing Agency';
+    document.title = 'Contact — Optenary Digital Product Studio';
     window.scrollTo(0, 0);
   }, []);
 
@@ -16,17 +16,17 @@ export default function ContactPage() {
     "@graph": [
       {
         "@type": "ContactPage",
-        "@id": "https://reachwisestudio.com/contact#webpage",
-        "url": "https://reachwisestudio.com/contact",
-        "name": "Contact Reachwise — Digital Marketing Agency",
+        "@id": "https://optenary.in/contact#webpage",
+        "url": "https://optenary.in/contact",
+        "name": "Contact Optenary — Digital Marketing Agency",
         "description": "Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
       },
       {
         "@type": "Organization",
-        "@id": "https://reachwisestudio.com/#organization",
-        "name": "Reachwise",
-        "url": "https://reachwisestudio.com/",
-        "email": "hello@reachwisestudio.com",
+        "@id": "https://optenary.in/#organization",
+        "name": "Optenary",
+        "url": "https://optenary.in/",
+        "email": "hello@optenary.in",
         "telephone": "+12125550186",
         "address": {
           "@type": "PostalAddress",
@@ -40,7 +40,7 @@ export default function ContactPage() {
 
   return (
     <div
-      className="reachwise-site"
+      className="optenary-site"
       style={{
         background: '#EEEEE8',
         minHeight: '100vh',
@@ -49,9 +49,9 @@ export default function ContactPage() {
       }}
     >
       <SEO
-        title="Contact — Reachwise Digital Marketing Agency"
+        title="Contact — Optenary Digital Product Studio"
         description="Tell us where you are and where you want to be. A senior strategist reads every message and replies within two hours on work days."
-        keywords="contact Reachwise, marketing agency contact, hire digital marketing agency, SEO agency New York, marketing strategy call"
+        keywords="contact Optenary, marketing agency contact, hire digital marketing agency, SEO agency New York, marketing strategy call"
         canonicalPath="/contact"
         schema={contactSchema}
       />
@@ -61,7 +61,7 @@ export default function ContactPage() {
       </main>
       <RwFooter
         blurb="SEO, social media and paid ads that bring the right people to your door."
-        wordmark="Reachwise"
+        wordmark="Optenary"
       />
     </div>
   );

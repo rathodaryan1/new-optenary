@@ -94,7 +94,7 @@ export default function HomePage() {
         <RwHero
           eyebrow="Now booking Q4 · 3 spots left"
           heading="Get seen by|the *right crowd.*"
-          subCopy="Reachwise is a digital marketing agency. We run SEO, social media and paid ads that put your brand in front of the people who buy, and we report every result in plain numbers."
+          subCopy="Optenary is a digital marketing & technology studio. We run SEO, social media and paid ads that put your brand in front of the people who buy, and we report every result in plain numbers."
           primary="Book a strategy call"
           primaryLink="#contact"
           secondary="See our work"
@@ -156,7 +156,7 @@ export default function HomePage() {
         <RwCta />
 
         {/* Exact Reachwise (12) Giant Wordmark Footer */}
-        <RwFooter />
+        <RwFooter wordmark="Optenary" />
       </main>
     </div>
   );

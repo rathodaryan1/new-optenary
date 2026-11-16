@@ -12,7 +12,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[#08090A] text-white antialiased">
       <SEO
-        title="Pricing — Simple Monthly Retainers | Reachwise"
+        title="Pricing — Simple Monthly Retainers | Optenary"
         description="Pick the channels you need. Every plan comes with a strategist, a live dashboard and plain-number reports."
         canonicalPath="/pricing"
       />
@@ -39,7 +39,7 @@ export default function PricingPage() {
         <RwCta />
       </main>
 
-      <RwFooter />
+      <RwFooter wordmark="Optenary" />
     </div>
   );
 }

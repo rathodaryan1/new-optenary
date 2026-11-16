@@ -11,7 +11,7 @@ import '../components/reachwise/reachwise.css';
 
 export default function ServicesPage() {
   useEffect(() => {
-    document.title = 'Services — Reachwise Digital Marketing Agency';
+    document.title = 'Services — Optenary Digital Product Studio';
     window.scrollTo(0, 0);
   }, []);
 
@@ -20,17 +20,17 @@ export default function ServicesPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://reachwisestudio.com/services#webpage",
-        "url": "https://reachwisestudio.com/services",
-        "name": "Services — Six channels. One growth plan. | Reachwise",
+        "@id": "https://optenary.in/services#webpage",
+        "url": "https://optenary.in/services",
+        "name": "Services — Six channels. One growth plan. | Optenary",
         "description": "SEO, social media, paid ads, content, web design and branding from one team, planned together and reported in plain numbers."
       },
       {
         "@type": "Organization",
-        "@id": "https://reachwisestudio.com/#organization",
-        "name": "Reachwise",
-        "url": "https://reachwisestudio.com/",
-        "email": "hello@reachwisestudio.com",
+        "@id": "https://optenary.in/#organization",
+        "name": "Optenary",
+        "url": "https://optenary.in/",
+        "email": "hello@optenary.in",
         "telephone": "+12125550186",
         "address": {
           "@type": "PostalAddress",
@@ -44,7 +44,7 @@ export default function ServicesPage() {
 
   return (
     <div
-      className="reachwise-site"
+      className="optenary-site"
       style={{
         background: '#EEEEE8',
         minHeight: '100vh',
@@ -53,9 +53,9 @@ export default function ServicesPage() {
       }}
     >
       <SEO
-        title="Services — Reachwise Digital Marketing Agency"
+        title="Services — Optenary Digital Product Studio"
         description="SEO, social media, paid ads, content, web design and branding from one team, planned together and reported in plain numbers."
-        keywords="marketing channels, SEO, social media, paid ads, content marketing, web design, branding, Reachwise services"
+        keywords="marketing channels, SEO, social media, paid ads, content marketing, web design, branding, Optenary services"
         canonicalPath="/services"
         schema={servicesSchema}
       />
@@ -75,8 +75,8 @@ export default function ServicesPage() {
           meta="SEO;Social media;Paid ads;Content;Web design;Branding"
           scrollCue="Scroll"
           query="marketing agency near me"
-          ourTitle="Reachwise · Digital marketing agency in New York"
-          ourDomain="reachwisestudio.com"
+          ourTitle="Optenary · Digital marketing agency in New York"
+          ourDomain="optenary.in"
           searchPop="+318 clicks this week"
         />
 
@@ -113,7 +113,7 @@ export default function ServicesPage() {
       {/* Exact Reachwise (12) Giant Wordmark Footer */}
       <RwFooter
         blurb="SEO, social media and paid ads that bring the right people to your door."
-        wordmark="Reachwise"
+        wordmark="Optenary"
       />
     </div>
   );

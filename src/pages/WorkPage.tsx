@@ -9,13 +9,13 @@ import '../components/reachwise/reachwise.css';
 
 export default function WorkPage() {
   useEffect(() => {
-    document.title = 'Work — Reachwise Digital Marketing Agency';
+    document.title = 'Work — Optenary Digital Product Studio';
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div
-      className="reachwise-site"
+      className="optenary-site"
       style={{
         background: '#08090A',
         minHeight: '100vh',
@@ -63,7 +63,7 @@ export default function WorkPage() {
       </main>
       <RwFooter
         blurb="SEO, social media and paid ads that bring the right people to your door."
-        wordmark="Reachwise"
+        wordmark="Optenary"
       />
     </div>
   );

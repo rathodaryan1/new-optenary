@@ -1284,10 +1284,10 @@ const SEED: Record<string, CmsRow[]> = {
     site: [
         {
             slug: "site",
-            f1: "Reachwise",
+            f1: "Optenary",
             f2: "Digital marketing agency",
             f3: "SEO, social media and paid ads that bring the right people to your door.",
-            f4: "hello@reachwisestudio.com",
+            f4: "hello@optenary.in",
             f5: "+1 (212) 555-0186",
             f6: "/contact",
             f7: "New York",
@@ -1385,7 +1385,7 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),
@@ -1557,9 +1557,9 @@ const AbIcon = ({ k }: { k: number }) =>
     )
 export default function RwAbout(props: Partial<AboutProps> = {}) {
     const {
-        eyebrow = "About Reachwise",
+        eyebrow = "About Optenary",
         heading = "We put brands|*in front of people*.",
-        lead = "Reachwise is a digital marketing agency in New York. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers.",
+        lead = "Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers.",
         facts = "Founded 2016;38 people;New York + remote",
         primary = "Book a call",
         primaryLink = "",
@@ -2154,7 +2154,7 @@ addPropertyControls(RwAbout, {
     eyebrow: {
         type: ControlType.String,
         title: "Eyebrow",
-        defaultValue: "About Reachwise",
+        defaultValue: "About Optenary",
     },
     heading: {
         type: ControlType.String,
@@ -2168,7 +2168,7 @@ addPropertyControls(RwAbout, {
         title: "Lead",
         displayTextArea: true,
         defaultValue:
-            "Reachwise is a digital marketing agency in New York. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers.",
+            "Optenary is a digital product & technology studio. Since 2016 we have helped 140+ brands get found on search, stopped on social and chosen over the competition — and we report every result in plain numbers.",
     },
     facts: {
         type: ControlType.String,

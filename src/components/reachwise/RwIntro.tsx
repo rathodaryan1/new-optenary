@@ -1287,10 +1287,10 @@ const SEED: Record<string, CmsRow[]> = {
     site: [
         {
             slug: "site",
-            f1: "Reachwise",
+            f1: "Optenary",
             f2: "Digital marketing agency",
             f3: "SEO, social media and paid ads that bring the right people to your door.",
-            f4: "hello@reachwisestudio.com",
+            f4: "hello@optenary.in",
             f5: "+1 (212) 555-0186",
             f6: "/contact",
             f7: "New York",
@@ -1388,7 +1388,7 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),
@@ -1518,7 +1518,7 @@ const rwinRand = (seed: number) => {
 const rwinFmt = (n: number) => Math.round(n).toLocaleString("en-US")
 export default function RwIntro(props: Partial<IntroProps> = {}) {
     const {
-        eyebrow = "(01) Why Reachwise",
+        eyebrow = "(01) Why Optenary",
         heading = "Everyone is a crowd.|We find *your buyers*.",
         subCopy = "Most brands aren't invisible. They're talking to the wrong people. We find the searches, feeds and audiences where your buyers already are — and put you there.",
         button = "About us",
@@ -2085,7 +2085,7 @@ addPropertyControls(RwIntro, {
     eyebrow: {
         type: ControlType.String,
         title: "Eyebrow",
-        defaultValue: "(01) Why Reachwise",
+        defaultValue: "(01) Why Optenary",
     },
     heading: {
         type: ControlType.String,

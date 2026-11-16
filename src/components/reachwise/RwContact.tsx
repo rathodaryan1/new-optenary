@@ -1285,10 +1285,10 @@ const SEED: Record<string, CmsRow[]> = {
     site: [
         {
             slug: "site",
-            f1: "Reachwise",
+            f1: "Optenary",
             f2: "Digital marketing agency",
             f3: "SEO, social media and paid ads that bring the right people to your door.",
-            f4: "hello@reachwisestudio.com",
+            f4: "hello@optenary.in",
             f5: "+1 (212) 555-0186",
             f6: "/contact",
             f7: "New York",
@@ -1454,7 +1454,7 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),
@@ -1758,7 +1758,7 @@ export default function RwContact(props: Partial<ContactProps> = {}) {
         studioTitle = "Studio",
         openHours = "1-5 09:00-18:00",
         socialsTitle = "Follow the work",
-        appLabel = "Reachwise",
+        appLabel = "Optenary",
         bpHint = "auto",
     } = props
     const c = colorsOf(props)
@@ -2669,7 +2669,7 @@ addPropertyControls(RwContact, {
     appLabel: {
         type: ControlType.String,
         title: "Card app name",
-        defaultValue: "Reachwise",
+        defaultValue: "Optenary",
     },
     bookTitle: {
         type: ControlType.String,
