@@ -123,9 +123,9 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
                   <span className="rw-fill" aria-hidden="true" />
                   <span className="rw-lbl">
                     <span className="rw-roll">
-                      <span className="rw-l1">Book a call</span>
+                      <span className="rw-l1">Start a project</span>
                       <span className="rw-l2" aria-hidden="true">
-                        Book a call
+                        Start a project
                       </span>
                     </span>
                   </span>
@@ -266,7 +266,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
                   onClick={() => setOpen(false)}
                 >
                   <span className="rw-face">
-                    <span className="rw-lbl">Book a call</span>
+                    <span className="rw-lbl">Start a project</span>
                   </span>
                 </a>
               </div>

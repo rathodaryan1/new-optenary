@@ -78,6 +78,7 @@ function AnimatedRoutes() {
           {/* Core pages */}
           <Route path="/services"             element={<PageTransition><ServicesPage /></PageTransition>} />
           <Route path="/work"                 element={<PageTransition><WorkPage /></PageTransition>} />
+          <Route path="/work/mehta-dairy"     element={<PageTransition><MehtaDairyCaseStudyPage /></PageTransition>} />
           <Route path="/about"                element={<PageTransition><AboutPage /></PageTransition>} />
           <Route path="/pricing"              element={<PageTransition><PricingPage /></PageTransition>} />
           <Route path="/projects"             element={<PageTransition><WorkPage /></PageTransition>} />
@@ -103,10 +104,11 @@ function AnimatedRoutes() {
           <Route path="/services/web-development"              element={<PageTransition><WebDevelopmentPage /></PageTransition>} />
           <Route path="/services/mobile-development"           element={<PageTransition><MobileDevelopmentPage /></PageTransition>} />
           <Route path="/services/custom-software"              element={<PageTransition><CustomSoftwarePage /></PageTransition>} />
-          <Route path="/services/desktop-development"             element={<PageTransition><DesktopDevelopmentPage /></PageTransition>} />
+          <Route path="/services/desktop-development"          element={<PageTransition><DesktopDevelopmentPage /></PageTransition>} />
           <Route path="/services/ai-agents-automation"         element={<PageTransition><AIAgentsAutomationPage /></PageTransition>} />
           <Route path="/services/shopify-development"          element={<PageTransition><ShopifyDevelopmentPage /></PageTransition>} />
           <Route path="/services/wordpress-development"        element={<PageTransition><WordPressDevelopmentPage /></PageTransition>} />
+          <Route path="/services/custom-ecommerce"             element={<PageTransition><CustomEcommercePage /></PageTransition>} />
           <Route path="/services/custom-ecommerce-development" element={<PageTransition><CustomEcommercePage /></PageTransition>} />
 
           {/* Local SEO pages */}
