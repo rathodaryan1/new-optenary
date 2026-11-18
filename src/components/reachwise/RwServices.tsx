@@ -2367,7 +2367,16 @@ export default function RwServices(props: Partial<ServicesProps> = {}) {
                                                         className="rwsv-tt"
                                                         style={D}
                                                     >
-                                                        {r.f1}
+                                                        <a
+                                                            href={`/services/${r.slug || ""}`}
+                                                            style={{
+                                                                color: "inherit",
+                                                                textDecoration: "none",
+                                                                cursor: "pointer",
+                                                            }}
+                                                        >
+                                                            {r.f1}
+                                                        </a>
                                                     </h3>
                                                 )}
                                                 {r.f3 && (

@@ -2413,7 +2413,18 @@ export default function RwServiceGrid(props: Partial<ServiceGridProps> = {}) {
                                     </div>
                                     <div className="rwsg-tx">
                                         <div className="rwsg-tt">
-                                            <h2 style={D}>{s.f1}</h2>
+                                            <h2 style={D}>
+                                                <a
+                                                    href={`/services/${s.slug || ""}`}
+                                                    style={{
+                                                        color: "inherit",
+                                                        textDecoration: "none",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                    {s.f1}
+                                                </a>
+                                            </h2>
                                             {s.f7 && (
                                                 <span className="rwsg-stat" style={M}>
                                                     <i />

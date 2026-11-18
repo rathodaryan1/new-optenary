@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft, Search } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import RwHeader from '../components/reachwise/RwHeader';
+import RwFooter from '../components/reachwise/RwFooter';
+import '../components/reachwise/reachwise.css';
 import SEO from '../components/SEO';
 
 export default function NotFoundPage() {
@@ -23,7 +24,7 @@ export default function NotFoundPage() {
         canonicalPath="/404"
         noindex={true}
       />
-      <Header />
+      <RwHeader />
 
       <main className="flex-grow flex items-center justify-center px-6 py-24 relative overflow-hidden">
         {/* Background glows */}
@@ -127,7 +128,7 @@ export default function NotFoundPage() {
         </div>
       </main>
 
-      <Footer />
+      <RwFooter wordmark="Optenary" />
     </div>
   );
 }

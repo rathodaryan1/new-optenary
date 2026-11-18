@@ -14,17 +14,10 @@ const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
 const ServicesPage             = lazyWithRetry(() => import('./pages/ServicesPage'));
+const ServiceDetailPage       = lazyWithRetry(() => import('./pages/ServiceDetailPage'));
 const PricingPage              = lazyWithRetry(() => import('./pages/PricingPage'));
 const AboutPage                = lazyWithRetry(() => import('./pages/AboutPage'));
 const IntegrationsPage         = lazyWithRetry(() => import('./pages/IntegrationsPage'));
-const WebDevelopmentPage       = lazyWithRetry(() => import('./pages/WebDevelopmentPage'));
-const MobileDevelopmentPage    = lazyWithRetry(() => import('./pages/MobileDevelopmentPage'));
-const CustomSoftwarePage       = lazyWithRetry(() => import('./pages/CustomSoftwarePage'));
-const DesktopDevelopmentPage    = lazyWithRetry(() => import('./pages/DesktopDevelopmentPage'));
-const AIAgentsAutomationPage   = lazyWithRetry(() => import('./pages/AIAgentsAutomationPage'));
-const ShopifyDevelopmentPage   = lazyWithRetry(() => import('./pages/ShopifyDevelopmentPage'));
-const WordPressDevelopmentPage = lazyWithRetry(() => import('./pages/WordPressDevelopmentPage'));
-const CustomEcommercePage      = lazyWithRetry(() => import('./pages/CustomEcommercePage'));
 const WorkPage                  = lazyWithRetry(() => import('./pages/WorkPage'));
 const MehtaDairyCaseStudyPage  = lazyWithRetry(() => import('./pages/MehtaDairyCaseStudyPage'));
 const FAQPage                  = lazyWithRetry(() => import('./pages/FAQPage'));
@@ -94,21 +87,23 @@ function AnimatedRoutes() {
           <Route path="/terms-of-service" element={<PageTransition><TermsPage /></PageTransition>} />
 
           {/* Services */}
-          <Route path="/services/seo"                          element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/social-media"                 element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/paid-ads"                     element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/content"                      element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/web-design"                   element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/branding"                     element={<PageTransition><ServicesPage /></PageTransition>} />
-          <Route path="/services/web-development"              element={<PageTransition><WebDevelopmentPage /></PageTransition>} />
-          <Route path="/services/mobile-development"           element={<PageTransition><MobileDevelopmentPage /></PageTransition>} />
-          <Route path="/services/custom-software"              element={<PageTransition><CustomSoftwarePage /></PageTransition>} />
-          <Route path="/services/desktop-development"          element={<PageTransition><DesktopDevelopmentPage /></PageTransition>} />
-          <Route path="/services/ai-agents-automation"         element={<PageTransition><AIAgentsAutomationPage /></PageTransition>} />
-          <Route path="/services/shopify-development"          element={<PageTransition><ShopifyDevelopmentPage /></PageTransition>} />
-          <Route path="/services/wordpress-development"        element={<PageTransition><WordPressDevelopmentPage /></PageTransition>} />
-          <Route path="/services/custom-ecommerce"             element={<PageTransition><CustomEcommercePage /></PageTransition>} />
-          <Route path="/services/custom-ecommerce-development" element={<PageTransition><CustomEcommercePage /></PageTransition>} />
+          <Route path="/services"                              element={<PageTransition><ServicesPage /></PageTransition>} />
+          <Route path="/services/web-development"              element={<PageTransition><ServiceDetailPage forcedSlug="web-development" /></PageTransition>} />
+          <Route path="/services/mobile-development"           element={<PageTransition><ServiceDetailPage forcedSlug="mobile-development" /></PageTransition>} />
+          <Route path="/services/custom-software"              element={<PageTransition><ServiceDetailPage forcedSlug="custom-software" /></PageTransition>} />
+          <Route path="/services/desktop-development"          element={<PageTransition><ServiceDetailPage forcedSlug="desktop-development" /></PageTransition>} />
+          <Route path="/services/ai-agents-automation"         element={<PageTransition><ServiceDetailPage forcedSlug="ai-agents-automation" /></PageTransition>} />
+          <Route path="/services/shopify-development"          element={<PageTransition><ServiceDetailPage forcedSlug="shopify-development" /></PageTransition>} />
+          <Route path="/services/wordpress-development"        element={<PageTransition><ServiceDetailPage forcedSlug="wordpress-development" /></PageTransition>} />
+          <Route path="/services/custom-ecommerce"             element={<PageTransition><ServiceDetailPage forcedSlug="custom-ecommerce" /></PageTransition>} />
+          <Route path="/services/custom-ecommerce-development" element={<PageTransition><ServiceDetailPage forcedSlug="custom-ecommerce" /></PageTransition>} />
+          <Route path="/services/web-design"                   element={<PageTransition><ServiceDetailPage forcedSlug="web-design" /></PageTransition>} />
+          <Route path="/services/seo"                          element={<PageTransition><ServiceDetailPage forcedSlug="web-development" /></PageTransition>} />
+          <Route path="/services/social-media"                 element={<PageTransition><ServiceDetailPage forcedSlug="mobile-development" /></PageTransition>} />
+          <Route path="/services/paid-ads"                     element={<PageTransition><ServiceDetailPage forcedSlug="ai-agents-automation" /></PageTransition>} />
+          <Route path="/services/content"                      element={<PageTransition><ServiceDetailPage forcedSlug="web-design" /></PageTransition>} />
+          <Route path="/services/branding"                     element={<PageTransition><ServiceDetailPage forcedSlug="web-design" /></PageTransition>} />
+          <Route path="/services/:slug"                         element={<PageTransition><ServiceDetailPage /></PageTransition>} />
 
           {/* Local SEO pages */}
           <Route path="/web-development-company-india" element={<PageTransition><WebDevIndiaPage /></PageTransition>} />

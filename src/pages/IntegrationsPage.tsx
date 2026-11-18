@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, Zap, CheckCircle } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import RwHeader from '../components/reachwise/RwHeader';
+import RwFooter from '../components/reachwise/RwFooter';
+import '../components/reachwise/reachwise.css';
 import { BrandLogo } from '../components/BrandLogos';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -361,7 +362,7 @@ export default function IntegrationsPage() {
         canonicalPath="/integrations"
       />
       {/* Shared Header Navigation */}
-      <Header />
+      <RwHeader active="services" />
 
       <main className="flex-grow bg-[#050607] py-28 px-6 md:px-12 relative overflow-hidden">
         {/* Glow Rings */}
@@ -614,7 +615,7 @@ export default function IntegrationsPage() {
       </main>
 
       {/* Shared Footer directories */}
-      <Footer />
+      <RwFooter wordmark="Optenary" />
     </div>
   );
 }

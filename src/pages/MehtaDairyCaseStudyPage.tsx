@@ -14,11 +14,12 @@ import {
   Clock,
   ArrowRight
 } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import RwHeader from '../components/reachwise/RwHeader';
+import RwFooter from '../components/reachwise/RwFooter';
+import RwCta from '../components/reachwise/RwCta';
+import '../components/reachwise/reachwise.css';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
-import Contact from '../components/Contact';
 import { Link } from 'react-router-dom';
 
 export default function MehtaDairyCaseStudyPage() {
@@ -85,7 +86,7 @@ export default function MehtaDairyCaseStudyPage() {
         canonicalPath="/projects/mehta-dairy"
         schema={caseStudySchema}
       />
-      <Header />
+      <RwHeader active="work" />
 
       <main className="flex-grow pt-28">
 
@@ -458,11 +459,11 @@ export default function MehtaDairyCaseStudyPage() {
         </section>
 
         {/* ── CTA Contact Section ─────────────────────────────────────────── */}
-        <Contact />
+        <RwCta />
 
       </main>
 
-      <Footer />
+      <RwFooter wordmark="Optenary" />
     </div>
   );
 }
