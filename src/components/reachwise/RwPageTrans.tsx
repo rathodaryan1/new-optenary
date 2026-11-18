@@ -285,10 +285,10 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       {/* Exact Reachwise "THE SIGNAL" Page Transition Layer */}
       <div
         className={`rwtr ${status === 'leaving'
-            ? 'rwtr-on rwtr-leave'
-            : status === 'entering'
-              ? 'rwtr-on rwtr-enter'
-              : 'rwtr-idle'
+          ? 'rwtr-on rwtr-leave'
+          : status === 'entering'
+            ? 'rwtr-on rwtr-enter'
+            : 'rwtr-idle'
           }`}
         aria-hidden={status === 'idle'}
         style={
