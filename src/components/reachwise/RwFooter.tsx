@@ -1575,17 +1575,19 @@ export interface FooterProps extends Partial<Pal> {
 // ---- THE WORDMARK: the footer waits behind the CTA (Reveal curtain) and is uncovered as it lifts; the giant wordmark rises with the uncover (--rv).
 // The pointer is a signal: a lime ring follows it over the wordmark and lights the letters inside it (CSS mask at --fx/--fy/--fr). Touch = it pulses on its own. ----
 const RwftMark = ({ s = 30 }: { s?: number }) => (
-    <svg width={s} height={s} viewBox="0 0 32 32" aria-hidden>
-        <circle cx="16" cy="16" r="15" fill="var(--rw-brass)" />
-        <circle cx="16" cy="16" r="3.4" fill="var(--rw-ink)" />
-        <path
-            d="M10.2 21.8a8.2 8.2 0 0 1 0-11.6M21.8 10.2a8.2 8.2 0 0 1 0 11.6"
-            fill="none"
-            stroke="var(--rw-ink)"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-        />
-    </svg>
+    <img
+        src="/images/logo_transparent.webp"
+        alt="Optenary logo"
+        width={s}
+        height={s}
+        style={{
+            width: s,
+            height: s,
+            objectFit: "contain",
+            display: "block",
+            filter: "drop-shadow(0 2px 8px rgba(1, 122, 245, 0.4))",
+        }}
+    />
 )
 export default function RwFooter(props: Partial<FooterProps> = {}) {
     const {

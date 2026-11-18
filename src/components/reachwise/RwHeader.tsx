@@ -97,23 +97,20 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
           <div className="rwhd-bar">
             {/* Logo */}
             <a className="rwhd-logo" href="/" aria-label="Optenary home">
-              <svg
-                width="30"
-                height="30"
-                viewBox="0 0 32 32"
-                aria-hidden="true"
+              <img
+                src="/images/logo_transparent.webp"
+                alt="Optenary logo mark"
+                width={30}
+                height={30}
                 className="rwhd-mark"
-              >
-                <circle cx="16" cy="16" r="15" fill="var(--rw-brass)" />
-                <circle cx="16" cy="16" r="3.4" fill="var(--rw-ink)" />
-                <path
-                  d="M10.2 21.8a8.2 8.2 0 0 1 0-11.6M21.8 10.2a8.2 8.2 0 0 1 0 11.6"
-                  fill="none"
-                  stroke="var(--rw-ink)"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                />
-              </svg>
+                style={{
+                  width: 30,
+                  height: 30,
+                  objectFit: "contain",
+                  display: "block",
+                  filter: "drop-shadow(0 2px 8px rgba(1, 122, 245, 0.4))",
+                }}
+              />
               <span>Optenary</span>
             </a>
 
