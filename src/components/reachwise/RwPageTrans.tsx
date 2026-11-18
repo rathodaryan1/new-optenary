@@ -23,7 +23,36 @@ const PageTransContext = createContext<PageTransContextValue>({
 
 export const usePageTransition = () => useContext(PageTransContext);
 
-// Maps a pathname or hash or text to the Reachwise display label
+// Preload route chunks eagerly on hover or transition trigger
+const ROUTE_PRELOADERS: Record<string, () => Promise<any>> = {
+  '/services': () => import('../../pages/ServicesPage'),
+  '/work': () => import('../../pages/WorkPage'),
+  '/pricing': () => import('../../pages/PricingPage'),
+  '/about': () => import('../../pages/AboutPage'),
+  '/contact': () => import('../../pages/ContactPage'),
+  '/blog': () => import('../../pages/BlogPage'),
+  '/faq': () => import('../../pages/FAQPage'),
+  '/terms-of-service': () => import('../../pages/TermsPage'),
+  '/privacy-policy': () => import('../../pages/PrivacyPolicyPage'),
+};
+
+export function preloadRoute(to: string) {
+  try {
+    const [path] = to.split('#');
+    const clean = path.toLowerCase().replace(/\/$/, '') || '/';
+    if (ROUTE_PRELOADERS[clean]) {
+      ROUTE_PRELOADERS[clean]();
+    } else if (clean.startsWith('/services/')) {
+      import('../../pages/ServiceDetailPage');
+    } else if (clean.startsWith('/blog/')) {
+      import('../../pages/BlogPage');
+    } else if (clean.startsWith('/work/') || clean.startsWith('/projects/')) {
+      import('../../pages/MehtaDairyCaseStudyPage');
+    }
+  } catch { }
+}
+
+// Maps a pathname or hash or text to the Optenary display label
 export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | null): string {
   // 1. Explicit data attribute on the element or parent
   const explicit = targetEl?.getAttribute('data-trans-title') ||
@@ -55,22 +84,34 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
     if (cleanHash.includes('review') || cleanHash.includes('testim')) return 'Reviews';
     if (cleanHash.includes('team') || cleanHash.includes('specialist')) return 'Team';
     if (cleanHash.includes('faq')) return 'FAQ';
-    if (cleanHash.includes('number') || cleanHash.includes('report') || cleanHash.includes('kpi')) return 'The Numbers';
-    if (cleanHash.includes('feed') || cleanHash.includes('social')) return 'Content';
-    if (cleanHash.includes('funnel') || cleanHash.includes('how-we-work')) return 'How We Work';
+    if (cleanHash.includes('number') || cleanHash.includes('report') || cleanHash.includes('kpi')) return 'Capabilities';
+    if (cleanHash.includes('feed') || cleanHash.includes('social')) return 'Insights';
+    if (cleanHash.includes('funnel') || cleanHash.includes('how-we-work')) return 'Process';
     if (cleanHash.includes('journal') || cleanHash.includes('blog')) return 'Journal';
   }
 
   const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
   if (cleanPath === '/' || cleanPath === '/home') return 'Home';
   if (cleanPath === '/services') return 'Services';
-  if (cleanPath === '/services/seo') return 'SEO';
-  if (cleanPath === '/services/social-media') return 'Social Media';
-  if (cleanPath === '/services/paid-ads') return 'Paid Ads';
-  if (cleanPath === '/services/content') return 'Content';
-  if (cleanPath === '/services/web-design') return 'Web Design';
-  if (cleanPath === '/services/branding') return 'Branding';
+
+  // Specific service detail pages
+  if (cleanPath === '/services/web-development') return 'Web Development';
+  if (cleanPath === '/services/mobile-development') return 'Mobile Apps';
+  if (cleanPath === '/services/custom-software') return 'Custom Software';
+  if (cleanPath === '/services/desktop-development') return 'Desktop Software';
+  if (cleanPath === '/services/ai-agents-automation') return 'AI & Automation';
+  if (cleanPath === '/services/web-design') return 'UI/UX Design';
+  if (cleanPath === '/services/custom-ecommerce' || cleanPath === '/services/custom-ecommerce-development') return 'Digital Commerce';
+  if (cleanPath === '/services/shopify-development') return 'Shopify Dev';
+  if (cleanPath === '/services/wordpress-development') return 'WordPress Dev';
+  if (cleanPath === '/services/seo') return 'Web Development';
+  if (cleanPath === '/services/social-media') return 'Mobile Apps';
+  if (cleanPath === '/services/paid-ads') return 'AI & Automation';
+  if (cleanPath === '/services/content') return 'UI/UX Design';
+  if (cleanPath === '/services/branding') return 'UI/UX Design';
+
   if (cleanPath === '/work' || cleanPath === '/projects') return 'Work';
+  if (cleanPath === '/work/mehta-dairy' || cleanPath === '/projects/mehta-dairy') return 'Mehta Dairy';
   if (cleanPath === '/about') return 'About';
   if (cleanPath === '/pricing') return 'Pricing';
   if (cleanPath === '/contact') return 'Contact';
@@ -81,15 +122,15 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
 
   if (cleanPath.startsWith('/services/')) return 'Services';
   if (cleanPath.startsWith('/blog/')) return 'Blog';
-  if (cleanPath.startsWith('/projects/')) return 'Work';
+  if (cleanPath.startsWith('/projects/') || cleanPath.startsWith('/work/')) return 'Work';
 
   // 3. Fallback from anchor text if short
   const rawText = targetEl?.textContent?.trim() || '';
   if (rawText && rawText.length <= 25 && !rawText.includes('\n')) {
-    if (/book\s*a\s*call/i.test(rawText) || /contact/i.test(rawText) || /audit/i.test(rawText)) {
+    if (/book\s*a\s*call/i.test(rawText) || /contact/i.test(rawText) || /start\s*a\s*project/i.test(rawText)) {
       return 'Contact';
     }
-    if (/see\s*our\s*work/i.test(rawText) || /case\s*studies/i.test(rawText)) {
+    if (/see\s*our\s*work/i.test(rawText) || /case\s*studies/i.test(rawText) || /explore\s*our\s*work/i.test(rawText)) {
       return 'Work';
     }
     if (/see\s*pricing/i.test(rawText) || /pricing/i.test(rawText)) {
@@ -98,7 +139,7 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
     return rawText;
   }
 
-  return 'Home';
+  return 'Services';
 }
 
 export default function RwPageTrans({ children }: { children?: ReactNode }) {
@@ -138,6 +179,9 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       if (isTransitioningRef.current) return;
       isTransitioningRef.current = true;
 
+      // 1. Immediately preload the destination route chunk
+      preloadRoute(to);
+
       const W = window.innerWidth;
       const H = window.innerHeight;
       const x = origin ? origin.x : W / 2;
@@ -160,9 +204,13 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
 
       if (timerRef.current) clearTimeout(timerRef.current);
 
-      // At 560ms (exact Framer departure wavefront duration):
+      // Animation Timeline:
+      // 0ms -> 420ms: Wavefront expands to cover screen
+      // 160ms -> 440ms: Pill badge '• OPENING /' animates in
+      // 220ms -> 540ms: Entire destination word wipes in and completes
+      // 540ms -> 860ms: Complete word is 100% displayed and held for user to read
+      // At 860ms: Navigate & reset scroll behind solid mask
       timerRef.current = setTimeout(() => {
-        // Execute navigation or section scroll
         if (to.startsWith('#')) {
           const id = to.replace('#', '');
           const targetEl = document.getElementById(id);
@@ -173,7 +221,6 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
             history.pushState(null, '', to);
           } catch { }
         } else {
-          // If destination contains hash, e.g. /services#seo
           const [path, hash] = to.split('#');
           navigate(path || '/');
           if (hash) {
@@ -186,15 +233,18 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
           }
         }
 
-        // Switch to entering phase (wave shrinks back to origin point & dot pings)
-        setStatus('entering');
-
-        // Entering wave duration + dot ping: 680ms
+        // At 900ms: Smoothly switch to 'entering':
+        // Text fades out cleanly (220ms) while iris shrinks back (520ms)
         timerRef.current = setTimeout(() => {
-          setStatus('idle');
-          isTransitioningRef.current = false;
-        }, 680);
-      }, 560);
+          setStatus('entering');
+
+          // At 1440ms (540ms after entering): Transition complete
+          timerRef.current = setTimeout(() => {
+            setStatus('idle');
+            isTransitioningRef.current = false;
+          }, 540);
+        }, 40);
+      }, 860);
     },
     [navigate]
   );
@@ -217,15 +267,24 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
           setStatus('entering');
           const t = setTimeout(() => {
             setStatus('idle');
-          }, 680);
+          }, 540);
           return () => clearTimeout(t);
         }
       }
     } catch { }
   }, []);
 
-  // Global click listener to intercept internal navigations
+  // Global click & hover listener
   useEffect(() => {
+    const handleGlobalHover = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest('a') as HTMLAnchorElement | null;
+      const href = anchor?.getAttribute('href');
+      if (href && (href.startsWith('/') || href.startsWith('#')) && !href.startsWith('//')) {
+        preloadRoute(href);
+      }
+    };
+
     const handleGlobalClick = (e: MouseEvent) => {
       // Ignore right clicks or clicks with modifier keys
       if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -260,7 +319,7 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
         return;
       }
 
-      // Prevent native jump / navigation and trigger Reachwise Signal Transition
+      // Prevent native jump and trigger Signal Transition
       e.preventDefault();
       e.stopPropagation();
 
@@ -270,8 +329,12 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       triggerTransition(href, title, origin);
     };
 
+    window.addEventListener('mouseover', handleGlobalHover, { passive: true });
     window.addEventListener('click', handleGlobalClick, { capture: true });
-    return () => window.removeEventListener('click', handleGlobalClick, { capture: true });
+    return () => {
+      window.removeEventListener('mouseover', handleGlobalHover);
+      window.removeEventListener('click', handleGlobalClick, { capture: true });
+    };
   }, [triggerTransition]);
 
   return (
@@ -299,9 +362,9 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
             '--rwtr-x': `${coords.x}px`,
             '--rwtr-y': `${coords.y}px`,
             '--rwtr-r': `${coords.r}px`,
-            '--d': '560ms',
+            '--d': '420ms',
             '--rw-night': '#08090A',
-            '--rw-brass': '#D4FF3A',
+            '--rw-brass': 'var(--rw-brass, #8B5CF6)',
             '--rw-ink': '#0D0E10',
             '--rw-cloud': '#FFFFFF',
             '--rw-bone': '#EEEEE8',
@@ -309,13 +372,13 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
           } as React.CSSProperties
         }
       >
-        {/* Signal-Lime leading wavefront */}
+        {/* Leading wavefront */}
         <i className="rwtr-lime" />
 
         {/* Deep Night ground following behind it */}
         <i className="rwtr-fill" />
 
-        {/* Central Display: • OPENING / + Signal-lime Pill Name */}
+        {/* Central Display: • OPENING / + Pill Name */}
         <div className="rwtr-mid">
           <p
             className="rwtr-k"
