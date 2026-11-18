@@ -1313,7 +1313,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "+",
             f9: "2024",
             f10: "High-performance direct-to-consumer platform with subscription billing, logistics routing, and automated invoice dispatch.",
-            img: "/images/mehta_dairy.png",
+            img: "/images/work/mehta_dairy_studio.webp",
             n1: "1",
         },
         {
@@ -1328,7 +1328,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2024",
             f10: "End-to-end tenant onboarding, room allocation, automated rent collection, and maintenance tracking portal.",
-            img: "/images/pg_management.webp",
+            img: "/images/work/urban_nest_studio.webp",
             n1: "2",
         },
         {
@@ -1343,7 +1343,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2025",
             f10: "Catalog showcase and multi-tier wholesale pricing engine tailored for regional spice distributors and consumers.",
-            img: "/images/vishal_masala.webp",
+            img: "/images/work/vishal_masala_studio.webp",
             n1: "3",
         },
         {
@@ -1358,7 +1358,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2024",
             f10: "Fast searchable catalog indexing over 10,000+ industrial hardware SKUs with instant quote generation.",
-            img: "/images/shree_enterprise.webp",
+            img: "/images/work/shree_enterprise_studio.webp",
             n1: "4",
         },
         {
@@ -1373,7 +1373,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "+",
             f9: "2024",
             f10: "Immersive multimedia site delivering 4K trailers, cinema screening schedules, and ticketing redirects.",
-            img: "/images/laalo.webp",
+            img: "/images/work/laalo_studio.webp",
             n1: "5",
         },
     ],
@@ -2018,7 +2018,7 @@ const CSS_WG = `
 .rwwg-cov{position:relative;border-radius:24px;overflow:hidden;background:var(--rw-pine);isolation:isolate}
 .rwwg-card{--k:0}
 .rwwg-zoom{position:absolute;inset:0;transition:scale 1.1s cubic-bezier(.2,.8,.2,1)} .rwwg-card:hover .rwwg-zoom{scale:1.05}
-.rwwg-zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none}
+.rwwg-zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;user-select:none}
 .rwwg-gry{position:absolute;inset:0;clip-path:inset(calc(var(--k)*100%) 0 0 0)} .rwwg-gry img{filter:grayscale(1) brightness(.5) contrast(1.08)}
 .rwwg-scan{position:absolute;z-index:2;left:0;right:0;top:calc(var(--k)*100%);height:2px;margin-top:-1px;background:var(--rw-brass);box-shadow:0 0 18px 3px color-mix(in srgb,var(--rw-brass) 60%,transparent),0 0 60px 10px color-mix(in srgb,var(--rw-brass) 22%,transparent);opacity:calc(1 - max(0,(var(--k) - .96))*25);pointer-events:none}
 .rwwg-scan::before{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(0deg,color-mix(in srgb,var(--rw-brass) 22%,transparent),transparent)}

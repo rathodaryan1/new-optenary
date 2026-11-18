@@ -1314,7 +1314,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "+",
             f9: "2024",
             f10: "High-performance direct-to-consumer platform with subscription billing, logistics routing, and automated invoice dispatch.",
-            img: "/images/mehta_dairy.png",
+            img: "/images/work/mehta_dairy_studio.webp",
             n1: "1",
         },
         {
@@ -1329,7 +1329,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2024",
             f10: "End-to-end tenant onboarding, room allocation, automated rent collection, and maintenance tracking portal.",
-            img: "/images/pg_management.webp",
+            img: "/images/work/urban_nest_studio.webp",
             n1: "2",
         },
         {
@@ -1344,7 +1344,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2025",
             f10: "Catalog showcase and multi-tier wholesale pricing engine tailored for regional spice distributors and consumers.",
-            img: "/images/vishal_masala.webp",
+            img: "/images/work/vishal_masala_studio.webp",
             n1: "3",
         },
         {
@@ -1359,7 +1359,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "",
             f9: "2024",
             f10: "Fast searchable catalog indexing over 10,000+ industrial hardware SKUs with instant quote generation.",
-            img: "/images/shree_enterprise.webp",
+            img: "/images/work/shree_enterprise_studio.webp",
             n1: "4",
         },
         {
@@ -1374,7 +1374,7 @@ const SEED: Record<string, CmsRow[]> = {
             f8: "+",
             f9: "2024",
             f10: "Immersive multimedia site delivering 4K trailers, cinema screening schedules, and ticketing redirects.",
-            img: "/images/laalo.webp",
+            img: "/images/work/laalo_studio.webp",
             n1: "5",
         },
     ],

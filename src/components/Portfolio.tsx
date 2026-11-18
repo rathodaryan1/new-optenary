@@ -81,7 +81,7 @@ export default function Portfolio() {
           {/* Browser page content */}
           <div className="flex-grow relative overflow-hidden bg-black group/img">
             <img
-              src="/images/mehta_dairy.png"
+              src="/images/work/mehta_dairy_studio.webp"
               alt="Mehta Dairy E-Commerce Website"
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/img:scale-105"
               loading="lazy"
@@ -130,7 +130,7 @@ export default function Portfolio() {
           {/* Browser page content */}
           <div className="flex-grow relative overflow-hidden bg-black">
             <img
-              src="/images/pg_management.webp"
+              src="/images/work/urban_nest_studio.webp"
               alt="Urban Nest PG Management"
               className="w-full h-full object-cover object-top"
               loading="lazy" decoding="async" />
@@ -177,7 +177,7 @@ export default function Portfolio() {
           {/* Browser page content */}
           <div className="flex-grow relative overflow-hidden bg-black">
             <img
-              src="/images/vishal_masala.webp"
+              src="/images/work/vishal_masala_studio.webp"
               alt="Vishal Masala E-Commerce"
               className="w-full h-full object-cover object-top"
               loading="lazy" decoding="async" />
@@ -223,7 +223,7 @@ export default function Portfolio() {
           {/* Browser page content */}
           <div className="flex-grow relative overflow-hidden bg-black">
             <img
-              src="/images/shree_enterprise.webp"
+              src="/images/work/shree_enterprise_studio.webp"
               alt="Shree Enterprise Fire Safety"
               className="w-full h-full object-cover object-top"
               loading="lazy" decoding="async" />
@@ -269,7 +269,7 @@ export default function Portfolio() {
           {/* Browser page content */}
           <div className="flex-grow relative overflow-hidden bg-black">
             <img
-              src="/images/laalo_movie.webp"
+              src="/images/work/laalo_studio.webp"
               alt="Laalo Movie Portfolio Website"
               className="w-full h-full object-cover object-top"
               loading="lazy" decoding="async" />
