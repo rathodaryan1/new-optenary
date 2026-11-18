@@ -103,6 +103,7 @@ export default function HomePage() {
           counterLabel="PRODUCTION LINES OF CODE DELIVERED"
           counterStart={248690}
           services="Web, Mobile, SaaS, AI, E-Commerce"
+          navLinks="Services:/services, Work:/work, Pricing:/pricing, About:/about, Blog:/blog, Contact:/contact"
           navCta="Start a project"
         />
 

@@ -1648,7 +1648,7 @@ export default function RwHero(props: Partial<HeroProps> = {}) {
         counterStart = 1284300,
         hint = "MOVE TO REACH · CLICK TO EXPLORE CAPABILITIES",
         showNav = true,
-        navLinks = "Services:/services, Work:/work, Pricing:/pricing, About:/about, Blog:/blog",
+        navLinks = "Services:/services, Work:/work, Pricing:/pricing, About:/about, Blog:/blog, Contact:/contact",
         navCta = "Start a project",
         bpHint = "auto",
     } = props
@@ -2466,7 +2466,7 @@ addPropertyControls(RwHero, {
         title: "Nav links",
         description: "Label:/path, …",
         defaultValue:
-            "Services:/services, Work:/work, Pricing:/pricing, About:/about, Blog:/blog",
+            "Services:/services, Work:/work, Pricing:/pricing, About:/about, Blog:/blog, Contact:/contact",
     },
     navCta: {
         type: ControlType.String,
