@@ -1934,7 +1934,7 @@ function useSite() {
     const s = r[0] || (SEED.site || [])[0] || {}
     const g = (k: string) => String(s[k] ?? "").trim()
     return {
-        name: g("f1") || "Reachwise",
+        name: g("f1") || "Optenary",
         role: g("f2"),
         tagline: g("f3"),
         email: g("f4"),

@@ -1764,7 +1764,7 @@ export default function RwPageHero(props: Partial<PageHeroProps> = {}) {
                         <div
                             className="rwph-scope"
                             role="img"
-                            aria-label={`Reach: ${CH.map((x) => x.t).join(", ")}`}
+                            aria-label={`Capabilities: ${CH.map((x) => x.t).join(", ")}`}
                         >
                             <svg
                                 className="rwph-grid"
