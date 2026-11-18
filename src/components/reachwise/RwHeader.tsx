@@ -10,7 +10,20 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
   const [open, setOpen] = useState(false)
   const [glass, setGlass] = useState(false)
   const [time, setTime] = useState("")
+  const [isPhone, setIsPhone] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
   const location = useLocation()
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth
+      setIsPhone(w < 810)
+      setIsCompact(w < 1024)
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize, { passive: true })
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   // Determine active route if not explicitly passed
   const currentActive =
@@ -70,7 +83,16 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
 
   return (
     <div className="rwhd-root" data-rwhd>
-      <div className={`rw rwhd ${open ? "is-open" : ""}`}>
+      <style>{`
+        @media (max-width: 1024px) {
+          .rwhd-nav { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .rwhd-cta { display: none !important; }
+          .rwhd-bar { justify-content: space-between !important; }
+        }
+      `}</style>
+      <div className={`rw rwhd ${open ? "is-open" : ""} ${isPhone ? "is-ph" : isCompact ? "is-cmp" : ""}`}>
         <header className={`rwhd-top ${glass ? "is-glass" : ""} ${isLight ? "is-lt" : ""}`}>
           <div className="rwhd-bar">
             {/* Logo */}

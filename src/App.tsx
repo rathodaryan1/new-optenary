@@ -10,7 +10,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 import RwPageTrans from './components/reachwise/RwPageTrans';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
-const StickyBookCTA = lazyWithRetry(() => import('./components/StickyBookCTA'));
 const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
@@ -141,7 +140,6 @@ function App() {
 
           {/* Global floating UI */}
           <Suspense fallback={null}>
-            <StickyBookCTA />
             <CookieConsent />
           </Suspense>
         </RwPageTrans>
