@@ -1,5 +1,42 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import {
+  Code2,
+  Globe,
+  Lock,
+  Rocket,
+  ShieldCheck,
+  TrendingUp,
+  Smartphone,
+  RefreshCw,
+  Cpu,
+  Bell,
+  Award,
+  Activity,
+  Building2,
+  Zap,
+  CreditCard,
+  KeyRound,
+  Network,
+  FileCheck2,
+  Bot,
+  Search,
+  Workflow,
+  Shield,
+  UserCheck,
+  BarChart3,
+  Palette,
+  MousePointerClick,
+  LayoutTemplate,
+  Package,
+  Eye,
+  Sparkles,
+  ShoppingBag,
+  PackageCheck,
+  Flame,
+  ShoppingCart,
+  Globe2,
+} from 'lucide-react';
 import SEO from '../components/SEO';
 import RwHeader from '../components/reachwise/RwHeader';
 import RwPageHero from '../components/reachwise/RwPageHero';
@@ -8,6 +45,62 @@ import RwFaq from '../components/reachwise/RwFaq';
 import RwCta from '../components/reachwise/RwCta';
 import RwFooter from '../components/reachwise/RwFooter';
 import '../components/reachwise/reachwise.css';
+
+const DELIVERABLE_ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; color?: string }>> = {
+  // Web Development
+  code: Code2,
+  globe: Globe,
+  lock: Lock,
+  rocket: Rocket,
+  security: ShieldCheck,
+  vitals: TrendingUp,
+
+  // Mobile Development
+  smartphone: Smartphone,
+  mobile: Smartphone,
+  sync: RefreshCw,
+  hardware: Cpu,
+  push: Bell,
+  store: Award,
+  telemetry: Activity,
+
+  // Custom Software & SaaS
+  multiTenant: Building2,
+  queues: Zap,
+  billing: CreditCard,
+  rbac: KeyRound,
+  api: Network,
+  audit: FileCheck2,
+
+  // AI Agents & Automation
+  bot: Bot,
+  rag: Search,
+  swarm: Workflow,
+  privateLlm: Shield,
+  humanInLoop: UserCheck,
+  observability: BarChart3,
+
+  // UI/UX & Design Systems
+  tokens: Palette,
+  prototype: MousePointerClick,
+  responsive: LayoutTemplate,
+  storybook: Package,
+  accessibility: Eye,
+  motion: Sparkles,
+
+  // Digital Commerce
+  storefront: ShoppingBag,
+  checkout: Zap,
+  inventory: PackageCheck,
+  flashSales: Flame,
+  cart: ShoppingCart,
+  global: Globe2,
+};
+
+function DeliverableIcon({ name }: { name: string }) {
+  const Icon = DELIVERABLE_ICONS[name] || Zap;
+  return <Icon size={20} strokeWidth={2} color="#0D0E10" />;
+}
 
 interface ServiceData {
   slug: string;
@@ -40,32 +133,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Full-Stack Next.js & React',
         desc: 'Server-side rendering, streaming SSR, and edge API routes tailored for high concurrency and sub-second global responses.',
-        icon: '⚡',
+        icon: 'code',
       },
       {
         title: 'Sub-Second Global TTFB',
         desc: 'Edge caching via Cloudflare/Vercel, asset prefetching, and Brotli compression ensuring instant first-byte arrival globally.',
-        icon: '🌐',
+        icon: 'globe',
       },
       {
         title: '100% Client Code & IP Ownership',
         desc: 'Clean, strictly typed TypeScript code delivered with comprehensive automated integration tests and zero vendor lock-in.',
-        icon: '🔒',
+        icon: 'lock',
       },
       {
         title: 'Automated CI/CD & Deployments',
         desc: 'Dockerized staging environments, automated GitHub Actions testing pipelines, and zero-downtime production rollouts.',
-        icon: '🚀',
+        icon: 'rocket',
       },
       {
         title: 'Enterprise Security Architecture',
         desc: 'CSRF mitigation, strict Content Security Policies (CSP), rate limiting, and encrypted session management.',
-        icon: '🛡️',
+        icon: 'security',
       },
       {
         title: '100/100 Core Web Vitals',
         desc: 'Zero layout shift (CLS), instant interactive readiness (INP), and lightning-fast largest contentful paint (LCP).',
-        icon: '📈',
+        icon: 'vitals',
       },
     ],
     caseStudy: {
@@ -99,32 +192,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Single Codebase for iOS & Android',
         desc: 'Complete feature parity across iPhone and Android without paying twice for separate platform engineering teams.',
-        icon: '📱',
+        icon: 'smartphone',
       },
       {
         title: 'Offline-First Synchronization',
         desc: 'Local SQLite data persistence guaranteeing complete app usability even in zero-reception transit environments.',
-        icon: '🔄',
+        icon: 'sync',
       },
       {
         title: 'Native Device Hardware Access',
         desc: 'Biometric authentication (Face ID / Touch ID), Bluetooth, GPS, camera, and native background audio pipelines.',
-        icon: '⚙️',
+        icon: 'hardware',
       },
       {
         title: 'Instant Push & Engagement',
         desc: 'Real-time WebSocket event notifications, segmented FCM messaging, and deep-linking directly into application views.',
-        icon: '🔔',
+        icon: 'push',
       },
       {
         title: 'Store Submission & Launch',
         desc: 'End-to-end Apple App Store and Google Play Store review approval handling with zero submission friction.',
-        icon: '⭐',
+        icon: 'store',
       },
       {
         title: 'Real-time Crash Telemetry',
         desc: 'Sentry and Firebase crash reporting catching production exceptions instantly with full device stack traces.',
-        icon: '📊',
+        icon: 'telemetry',
       },
     ],
     caseStudy: {
@@ -157,32 +250,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Multi-Tenant Database Isolation',
         desc: 'Row-Level Security (RLS) guaranteeing strict data privacy and zero cross-tenant contamination.',
-        icon: '🏢',
+        icon: 'multiTenant',
       },
       {
         title: 'Automated Job Processing Queues',
         desc: 'Distributed Redis & BullMQ workers processing PDF exports, background analytics, and webhook dispatch.',
-        icon: '⚡',
+        icon: 'queues',
       },
       {
         title: 'Subscription & Billing Pipelines',
         desc: 'Turnkey Stripe and Razorpay integrations with automated tax calculations, metered usage, and invoice dispatch.',
-        icon: '💳',
+        icon: 'billing',
       },
       {
         title: 'Granular Role-Based Access (RBAC)',
         desc: 'Fine-grained permission matrices, team workspace hierarchies, and single sign-on (SSO) readiness.',
-        icon: '🔑',
+        icon: 'rbac',
       },
       {
         title: 'Comprehensive REST & GraphQL APIs',
         desc: 'Self-documenting OpenAPI / Swagger specifications and deterministic rate-limited API endpoints.',
-        icon: '🔌',
+        icon: 'api',
       },
       {
         title: 'Observable Audit Logging',
         desc: 'Immutable audit logs tracking sensitive user actions, security alterations, and compliance events.',
-        icon: '📋',
+        icon: 'audit',
       },
     ],
     caseStudy: {
@@ -215,32 +308,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Deterministic Tool Calling',
         desc: 'Structured Zod / JSON schemas guaranteeing the AI executes database and API actions with zero hallucinations.',
-        icon: '🤖',
+        icon: 'bot',
       },
       {
         title: 'Enterprise RAG Document Search',
         desc: 'Vector embeddings over private PDF catalogs and company manuals with strict permission-aware retrieval.',
-        icon: '🔍',
+        icon: 'rag',
       },
       {
         title: 'Autonomous Multi-Agent Pipelines',
         desc: 'Collaborative agent swarms handling automated lead qualification, contract analysis, and support resolution.',
-        icon: '🤝',
+        icon: 'swarm',
       },
       {
         title: 'Private & Local LLM Hosting',
         desc: 'Deploy open-source LLMs (Llama 3, Mistral) on your own private cloud hardware for absolute data sovereignty.',
-        icon: '🛡️',
+        icon: 'privateLlm',
       },
       {
         title: 'Human-in-the-Loop Safeguards',
         desc: 'Approval checkpoints for high-stakes business operations ensuring humans retain final authority.',
-        icon: '👤',
+        icon: 'humanInLoop',
       },
       {
         title: 'Continuous Trace Telemetry',
         desc: 'LangSmith / Arize observability tracking prompt performance, execution latency, and token cost curves.',
-        icon: '📊',
+        icon: 'observability',
       },
     ],
     funnelSteps: 'Use Case Feasibility · Sprint 1: Identify high-ROI workflows, evaluate token budgets, and lock model strategy.;RAG & Vector Ingestion · Sprint 2: Data parsing, embedding pipeline, and vector indexing setup.;Agent Orchestration · Sprints 3–4: Tool-calling logic, deterministic guards, and webhook triggers.;Staging Validation · Launch: Rigorous red-teaming, regression test suite, and monitored production deployment.',
@@ -263,32 +356,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Modular Design Tokens',
         desc: 'Comprehensive color tokens, typography scales, spacing variables, and component variants.',
-        icon: '🎨',
+        icon: 'tokens',
       },
       {
         title: 'Interactive Figma Prototypes',
         desc: 'Realistic clickable user flows validated with real customers before writing a single line of code.',
-        icon: '🖱️',
+        icon: 'prototype',
       },
       {
         title: 'Responsive Breakpoint Parity',
         desc: 'Crafted systematically for mobile (320px+), tablet, and desktop viewports.',
-        icon: '📐',
+        icon: 'responsive',
       },
       {
         title: 'Production React Storybook',
         desc: 'Tokens and components directly mapped to production React & Tailwind codebases.',
-        icon: '📦',
+        icon: 'storybook',
       },
       {
         title: 'WCAG 2.1 AA Accessibility',
         desc: 'Color contrast validation, keyboard navigation focus rings, and screen-reader accessibility.',
-        icon: '♿',
+        icon: 'accessibility',
       },
       {
         title: 'Motion & Micro-Interactions',
         desc: 'Fluid physics-based spring animations and interactive cues that make software feel alive.',
-        icon: '✨',
+        icon: 'motion',
       },
     ],
     funnelSteps: 'Product Discovery · Sprint 1: User personas, competitor teardowns, and information architecture.;Wireframing & UX · Sprint 2: Low-fidelity wireframes and primary conversion paths.;Visual Design & Tokens · Sprints 3–4: High-fidelity components, typography tokens, and design sign-off.;Code Handoff · Launch: Storybook components, React code review, and QA alignment.',
@@ -311,32 +404,32 @@ const SERVICES_REGISTRY: Record<string, ServiceData> = {
       {
         title: 'Headless Next.js Storefronts',
         desc: 'Sub-second page navigation and instant category filtering powered by Next.js and CDN edge caching.',
-        icon: '🛍️',
+        icon: 'storefront',
       },
       {
         title: '1-Click Express Checkout',
         desc: 'Streamlined checkout flows with Apple Pay, Google Pay, and UPI express integrations.',
-        icon: '⚡',
+        icon: 'checkout',
       },
       {
         title: 'Automated Inventory & ERP Sync',
         desc: 'Real-time multi-warehouse stock synchronization, courier API dispatch, and automated tracking.',
-        icon: '📦',
+        icon: 'inventory',
       },
       {
         title: 'High-Concurrency Flash Sales',
         desc: 'Redis-cached catalog architectures built to withstand 10,000+ simultaneous checkout requests.',
-        icon: '🔥',
+        icon: 'flashSales',
       },
       {
         title: 'Cart Abandonment Recovery',
         desc: 'Automated recovery flows via WhatsApp and email recovering up to 25% of uncompleted carts.',
-        icon: '🛒',
+        icon: 'cart',
       },
       {
         title: 'Multi-Currency & Regional Tax',
         desc: 'Dynamic local currency conversion, GST / VAT compliance, and international shipping calculation.',
-        icon: '🌍',
+        icon: 'global',
       },
     ],
     caseStudy: {
@@ -431,7 +524,7 @@ export default function ServiceDetailPage({ forcedSlug }: { forcedSlug?: string 
           secondaryLink="/services"
           meta={service.techStack.slice(0, 5).join(';')}
           scrollCue="Scroll"
-          chips={`⚡|${service.kpi} ${service.kpiLabel};★|100% Client Code Ownership;💰|${service.price}`}
+          chips={`⚡|${service.kpi} ${service.kpiLabel};★|100% Client Code Ownership;✓|${service.price}`}
           centerLabel="Optenary"
         />
 
@@ -489,16 +582,18 @@ export default function ServiceDetailPage({ forcedSlug }: { forcedSlug?: string 
                 >
                   <span
                     style={{
-                      width: 44,
-                      height: 44,
+                      width: 46,
+                      height: 46,
                       borderRadius: '50%',
                       background: 'var(--rw-brass)',
                       display: 'grid',
                       placeItems: 'center',
-                      fontSize: 20,
+                      color: 'var(--rw-ink)',
+                      flexShrink: 0,
+                      boxShadow: '0 4px 14px -3px rgba(212, 255, 58, 0.45)',
                     }}
                   >
-                    {d.icon}
+                    <DeliverableIcon name={d.icon} />
                   </span>
                   <h3
                     style={{
