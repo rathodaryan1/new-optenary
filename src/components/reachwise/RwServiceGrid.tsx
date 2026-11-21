@@ -1323,7 +1323,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Smooth iOS & Android apps built with Flutter and React Native. Pixel-perfect, offline-ready, and fast.",
             f4: "From $3,500",
             f5: "iOS & Android Cross-Platform;Offline Data Sync;Push Notifications & Biometrics;App Store & Play Store Launch;Continuous Crash Monitoring",
-            f6: "social",
+            f6: "mobile",
             f7: "60fps Smooth UI",
             n1: "2",
         },
@@ -1334,7 +1334,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Bespoke SaaS platforms, internal ERP dashboards, multi-tenant databases, and enterprise API ecosystems.",
             f4: "From $4,800",
             f5: "Multi-Tenant Architecture;Role-Based Access Control;Stripe / Razorpay Billing;Automated Background Workers;Enterprise Data Security",
-            f6: "content",
+            f6: "saas",
             f7: "99.9% Target Uptime",
             n1: "3",
         },
@@ -1345,7 +1345,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Self-operating AI agents, RAG document pipelines, custom LLM tool-calling, and automated workflow orchestrations.",
             f4: "From $2,800",
             f5: "Autonomous Agent Tool Calling;RAG Vector Search;Workflow Automation (Zapier/n8n);Private Model Hosting;Real-time Data Streaming",
-            f6: "ads",
+            f6: "ai",
             f7: "Sub-second LLM Latency",
             n1: "4",
         },
@@ -1356,7 +1356,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Comprehensive design systems in Figma translated directly into modular React component libraries.",
             f4: "From $2,000",
             f5: "Design System Tokens;Figma Interactive Prototypes;Responsive Breakpoint Systems;Micro-Interactions & Animations;Production React Tokens",
-            f6: "web",
+            f6: "design",
             f7: "Figma to Code 1:1",
             n1: "5",
         },
@@ -1367,7 +1367,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Headless commerce, Shopify Plus, and custom store architectures engineered for high-volume transactions.",
             f4: "From $3,200",
             f5: "Headless Storefronts;Multi-Currency & Tax;Inventory & ERP Sync;1-Click Checkout Flow;Cart Abandonment Recovery",
-            f6: "brand",
+            f6: "commerce",
             f7: "< 1s Checkout Load",
             n1: "6",
         },
@@ -1676,26 +1676,10 @@ type SgP = {
     M: CSSProperties
     D: CSSProperties
 }
-const SgUI = ({ kind, ...p }: SgP & { kind: string }) => {
-    const k = String(kind || "").toLowerCase()
-    const C =
-        k === "seo" || k === "web-dev" || k === "web-development"
-            ? SgWebDev
-            : k === "social"
-              ? SgSoc
-              : k === "ads"
-                ? SgAds
-                : k === "content"
-                  ? SgCnt
-                  : k === "web"
-                    ? SgWeb
-                    : SgBrd
-    return <C {...p} />
-}
-// Web Development: Modern Next.js IDE + Live Build & 100/100 Lighthouse Performance Gauge
+// 01. Web Development: Next.js IDE + Live Build & 100/100 Lighthouse Gauge
 const SgWebDev = ({ run, M, D, spd = 1 }: SgP) => {
-    const step = useSgStep(3, 700 / spd, run, 350)
-    const score = useSgCount(88, 100, 1600 / spd, run, 400)
+    const step = useSgStep(3, 700 / spd, run, 350);
+    const score = useSgCount(88, 100, 1600 / spd, run, 400);
     return (
         <div className="rwsg-ui rwsv-webdev">
             <div className="rwsv-dev-bar" style={M}>
@@ -1725,24 +1709,40 @@ const SgWebDev = ({ run, M, D, spd = 1 }: SgP) => {
                 <div className="rwsv-dev-lines">
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">1</span>
-                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>import</span> &#123; createClient &#125; <span style={{ color: "var(--rw-brass)" }}>from</span> <span style={{ color: "#0284C7" }}>'@optenary/core'</span></span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>import</span> &#123; createEngine &#125; <span style={{ color: "var(--rw-brass)" }}>from</span> <span style={{ color: "#0284C7" }}>'@optenary/web'</span></span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">2</span>
-                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>export default async function</span> <span style={{ color: "#2563EB" }}>WebEngine</span>() &#123;</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>import</span> &#123; Cache, Vitals &#125; <span style={{ color: "var(--rw-brass)" }}>from</span> <span style={{ color: "#0284C7" }}>'@optenary/perf'</span></span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">3</span>
-                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>const</span> app = <span style={{ color: "var(--rw-brass)" }}>await</span> createClient(&#123; <span style={{ color: "#0284C7" }}>speed</span>: <span style={{ color: "#D97706" }}>'sub-second'</span> &#125;)</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>export default async function</span> <span style={{ color: "#2563EB" }}>WebEngine</span>() &#123;</span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">4</span>
-                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>return</span> &lt;<span style={{ color: "#059669" }}>NextApp</span> <span style={{ color: "#0284C7" }}>ttfb</span>=<span style={{ color: "#D97706" }}>"24ms"</span> <span style={{ color: "#0284C7" }}>vitals</span>=&#123;<span style={{ color: "#DB2777" }}>100</span>&#125; /&gt;</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>const</span> app = <span style={{ color: "var(--rw-brass)" }}>await</span> createEngine(&#123; <span style={{ color: "#0284C7" }}>ttfb</span>: <span style={{ color: "#D97706" }}>'24ms'</span> &#125;)</span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">5</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>return</span> &lt;<span style={{ color: "#059669" }}>NextApp</span> <span style={{ color: "#0284C7" }}>cache</span>=<span style={{ color: "#D97706" }}>"edge"</span> <span style={{ color: "#0284C7" }}>vitals</span>=&#123;<span style={{ color: "#DB2777" }}>100</span>&#125;&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">6</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span style={{ color: "#059669" }}>Shield</span> <span style={{ color: "#0284C7" }}>ssl</span>=<span style={{ color: "#D97706" }}>"tls-1.3"</span> /&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">7</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;&lt;/<span style={{ color: "#059669" }}>NextApp</span>&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">8</span>
                         <span className="rwsv-dev-c">&#125;<i className="rwsv-dev-cursor" /></span>
                     </div>
+                </div>
+                <div className="rwsv-dev-term">
+                    <span style={{ color: "#16A34A" }}>✓</span>
+                    <span>Ready in 120ms · 100% TypeScript · 0 errors</span>
                 </div>
             </div>
             <div className="rwsv-dev-perf">
@@ -1777,7 +1777,7 @@ const SgWebDev = ({ run, M, D, spd = 1 }: SgP) => {
                     </div>
                     <div className="rwsv-dev-stat">
                         <span style={M}>BUILD</span>
-                        <b style={D} className="rwsv-dev-pass">READY</b>
+                        <b style={D} style={{ color: "#16A34A" }}>READY</b>
                     </div>
                 </div>
             </div>
@@ -1788,461 +1788,234 @@ const SgWebDev = ({ run, M, D, spd = 1 }: SgP) => {
         </div>
     )
 }
-// Social: a post collecting likes, heart pops, hearts float up
-const SgSoc = ({ run, cfg, M, D, spd = 1 }: SgP) => {
-    const likes = useSgCount(1184, 1312, 2200 / spd, run, 500)
-    const pop = useSgStep(1, 400 / spd, run, 700)
+
+// 02. Mobile Applications: Cross-Platform Smartphone UI + 60fps Telemetry
+const SgMobile = ({ run, M, D, spd = 1 }: SgP) => {
+    const push = useSgStep(1, 400 / spd, run, 600);
     return (
-        <div className="rwsg-ui rwsg-soc">
-            <div className="rwsg-phone">
-                <div className="rwsg-ph-h">
-                    <i className="rwsg-av" />
-                    <span style={M}>{cfg.socialHandle}</span>
-                    <b style={M}>···</b>
-                </div>
-                <div className="rwsg-ph">
-                    <img
-                        {...RS(cfg.photo, "360px")}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        draggable={false}
-                    />
-                    <span
-                        className={`rwsg-float${pop ? " is-on" : ""}`}
-                        aria-hidden
-                    >
-                        <i />
-                        <i />
-                        <i />
-                    </span>
-                    <span
-                        className={`rwsg-toast rwsg-toast-s${pop ? " is-on" : ""}`}
-                        style={M}
-                    >
-                        <i />
-                        +128 likes in 1 h
-                    </span>
-                </div>
-                <div className="rwsg-pb">
-                    <span className={`rwsg-hrt${pop ? " is-pop" : ""}`}>
-                        <SgHeart />
-                        <i />
-                    </span>
-                    <svg className="rwsg-ic" viewBox="0 0 24 24" aria-hidden>
-                        <path
-                            d="M4 12a8 8 0 1 1 3.3 6.5L4 20l1.2-3.6A8 8 0 0 1 4 12z"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    <svg className="rwsg-ic" viewBox="0 0 24 24" aria-hidden>
-                        <path
-                            d="M21 4L10 14M21 4l-7 17-4-7-7-4z"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                </div>
-                <p className="rwsg-likes" style={D}>
-                    {Math.round(likes).toLocaleString("en-US")} likes
-                </p>
-                <p className="rwsg-cap">
-                    <b>{cfg.socialHandle.replace(/^@/, "")}</b> Monday mornings,
-                    sorted ☕
-                </p>
-            </div>
-        </div>
-    )
-}
-// Ads: an ad card + two gauges ticking + revenue bars growing
-const SgGauge = ({
-    v,
-    max,
-    label,
-    text,
-    M,
-    D,
-}: {
-    v: number
-    max: number
-    label: string
-    text: string
-    M: CSSProperties
-    D: CSSProperties
-}) => {
-    const f = clamp01(v / max)
-    return (
-        <span className="rwsg-g">
-            <svg viewBox="0 0 120 70" aria-hidden>
-                <path
-                    d="M10 62a50 50 0 0 1 100 0"
-                    className="rwsg-g0"
-                    pathLength={1}
-                />
-                <path
-                    d="M10 62a50 50 0 0 1 100 0"
-                    className="rwsg-g1"
-                    pathLength={1}
-                    style={{ strokeDashoffset: 1 - f }}
-                />
-            </svg>
-            <b style={D}>{text}</b>
-            <small style={M}>{label}</small>
-        </span>
-    )
-}
-const SgAds = ({ run, cfg, M, D, spd = 1 }: SgP) => {
-    const ctr = useSgCount(0.9, 4.8, 1900 / spd, run)
-    const roas = useSgCount(1.4, 6.2, 2100 / spd, run, 450)
-    const bars = [0.28, 0.36, 0.34, 0.5, 0.58, 0.74, 0.96]
-    return (
-        <div className="rwsg-ui rwsg-ads">
-            <div className="rwsg-ad">
-                <span className="rwsg-spon" style={M}>
-                    <i className="rwsg-av" />
-                    Sponsored
-                </span>
-                <b style={D}>{cfg.adsHeadline}</b>
-                <span className="rwsg-adimg" aria-hidden>
+        <div className="rwsg-ui rwsv-mobile">
+            <div className="rwsv-mob-phone">
+                <div className="rwsv-mob-island">
+                    <span style={M}>9:41</span>
                     <i />
-                </span>
-                <span className="rwsg-adbtn" style={M}>
-                    Book now
-                </span>
-            </div>
-            <div className="rwsg-gs">
-                <SgGauge
-                    v={ctr}
-                    max={6}
-                    label="CTR"
-                    text={`${ctr.toFixed(1)}%`}
-                    M={M}
-                    D={D}
-                />
-                <SgGauge
-                    v={roas}
-                    max={8}
-                    label="ROAS"
-                    text={`${roas.toFixed(1)}×`}
-                    M={M}
-                    D={D}
-                />
-            </div>
-            <span
-                className={`rwsg-bars${run === true ? " is-run" : ""}`}
-                aria-hidden
-            >
-                {bars.map((h, i) => (
-                    <i
-                        key={i}
-                        style={{
-                            height: `${h * 100}%`,
-                            animationDelay: `${0.3 + i * 0.09}s`,
-                        }}
-                    />
-                ))}
-            </span>
-        </div>
-    )
-}
-// Content: an article typing itself, the read counter climbing
-const SgCnt = ({ run, cfg, M, D, spd = 1 }: SgP) => {
-    const full = cfg.articleTitle
-    const n = useSgStep(full.length, 40 / spd, run, 350)
-    const reads = useSgCount(0, 2410, 2600 / spd, run, 600)
-    return (
-        <div className="rwsg-ui rwsg-cnt">
-            <div className="rwsg-art">
-                <span className="rwsg-kick" style={M}>
-                    Guide · 6 min read
-                </span>
-                <b className="rwsg-type" style={D}>
-                    {full.slice(0, n)}
-                    <i className={n < full.length ? "is-typing" : ""} />
-                </b>
-                <span className="rwsg-by" style={M}>
-                    <i className="rwsg-av" />
-                    Optenary editorial
-                </span>
-                <span className="rwsg-lines" aria-hidden>
-                    {Array.from({ length: 14 }, (_, i) => (
-                        <i key={i} />
-                    ))}
-                </span>
-                <span className="rwsg-prog" aria-hidden>
-                    <i
-                        style={{
-                            transform: `scaleX(${(reads / 2410).toFixed(3)})`,
-                        }}
-                    />
-                </span>
-                <span className="rwsg-reads" style={M}>
-                    <em />
-                    {Math.round(reads).toLocaleString("en-US")} reads this week
-                </span>
-            </div>
-        </div>
-    )
-}
-// Web: a browser whose landing page scrolls, a cursor clicks the CTA
-const SgWeb = ({ cfg, M }: SgP) => (
-    <div className="rwsg-ui rwsg-web">
-        <div className="rwsg-br">
-            <div className="rwsg-chrome">
-                <i />
-                <i />
-                <i />
-                <span style={M}>{cfg.webUrl}</span>
-            </div>
-            <div className="rwsg-vp">
-                <div className="rwsg-page">
-                    <span className="rwsg-pg-nav">
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsg-pg-h">
-                        <i />
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsg-pg-b" />
-                    <span className="rwsg-pg-img" />
-                    <span className="rwsg-pg-row">
-                        <i />
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsg-pg-h">
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsg-pg-q" />
-                    <span className="rwsg-pg-row">
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsg-pg-b" />
                 </div>
-                <i className="rwsg-cur" aria-hidden />
+                <div className="rwsv-mob-screen">
+                    <div className="rwsv-mob-header" style={M}>
+                        <span>Optenary Mobile</span>
+                        <span>iOS & Android</span>
+                    </div>
+                    <div className="rwsv-mob-hero">
+                        <span style={M}>TELEMETRY STREAM</span>
+                        <strong style={D}>60 FPS Native UI</strong>
+                    </div>
+                    <div className="rwsv-mob-grid">
+                        <div className="rwsv-mob-card">
+                            <span style={M}>OFFLINE SYNC</span>
+                            <b style={D}>Ready</b>
+                        </div>
+                        <div className="rwsv-mob-card">
+                            <span style={M}>CRASH RATE</span>
+                            <b style={D}>&lt; 0.01%</b>
+                        </div>
+                    </div>
+                    <div className="rwsv-mob-push" style={M}>
+                        <span style={{ color: "var(--rw-brass)" }}>●</span>
+                        <span>Push: Real-time data synced</span>
+                    </div>
+                </div>
             </div>
-            <span className="rwsg-conv" style={M}>
-                Conversion 4.1% ▲
+            <p className={`rwsg-toast${push ? " is-on" : ""}`} style={M}>
+                <i />
+                📱 60fps Native UI · Cross-Platform
+            </p>
+        </div>
+    )
+}
+
+// 03. Custom Software & SaaS: Multi-Tenant Architecture & Event Stream
+const SgSaaS = ({ run, M, D, spd = 1 }: SgP) => {
+    const pop = useSgStep(2, 500 / spd, run, 450);
+    return (
+        <div className="rwsg-ui rwsv-saas">
+            <div className="rwsv-saas-bar" style={M}>
+                <span>SaaS Admin Console · Multi-Tenant</span>
+                <span style={{ color: "#16A34A", fontWeight: 700 }}>● 99.98% Uptime</span>
+            </div>
+            <div className="rwsv-saas-body">
+                <div className="rwsv-saas-metrics">
+                    <div className="rwsv-saas-box">
+                        <span style={M}>TENANTS</span>
+                        <b style={D}>428 Active</b>
+                    </div>
+                    <div className="rwsv-saas-box">
+                        <span style={M}>THROUGHPUT</span>
+                        <b style={D}>14.2k req/s</b>
+                    </div>
+                    <div className="rwsv-saas-box">
+                        <span style={M}>SECURITY</span>
+                        <b style={D}>RBAC Valid</b>
+                    </div>
+                </div>
+                <div className="rwsv-saas-feed">
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#16A34A" }}>✓</b>
+                        <span>[09:42:15] Tenant_104 auth success · DB isolated</span>
+                    </div>
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#0284C7" }}>●</b>
+                        <span>[09:42:16] Stripe subscription webhook processed</span>
+                    </div>
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#16A34A" }}>✓</b>
+                        <span>[09:42:17] Background queue: 0 pending jobs (18ms)</span>
+                    </div>
+                </div>
+            </div>
+            <p className={`rwsg-toast${pop >= 1 ? " is-on" : ""}`} style={M}>
+                <i />
+                🛡️ 99.9% Target Uptime · Multi-Tenant
+            </p>
+        </div>
+    )
+}
+
+// 04. AI Agents & Automation: Autonomous Pipeline & Tool Calling
+const SgAI = ({ run, M, D, spd = 1 }: SgP) => {
+    const step = useSgStep(3, 600 / spd, run, 400);
+    return (
+        <div className="rwsg-ui rwsv-ai">
+            <div className="rwsv-saas-bar" style={M}>
+                <span>AI Agent Pipeline · Tool Calling</span>
+                <span style={{ color: "var(--rw-brass)", fontWeight: 700 }}>● Agent Active</span>
+            </div>
+            <div className="rwsv-ai-pipe">
+                <div className={`rwsv-ai-step ${step >= 0 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Prompt Received</strong>
+                        <span style={M}>"Synthesize quarterly analytics & notify ERP"</span>
+                    </div>
+                </div>
+                <div className={`rwsv-ai-step ${step >= 1 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Tool: db_query() Executed</strong>
+                        <span style={M}>Retrieved 24 rows from PostgreSQL in 14ms</span>
+                    </div>
+                </div>
+                <div className={`rwsv-ai-step ${step >= 2 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Vector RAG & Streaming</strong>
+                        <span style={M}>Embedded 8 docs · 48 tokens/sec streaming</span>
+                    </div>
+                </div>
+            </div>
+            <p className={`rwsg-toast${step >= 2 ? " is-on" : ""}`} style={M}>
+                <i />
+                🤖 Autonomous Tool Calling · Sub-second
+            </p>
+        </div>
+    )
+}
+
+// 05. UI/UX & Design Systems: Interactive Web & Component Prototype
+const SgDesign = ({ cfg, M }: SgP) => (
+    <div className="rwsg-ui rwsv-web">
+        <div className="rwsv-br">
+            <div className="rwsv-chrome">
+                <i />
+                <i />
+                <i />
+                <span style={M}>Figma to Code 1:1 · Design Tokens</span>
+            </div>
+            <div className="rwsv-vp">
+                <div className="rwsv-page">
+                    <span className="rwsv-pg-nav">
+                        <i />
+                        <i />
+                        <i />
+                        <i />
+                    </span>
+                    <span className="rwsv-pg-h">
+                        <i />
+                        <i />
+                        <i />
+                    </span>
+                    <span className="rwsv-pg-b" />
+                    <span className="rwsv-pg-img" />
+                    <span className="rwsv-pg-row">
+                        <i />
+                        <i />
+                        <i />
+                    </span>
+                </div>
+                <i className="rwsv-cur" aria-hidden />
+            </div>
+            <span className="rwsv-conv" style={M}>
+                Figma to React 1:1 ▲
             </span>
         </div>
     </div>
 )
-// Brand: the logo, four swatches flipping to a second palette, the type
-const SgBrd = ({ cfg, M, D }: SgP) => (
-    <div className="rwsg-ui rwsg-brd">
-        <div className="rwsg-logo">
-            <SgMark s={44} />
-            <b style={D}>{cfg.brandName}</b>
-        </div>
-        <div className="rwsg-sw">
-            {["#0D0E10", "#D4FF3A", "#FF3E88", "#FFFFFF"].map((hx, i) => (
-                <span
-                    key={i}
-                    className={`rwsg-s rwsg-s${i}`}
-                    style={{ animationDelay: `${i * 0.16}s` }}
-                >
-                    <i>
-                        <small style={M}>{hx}</small>
-                    </i>
-                    <i>
-                        <small style={M}>
-                            {["#1F3A2E", "#FF8A3D", "#F2E6D3", "#2F5BFF"][i]}
-                        </small>
-                    </i>
-                </span>
-            ))}
-        </div>
-        <div className="rwsg-spec">
-            <span style={D}>Aa</span>
-            <span style={M}>
-                Display · Sans · Mono
-                <br />
-                Guidelines v1.0
-            </span>
-        </div>
-        <div className="rwsg-apps" aria-hidden>
-            <i className="rwsg-app1">
-                <SgMark s={22} />
-            </i>
-            <i className="rwsg-app2" style={D}>
-                {cfg.brandName}
-            </i>
-            <i className="rwsg-app3" />
-        </div>
-    </div>
-)
 
+// 06. Digital Commerce: Real 1-Click Checkout & High-Volume Inventory Sync
+const SgCommerce = ({ run, M, D, spd = 1 }: SgP) => {
+    const step = useSgStep(3, 750 / spd, run, 450);
+    return (
+        <div className="rwsg-ui rwsv-commerce">
+            <div className="rwsv-com-bar" style={M}>
+                <span>store.optenary.in · Headless Commerce</span>
+                <span style={{ color: "#16A34A", fontWeight: 700 }}>● 1-Click Pay</span>
+            </div>
+            <div className="rwsv-com-card">
+                <div className="rwsv-com-prod">
+                    <div className="rwsv-com-thumb">⚡</div>
+                    <div className="rwsv-com-meta">
+                        <strong style={D}>Cloud Storefront Tier 1</strong>
+                        <span style={M}>Headless Architecture · Shopify Plus</span>
+                    </div>
+                    <div className="rwsv-com-price" style={D}>$3,200</div>
+                </div>
+                <div className="rwsv-com-row" style={M}>
+                    <span>SUBTOTAL</span>
+                    <b>$3,200.00</b>
+                </div>
+                <div className="rwsv-com-row" style={M}>
+                    <span>TAX &amp; MULTI-CURRENCY</span>
+                    <b>Auto Calculated ($0.00)</b>
+                </div>
+                <div className={`rwsv-com-btn ${step >= 2 ? "is-success" : ""}`} style={M}>
+                    {step === 0 && " Pay / 1-Click Express Checkout"}
+                    {step === 1 && "Processing Tokenized Payment..."}
+                    {step >= 2 && "✓ Payment Authorized · Order #8492"}
+                </div>
+            </div>
+            <p className={`rwsg-toast${step >= 2 ? " is-on" : ""}`} style={M}>
+                <i />
+                ⚡ &lt; 1s Checkout Load · High-Volume Ready
+            </p>
+        </div>
+    )
+}
 
-
-const CSS_SG = `.rwsg{background:var(--rw-bone);color:var(--rw-ink);padding:clamp(72px,7vw,120px) 0 clamp(110px,11vw,180px);overflow-x:clip}
-.rwsg .rw-eb i{position:relative} .rwsg .rw-eb i::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 1.5px var(--rw-brass);animation:rwsg-ping 1.8s cubic-bezier(.2,.6,.3,1) infinite}
-@keyframes rwsg-ping{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
-.rwsg .rw-hd{font-weight:var(--rw-font-dw,700);letter-spacing:-.045em}
-.rwsg .rw-it{position:relative;isolation:isolate;font-weight:inherit;color:var(--rw-ink);padding:0 .06em;margin:0 -.02em}
-.rwsg .rw-it::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.1em;bottom:.02em;border-radius:.14em;background:var(--rw-brass);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.7,0,.2,1) var(--pd,.6s)}
-.rwsg .rw-hd.is-on .rw-it::before{transform:none}
-.rwsg-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:end;gap:40px;margin-bottom:clamp(44px,4.6vw,72px)}
-.rwsg-hl{display:flex;flex-direction:column;gap:26px;align-items:flex-start}
-.rwsg-hr{display:flex;flex-direction:column;align-items:flex-start;gap:24px;justify-self:end;max-width:420px} .rwsg-hr p{margin:0;font-size:17px;line-height:1.5;color:var(--rw-mut)}
-/* two offset columns: the even cards hang 140px lower */
-.rwsg-grid{--off:140px;display:grid;grid-template-columns:1fr 1fr;gap:28px 24px;padding-bottom:var(--off)}
-.rwsg-card:nth-child(even){translate:0 var(--off)}
-.rwsg-card{position:relative;display:flex;flex-direction:column;border-radius:30px;padding:12px;background:var(--rw-cloud);box-shadow:0 0 0 1px color-mix(in srgb,var(--rw-ink) 7%,transparent);overflow:hidden;isolation:isolate;transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .6s}
-.rwsg-card:hover{transform:translateY(-8px);box-shadow:0 0 0 1px color-mix(in srgb,var(--rw-ink) 10%,transparent),0 40px 70px -40px rgba(13,14,16,.45)}
-/* the reach ripple: two lime rings out of the top-left corner */
-.rwsg-rip{position:absolute;z-index:3;left:0;top:0;width:0;height:0;pointer-events:none}
-.rwsg-rip b{position:absolute;left:0;top:0;width:260%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;box-shadow:inset 0 0 0 2px var(--rw-brass),0 0 0 1px color-mix(in srgb,var(--rw-brass) 40%,transparent);background:radial-gradient(circle,transparent 62%,color-mix(in srgb,var(--rw-brass) 12%,transparent) 70%,transparent 71%);scale:0;opacity:0}
-.rwsg-rip{width:100%;height:100%}
-.rwsg-card.is-hit .rwsg-rip b:not(.rwsg-hov){animation:rwsg-rip 1.7s cubic-bezier(.15,.6,.3,1) both} .rwsg-card.is-hit .rwsg-rip b:nth-child(2){animation-delay:.28s}
-@keyframes rwsg-rip{0%{scale:0;opacity:1}70%{opacity:.9}100%{scale:1;opacity:0}}
-.rwsg-card.is-hit .rwsg-rip .rwsg-hov{animation:none} .rwsg-card.is-hit:hover .rwsg-rip .rwsg-hov{animation:rwsg-rip2 1.1s cubic-bezier(.2,.6,.3,1) both}
-@keyframes rwsg-rip2{0%{scale:0;opacity:1}100%{scale:.45;opacity:0}}
-.rwsg.is-fin .rwsg-rip{display:none}
-/* stage: grey + dim while it waits, blooms when reached */
-.rwsg-stage{position:relative;height:380px;border-radius:22px;overflow:hidden;background:var(--stg);--pfg:var(--rw-ink);--mut:color-mix(in srgb,var(--rw-ink) 60%,transparent);--stg:color-mix(in srgb,var(--rw-ink) 6%,transparent)}
-.rwsg-card.t-lime .rwsg-stage{--stg:color-mix(in srgb,var(--rw-brass) 55%,var(--rw-bone))}
-.rwsg-card.t-cloud .rwsg-stage{--stg:var(--rw-bone)}
-.rwsg-card.t-ink .rwsg-stage{--stg:var(--rw-ink);--pfg:var(--rw-cloud);--mut:color-mix(in srgb,var(--rw-cloud) 62%,transparent)} .rwsg-card.t-ink .rwsg-brd,.rwsg-card.t-ink .rwsg-spec{color:var(--rw-cloud)}
-.rwsg-stage>.rwsg-ui{filter:grayscale(1);opacity:.72;transition:filter 1.2s ease .25s,opacity 1s ease .25s}
-.rwsg-card.is-hit .rwsg-stage>.rwsg-ui{filter:none;opacity:1}
-.rwsg-card:not(.is-hit) .rwsg-page,.rwsg-card:not(.is-hit) .rwsg-cur,.rwsg-card:not(.is-hit) .rwsg-s{animation-play-state:paused}
-.rwsg-st{position:absolute;z-index:4;left:14px;top:14px;display:inline-flex;align-items:center;gap:8px;padding:6px 11px 6px 9px;border-radius:999px;background:var(--rw-cloud);color:var(--rw-ink);font-size:12px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 8px 20px -12px rgba(0,0,0,.4)}
-.rwsg-st i{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--rw-ink) 30%,transparent);transition:background .4s} .rwsg-card.is-hit .rwsg-st i{background:#FF3E88;animation:rw-blink 1.4s ease-in-out infinite}
-.rwsg-st em{font-style:normal;color:color-mix(in srgb,var(--rw-ink) 78%,transparent)} .rwsg-st em::before{content:"· "}
-.rwsg-no{position:absolute;z-index:4;right:14px;top:14px;display:grid;place-items:center;min-width:44px;height:30px;padding:0 10px;border-radius:999px;background:var(--rw-ink);color:var(--rw-brass);font-size:12px;letter-spacing:.06em}
-/* when the stage has a floating header chip, keep the mini-UI's own top clear */
-.rwsg-stage>.rwsg-ui{padding-top:56px}
-.rwsg-stage>.rwsg-soc{padding-top:48px}
-/* copy */
-.rwsg-tx{display:flex;flex-direction:column;gap:14px;padding:26px 16px 12px}
-.rwsg-tt{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
-.rwsg-tt h2{margin:0;font-size:clamp(36px,3.3vw,52px);line-height:.96;letter-spacing:-.045em;font-weight:var(--rw-font-dw,700)}
-.rwsg-stat{flex:none;display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:7px 12px;border-radius:999px;background:var(--rw-brass);color:var(--rw-ink);font-size:12px;letter-spacing:.02em} .rwsg-stat i{width:7px;height:7px;border-radius:50%;background:#FF3E88}
-.rwsg-short{margin:0;font-size:20px;line-height:1.3;letter-spacing:-.015em;font-weight:500}
-.rwsg-body{margin:0;font-size:16px;line-height:1.55;color:var(--rw-mut);max-width:52ch}
-.rwsg-inc{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;padding:0}
-.rwsg-inc li{display:inline-flex;align-items:center;gap:8px;padding:7px 13px 7px 8px;border-radius:999px;background:var(--rw-bone);font-size:14px;line-height:1.2}
-.rwsg-inc svg{width:18px;height:18px;flex:none} .rwsg-inc circle{fill:var(--rw-brass);stroke:none} .rwsg-inc path{fill:none;stroke:var(--rw-ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s cubic-bezier(.6,0,.3,1) calc(.9s + var(--j)*.14s)}
-.rwsg-card.is-hit .rwsg-inc path,.rwsg.is-fin .rwsg-inc path{stroke-dashoffset:0}
-.rwsg-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:10px;padding-top:18px;border-top:1px solid var(--rw-fog)}
-.rwsg-pr{display:flex;flex-direction:column;gap:3px;margin:0;font-size:15px} .rwsg-pr small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rw-mut)}
-.rwsg-foot .rw-btn{--ring:var(--rw-cloud)}
-.rwsg-hint{display:flex;align-items:center;gap:8px;margin:28px 0 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rw-mut)} .rwsg-hint i{width:7px;height:7px;border-radius:50%;background:#FF3E88;animation:rw-blink 1.4s ease-in-out infinite}
-/* tablet */
-.rwsg.is-tab .rwsg-head{grid-template-columns:1fr;align-items:start} .rwsg.is-tab .rwsg-hr{justify-self:start;max-width:560px}
-.rwsg.is-tab .rwsg-grid{--off:90px;gap:20px 16px} .rwsg.is-tab .rwsg-stage{height:330px} .rwsg.is-tab .rwsg-tx{padding:22px 10px 8px}
-.rwsg.is-tab .rwsg-bars{display:none} .rwsg.is-tab .rwsg-tt{flex-direction:column;gap:10px} .rwsg.is-tab .rwsg-short{font-size:18px}
-/* phone */
-.rwsg.is-ph{padding:64px 0 88px}
-.rwsg.is-ph .rwsg-head{grid-template-columns:1fr;gap:24px;margin-bottom:36px} .rwsg.is-ph .rwsg-hr{justify-self:stretch;max-width:none} .rwsg.is-ph .rwsg-hr p{font-size:16px}
-.rwsg.is-ph .rwsg-grid{grid-template-columns:1fr;--off:0px;gap:16px} .rwsg.is-ph .rwsg-card{border-radius:24px;padding:8px} .rwsg.is-ph .rwsg-stage{height:320px;border-radius:18px}
-.rwsg.is-ph .rwsg-tx{padding:20px 10px 8px} .rwsg.is-ph .rwsg-tt{flex-direction:column;gap:10px} .rwsg.is-ph .rwsg-tt h2{font-size:38px} .rwsg.is-ph .rwsg-short{font-size:18px} .rwsg.is-ph .rwsg-body{font-size:15.5px}
-.rwsg.is-ph .rwsg-foot .rw-btn{width:100%} .rwsg.is-ph .rwsg-st em{display:none}
-.rwsg.is-ph .rwsg-card:hover{transform:none}
-/* ================= mini UIs (shared with the homepage channel switcher, own prefix) ================= */
-/* ================= mini UIs ================= */
-.rwsg-ui{position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;padding:20px;color:var(--rw-ink);font-size:12px}
-.rwsg-av{display:inline-block;flex:none;width:22px;height:22px;border-radius:50%;background:conic-gradient(from 200deg,var(--rw-brass),#FF3E88,var(--rw-brass))}
-.rwsg-toast{position:absolute;display:inline-flex;align-items:center;gap:8px;margin:0;padding:8px 13px 8px 9px;border-radius:999px;background:var(--rw-cloud);color:var(--rw-ink);font-size:12px;white-space:nowrap;box-shadow:0 14px 30px -12px rgba(0,0,0,.45),0 0 0 1px color-mix(in srgb,var(--rw-ink) 8%,transparent);opacity:0;scale:.6;translate:0 10px;transition:opacity .35s,scale .55s cubic-bezier(.34,1.56,.64,1),translate .55s cubic-bezier(.34,1.56,.64,1)}
-.rwsg-toast i{width:18px;height:18px;border-radius:50%;background:var(--rw-brass);box-shadow:inset 0 0 0 5px var(--rw-brass),inset 0 0 0 9px var(--rw-ink)} .rwsg-toast::after{content:"";position:absolute;right:-2px;top:-2px;width:9px;height:9px;border-radius:50%;background:#FF3E88;box-shadow:0 0 0 2px var(--rw-cloud)}
-.rwsg-toast.is-on{opacity:1;scale:1;translate:0 0}
-/* seo */
-.rwsg-q{display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:999px;background:var(--rw-cloud);box-shadow:0 1px 0 color-mix(in srgb,var(--rw-ink) 8%,transparent),0 10px 24px -16px rgba(0,0,0,.4);font-size:13.5px} .rwsg-q svg{width:16px;height:16px;flex:none;color:var(--rw-mut)} .rwsg-q span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:clip} .rwsg-q>i{width:3px;height:16px;border-radius:2px;background:var(--rw-ink);animation:rw-blink 1s steps(1) infinite}
-.rwsg-meta{margin:0 4px;font-size:12px;letter-spacing:.04em;color:var(--mut)}
-.rwsg-res{position:relative;flex:1;min-height:0}
-.rwsg-r{position:absolute;left:0;right:0;height:calc(20% - 6px);display:flex;align-items:center;gap:11px;padding:0 12px;border-radius:12px;background:color-mix(in srgb,var(--rw-cloud) 55%,transparent);transition:top .6s cubic-bezier(.34,1.25,.64,1),background .4s,box-shadow .4s}
-.rwsg-fav{width:22px;height:22px;flex:none;border-radius:50%;background:color-mix(in srgb,var(--rw-ink) 12%,transparent)}
-.rwsg-rt{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0} .rwsg-rt b{font-size:12px;font-weight:400;color:color-mix(in srgb,var(--rw-ink) 78%,transparent);white-space:nowrap;overflow:hidden;min-width:0} .rwsg-rt em{display:block;height:6px;width:82%;border-radius:4px;background:color-mix(in srgb,var(--rw-ink) 16%,transparent)} .rwsg-rt em.rwsg-rt2{width:58%;height:5px;background:color-mix(in srgb,var(--rw-ink) 9%,transparent)}
-.rwsg-rt strong{font-size:14px;line-height:1.1;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;min-width:0}
-@media (max-width:699px){.rwsg-rt b,.rwsg-rt strong{-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent)} .rwsg-rt strong{font-size:13px}} /* 10-20: mock results fit one line, fade instead of an ellipsis */
-.rwsg-r.is-me{z-index:2;background:var(--rw-cloud);box-shadow:0 0 0 1.5px var(--rw-ink),0 12px 26px -14px rgba(0,0,0,.55)} .rwsg-r.is-me .rwsg-fav{background:var(--rw-brass);box-shadow:inset 0 0 0 5px var(--rw-cloud),0 0 0 1px var(--rw-ink)} .rwsg-r.is-me .rwsg-rt b{color:var(--rw-ink)}
-.rwsg-r.is-top{box-shadow:0 0 0 1.5px var(--rw-ink),0 0 0 6px color-mix(in srgb,var(--rw-brass) 70%,transparent),0 12px 26px -14px rgba(0,0,0,.55)}
-.rwsg-rank{flex:none;padding:4px 9px;border-radius:999px;background:var(--rw-ink);color:var(--rw-brass);font-size:12px}
-.rwsg-seo .rwsg-toast{right:18px;bottom:18px}
-/* social */
-.rwsg-soc{align-items:center;justify-content:center;padding:18px}
-.rwsg-phone{position:relative;display:flex;flex-direction:column;width:min(100%,270px);height:100%;max-height:470px;border-radius:30px;padding:10px;background:var(--rw-cloud);box-shadow:0 0 0 1px color-mix(in srgb,var(--rw-ink) 10%,transparent),0 30px 60px -30px rgba(0,0,0,.6)}
-.rwsg-ph-h{display:flex;align-items:center;gap:8px;padding:4px 4px 10px;font-size:12px} .rwsg-ph-h b{margin-left:auto;font-weight:400;color:var(--rw-mut)}
-.rwsg-ph{position:relative;flex:1;min-height:0;border-radius:18px;overflow:hidden;background:var(--rw-ink)} .rwsg-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.rwsg-float{position:absolute;right:18px;bottom:10px;width:24px;height:80px;pointer-events:none} .rwsg-float i{position:absolute;left:0;bottom:0;width:18px;height:18px;opacity:0;background:#FF3E88;clip-path:path('M9 16.5S1 11.8 1 6.3A3.9 3.9 0 0 1 9 4.6 3.9 3.9 0 0 1 17 6.3c0 5.5-8 10.2-8 10.2z')}
-.rwsg-float.is-on i{animation:rwsg-fl 2.2s cubic-bezier(.2,.7,.3,1) infinite} .rwsg-float.is-on i:nth-child(2){animation-delay:.5s;left:8px} .rwsg-float.is-on i:nth-child(3){animation-delay:1.1s;left:-6px}
-@keyframes rwsg-fl{0%{opacity:0;transform:translateY(0) scale(.5)}15%{opacity:1}100%{opacity:0;transform:translateY(-78px) scale(1.1) rotate(-12deg)}}
-.rwsg-toast-s{left:10px;top:10px}
-.rwsg-pb{display:flex;align-items:center;gap:12px;padding:10px 4px 4px} .rwsg-ic{width:21px;height:21px}
-.rwsg-hrt{position:relative;display:grid;place-items:center;width:23px;height:23px;transition:color .3s} .rwsg-hrt svg{width:23px;height:23px}
-.rwsg-hrt i{position:absolute;inset:-3px;border-radius:50%;box-shadow:0 0 0 2px var(--rw-brass);opacity:0}
-.rwsg-hrt.is-pop{color:#FF3E88} .rwsg-hrt.is-pop svg{animation:rwsg-hp .6s cubic-bezier(.34,1.56,.64,1)} .rwsg-hrt.is-pop i{animation:rwsg-ping 1s cubic-bezier(.2,.6,.3,1)}
-@keyframes rwsg-hp{0%{scale:1}45%{scale:1.45}100%{scale:1}}
-.rwsg-likes{margin:4px 4px 0;font-size:15px;letter-spacing:-.02em;font-weight:700;font-variant-numeric:tabular-nums}
-.rwsg-cap{margin:2px 4px 4px;font-size:12px;line-height:1.35;overflow-wrap:break-word;min-width:0} .rwsg-cap b{font-weight:600}
-/* ads */
-.rwsg-ad{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 88px;grid-template-rows:auto 1fr auto;gap:8px 14px;padding:16px;border-radius:16px;background:var(--rw-ink);color:var(--rw-cloud)}
-.rwsg-spon{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--rw-cloud) 78%,transparent)} .rwsg-spon .rwsg-av{width:18px;height:18px}
-.rwsg-ad b{grid-column:1;font-size:19px;line-height:1.08;letter-spacing:-.03em;font-weight:700}
-.rwsg-adimg{grid-column:2;grid-row:1/4;border-radius:12px;background:radial-gradient(circle at 35% 30%,var(--rw-brass),color-mix(in srgb,var(--rw-brass) 30%,var(--rw-ink)) 70%);overflow:hidden;position:relative} .rwsg-adimg i{position:absolute;left:50%;top:56%;width:46px;height:46px;border-radius:50%;translate:-50% -50%;background:var(--rw-cloud);box-shadow:0 0 0 10px color-mix(in srgb,var(--rw-cloud) 26%,transparent)}
-.rwsg-adbtn{grid-column:1;justify-self:start;padding:7px 12px;border-radius:999px;background:var(--rw-brass);color:var(--rw-ink);font-size:12px}
-.rwsg-gs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.rwsg-g{position:relative;display:flex;flex-direction:column;align-items:center;padding:12px 10px 10px;border-radius:14px;background:var(--rw-cloud)} .rwsg-g svg{width:100%;max-width:140px;height:auto;overflow:visible}
-.rwsg-g0,.rwsg-g1{fill:none;stroke-width:11;stroke-linecap:round} .rwsg-g0{stroke:color-mix(in srgb,var(--rw-ink) 9%,transparent)} .rwsg-g1{stroke:var(--rw-brass);stroke-dasharray:1 1;filter:drop-shadow(0 0 .6px var(--rw-ink))}
-.rwsg-g b{margin-top:-30px;font-size:24px;line-height:1;letter-spacing:-.03em;font-weight:700;font-variant-numeric:tabular-nums} .rwsg-g small{margin-top:5px;font-size:12px;letter-spacing:.14em;color:var(--rw-mut)}
-.rwsg-bars{flex:1;min-height:30px;display:flex;align-items:flex-end;gap:6px;padding:0 4px} .rwsg-bars i{flex:1;border-radius:5px 5px 2px 2px;background:color-mix(in srgb,var(--pfg) 11%,transparent);transform-origin:bottom} .rwsg-bars i:last-child{background:var(--rw-brass);box-shadow:inset 0 0 0 1px var(--rw-ink)}
-.rwsg-bars.is-run i{animation:rwsg-bar .9s cubic-bezier(.2,.8,.2,1) backwards} @keyframes rwsg-bar{from{transform:scaleY(0)}}
-/* content */
-.rwsg-cnt{padding:18px}
-.rwsg-art{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:16px;background:var(--rw-cloud);box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}
-.rwsg-kick{align-self:flex-start;padding:5px 10px;border-radius:999px;background:var(--rw-brass);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.rwsg-type{min-height:3.3em;font-size:26px;line-height:1.08;letter-spacing:-.035em;font-weight:700} .rwsg-type i{display:inline-block;width:3px;height:.9em;margin-left:3px;vertical-align:-.08em;background:var(--rw-ink);animation:rw-blink 1s steps(1) infinite} .rwsg-type i.is-typing{animation:none}
-.rwsg-by{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--rw-mut)}
-.rwsg-lines{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow:hidden} .rwsg-lines i{flex:none;height:6px;border-radius:4px;background:color-mix(in srgb,var(--rw-ink) 10%,transparent)} .rwsg-lines i:nth-child(3n+2){width:92%} .rwsg-lines i:nth-child(3n){width:70%}
-.rwsg-prog{height:4px;border-radius:4px;background:color-mix(in srgb,var(--rw-ink) 8%,transparent);overflow:hidden} .rwsg-prog i{display:block;height:100%;background:var(--rw-ink);transform-origin:left}
-.rwsg-reads{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--rw-ink);font-variant-numeric:tabular-nums} .rwsg-reads em{width:7px;height:7px;border-radius:50%;background:#FF3E88}
-/* web */
-.rwsg-web{padding:18px}
-.rwsg-br{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:var(--rw-cloud);box-shadow:0 24px 44px -26px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--rw-ink) 8%,transparent)}
-.rwsg-chrome{display:flex;align-items:center;gap:6px;height:34px;flex:none;padding:0 12px;border-bottom:1px solid var(--rw-fog)} .rwsg-chrome>i{width:8px;height:8px;border-radius:50%;background:var(--rw-fog)} .rwsg-chrome>i:first-child{background:#FF3E88} .rwsg-chrome span{margin-left:8px;flex:1;padding:4px 12px;border-radius:999px;background:var(--rw-bone);font-size:12px;color:var(--rw-mut);white-space:nowrap;overflow:hidden;text-overflow:clip}
-.rwsg-vp{position:relative;flex:1;min-height:0;overflow:hidden}
-.rwsg-page{display:flex;flex-direction:column;gap:14px;padding:16px;animation:rwsg-scroll 8s cubic-bezier(.65,0,.35,1) infinite}
-@keyframes rwsg-scroll{0%,14%{transform:translateY(0)}46%,62%{transform:translateY(-46%)}90%,100%{transform:translateY(0)}}
-.rwsg-pg-nav{display:flex;gap:8px;align-items:center} .rwsg-pg-nav i{height:6px;width:28px;border-radius:4px;background:color-mix(in srgb,var(--rw-ink) 14%,transparent)} .rwsg-pg-nav i:first-child{width:18px;height:18px;border-radius:50%;background:var(--rw-brass);box-shadow:inset 0 0 0 1px var(--rw-ink);margin-right:auto}
-.rwsg-pg-h{display:flex;flex-direction:column;gap:7px} .rwsg-pg-h i{height:16px;width:88%;border-radius:5px;background:var(--rw-ink)} .rwsg-pg-h i+i{width:64%} .rwsg-pg-h i+i+i{width:40%}
-.rwsg-pg-b{align-self:flex-start;width:108px;height:30px;flex:none;border-radius:999px;background:var(--rw-brass);box-shadow:inset 0 0 0 1px var(--rw-ink)}
-.rwsg-pg-img{height:120px;flex:none;border-radius:12px;background:linear-gradient(135deg,var(--rw-ink),color-mix(in srgb,var(--rw-ink) 60%,var(--rw-brass)))}
-.rwsg-pg-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px} .rwsg-pg-row i{height:64px;border-radius:10px;background:var(--rw-bone)} .rwsg-pg-row:has(i:nth-child(2):last-child){grid-template-columns:1fr 1fr}
-.rwsg-pg-q{height:70px;flex:none;border-radius:12px;background:color-mix(in srgb,var(--rw-brass) 40%,var(--rw-cloud))}
-.rwsg-cur{position:absolute;left:62%;top:58%;width:18px;height:18px;border-radius:50%;background:var(--rw-ink);box-shadow:0 0 0 3px var(--rw-cloud);animation:rwsg-cur 8s cubic-bezier(.65,0,.35,1) infinite}
-@keyframes rwsg-cur{0%,10%{transform:translate(0,0)}22%{transform:translate(-90px,-60px) scale(.8)}26%{transform:translate(-90px,-60px) scale(1.1)}40%,100%{transform:translate(0,0)}}
-.rwsg-conv{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;background:var(--rw-ink);color:var(--rw-brass);font-size:12px}
-/* brand */
-.rwsg-brd{justify-content:space-between;padding:24px}
-.rwsg-logo{display:flex;align-items:center;gap:12px} .rwsg-logo b{font-size:38px;letter-spacing:-.055em;font-weight:800;line-height:1}
-.rwsg-sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;perspective:500px}
-.rwsg-s{position:relative;height:86px;transform-style:preserve-3d;animation:rwsg-flip 4.4s cubic-bezier(.7,0,.2,1) infinite}
-.rwsg-s i{position:absolute;inset:0;display:flex;align-items:flex-end;padding:8px;border-radius:12px;backface-visibility:hidden;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--rw-ink) 14%,transparent)} .rwsg-s i+i{transform:rotateY(180deg)} .rwsg-s small{font-size:12px;letter-spacing:.06em;color:var(--rw-ink)} .rwsg-s0 i small,.rwsg-s3 i+i small{color:var(--rw-cloud)}
-.rwsg-s0 i:first-child{background:var(--rw-ink)} .rwsg-s0 i+i{background:#1F3A2E} .rwsg-s1 i:first-child{background:var(--rw-brass)} .rwsg-s1 i+i{background:#FF8A3D} .rwsg-s2 i:first-child{background:#FF3E88} .rwsg-s2 i+i{background:#F2E6D3} .rwsg-s3 i:first-child{background:var(--rw-cloud)} .rwsg-s3 i+i{background:#2F5BFF}
-@keyframes rwsg-flip{0%,35%{transform:rotateY(0)}50%,85%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
-.rwsg-spec{display:flex;align-items:center;gap:16px;font-size:12px;line-height:1.5;letter-spacing:.1em;text-transform:uppercase;color:var(--rw-ink)} .rwsg-spec span:first-child{font-size:64px;line-height:1;letter-spacing:-.05em;text-transform:none;font-weight:700}
-.rwsg-apps{display:flex;gap:10px;align-items:center} .rwsg-apps i{display:grid;place-items:center;height:44px;border-radius:12px;font-style:normal}
-.rwsg-app1{width:44px;background:var(--rw-ink)} .rwsg-app2{padding:0 16px;background:var(--rw-brass);color:var(--rw-ink);font-size:15px;font-weight:700;letter-spacing:-.03em;border-radius:999px!important} .rwsg-app3{flex:1;background:repeating-linear-gradient(90deg,#FF3E88 0 12px,var(--rw-ink) 12px 24px);opacity:.9}
-.rwsg.is-fin .rwsg-s,.rwsg.is-fin .rwsg-page,.rwsg.is-fin .rwsg-cur,.rwsg.is-fin .rwsg-float i{animation:none!important}
-.rwsg.is-ph .rwsg-ui{padding:14px} .rwsg.is-ph .rwsg-bars{display:none} .rwsg.is-ph .rwsg-type{font-size:21px} .rwsg.is-ph .rwsg-s{height:64px} .rwsg.is-ph .rwsg-spec span:first-child{font-size:46px} .rwsg.is-ph .rwsg-logo b{font-size:30px} .rwsg.is-ph .rwsg-brd{padding:16px} .rwsg.is-ph .rwsg-apps{display:none}
-.rwsg.is-ph .rwsg-ad b{font-size:16px} .rwsg.is-ph .rwsg-g b{font-size:20px;margin-top:-26px}
-.rwsg.is-ph .rwsg-stage>.rwsg-ui{padding-top:52px}
-.rwsg-card:hover .rwsg-page,.rwsg-card:hover .rwsg-cur{animation-duration:4s} .rwsg-card:hover .rwsg-s{animation-duration:2.2s}
-@media (prefers-reduced-motion:reduce){.rwsg-s,.rwsg-page,.rwsg-cur,.rwsg-float i{animation:none!important}}
-`;
-
-const THEMES = ["fog", "lime", "cloud", "ink", "fog", "lime"];
+// Master UI Dispatcher
+const SgUI = ({ kind, ...p }: SgP & { kind: string }) => {
+    const k = String(kind || "").toLowerCase()
+    const C =
+        k === "web-dev" || k === "seo" || k === "web-development"
+            ? SgWebDev
+            : k === "mobile" || k === "social" || k === "mobile-development"
+              ? SgMobile
+              : k === "saas" || k === "content" || k === "custom-software"
+                ? SgSaaS
+                : k === "ai" || k === "ads" || k === "ai-agents-automation"
+                  ? SgAI
+                  : k === "commerce" || k === "brand" || k === "custom-ecommerce"
+                    ? SgCommerce
+                    : SgDesign
+    return <C {...p} />
+}
 
 export default function RwServiceGrid(props: Partial<ServiceGridProps> = {}) {
     const {

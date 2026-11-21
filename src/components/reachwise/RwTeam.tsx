@@ -1320,26 +1320,6 @@ const SEED: Record<string, CmsRow[]> = {
             img: "/images/arjun.webp",
             n1: "2",
         },
-        {
-            slug: "gaurav",
-            f1: "Gaurav",
-            f2: "Full-Stack Engineer",
-            f3: "Architects modern React, Next.js, and TypeScript frontend applications with 60fps fluidity.",
-            f4: "Full-Stack",
-            f5: "https://linkedin.com",
-            img: "/images/gaurav.webp",
-            n1: "3",
-        },
-        {
-            slug: "yudhisthir",
-            f1: "Yudhisthir",
-            f2: "Software Engineer & Cloud Architect",
-            f3: "Builds autonomous AI pipelines, Docker orchestration, and automated CI/CD infrastructures.",
-            f4: "Cloud & AI",
-            f5: "https://linkedin.com",
-            img: "/images/yudhisthir.webp",
-            n1: "4",
-        },
     ],
 }
 const SW_BUILD = "RwTeam@cms1"

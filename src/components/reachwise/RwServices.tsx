@@ -1320,7 +1320,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Smooth iOS & Android apps built with Flutter and React Native. Pixel-perfect, offline-ready, and fast.",
             f4: "From $3,500",
             f5: "iOS & Android Cross-Platform;Offline Data Sync;Push Notifications & Biometrics;App Store & Play Store Launch;Continuous Crash Monitoring",
-            f6: "social",
+            f6: "mobile",
             f7: "60fps Smooth UI",
             n1: "2",
         },
@@ -1331,7 +1331,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Bespoke SaaS platforms, internal ERP dashboards, multi-tenant databases, and enterprise API ecosystems.",
             f4: "From $4,800",
             f5: "Multi-Tenant Architecture;Role-Based Access Control;Stripe / Razorpay Billing;Automated Background Workers;Enterprise Data Security",
-            f6: "content",
+            f6: "saas",
             f7: "99.9% Target Uptime",
             n1: "3",
         },
@@ -1342,7 +1342,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Self-operating AI agents, RAG document pipelines, custom LLM tool-calling, and automated workflow orchestrations.",
             f4: "From $2,800",
             f5: "Autonomous Agent Tool Calling;RAG Vector Search;Workflow Automation (Zapier/n8n);Private Model Hosting;Real-time Data Streaming",
-            f6: "ads",
+            f6: "ai",
             f7: "Sub-second LLM Latency",
             n1: "4",
         },
@@ -1353,7 +1353,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Comprehensive design systems in Figma translated directly into modular React component libraries.",
             f4: "From $2,000",
             f5: "Design System Tokens;Figma Interactive Prototypes;Responsive Breakpoint Systems;Micro-Interactions & Animations;Production React Tokens",
-            f6: "web",
+            f6: "design",
             f7: "Figma to Code 1:1",
             n1: "5",
         },
@@ -1364,7 +1364,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Headless commerce, Shopify Plus, and custom store architectures engineered for high-volume transactions.",
             f4: "From $3,200",
             f5: "Headless Storefronts;Multi-Currency & Tax;Inventory & ERP Sync;1-Click Checkout Flow;Cart Abandonment Recovery",
-            f6: "brand",
+            f6: "commerce",
             f7: "< 1s Checkout Load",
             n1: "6",
         },
@@ -1663,26 +1663,10 @@ type SvCfg = {
     brandName: string
 }
 type SvP = { run: boolean; cfg: SvCfg; M: CSSProperties; D: CSSProperties }
-const SvUI = ({ kind, ...p }: SvP & { kind: string }) => {
-    const k = String(kind || "").toLowerCase()
-    const C =
-        k === "seo" || k === "web-dev" || k === "web-development"
-            ? SvWebDev
-            : k === "social"
-              ? SvSoc
-              : k === "ads"
-                ? SvAds
-                : k === "content"
-                  ? SvCnt
-                  : k === "web"
-                    ? SvWeb
-                    : SvBrd
-    return <C {...p} />
-}
-// Web Development: Modern Next.js IDE + Live Build & 100/100 Lighthouse Performance Gauge
+// 01. Web Development: Next.js IDE + Live Build & 100/100 Lighthouse Gauge
 const SvWebDev = ({ run, M, D }: SvP) => {
-    const step = useSvStep(3, 700, run, 350)
-    const score = useSvCount(88, 100, 1600, run, 400)
+    const step = useSvStep(3, 700, run, 350);
+    const score = useSvCount(88, 100, 1600, run, 400);
     return (
         <div className="rwsv-ui rwsv-webdev">
             <div className="rwsv-dev-bar" style={M}>
@@ -1716,20 +1700,36 @@ const SvWebDev = ({ run, M, D }: SvP) => {
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">2</span>
-                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>export default async function</span> <span style={{ color: "#2563EB" }}>WebEngine</span>() &#123;</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>import</span> &#123; Cache, Vitals &#125; <span style={{ color: "var(--rw-brass)" }}>from</span> <span style={{ color: "#0284C7" }}>'@optenary/perf'</span></span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">3</span>
-                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>const</span> app = <span style={{ color: "var(--rw-brass)" }}>await</span> createEngine(&#123; <span style={{ color: "#0284C7" }}>ttfb</span>: <span style={{ color: "#D97706" }}>'24ms'</span> &#125;)</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>export default async function</span> <span style={{ color: "#2563EB" }}>WebEngine</span>() &#123;</span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">4</span>
-                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>return</span> &lt;<span style={{ color: "#059669" }}>NextApp</span> <span style={{ color: "#0284C7" }}>cache</span>=<span style={{ color: "#D97706" }}>"edge"</span> <span style={{ color: "#0284C7" }}>vitals</span>=&#123;<span style={{ color: "#DB2777" }}>100</span>&#125; /&gt;</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>const</span> app = <span style={{ color: "var(--rw-brass)" }}>await</span> createEngine(&#123; <span style={{ color: "#0284C7" }}>ttfb</span>: <span style={{ color: "#D97706" }}>'24ms'</span> &#125;)</span>
                     </div>
                     <div className="rwsv-dev-ln">
                         <span className="rwsv-dev-num">5</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>return</span> &lt;<span style={{ color: "#059669" }}>NextApp</span> <span style={{ color: "#0284C7" }}>cache</span>=<span style={{ color: "#D97706" }}>"edge"</span> <span style={{ color: "#0284C7" }}>vitals</span>=&#123;<span style={{ color: "#DB2777" }}>100</span>&#125;&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">6</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;&nbsp;&nbsp;&lt;<span style={{ color: "#059669" }}>Shield</span> <span style={{ color: "#0284C7" }}>ssl</span>=<span style={{ color: "#D97706" }}>"tls-1.3"</span> /&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">7</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;&lt;/<span style={{ color: "#059669" }}>NextApp</span>&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">8</span>
                         <span className="rwsv-dev-c">&#125;<i className="rwsv-dev-cursor" /></span>
                     </div>
+                </div>
+                <div className="rwsv-dev-term">
+                    <span style={{ color: "#16A34A" }}>✓</span>
+                    <span>Ready in 120ms · 100% TypeScript · 0 errors</span>
                 </div>
             </div>
             <div className="rwsv-dev-perf">
@@ -1764,7 +1764,7 @@ const SvWebDev = ({ run, M, D }: SvP) => {
                     </div>
                     <div className="rwsv-dev-stat">
                         <span style={M}>BUILD</span>
-                        <b style={D} className="rwsv-dev-pass">READY</b>
+                        <b style={D} style={{ color: "#16A34A" }}>READY</b>
                     </div>
                 </div>
             </div>
@@ -1775,213 +1775,146 @@ const SvWebDev = ({ run, M, D }: SvP) => {
         </div>
     )
 }
-// Social: a post collecting likes, heart pops, hearts float up
-const SvSoc = ({ run, cfg, M, D }: SvP) => {
-    const likes = useSvCount(1184, 1312, 2200, run, 500)
-    const pop = useSvStep(1, 400, run, 700)
+
+// 02. Mobile Applications: Cross-Platform Smartphone UI + 60fps Telemetry
+const SvMobile = ({ run, M, D }: SvP) => {
+    const push = useSvStep(1, 400, run, 600);
     return (
-        <div className="rwsv-ui rwsv-soc">
-            <div className="rwsv-phone">
-                <div className="rwsv-ph-h">
-                    <i className="rwsv-av" />
-                    <span style={M}>{cfg.socialHandle}</span>
-                    <b style={M}>···</b>
-                </div>
-                <div className="rwsv-ph">
-                    <img
-                        {...RS(cfg.photo, "360px")}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        draggable={false}
-                    />
-                    <span
-                        className={`rwsv-float${pop ? " is-on" : ""}`}
-                        aria-hidden
-                    >
-                        <i />
-                        <i />
-                        <i />
-                    </span>
-                    <span
-                        className={`rwsv-toast rwsv-toast-s${pop ? " is-on" : ""}`}
-                        style={M}
-                    >
-                        <i />
-                        +128 likes in 1 h
-                    </span>
-                </div>
-                <div className="rwsv-pb">
-                    <span className={`rwsv-hrt${pop ? " is-pop" : ""}`}>
-                        <SvHeart />
-                        <i />
-                    </span>
-                    <svg className="rwsv-ic" viewBox="0 0 24 24" aria-hidden>
-                        <path
-                            d="M4 12a8 8 0 1 1 3.3 6.5L4 20l1.2-3.6A8 8 0 0 1 4 12z"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    <svg className="rwsv-ic" viewBox="0 0 24 24" aria-hidden>
-                        <path
-                            d="M21 4L10 14M21 4l-7 17-4-7-7-4z"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                </div>
-                <p className="rwsv-likes" style={D}>
-                    {Math.round(likes).toLocaleString("en-US")} likes
-                </p>
-                <p className="rwsv-cap">
-                    <b>{cfg.socialHandle.replace(/^@/, "")}</b> Monday mornings,
-                    sorted ☕
-                </p>
-            </div>
-        </div>
-    )
-}
-// Ads: an ad card + two gauges ticking + revenue bars growing
-const SvGauge = ({
-    v,
-    max,
-    label,
-    text,
-    M,
-    D,
-}: {
-    v: number
-    max: number
-    label: string
-    text: string
-    M: CSSProperties
-    D: CSSProperties
-}) => {
-    const f = clamp01(v / max)
-    return (
-        <span className="rwsv-g">
-            <svg viewBox="0 0 120 70" aria-hidden>
-                <path
-                    d="M10 62a50 50 0 0 1 100 0"
-                    className="rwsv-g0"
-                    pathLength={1}
-                />
-                <path
-                    d="M10 62a50 50 0 0 1 100 0"
-                    className="rwsv-g1"
-                    pathLength={1}
-                    style={{ strokeDashoffset: 1 - f }}
-                />
-            </svg>
-            <b style={D}>{text}</b>
-            <small style={M}>{label}</small>
-        </span>
-    )
-}
-const SvAds = ({ run, cfg, M, D }: SvP) => {
-    const ctr = useSvCount(0.9, 4.8, 1900, run)
-    const roas = useSvCount(1.4, 6.2, 2100, run, 450)
-    const bars = [0.28, 0.36, 0.34, 0.5, 0.58, 0.74, 0.96]
-    return (
-        <div className="rwsv-ui rwsv-ads">
-            <div className="rwsv-ad">
-                <span className="rwsv-spon" style={M}>
-                    <i className="rwsv-av" />
-                    Sponsored
-                </span>
-                <b style={D}>{cfg.adsHeadline}</b>
-                <span className="rwsv-adimg" aria-hidden>
+        <div className="rwsv-ui rwsv-mobile">
+            <div className="rwsv-mob-phone">
+                <div className="rwsv-mob-island">
+                    <span style={M}>9:41</span>
                     <i />
-                </span>
-                <span className="rwsv-adbtn" style={M}>
-                    Book now
-                </span>
+                </div>
+                <div className="rwsv-mob-screen">
+                    <div className="rwsv-mob-header" style={M}>
+                        <span>Optenary Mobile</span>
+                        <span>iOS & Android</span>
+                    </div>
+                    <div className="rwsv-mob-hero">
+                        <span style={M}>TELEMETRY STREAM</span>
+                        <strong style={D}>60 FPS Native UI</strong>
+                    </div>
+                    <div className="rwsv-mob-grid">
+                        <div className="rwsv-mob-card">
+                            <span style={M}>OFFLINE SYNC</span>
+                            <b style={D}>Ready</b>
+                        </div>
+                        <div className="rwsv-mob-card">
+                            <span style={M}>CRASH RATE</span>
+                            <b style={D}>&lt; 0.01%</b>
+                        </div>
+                    </div>
+                    <div className="rwsv-mob-push" style={M}>
+                        <span style={{ color: "var(--rw-brass)" }}>●</span>
+                        <span>Push: Real-time data synced</span>
+                    </div>
+                </div>
             </div>
-            <div className="rwsv-gs">
-                <SvGauge
-                    v={ctr}
-                    max={6}
-                    label="CTR"
-                    text={`${ctr.toFixed(1)}%`}
-                    M={M}
-                    D={D}
-                />
-                <SvGauge
-                    v={roas}
-                    max={8}
-                    label="ROAS"
-                    text={`${roas.toFixed(1)}×`}
-                    M={M}
-                    D={D}
-                />
-            </div>
-            <span className={`rwsv-bars${run ? " is-run" : ""}`} aria-hidden>
-                {bars.map((h, i) => (
-                    <i
-                        key={i}
-                        style={{
-                            height: `${h * 100}%`,
-                            animationDelay: `${0.3 + i * 0.09}s`,
-                        }}
-                    />
-                ))}
-            </span>
+            <p className={`rwsv-toast${push ? " is-on" : ""}`} style={M}>
+                <i />
+                📱 60fps Native UI · Cross-Platform
+            </p>
         </div>
     )
 }
-// Content: an article typing itself, the read counter climbing
-const SvCnt = ({ run, cfg, M, D }: SvP) => {
-    const full = cfg.articleTitle
-    const n = useSvStep(full.length, 40, run, 350)
-    const reads = useSvCount(0, 2410, 2600, run, 600)
+
+// 03. Custom Software & SaaS: Multi-Tenant Architecture & Event Stream
+const SvSaaS = ({ run, M, D }: SvP) => {
+    const pop = useSvStep(2, 500, run, 450);
     return (
-        <div className="rwsv-ui rwsv-cnt">
-            <div className="rwsv-art">
-                <span className="rwsv-kick" style={M}>
-                    Guide · 6 min read
-                </span>
-                <b className="rwsv-type" style={D}>
-                    {full.slice(0, n)}
-                    <i className={n < full.length ? "is-typing" : ""} />
-                </b>
-                <span className="rwsv-by" style={M}>
-                    <i className="rwsv-av" />
-                    Optenary editorial
-                </span>
-                <span className="rwsv-lines" aria-hidden>
-                    {Array.from({ length: 14 }, (_, i) => (
-                        <i key={i} />
-                    ))}
-                </span>
-                <span className="rwsv-prog" aria-hidden>
-                    <i
-                        style={{
-                            transform: `scaleX(${(reads / 2410).toFixed(3)})`,
-                        }}
-                    />
-                </span>
-                <span className="rwsv-reads" style={M}>
-                    <em />
-                    {Math.round(reads).toLocaleString("en-US")} reads this week
-                </span>
+        <div className="rwsv-ui rwsv-saas">
+            <div className="rwsv-saas-bar" style={M}>
+                <span>SaaS Admin Console · Multi-Tenant</span>
+                <span style={{ color: "#16A34A", fontWeight: 700 }}>● 99.98% Uptime</span>
             </div>
+            <div className="rwsv-saas-body">
+                <div className="rwsv-saas-metrics">
+                    <div className="rwsv-saas-box">
+                        <span style={M}>TENANTS</span>
+                        <b style={D}>428 Active</b>
+                    </div>
+                    <div className="rwsv-saas-box">
+                        <span style={M}>THROUGHPUT</span>
+                        <b style={D}>14.2k req/s</b>
+                    </div>
+                    <div className="rwsv-saas-box">
+                        <span style={M}>SECURITY</span>
+                        <b style={D}>RBAC Valid</b>
+                    </div>
+                </div>
+                <div className="rwsv-saas-feed">
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#16A34A" }}>✓</b>
+                        <span>[09:42:15] Tenant_104 auth success · DB isolated</span>
+                    </div>
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#0284C7" }}>●</b>
+                        <span>[09:42:16] Stripe subscription webhook processed</span>
+                    </div>
+                    <div className="rwsv-saas-row">
+                        <b style={{ color: "#16A34A" }}>✓</b>
+                        <span>[09:42:17] Background queue: 0 pending jobs (18ms)</span>
+                    </div>
+                </div>
+            </div>
+            <p className={`rwsv-toast${pop >= 1 ? " is-on" : ""}`} style={M}>
+                <i />
+                🛡️ 99.9% Target Uptime · Multi-Tenant
+            </p>
         </div>
     )
 }
-// Web: a browser whose landing page scrolls, a cursor clicks the CTA
-const SvWeb = ({ cfg, M }: SvP) => (
+
+// 04. AI Agents & Automation: Autonomous Pipeline & Tool Calling
+const SvAI = ({ run, M, D }: SvP) => {
+    const step = useSvStep(3, 600, run, 400);
+    return (
+        <div className="rwsv-ui rwsv-ai">
+            <div className="rwsv-saas-bar" style={M}>
+                <span>AI Agent Pipeline · Tool Calling</span>
+                <span style={{ color: "var(--rw-brass)", fontWeight: 700 }}>● Agent Active</span>
+            </div>
+            <div className="rwsv-ai-pipe">
+                <div className={`rwsv-ai-step ${step >= 0 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Prompt Received</strong>
+                        <span style={M}>"Synthesize quarterly analytics & notify ERP"</span>
+                    </div>
+                </div>
+                <div className={`rwsv-ai-step ${step >= 1 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Tool: db_query() Executed</strong>
+                        <span style={M}>Retrieved 24 rows from PostgreSQL in 14ms</span>
+                    </div>
+                </div>
+                <div className={`rwsv-ai-step ${step >= 2 ? "is-active" : ""}`}>
+                    <i className="rwsv-ai-dot" />
+                    <div className="rwsv-ai-content">
+                        <strong style={D}>Vector RAG & Streaming</strong>
+                        <span style={M}>Embedded 8 docs · 48 tokens/sec streaming</span>
+                    </div>
+                </div>
+            </div>
+            <p className={`rwsv-toast${step >= 2 ? " is-on" : ""}`} style={M}>
+                <i />
+                🤖 Autonomous Tool Calling · Sub-second
+            </p>
+        </div>
+    )
+}
+
+// 05. UI/UX & Design Systems: Interactive Web & Component Prototype
+const SvDesign = ({ cfg, M }: SvP) => (
     <div className="rwsv-ui rwsv-web">
         <div className="rwsv-br">
             <div className="rwsv-chrome">
                 <i />
                 <i />
                 <i />
-                <span style={M}>{cfg.webUrl}</span>
+                <span style={M}>Figma to Code 1:1 · Design Tokens</span>
             </div>
             <div className="rwsv-vp">
                 <div className="rwsv-page">
@@ -2003,69 +1936,74 @@ const SvWeb = ({ cfg, M }: SvP) => (
                         <i />
                         <i />
                     </span>
-                    <span className="rwsv-pg-h">
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsv-pg-q" />
-                    <span className="rwsv-pg-row">
-                        <i />
-                        <i />
-                    </span>
-                    <span className="rwsv-pg-b" />
                 </div>
                 <i className="rwsv-cur" aria-hidden />
             </div>
             <span className="rwsv-conv" style={M}>
-                Conversion 4.1% ▲
+                Figma to React 1:1 ▲
             </span>
         </div>
     </div>
 )
-// Brand: the logo, four swatches flipping to a second palette, the type
-const SvBrd = ({ cfg, M, D }: SvP) => (
-    <div className="rwsv-ui rwsv-brd">
-        <div className="rwsv-logo">
-            <SvMark s={44} />
-            <b style={D}>{cfg.brandName}</b>
+
+// 06. Digital Commerce: Real 1-Click Checkout & High-Volume Inventory Sync
+const SvCommerce = ({ run, M, D }: SvP) => {
+    const step = useSvStep(3, 750, run, 450);
+    return (
+        <div className="rwsv-ui rwsv-commerce">
+            <div className="rwsv-com-bar" style={M}>
+                <span>store.optenary.in · Headless Commerce</span>
+                <span style={{ color: "#16A34A", fontWeight: 700 }}>● 1-Click Pay</span>
+            </div>
+            <div className="rwsv-com-card">
+                <div className="rwsv-com-prod">
+                    <div className="rwsv-com-thumb">⚡</div>
+                    <div className="rwsv-com-meta">
+                        <strong style={D}>Cloud Storefront Tier 1</strong>
+                        <span style={M}>Headless Architecture · Shopify Plus</span>
+                    </div>
+                    <div className="rwsv-com-price" style={D}>$3,200</div>
+                </div>
+                <div className="rwsv-com-row" style={M}>
+                    <span>SUBTOTAL</span>
+                    <b>$3,200.00</b>
+                </div>
+                <div className="rwsv-com-row" style={M}>
+                    <span>TAX &amp; MULTI-CURRENCY</span>
+                    <b>Auto Calculated ($0.00)</b>
+                </div>
+                <div className={`rwsv-com-btn ${step >= 2 ? "is-success" : ""}`} style={M}>
+                    {step === 0 && " Pay / 1-Click Express Checkout"}
+                    {step === 1 && "Processing Tokenized Payment..."}
+                    {step >= 2 && "✓ Payment Authorized · Order #8492"}
+                </div>
+            </div>
+            <p className={`rwsv-toast${step >= 2 ? " is-on" : ""}`} style={M}>
+                <i />
+                ⚡ &lt; 1s Checkout Load · High-Volume Ready
+            </p>
         </div>
-        <div className="rwsv-sw">
-            {["#0D0E10", "#D4FF3A", "#FF3E88", "#FFFFFF"].map((hx, i) => (
-                <span
-                    key={i}
-                    className={`rwsv-s rwsv-s${i}`}
-                    style={{ animationDelay: `${i * 0.16}s` }}
-                >
-                    <i>
-                        <small style={M}>{hx}</small>
-                    </i>
-                    <i>
-                        <small style={M}>
-                            {["#1F3A2E", "#FF8A3D", "#F2E6D3", "#2F5BFF"][i]}
-                        </small>
-                    </i>
-                </span>
-            ))}
-        </div>
-        <div className="rwsv-spec">
-            <span style={D}>Aa</span>
-            <span style={M}>
-                Display · Sans · Mono
-                <br />
-                Guidelines v1.0
-            </span>
-        </div>
-        <div className="rwsv-apps" aria-hidden>
-            <i className="rwsv-app1">
-                <SvMark s={22} />
-            </i>
-            <i className="rwsv-app2" style={D}>
-                {cfg.brandName}
-            </i>
-            <i className="rwsv-app3" />
-        </div>
-    </div>
-)
+    )
+}
+
+// Master UI Dispatcher
+const SvUI = ({ kind, ...p }: SvP & { kind: string }) => {
+    const k = String(kind || "").toLowerCase()
+    const C =
+        k === "web-dev" || k === "seo" || k === "web-development"
+            ? SvWebDev
+            : k === "mobile" || k === "social" || k === "mobile-development"
+              ? SvMobile
+              : k === "saas" || k === "content" || k === "custom-software"
+                ? SvSaaS
+                : k === "ai" || k === "ads" || k === "ai-agents-automation"
+                  ? SvAI
+                  : k === "commerce" || k === "brand" || k === "custom-ecommerce"
+                    ? SvCommerce
+                    : SvDesign
+    return <C {...p} />
+}
+
 export default function RwServices(props: Partial<ServicesProps> = {}) {
     const {
         eyebrow = "(02) Capabilities",
