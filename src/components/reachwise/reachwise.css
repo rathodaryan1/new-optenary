@@ -2169,3 +2169,239 @@ html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
   color: var(--rw-mut);
 }
 .rwsv-com-row b { color: var(--rw-ink); }
+
+/* ========================================================
+   UNIVERSAL MOBILE RESPONSIVENESS SUITE (@media max-width: 809px)
+   Guarantees zero horizontal scroll, touch ergonomics,
+   pure CSS media-query fallbacks, and fluid typography.
+   ======================================================== */
+@media (max-width: 809px) {
+  /* Prevent horizontal spill across entire viewport */
+  html, body, #root, .optenary-site, main {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    position: relative;
+  }
+
+  /* Safe gutters for container wraps */
+  :root {
+    --g: 20px !important;
+  }
+  .rw-wrap {
+    --pad: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    max-width: 100% !important;
+  }
+
+  /* Prevent text and headlines from clipping screen edges */
+  .rw, .rw * {
+    overflow-wrap: break-word !important;
+  }
+  .rw-hd, .rwh-h1, .rwwk-title, .rwwg-title, .rwpr-name {
+    text-wrap: balance !important;
+  }
+
+  /* Pricing Section: 1-column responsive grid */
+  .rwpr .rwpr-row {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    perspective: none !important;
+  }
+  .rwpr .rwpr-card {
+    transform: none !important;
+    max-width: 100% !important;
+  }
+  .rwpr .rwpr-top {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 24px !important;
+  }
+  .rwpr .rwpr-tg {
+    width: 100% !important;
+  }
+  .rwpr .rwpr-tb {
+    padding: 0 10px !important;
+    flex: 1 !important;
+  }
+  .rwpr .rwpr-foot {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .rwpr .rwpr-note {
+    line-height: 1.5 !important;
+    align-items: flex-start !important;
+  }
+
+  /* Work Grid: 1-column stacked cards */
+  .rwwg .rwwg-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .rwwg .rwwg-colm {
+    gap: 40px !important;
+  }
+  .rwwg .rwwg-colm + .rwwg-colm {
+    padding-top: 40px !important;
+  }
+  .rwwg .rwwg-card .rwwg-cov {
+    border-radius: 20px !important;
+  }
+
+  /* Services Grid: 1-column stacked service cards */
+  .rwsg .rwsg-grid {
+    grid-template-columns: 1fr !important;
+    --off: 0px !important;
+    gap: 20px !important;
+    padding-bottom: 0 !important;
+  }
+  .rwsg .rwsg-card {
+    border-radius: 24px !important;
+  }
+  .rwsg .rwsg-card:hover {
+    transform: none !important;
+  }
+
+  /* Numbers / Standards: 1-column responsive tiles */
+  .rwnm .rwnm-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .rwnm .rwnm-tile {
+    border-left: 0 !important;
+    padding: 22px 18px !important;
+  }
+  .rwnm .rwnm-tile + .rwnm-tile {
+    border-top: 1px solid color-mix(in srgb, var(--rw-cloud) 12%, transparent) !important;
+  }
+
+  /* Funnel Section */
+  .rwfn .rwfn-rows {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Feed Section */
+  .rwfd .rwfd-top {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .rwfd .rwfd-wall {
+    height: auto !important;
+    max-height: 700px !important;
+  }
+
+  /* Team Section */
+  .rwtm .rwtm-top {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Reviews Section */
+  .rwrv .rwrv-panel {
+    grid-template-columns: 1fr !important;
+    padding: 32px 16px 16px !important;
+    gap: 32px !important;
+  }
+  .rwrv .rwrv-big {
+    font-size: clamp(64px, 18vw, 96px) !important;
+  }
+
+  /* FAQ Accordion Section */
+  .rwfq .rwfq-in {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .rwfq .rwfq-stick {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Footer Section */
+  .rwft .rwft-top {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .rwft .rwft-cols {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 16px !important;
+  }
+  .rwft .rwft-col:last-child {
+    grid-column: 1 / -1 !important;
+  }
+  .rwft .rwft-legal {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Hero Section buttons & CTA full-width stack on mobile */
+  .rwh-btns {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  .rwh-btns .rw-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Contact page form */
+  .rwco .rwco-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .rwco .rwco-row {
+    grid-template-columns: 1fr !important;
+  }
+  .rwco .rwco-foot .rw-btn {
+    width: 100% !important;
+  }
+
+  /* Touch scrolling */
+  .rwwk-tabs, .rwwg-chips, .rwtm-row, .rwbl-chips, .rw-chips {
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Prevent auto-zoom on mobile inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra fluid scaling for smaller mobile phones (<= 480px) */
+  .rwh-h1 {
+    font-size: clamp(34px, 10.5vw, 44px) !important;
+    line-height: 1.05 !important;
+  }
+  .rw-hd {
+    font-size: clamp(30px, 9.5vw, 40px) !important;
+    line-height: 1.08 !important;
+  }
+  .rwwk-title, .rwwg-title {
+    font-size: clamp(22px, 7vw, 28px) !important;
+  }
+  .rwpr-price {
+    font-size: clamp(44px, 12vw, 64px) !important;
+  }
+  .rwwk-view {
+    border-radius: 18px !important;
+  }
+  .rwco-form {
+    padding: 20px 14px !important;
+  }
+  .rwpr-cin {
+    padding: 22px 16px !important;
+  }
+  .rwft-word {
+    font-size: clamp(48px, 18vw, 80px) !important;
+  }
+}
+

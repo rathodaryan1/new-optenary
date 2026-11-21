@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface RwPricingProps {
   id?: string;
@@ -6,6 +6,25 @@ interface RwPricingProps {
 
 export default function RwPricing({ id = 'pricing' }: RwPricingProps) {
   const [billing, setBilling] = useState<'monthly' | 'quarterly'>('monthly');
+  const [isPhone, setIsPhone] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < 810 : false
+  );
+  const [isTab, setIsTab] = useState(
+    typeof window !== 'undefined'
+      ? window.innerWidth >= 810 && window.innerWidth < 1100
+      : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      setIsPhone(w < 810);
+      setIsTab(w >= 810 && w < 1100);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const plans = [
     {
@@ -35,7 +54,7 @@ export default function RwPricing({ id = 'pricing' }: RwPricingProps) {
   return (
     <section
       id={id}
-      className="rw rw-sec rw-dark rwpr is-set"
+      className={`rw rw-sec rw-dark rwpr is-set ${isPhone ? 'is-ph' : isTab ? 'is-tab' : ''}`}
       style={{
         fontFamily: "var(--rw-font-b, 'Funnel Sans'), Inter, system-ui, sans-serif",
         fontWeight: 400,

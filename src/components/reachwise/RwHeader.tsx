@@ -10,8 +10,12 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
   const [open, setOpen] = useState(false)
   const [glass, setGlass] = useState(false)
   const [time, setTime] = useState("")
-  const [isPhone, setIsPhone] = useState(false)
-  const [isCompact, setIsCompact] = useState(false)
+  const [isPhone, setIsPhone] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 810 : false
+  )
+  const [isCompact, setIsCompact] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 1024 : false
+  )
   const location = useLocation()
 
   useEffect(() => {

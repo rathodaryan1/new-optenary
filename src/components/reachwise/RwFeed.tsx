@@ -173,12 +173,24 @@ function useLive() {
 // Width/height of the root + viewport height. SSR starts from the breakpoint hint (Framer renders the Tablet/Phone copies with the same code and no width).
 function useSize(root: React.RefObject<HTMLElement | null>, hint?: string) {
     const ov = String(hint || "").toLowerCase()
-    const [w, setW] = useState(
-            ov === "phone" ? 390 : ov === "tablet" ? 810 : 1440
-        ),
-        [vh, setVh] = useState(
-            ov === "phone" ? 844 : ov === "tablet" ? 1080 : 900
-        )
+    const initW =
+        typeof window !== "undefined" && window.innerWidth
+            ? window.innerWidth
+            : ov === "phone"
+              ? 390
+              : ov === "tablet"
+                ? 810
+                : 1440
+    const initVh =
+        typeof window !== "undefined" && window.innerHeight
+            ? window.innerHeight
+            : ov === "phone"
+              ? 844
+              : ov === "tablet"
+                ? 1080
+                : 900
+    const [w, setW] = useState(initW),
+        [vh, setVh] = useState(initVh)
     useLayoutEffect(() => {
         const el = root.current
         if (!el) return

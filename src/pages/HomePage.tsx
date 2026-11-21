@@ -1,4 +1,5 @@
 import SEO from '../components/SEO';
+import RwHeader from '../components/reachwise/RwHeader';
 import RwHero from '../components/reachwise/RwHero';
 import RwClients from '../components/reachwise/RwClients';
 import RwIntro from '../components/reachwise/RwIntro';
@@ -89,9 +90,13 @@ export default function HomePage() {
       {/* Instant Reachwise Hero Experience */}
       {/* <IntroLoader /> */}
 
+      {/* Reachwise Unified Header with Sticky Navbar & Mobile Drawer */}
+      <RwHeader active="home" ground="dark" />
+
       <main>
         {/* Exact Reachwise Hero Experience Clone as per image */}
         <RwHero
+          showNav={false}
           eyebrow="WHERE TECHNOLOGY EVOLVES"
           heading="We turn ambitious ideas into|*powerful digital experiences.*"
           subCopy="Optenary designs and engineers websites, mobile applications, custom software, SaaS platforms and intelligent AI solutions that help businesses evolve."
