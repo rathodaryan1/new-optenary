@@ -2308,7 +2308,7 @@ addPropertyControls(RwPageHero, {
         description: "icon|text; … (3)",
         displayTextArea: true,
         defaultValue:
-            "❤|1.2k likes on one reel;★|New 5-star review;#1|“dentist near me”",
+            "⚡|Sub-second TTFB;★|99+ Lighthouse score;✓|CI/CD deployment passing",
         hidden: (p: any) => p.object !== "pulse",
     },
     centerLabel: {

@@ -1312,7 +1312,7 @@ const SEED: Record<string, CmsRow[]> = {
             f3: "Modern React & Next.js architectures with clean TypeScript, sub-second TTFB, and fluid UX.",
             f4: "From $2,400",
             f5: "Full-Stack React & Next.js;TypeScript Architecture;API & Database Integration;Lighthouse 95+ Performance;CI/CD Deployment",
-            f6: "seo",
+            f6: "web-dev",
             f7: "99+ Lighthouse Score",
             n1: "1",
         },
@@ -1679,8 +1679,8 @@ type SgP = {
 const SgUI = ({ kind, ...p }: SgP & { kind: string }) => {
     const k = String(kind || "").toLowerCase()
     const C =
-        k === "seo"
-            ? SgSeo
+        k === "seo" || k === "web-dev" || k === "web-development"
+            ? SgWebDev
             : k === "social"
               ? SgSoc
               : k === "ads"
@@ -1692,77 +1692,98 @@ const SgUI = ({ kind, ...p }: SgP & { kind: string }) => {
                     : SgBrd
     return <C {...p} />
 }
-// SEO: our result climbs from #5 to #1
-const SgSeo = ({ run, cfg, M, D, spd = 1 }: SgP) => {
-    const st = useSgStep(4, 640 / spd, run, 420)
-    const ours = 4 - st
-    const others = [
-        "citydentalcare.com",
-        "yelp.com › dentists",
-        "smilecentre.co",
-        "healthgrades.com",
-    ]
+// Web Development: Modern Next.js IDE + Live Build & 100/100 Lighthouse Performance Gauge
+const SgWebDev = ({ run, M, D, spd = 1 }: SgP) => {
+    const step = useSgStep(3, 700 / spd, run, 350)
+    const score = useSgCount(88, 100, 1600 / spd, run, 400)
     return (
-        <div className="rwsg-ui rwsg-seo">
-            <div className="rwsg-q" style={M}>
-                <svg viewBox="0 0 24 24" aria-hidden>
-                    <circle
-                        cx="10.5"
-                        cy="10.5"
-                        r="6"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                    />
-                    <path
-                        d="M15 15l5 5"
-                        stroke="currentColor"
-                        strokeWidth="2.4"
-                        strokeLinecap="round"
-                    />
-                </svg>
-                <span>{cfg.seoQuery}</span>
-                <i />
+        <div className="rwsg-ui rwsv-webdev">
+            <div className="rwsv-dev-bar" style={M}>
+                <div className="rwsv-dev-dots" aria-hidden>
+                    <span style={{ background: "#FF5F56" }} />
+                    <span style={{ background: "#FFBD2E" }} />
+                    <span style={{ background: "#27C93F" }} />
+                </div>
+                <span className="rwsv-dev-pill">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.65 }}>
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    optenary.in/app · Next.js 15
+                </span>
+                <span className="rwsv-dev-badge">● Production</span>
             </div>
-            <p className="rwsg-meta" style={M}>
-                About 2,140,000 results · 0.42 s
-            </p>
-            <div className="rwsg-res">
-                {[0, 1, 2, 3, 4].map((i) => {
-                    const me = i === 4
-                    const slot = me ? ours : i < ours ? i : i + 1
-                    return (
-                        <div
-                            key={i}
-                            className={`rwsg-r${me ? " is-me" : ""}${me && ours === 0 ? " is-top" : ""}`}
-                            style={{ top: `${Math.min(4, slot) * 20}%` }}
-                        >
-                            <i className="rwsg-fav" />
-                            <span className="rwsg-rt">
-                                <b style={M}>
-                                    {me ? "yoursite.com" : others[i]}
-                                </b>
-                                {me ? (
-                                    <strong style={D}>
-                                        Your brand · {cfg.seoQuery}
-                                    </strong>
-                                ) : (
-                                    <em />
-                                )}
-                                <em className="rwsg-rt2" />
-                            </span>
-                            {me && (
-                                <span className="rwsg-rank" style={M}>
-                                    #{ours + 1}
-                                </span>
-                            )}
-                        </div>
-                    )
-                })}
+            <div className="rwsv-dev-code">
+                <div className="rwsv-dev-tab" style={M}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    <span>Page.tsx</span>
+                    <span className="rwsv-dev-ts">TSX</span>
+                </div>
+                <div className="rwsv-dev-lines">
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">1</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>import</span> &#123; createClient &#125; <span style={{ color: "var(--rw-brass)" }}>from</span> <span style={{ color: "#0284C7" }}>'@optenary/core'</span></span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">2</span>
+                        <span className="rwsv-dev-c"><span style={{ color: "var(--rw-brass)" }}>export default async function</span> <span style={{ color: "#2563EB" }}>WebEngine</span>() &#123;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">3</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>const</span> app = <span style={{ color: "var(--rw-brass)" }}>await</span> createClient(&#123; <span style={{ color: "#0284C7" }}>speed</span>: <span style={{ color: "#D97706" }}>'sub-second'</span> &#125;)</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">4</span>
+                        <span className="rwsv-dev-c">&nbsp;&nbsp;<span style={{ color: "var(--rw-brass)" }}>return</span> &lt;<span style={{ color: "#059669" }}>NextApp</span> <span style={{ color: "#0284C7" }}>ttfb</span>=<span style={{ color: "#D97706" }}>"24ms"</span> <span style={{ color: "#0284C7" }}>vitals</span>=&#123;<span style={{ color: "#DB2777" }}>100</span>&#125; /&gt;</span>
+                    </div>
+                    <div className="rwsv-dev-ln">
+                        <span className="rwsv-dev-num">5</span>
+                        <span className="rwsv-dev-c">&#125;<i className="rwsv-dev-cursor" /></span>
+                    </div>
+                </div>
             </div>
-            <p className={`rwsg-toast${ours === 0 ? " is-on" : ""}`} style={M}>
+            <div className="rwsv-dev-perf">
+                <div className="rwsv-dev-gauge">
+                    <div className="rwsv-dev-circle">
+                        <svg viewBox="0 0 36 36" className="rwsv-dev-circ-svg">
+                            <path
+                                className="rwsv-dev-circ-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path
+                                className="rwsv-dev-circ-val"
+                                strokeDasharray={`${Math.round(score)}, 100`}
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                        </svg>
+                        <span className="rwsv-dev-score" style={D}>{Math.round(score)}</span>
+                    </div>
+                    <div className="rwsv-dev-gauge-txt">
+                        <strong style={D}>Lighthouse Score</strong>
+                        <span style={M}>Performance · 100/100</span>
+                    </div>
+                </div>
+                <div className="rwsv-dev-stats">
+                    <div className="rwsv-dev-stat">
+                        <span style={M}>TTFB</span>
+                        <b style={D}>24 ms</b>
+                    </div>
+                    <div className="rwsv-dev-stat">
+                        <span style={M}>FCP</span>
+                        <b style={D}>0.3 s</b>
+                    </div>
+                    <div className="rwsv-dev-stat">
+                        <span style={M}>BUILD</span>
+                        <b style={D} className="rwsv-dev-pass">READY</b>
+                    </div>
+                </div>
+            </div>
+            <p className={`rwsg-toast rwsv-dev-toast${step >= 2 ? " is-on" : ""}`} style={M}>
                 <i />
-                Position 1 · clicks +212%
+                ⚡ 100/100 Lighthouse · Sub-second TTFB
             </p>
         </div>
     )

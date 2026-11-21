@@ -1642,7 +1642,7 @@ export default function RwHero(props: Partial<HeroProps> = {}) {
         primaryLink = "",
         secondary = "Start a Project",
         secondaryLink = "/work",
-        chips = "❤|1.2k likes on one reel;+|86 new followers;★|New 5-star review;#1|“dentist near me”;●|12 leads today;↗|CTR up to 4.8%;✓|Call booked · Tue 10:30;◎|+318 profile visits;▶|48k video views;$|ROAS 6.2×",
+        chips = "⚡|Sub-second TTFB;★|99+ Lighthouse score;✓|CI/CD deployment passing;●|Zero runtime exceptions;↗|99.9% target uptime;📦|Production Docker build;🔒|End-to-end encrypted;▶|API latency < 24ms;☁|Multi-region edge cache;$|100% IP & code ownership",
         services = "Web, Mobile, SaaS, AI, E-Commerce",
         counterLabel = "Production lines of code delivered",
         counterStart = 1284300,
@@ -2431,7 +2431,7 @@ addPropertyControls(RwHero, {
         description: "icon|text; icon|text; …",
         displayTextArea: true,
         defaultValue:
-            "❤|1.2k likes on one reel;+|86 new followers;★|New 5-star review;#1|“dentist near me”;●|12 leads today;↗|CTR up to 4.8%;✓|Call booked · Tue 10:30;◎|+318 profile visits;▶|48k video views;$|ROAS 6.2×",
+            "⚡|Sub-second TTFB;★|99+ Lighthouse score;✓|CI/CD deployment passing;●|Zero runtime exceptions;↗|99.9% target uptime;📦|Production Docker build;🔒|End-to-end encrypted;▶|API latency < 24ms;☁|Multi-region edge cache;$|100% IP & code ownership",
     },
     services: {
         type: ControlType.String,

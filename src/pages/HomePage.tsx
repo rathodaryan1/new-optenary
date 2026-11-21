@@ -114,7 +114,13 @@ export default function HomePage() {
         <RwIntro />
 
         {/* Exact Reachwise Six-Channel Interactive Services Switcher */}
-        <RwServices />
+        <RwServices
+          eyebrow="(02) Capabilities"
+          heading="Engineering capabilities.|*Built to evolve.*"
+          intro="Modern web apps, mobile systems, custom SaaS, AI automation, and cloud architecture engineered by one unified studio."
+          button="All services"
+          buttonLink="/services"
+        />
 
         {/* Exact Reachwise Before/After Case Studies Section */}
         <RwWork />
