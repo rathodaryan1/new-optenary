@@ -1453,61 +1453,73 @@
 
 /* ===== REACHWISE PAGE TRANSITION (THE SIGNAL) ===== */
 
-.rwtr{position:fixed;inset:0;z-index:9998;pointer-events:none;overflow:hidden;color:var(--rw-cloud);display:none;--x:var(--rwtr-x,50vw);--y:var(--rwtr-y,50vh);--R:var(--rwtr-r,150vmax)}
+.rwtr{position:fixed;inset:0;z-index:99999;pointer-events:none;overflow:hidden;color:var(--rw-cloud);display:none;--x:var(--rwtr-x,50vw);--y:var(--rwtr-y,50vh);--R:var(--rwtr-r,150vmax)}
 .rwtr *{box-sizing:border-box}
 .rwtr-on{display:block;pointer-events:auto}
 html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
 @keyframes rwtr-fb{to{opacity:0;visibility:hidden}}
 
 .rwtr-lime,.rwtr-fill{position:absolute;inset:0;display:block;will-change:clip-path}
-.rwtr-lime{background:var(--rw-brass)}
-.rwtr-fill{background:var(--rw-night)}
-.rwtr-fill::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--x) var(--y),color-mix(in srgb,var(--rw-brass) 14%,transparent),transparent 46%)}
+.rwtr-lime{background:#D4FF3A}
+.rwtr-fill{background:#08090A}
+.rwtr-fill::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--x) var(--y),rgba(212,255,58,0.12),transparent 46%)}
 
 /* covered (server HTML on arrival) */
 .rwtr-ssr .rwtr-lime,.rwtr-ssr .rwtr-fill{clip-path:circle(var(--R) at var(--x) var(--y))}
 .rwtr-ssr .rwtr-mid,.rwtr-ssr .rwtr-dot{display:none}
 
-/* leaving: the brass/purple wavefront leads, the night follows directly behind it */
-.rwtr-leave .rwtr-lime{animation:rwtr-grow 420ms cubic-bezier(.4,0,.2,1) both}
-.rwtr-leave .rwtr-fill{animation:rwtr-grow 420ms cubic-bezier(.4,0,.2,1) 22ms both}
+/* leaving: the lime wavefront leads, the night follows directly behind it */
+.rwtr-leave .rwtr-lime{animation:rwtr-grow 400ms cubic-bezier(.4,0,.2,1) both}
+.rwtr-leave .rwtr-fill{animation:rwtr-grow 400ms cubic-bezier(.4,0,.2,1) 24ms both}
 @keyframes rwtr-grow{from{clip-path:circle(0px at var(--x) var(--y))}to{clip-path:circle(var(--R) at var(--x) var(--y))}}
 
-.rwtr-mid{position:absolute;left:0;right:0;top:50%;translate:0 -50%;padding:0 clamp(20px,4vw,64px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;z-index:10}
-.rwtr-k{display:inline-flex;align-items:center;gap:10px;margin:0;padding:7px 16px 7px 12px;border-radius:999px;background:rgba(255,255,255,0.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.16);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rw-cloud)}
-.rwtr-k i{position:relative;width:7px;height:7px;border-radius:50%;background:var(--rw-brass)}
-.rwtr-k i::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 1.5px var(--rw-brass);animation:rwtr-ping 1.1s cubic-bezier(.2,.6,.3,1) infinite}
-.rwtr-k span{color:color-mix(in srgb,var(--rw-cloud) 78%,transparent);text-transform:none;letter-spacing:.02em}
+/* Central Display */
+.rwtr-mid{position:absolute;left:0;right:0;top:50%;translate:0 -50%;padding:0 clamp(20px,4vw,64px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;z-index:10;pointer-events:none}
 
-.rwtr-name{margin:0;max-width:100%;font-size:clamp(50px,8.4vw,116px);line-height:.98;letter-spacing:-.045em;font-weight:var(--rw-font-dw,700)}
-.rwtr-name span{position:relative;display:inline-block;max-width:100%;padding:0 .22em .06em;color:#FFFFFF;isolation:isolate;overflow-wrap:anywhere}
-.rwtr-name span::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:.06em;bottom:0;border-radius:.14em;background:var(--rw-brass);transform-origin:left;box-shadow:0 4px 30px rgba(139,92,246,0.45)}
+/* Top Capsule Pill: [ ◉ OPENING  /work ] */
+.rwtr-k{display:inline-flex;align-items:center;gap:10px;margin:0;padding:7px 18px 7px 12px;border-radius:999px;background:rgba(255,255,255,0.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--rw-font-m,'Geist Mono'),ui-monospace,SFMono-Regular,monospace;line-height:1}
+.rwtr-radar{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex:none}
+.rwtr-radar-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #D4FF3A;box-sizing:border-box}
+.rwtr-radar-dot{position:relative;width:4px;height:4px;border-radius:50%;background:#D4FF3A}
+.rwtr-radar::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:1.5px solid #D4FF3A;animation:rwtr-radar-ping 1.4s cubic-bezier(.2,.6,.3,1) infinite;pointer-events:none}
+@keyframes rwtr-radar-ping{0%{transform:scale(0.8);opacity:0.9}100%{transform:scale(1.7);opacity:0}}
+.rwtr-k-txt{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#EEEEE8}
+.rwtr-k-route{font-size:12px;font-weight:500;letter-spacing:.02em;color:rgba(255,255,255,0.72);font-family:var(--rw-font-m,'Geist Mono'),ui-monospace,SFMono-Regular,monospace}
 
-.rwtr-leave .rwtr-k{animation:rwtr-in .28s cubic-bezier(.2,.8,.2,1) 160ms both}
-.rwtr-leave .rwtr-name span{animation:rwtr-clip .34s cubic-bezier(.16,1,.3,1) 220ms both}
-.rwtr-leave .rwtr-name span::before{animation:rwtr-wipe .34s cubic-bezier(.16,1,.3,1) 220ms both}
+/* Bottom Lime Destination Badge: [ Work ] */
+.rwtr-name{margin:0;max-width:100%;display:flex;justify-content:center;align-items:center}
+.rwtr-pill{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;padding:10px 32px 14px;background:#D4FF3A;color:#08090A;border-radius:18px;font-family:var(--rw-font-d,'Funnel Display'),Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(52px,7.8vw,96px);line-height:0.96;letter-spacing:-.04em;text-align:center;box-shadow:0 12px 36px rgba(212,255,58,0.32);isolation:isolate;overflow-wrap:anywhere}
 
-@keyframes rwtr-in{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
-@keyframes rwtr-clip{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-@keyframes rwtr-wipe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* Leaving animations */
+.rwtr-leave .rwtr-k{animation:rwtr-k-in 300ms cubic-bezier(.16,1,.3,1) 140ms both}
+.rwtr-leave .rwtr-pill{animation:rwtr-badge-in 340ms cubic-bezier(.16,1,.3,1) 180ms both}
 
-/* arriving: the signal contracts back to where it started — night first, the rim after it */
-.rwtr-enter .rwtr-mid{animation:rwtr-out .22s cubic-bezier(.4,0,1,1) both;pointer-events:none}
-@keyframes rwtr-out{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(0.96)}}
+@keyframes rwtr-k-in{from{opacity:0;transform:translateY(16px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes rwtr-badge-in{from{opacity:0;transform:translateY(22px) scale(0.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-.rwtr-enter .rwtr-fill{animation:rwtr-shrink .52s cubic-bezier(.7,0,.25,1) both}
-.rwtr-enter .rwtr-lime{animation:rwtr-shrink .52s cubic-bezier(.7,0,.25,1) 25ms both}
+/* Arriving / entering: central display fades away cleanly while night contracts */
+.rwtr-enter .rwtr-mid{animation:rwtr-out 200ms cubic-bezier(.4,0,1,1) both;pointer-events:none}
+@keyframes rwtr-out{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-8px) scale(0.96)}}
+
+.rwtr-enter .rwtr-fill{animation:rwtr-shrink 520ms cubic-bezier(.7,0,.25,1) both}
+.rwtr-enter .rwtr-lime{animation:rwtr-shrink 520ms cubic-bezier(.7,0,.25,1) 25ms both}
 @keyframes rwtr-shrink{from{clip-path:circle(var(--R) at var(--x) var(--y))}to{clip-path:circle(0px at var(--x) var(--y))}}
 
-.rwtr-dot{position:absolute;left:var(--x);top:var(--y);width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--rw-brass);opacity:0;display:none}
+.rwtr-dot{position:absolute;left:var(--x);top:var(--y);width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#D4FF3A;opacity:0;display:none}
 .rwtr-enter .rwtr-dot{display:block;animation:rwtr-dot .6s cubic-bezier(.2,.8,.2,1) .42s both}
-.rwtr-dot::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2px var(--rw-brass);opacity:0}
+.rwtr-dot::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 2px #D4FF3A;opacity:0}
 .rwtr-enter .rwtr-dot::after{animation:rwtr-ping .6s cubic-bezier(.2,.6,.3,1) .48s both}
 @keyframes rwtr-dot{0%{opacity:1;scale:1}40%{opacity:1;scale:1.25}100%{opacity:0;scale:0}}
 @keyframes rwtr-ping{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(4)}}
 
 .rwtr-idle{display:none!important}
-@media (max-width:809px){.rwtr-name{font-size:clamp(38px,10vw,60px)} .rwtr-mid{gap:14px}}
+@media (max-width:809px){
+  .rwtr-mid{gap:14px}
+  .rwtr-pill{padding:8px 24px 11px;font-size:clamp(40px,12vw,62px);border-radius:15px}
+  .rwtr-k{padding:6px 14px 6px 10px;font-size:11px}
+  .rwtr-k-txt{font-size:10.5px}
+  .rwtr-k-route{font-size:11px}
+}
 @media (prefers-reduced-motion:reduce){.rwtr{display:none!important}}
 
 /* ===== REACHWISE PRICING ===== */

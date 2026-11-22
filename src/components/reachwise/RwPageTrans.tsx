@@ -8,17 +8,20 @@ import React, {
   type ReactNode,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './reachwise.css';
 
 interface PageTransContextValue {
   triggerTransition: (to: string, title?: string, origin?: { x: number; y: number }) => void;
   isTransitioning: boolean;
   pageName: string;
+  pageRoute: string;
 }
 
 const PageTransContext = createContext<PageTransContextValue>({
   triggerTransition: () => { },
   isTransitioning: false,
   pageName: 'Home',
+  pageRoute: '/home',
 });
 
 export const usePageTransition = () => useContext(PageTransContext);
@@ -50,6 +53,66 @@ export function preloadRoute(to: string) {
       import('../../pages/MehtaDairyCaseStudyPage');
     }
   } catch { }
+}
+
+// Maps a route or href to the exact slug shown in the capsule (e.g. /work, /services, /pricing)
+export function resolveTransitionRoute(href: string): string {
+  let pathname = href;
+  let hash = '';
+  try {
+    const url = new URL(href, window.location.origin);
+    pathname = url.pathname;
+    hash = url.hash;
+  } catch {
+    if (href.startsWith('#')) {
+      hash = href;
+      pathname = window.location.pathname;
+    }
+  }
+
+  const cleanHash = hash.replace(/^#/, '').toLowerCase();
+  if (cleanHash) {
+    if (cleanHash.includes('work') || cleanHash.includes('case-stud') || cleanHash === 'projects') return '/work';
+    if (cleanHash.includes('service') || cleanHash.includes('channel')) return '/services';
+    if (cleanHash.includes('pricing') || cleanHash.includes('plan')) return '/pricing';
+    if (cleanHash.includes('about')) return '/about';
+    if (cleanHash.includes('contact') || cleanHash.includes('audit')) return '/contact';
+    if (cleanHash.includes('client') || cleanHash.includes('radar')) return '/clients';
+    if (cleanHash.includes('review') || cleanHash.includes('testim')) return '/reviews';
+    if (cleanHash.includes('team') || cleanHash.includes('specialist')) return '/team';
+    if (cleanHash.includes('faq')) return '/faq';
+    if (cleanHash.includes('number') || cleanHash.includes('report') || cleanHash.includes('kpi')) return '/capabilities';
+    if (cleanHash.includes('feed') || cleanHash.includes('social')) return '/insights';
+    if (cleanHash.includes('funnel') || cleanHash.includes('how-we-work')) return '/process';
+    if (cleanHash.includes('journal') || cleanHash.includes('blog')) return '/blog';
+  }
+
+  const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
+  if (cleanPath === '/' || cleanPath === '/home') return '/home';
+  if (cleanPath === '/services') return '/services';
+  if (cleanPath === '/work' || cleanPath === '/projects') return '/work';
+  if (cleanPath === '/pricing') return '/pricing';
+  if (cleanPath === '/about') return '/about';
+  if (cleanPath === '/contact') return '/contact';
+  if (cleanPath === '/blog') return '/blog';
+  if (cleanPath === '/faq') return '/faq';
+  if (cleanPath === '/terms-of-service') return '/terms';
+  if (cleanPath === '/privacy-policy') return '/privacy';
+
+  if (cleanPath.startsWith('/services/')) {
+    const sub = cleanPath.replace('/services/', '');
+    return `/${sub}`;
+  }
+  if (cleanPath.startsWith('/work/')) {
+    const sub = cleanPath.replace('/work/', '');
+    return `/${sub}`;
+  }
+  if (cleanPath.startsWith('/blog/')) {
+    const sub = cleanPath.replace('/blog/', '');
+    return `/${sub}`;
+  }
+
+  return cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
 }
 
 // Maps a pathname or hash or text to the Optenary display label
@@ -139,7 +202,7 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
     return rawText;
   }
 
-  return 'Services';
+  return 'Optenary';
 }
 
 export default function RwPageTrans({ children }: { children?: ReactNode }) {
@@ -147,6 +210,7 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
 
   const [status, setStatus] = useState<'idle' | 'leaving' | 'entering'>('idle');
   const [pageName, setPageName] = useState<string>('Home');
+  const [pageRoute, setPageRoute] = useState<string>('/home');
   const [coords, setCoords] = useState<{ x: number; y: number; r: number }>({
     x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500,
     y: typeof window !== 'undefined' ? window.innerHeight / 2 : 500,
@@ -189,9 +253,11 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       const r = computeRadius(x, y);
 
       const resolvedTitle = title || resolveTransitionTitle(to);
+      const resolvedRoute = resolveTransitionRoute(to);
 
       setCoords({ x, y, r });
       setPageName(resolvedTitle);
+      setPageRoute(resolvedRoute);
       setStatus('leaving');
 
       // Save point in session for persistence
@@ -205,11 +271,11 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
       if (timerRef.current) clearTimeout(timerRef.current);
 
       // Animation Timeline:
-      // 0ms -> 420ms: Wavefront expands to cover screen
-      // 160ms -> 440ms: Pill badge '• OPENING /' animates in
-      // 220ms -> 540ms: Entire destination word wipes in and completes
-      // 540ms -> 860ms: Complete word is 100% displayed and held for user to read
-      // At 860ms: Navigate & reset scroll behind solid mask
+      // 0ms -> 400ms: Circular Signal wavefront expands to cover screen
+      // 140ms: Top Capsule [ ◉ OPENING /work ] animates in
+      // 180ms: Lime badge [ Work ] animates in (fully intact, no clipping)
+      // 520ms -> 860ms: Complete badge is 100% displayed and held for user to read
+      // At 860ms: Navigate & reset scroll behind solid night mask
       timerRef.current = setTimeout(() => {
         if (to.startsWith('#')) {
           const id = to.replace('#', '');
@@ -234,7 +300,7 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
         }
 
         // At 900ms: Smoothly switch to 'entering':
-        // Text fades out cleanly (220ms) while iris shrinks back (520ms)
+        // Text & badge fade away cleanly (200ms) while iris contracts back to origin (520ms)
         timerRef.current = setTimeout(() => {
           setStatus('entering');
 
@@ -343,9 +409,10 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
         triggerTransition,
         isTransitioning: status !== 'idle',
         pageName,
+        pageRoute,
       }}
     >
-      {/* Exact Reachwise "THE SIGNAL" Page Transition Layer */}
+      {/* Reachwise "THE SIGNAL" Page Transition Layer */}
       <div
         className={`rwtr ${status === 'leaving'
           ? 'rwtr-on rwtr-leave'
@@ -362,45 +429,36 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
             '--rwtr-x': `${coords.x}px`,
             '--rwtr-y': `${coords.y}px`,
             '--rwtr-r': `${coords.r}px`,
-            '--d': '420ms',
+            '--d': '400ms',
             '--rw-night': '#08090A',
-            '--rw-brass': 'var(--rw-brass, #8B5CF6)',
-            '--rw-ink': '#0D0E10',
+            '--rw-brass': '#D4FF3A',
+            '--rw-lime': '#D4FF3A',
+            '--rw-ink': '#08090A',
             '--rw-cloud': '#FFFFFF',
             '--rw-bone': '#EEEEE8',
             fontFamily: "var(--rw-font-b, 'Funnel Sans'), sans-serif",
           } as React.CSSProperties
         }
       >
-        {/* Leading wavefront */}
+        {/* Leading lime wavefront */}
         <i className="rwtr-lime" />
 
         {/* Deep Night ground following behind it */}
         <i className="rwtr-fill" />
 
-        {/* Central Display: • OPENING / + Pill Name */}
+        {/* Central Display: [ ◉ OPENING  /work ] + [ Work ] */}
         <div className="rwtr-mid">
-          <p
-            className="rwtr-k"
-            style={{
-              fontFamily: "var(--rw-font-m, 'Geist Mono'), ui-monospace, monospace",
-              fontWeight: 400,
-            }}
-          >
-            <i />
-            Opening
-            <span>/</span>
+          <p className="rwtr-k">
+            <span className="rwtr-radar" aria-hidden="true">
+              <i className="rwtr-radar-ring" />
+              <i className="rwtr-radar-dot" />
+            </span>
+            <span className="rwtr-k-txt">OPENING</span>
+            <span className="rwtr-k-route">{pageRoute}</span>
           </p>
-          <p
-            className="rwtr-name"
-            style={{
-              fontFamily: "var(--rw-font-d, 'Funnel Display'), Inter, system-ui, sans-serif",
-              fontWeight: 700,
-              fontStyle: 'normal',
-            }}
-          >
-            <span>{pageName}</span>
-          </p>
+          <div className="rwtr-name">
+            <span className="rwtr-pill">{pageName}</span>
+          </div>
         </div>
 
         {/* Origin dot that pings when arriving */}
@@ -411,3 +469,4 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
     </PageTransContext.Provider>
   );
 }
+
