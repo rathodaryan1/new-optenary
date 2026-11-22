@@ -2027,7 +2027,8 @@ export default function RwHero(props: Partial<HeroProps> = {}) {
         )
             return
         const r = root.current
-        setHasCur(true)
+        // Handled globally across all sections and devices by OptenaryCursor
+        return;
         let x = -99,
             y = -99,
             ax = -99,

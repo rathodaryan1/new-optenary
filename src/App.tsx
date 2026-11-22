@@ -8,12 +8,11 @@ import HomePage from './pages/HomePage';
 
 import ErrorBoundary from './components/ErrorBoundary';
 import RwPageTrans from './components/reachwise/RwPageTrans';
+import OptenaryCursor from './components/reachwise/OptenaryCursor';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 import { AuthProvider } from './platform/auth/AuthContext';
 import { RequireAdminOrTeam, RequireClient } from './platform/auth/RouteGuards';
 import { PlatformProvider } from './platform/platformContext';
-
-const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
 const ServicesPage             = lazyWithRetry(() => import('./pages/ServicesPage'));
@@ -171,13 +170,11 @@ function App() {
               {/* Scroll restoration */}
               <ScrollToHash />
 
+              {/* Interactive signature cursor for mobile & desktop */}
+              <OptenaryCursor />
+
               {/* Animated route transitions */}
               <AnimatedRoutes />
-
-              {/* Global floating UI */}
-              <Suspense fallback={null}>
-                <CookieConsent />
-              </Suspense>
             </RwPageTrans>
           </PlatformProvider>
         </AuthProvider>

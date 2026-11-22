@@ -1616,7 +1616,7 @@ export default function RwFooter(props: Partial<FooterProps> = {}) {
         contactTitle = "Contact",
         wordmark = "Optenary",
         hint = "Move over the name",
-        legal = "Privacy:/privacy, Terms:/terms, Cookies:/cookies",
+        legal = "Privacy:/privacy-policy, Terms:/terms-of-service",
         madeWith = "Made with Framer",
         madeWithLink = "https://www.framer.com",
         clockLabel = "Local time",
@@ -2055,7 +2055,7 @@ addPropertyControls(RwFooter, {
         type: ControlType.String,
         title: "Legal links",
         description: "Label:/path, …",
-        defaultValue: "Privacy:/privacy, Terms:/terms, Cookies:/cookies",
+        defaultValue: "Privacy:/privacy-policy, Terms:/terms-of-service",
     },
     madeWith: {
         type: ControlType.String,
