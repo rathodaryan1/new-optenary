@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import ErrorBoundary from './components/ErrorBoundary';
 import RwPageTrans from './components/reachwise/RwPageTrans';
 import { lazyWithRetry } from './utils/lazyWithRetry';
+import { AuthProvider } from './platform/auth/AuthContext';
+import { RequireAdminOrTeam, RequireClient } from './platform/auth/RouteGuards';
 import { PlatformProvider } from './platform/platformContext';
 
 const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
@@ -33,12 +35,19 @@ const MobileAppSuratPage       = lazyWithRetry(() => import('./pages/seo/MobileA
 const AIAutomationIndiaPage    = lazyWithRetry(() => import('./pages/seo/AIAutomationIndiaPage'));
 
 // Optenary Operations Platform
+const LoginPage                = lazyWithRetry(() => import('./platform/pages/LoginPage'));
 const ClientPortalPage         = lazyWithRetry(() => import('./platform/pages/ClientPortalPage'));
 const ClientOnboardingPage     = lazyWithRetry(() => import('./platform/pages/ClientOnboardingPage'));
 const AdminDashboardPage       = lazyWithRetry(() => import('./platform/pages/AdminDashboardPage'));
 const AdminProjectsPage        = lazyWithRetry(() => import('./platform/pages/AdminProjectsPage'));
 const AdminClientsPage         = lazyWithRetry(() => import('./platform/pages/AdminClientsPage'));
 const AdminLeadsCrmPage        = lazyWithRetry(() => import('./platform/pages/AdminLeadsCrmPage'));
+const AdminTasksPage           = lazyWithRetry(() => import('./platform/pages/AdminTasksPage'));
+const AdminTeamPage            = lazyWithRetry(() => import('./platform/pages/AdminTeamPage'));
+const AdminUpdatesPage         = lazyWithRetry(() => import('./platform/pages/AdminUpdatesPage'));
+const AdminFilesPage           = lazyWithRetry(() => import('./platform/pages/AdminFilesPage'));
+const AdminAnalyticsPage       = lazyWithRetry(() => import('./platform/pages/AdminAnalyticsPage'));
+const AdminSettingsPage        = lazyWithRetry(() => import('./platform/pages/AdminSettingsPage'));
 
 // Blog slug wrapper — reads :slug from URL and passes it to BlogPage
 function BlogSlugPage() {
@@ -119,14 +128,26 @@ function AnimatedRoutes() {
           <Route path="/mobile-app-developer-surat"    element={<PageTransition><MobileAppSuratPage /></PageTransition>} />
           <Route path="/ai-automation-agency-india"    element={<PageTransition><AIAutomationIndiaPage /></PageTransition>} />
 
-          {/* Optenary Operations Platform */}
-          <Route path="/portal"            element={<PageTransition><ClientPortalPage /></PageTransition>} />
+          {/* Auth */}
+          <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
+
+          {/* Client Portal & Onboarding */}
+          <Route path="/portal"            element={<RequireClient><PageTransition><ClientPortalPage /></PageTransition></RequireClient>} />
           <Route path="/portal/onboarding" element={<PageTransition><ClientOnboardingPage /></PageTransition>} />
           <Route path="/onboarding"        element={<PageTransition><ClientOnboardingPage /></PageTransition>} />
-          <Route path="/admin"             element={<PageTransition><AdminDashboardPage /></PageTransition>} />
-          <Route path="/admin/projects"    element={<PageTransition><AdminProjectsPage /></PageTransition>} />
-          <Route path="/admin/clients"     element={<PageTransition><AdminClientsPage /></PageTransition>} />
-          <Route path="/admin/crm"         element={<PageTransition><AdminLeadsCrmPage /></PageTransition>} />
+
+          {/* Admin Operations Platform (Protected by RequireAdminOrTeam) */}
+          <Route path="/admin"             element={<RequireAdminOrTeam><PageTransition><AdminDashboardPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/leads"       element={<RequireAdminOrTeam><PageTransition><AdminLeadsCrmPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/crm"         element={<RequireAdminOrTeam><PageTransition><AdminLeadsCrmPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/clients"     element={<RequireAdminOrTeam><PageTransition><AdminClientsPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/projects"    element={<RequireAdminOrTeam><PageTransition><AdminProjectsPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/tasks"       element={<RequireAdminOrTeam><PageTransition><AdminTasksPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/team"        element={<RequireAdminOrTeam><PageTransition><AdminTeamPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/updates"     element={<RequireAdminOrTeam><PageTransition><AdminUpdatesPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/files"       element={<RequireAdminOrTeam><PageTransition><AdminFilesPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/analytics"   element={<RequireAdminOrTeam><PageTransition><AdminAnalyticsPage /></PageTransition></RequireAdminOrTeam>} />
+          <Route path="/admin/settings"    element={<RequireAdminOrTeam><PageTransition><AdminSettingsPage /></PageTransition></RequireAdminOrTeam>} />
 
           {/* 404 */}
           <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
@@ -141,23 +162,25 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <PlatformProvider>
-          <RwPageTrans>
-            {/* Vercel Analytics */}
-            <Analytics />
+        <AuthProvider>
+          <PlatformProvider>
+            <RwPageTrans>
+              {/* Vercel Analytics */}
+              <Analytics />
 
-            {/* Scroll restoration */}
-            <ScrollToHash />
+              {/* Scroll restoration */}
+              <ScrollToHash />
 
-            {/* Animated route transitions */}
-            <AnimatedRoutes />
+              {/* Animated route transitions */}
+              <AnimatedRoutes />
 
-            {/* Global floating UI */}
-            <Suspense fallback={null}>
-              <CookieConsent />
-            </Suspense>
-          </RwPageTrans>
-        </PlatformProvider>
+              {/* Global floating UI */}
+              <Suspense fallback={null}>
+                <CookieConsent />
+              </Suspense>
+            </RwPageTrans>
+          </PlatformProvider>
+        </AuthProvider>
       </BrowserRouter>
     </ErrorBoundary>
   );

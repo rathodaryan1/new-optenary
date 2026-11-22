@@ -1973,6 +1973,14 @@ const CSS_REVIEWS = `
 .rwrv.is-ph .rwrv-big{font-size:96px} .rwrv.is-ph .rwrv-sub{font-size:16px}
 .rwrv.is-ph .rwrv-lock{padding:12px 12px 14px;border-radius:40px;box-shadow:0 0 0 5px color-mix(in srgb,var(--rw-ink) 88%,var(--rw-stone)),0 40px 70px -40px rgba(13,14,16,.6)}
 .rwrv.is-ph .rwrv-clock{font-size:78px} .rwrv.is-ph .rwrv-note{padding:13px 13px 14px;border-radius:22px} .rwrv.is-ph .rwrv-res{font-size:12px;padding:4px 8px} .rwrv.is-ph .rwrv-q{font-size:14px}
+@media (max-width: 810px){
+  .rwrv-who{display:grid!important;grid-template-columns:36px 1fr!important;align-items:start!important;column-gap:10px!important;row-gap:6px!important}
+  .rwrv-av{grid-column:1!important;grid-row:1!important;width:36px!important;height:36px!important}
+  .rwrv-nm{grid-column:2!important;grid-row:1!important;min-width:0!important;word-break:normal!important;overflow-wrap:normal!important}
+  .rwrv-nm b{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:normal!important}
+  .rwrv-nm span{display:block!important;white-space:normal!important;line-height:1.3!important;word-break:normal!important}
+  .rwrv-res{grid-column:2!important;grid-row:2!important;justify-self:start!important;margin-left:0!important;font-size:11.5px!important;padding:3px 8px!important}
+}
 @media (prefers-reduced-motion:reduce){.rwrv-note{transition:none}}
 `
 addPropertyControls(RwReviews, {

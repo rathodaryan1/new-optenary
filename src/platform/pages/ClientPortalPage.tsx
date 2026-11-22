@@ -254,7 +254,7 @@ export default function ClientPortalPage() {
             </div>
 
             <div className="space-y-4">
-              {project.updates.map((update) => (
+              {project.updates.filter((u) => u.isPublicToClient).map((update) => (
                 <div
                   key={update.id}
                   className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-3 relative group hover:border-white/[0.15] transition-all"

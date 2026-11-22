@@ -100,10 +100,17 @@ export function resolveTransitionRoute(href: string): string {
   if (cleanPath === '/privacy-policy') return '/privacy';
   if (cleanPath === '/portal') return '/portal';
   if (cleanPath === '/portal/onboarding' || cleanPath === '/onboarding') return '/onboarding';
+  if (cleanPath === '/login') return '/login';
   if (cleanPath === '/admin') return '/admin';
   if (cleanPath === '/admin/projects') return '/projects';
   if (cleanPath === '/admin/clients') return '/clients';
-  if (cleanPath === '/admin/crm') return '/crm';
+  if (cleanPath === '/admin/crm' || cleanPath === '/admin/leads') return '/leads';
+  if (cleanPath === '/admin/tasks') return '/tasks';
+  if (cleanPath === '/admin/team') return '/team';
+  if (cleanPath === '/admin/updates') return '/updates';
+  if (cleanPath === '/admin/files') return '/files';
+  if (cleanPath === '/admin/analytics') return '/analytics';
+  if (cleanPath === '/admin/settings') return '/settings';
 
   if (cleanPath.startsWith('/services/')) {
     const sub = cleanPath.replace('/services/', '');
@@ -190,10 +197,17 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
   if (cleanPath === '/privacy-policy') return 'Privacy';
   if (cleanPath === '/portal') return 'Client Portal';
   if (cleanPath === '/portal/onboarding' || cleanPath === '/onboarding') return 'Onboarding';
+  if (cleanPath === '/login') return 'Sign In';
   if (cleanPath === '/admin') return 'Admin OS';
   if (cleanPath === '/admin/projects') return 'Projects';
   if (cleanPath === '/admin/clients') return 'Clients';
-  if (cleanPath === '/admin/crm') return 'Leads & CRM';
+  if (cleanPath === '/admin/crm' || cleanPath === '/admin/leads') return 'Leads & CRM';
+  if (cleanPath === '/admin/tasks') return 'Tasks & Sprints';
+  if (cleanPath === '/admin/team') return 'Engineering Team';
+  if (cleanPath === '/admin/updates') return 'Updates Feed';
+  if (cleanPath === '/admin/files') return 'Deliverables & Files';
+  if (cleanPath === '/admin/analytics') return 'Analytics';
+  if (cleanPath === '/admin/settings') return 'Settings';
 
   if (cleanPath.startsWith('/services/')) return 'Services';
   if (cleanPath.startsWith('/blog/')) return 'Blog';

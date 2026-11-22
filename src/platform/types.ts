@@ -1,10 +1,22 @@
-// Optenary Operations Platform Data Types
+// Optenary Operations Platform Data Types & Interfaces
 
-export type UserRole = 'admin' | 'client';
+export type UserRole = 'admin' | 'team' | 'client';
 
-export type ProjectStatus = 'onboarding' | 'active' | 'in_review' | 'completed' | 'delayed';
+export interface AuthUser {
+  id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+  clientId?: string; // Set when role === 'client'
+  companyName?: string;
+  avatar?: string;
+}
+
+export type ProjectStatus = 'planning' | 'in_progress' | 'on_hold' | 'review' | 'completed';
 export type MilestoneStatus = 'completed' | 'in_progress' | 'pending';
-export type LeadStatus = 'new' | 'contacted' | 'qualified' | 'proposal_sent' | 'won' | 'lost';
+export type LeadStatus = 'new' | 'contacted' | 'qualified' | 'proposal_sent' | 'negotiation' | 'won' | 'lost';
+export type TaskStatus = 'todo' | 'in_progress' | 'review' | 'done';
+export type TaskPriority = 'low' | 'medium' | 'high' | 'urgent';
 
 export interface Milestone {
   id: string;
@@ -14,6 +26,33 @@ export interface Milestone {
   dueDate?: string;
   completedAt?: string;
   deliverables?: string[];
+}
+
+export interface Task {
+  id: string;
+  projectId: string;
+  milestoneId?: string;
+  assignedTo?: string; // TeamMember id
+  assignedToName?: string;
+  title: string;
+  description?: string;
+  status: TaskStatus;
+  priority: TaskPriority;
+  dueDate?: string;
+  estimatedHours?: number;
+  isCompleted: boolean;
+  createdAt: string;
+  isDemo?: boolean;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  email: string;
+  roleTitle: string;
+  department: string;
+  activeTasksCount: number;
+  avatarUrl?: string;
 }
 
 export interface ProjectUpdate {
@@ -29,12 +68,14 @@ export interface ProjectUpdate {
 
 export interface FileItem {
   id: string;
+  projectId: string;
   name: string;
   category: 'requirements' | 'brand_assets' | 'designs' | 'documents' | 'deliverables';
   size: string;
   uploadedAt: string;
   url: string;
   type: string;
+  uploadedBy?: string;
 }
 
 export interface ActivityEvent {
@@ -42,7 +83,7 @@ export interface ActivityEvent {
   date: string;
   title: string;
   description: string;
-  type: 'status' | 'milestone' | 'file' | 'note' | 'onboarding';
+  type: 'status' | 'milestone' | 'file' | 'note' | 'onboarding' | 'task';
 }
 
 export interface Project {
@@ -52,18 +93,21 @@ export interface Project {
   companyName: string;
   title: string;
   service: string;
-  progress: number; // 0 - 100
+  description?: string;
+  progress: number; // 0 - 100 (automatically computed from milestones/tasks)
   status: ProjectStatus;
   startDate: string;
   targetDeliveryDate: string;
   budget: string;
-  teamMembers: Array<{ name: string; role: string; email?: string }>;
+  teamMembers: Array<{ id?: string; name: string; role: string; email?: string }>;
   milestones: Milestone[];
   updates: ProjectUpdate[];
   files: FileItem[];
   timeline: ActivityEvent[];
   requirementsSummary: string;
   liveUrl?: string;
+  repositoryUrl?: string;
+  isDemo?: boolean;
 }
 
 export interface OnboardingData {
@@ -95,7 +139,11 @@ export interface Client {
   activeProjectsCount: number;
   totalValue: string;
   status: 'active' | 'onboarding' | 'completed';
+  industry?: string;
+  website?: string;
+  notes?: string;
   onboardingData?: OnboardingData;
+  isDemo?: boolean;
 }
 
 export interface Proposal {
@@ -116,8 +164,11 @@ export interface Lead {
   phone: string;
   service: string;
   budget: string;
+  source: string;
   status: LeadStatus;
   notes: string;
+  followUpDate?: string;
   createdAt: string;
   proposal?: Proposal;
+  isDemo?: boolean;
 }
