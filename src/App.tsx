@@ -23,6 +23,7 @@ const AboutPage                = lazyWithRetry(() => import('./pages/AboutPage')
 const IntegrationsPage         = lazyWithRetry(() => import('./pages/IntegrationsPage'));
 const WorkPage                  = lazyWithRetry(() => import('./pages/WorkPage'));
 const MehtaDairyCaseStudyPage  = lazyWithRetry(() => import('./pages/MehtaDairyCaseStudyPage'));
+const WorkDetailPage          = lazyWithRetry(() => import('./pages/WorkDetailPage'));
 const FAQPage                  = lazyWithRetry(() => import('./pages/FAQPage'));
 const ContactPage              = lazyWithRetry(() => import('./pages/ContactPage'));
 const PrivacyPolicyPage        = lazyWithRetry(() => import('./pages/PrivacyPolicyPage'));
@@ -163,10 +164,12 @@ function AnimatedRoutes() {
           <Route path="/services"             element={<PageTransition><ServicesPage /></PageTransition>} />
           <Route path="/work"                 element={<PageTransition><WorkPage /></PageTransition>} />
           <Route path="/work/mehta-dairy"     element={<PageTransition><MehtaDairyCaseStudyPage /></PageTransition>} />
+          <Route path="/work/:slug"           element={<PageTransition><WorkDetailPage /></PageTransition>} />
           <Route path="/about"                element={<PageTransition><AboutPage /></PageTransition>} />
           <Route path="/pricing"              element={<PageTransition><PricingPage /></PageTransition>} />
           <Route path="/projects"             element={<PageTransition><WorkPage /></PageTransition>} />
           <Route path="/projects/mehta-dairy" element={<PageTransition><MehtaDairyCaseStudyPage /></PageTransition>} />
+          <Route path="/projects/:slug"       element={<PageTransition><WorkDetailPage /></PageTransition>} />
           <Route path="/integrations"         element={<PageTransition><IntegrationsPage /></PageTransition>} />
           <Route path="/faq"          element={<PageTransition><FAQPage /></PageTransition>} />
           <Route path="/contact"      element={<PageTransition><ContactPage /></PageTransition>} />

@@ -27,6 +27,12 @@ const routes = [
   { path: '/ai-automation-agency-india', priority: '0.8', changefreq: 'monthly', lastmod: today },
 
   // Trust & Portfolio Pages
+  { path: '/work', priority: '0.8', changefreq: 'weekly', lastmod: today },
+  { path: '/work/shree-enterprise', priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { path: '/work/mehta-dairy', priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { path: '/work/urban-nest', priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { path: '/work/vishal-masala', priority: '0.8', changefreq: 'monthly', lastmod: today },
+  { path: '/work/laalo', priority: '0.8', changefreq: 'monthly', lastmod: today },
   { path: '/projects', priority: '0.8', changefreq: 'weekly', lastmod: today },
   { path: '/projects/mehta-dairy', priority: '0.8', changefreq: 'monthly', lastmod: today },
   { path: '/integrations', priority: '0.7', changefreq: 'monthly', lastmod: today },
