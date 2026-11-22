@@ -31,6 +31,7 @@ import { usePlatform } from '../platformContext';
 import { useAuth, DEMO_USERS } from '../auth/AuthContext';
 import AIAssistantModal from './AIAssistantModal';
 import { isSupabaseConfigured } from '../../lib/supabase';
+import { getMainSiteUrl } from '../../utils/domain';
 
 interface PlatformLayoutProps {
   children: ReactNode;
@@ -290,7 +291,7 @@ export default function PlatformLayout({
             </button>
           )}
 
-          <Link to="/" className="flex items-center gap-2.5">
+          <Link to={role === 'client' ? '/portal' : '/admin'} className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-[#D4FF3A] flex items-center justify-center font-extrabold text-[#08090A] text-sm shadow-[0_0_12px_rgba(212,255,58,0.3)]">
               O
             </div>
@@ -554,10 +555,20 @@ export default function PlatformLayout({
                   </button>
                 </div>
 
-                <div className="pt-2 border-t border-white/[0.06]">
+                <div className="pt-2 border-t border-white/[0.06] space-y-1">
+                  <a
+                    href={getMainSiteUrl('/')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/[0.04] flex items-center justify-between font-medium text-xs transition-colors"
+                  >
+                    <span>Main Website</span>
+                    <ExternalLink className="w-3 h-3 text-white/40" />
+                  </a>
+
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-red-400 hover:bg-red-500/10 flex items-center gap-2 font-medium"
+                    className="w-full text-left px-2.5 py-1.5 rounded-lg text-red-400 hover:bg-red-500/10 flex items-center gap-2 font-medium text-xs transition-colors"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     <span>Sign Out</span>

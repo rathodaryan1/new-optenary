@@ -1,5 +1,5 @@
 import { useEffect, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, useLocation, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import PageTransition from './components/PageTransition';
@@ -10,9 +10,10 @@ import ErrorBoundary from './components/ErrorBoundary';
 import RwPageTrans from './components/reachwise/RwPageTrans';
 import OptenaryCursor from './components/reachwise/OptenaryCursor';
 import { lazyWithRetry } from './utils/lazyWithRetry';
-import { AuthProvider } from './platform/auth/AuthContext';
+import { AuthProvider, useAuth } from './platform/auth/AuthContext';
 import { RequireAdminOrTeam, RequireClient } from './platform/auth/RouteGuards';
 import { PlatformProvider } from './platform/platformContext';
+import { isAppSubdomain, isMainProductionDomain } from './utils/domain';
 
 // ─── Lazy-loaded pages ────────────────────────────────────────────────────────
 const ServicesPage             = lazyWithRetry(() => import('./pages/ServicesPage'));
@@ -73,16 +74,90 @@ function ScrollToHash() {
   return null;
 }
 
+// ─── Subdomain & Domain Routing Enforcer ─────────────────────────────────────
+function DomainSubdomainRouter() {
+  const location = useLocation();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    // 1. If on public production domain (optenary.in / www.optenary.in):
+    // Redirect any platform/portal/admin access to app.optenary.in
+    if (isMainProductionDomain()) {
+      const p = location.pathname.toLowerCase();
+      if (
+        p.startsWith('/admin') ||
+        p.startsWith('/portal') ||
+        p === '/login' ||
+        p === '/onboarding'
+      ) {
+        window.location.replace(`https://app.optenary.in${location.pathname}${location.search}${location.hash}`);
+      }
+    }
+
+    // 2. If on app subdomain (app.optenary.in):
+    if (isAppSubdomain()) {
+      const p = location.pathname.toLowerCase();
+      // If at root of app.optenary.in (/ or /home), redirect directly to dashboard or login
+      if (p === '/' || p === '/home') {
+        if (currentUser?.role === 'admin' || currentUser?.role === 'team') {
+          window.location.replace('/admin');
+        } else if (currentUser?.role === 'client') {
+          window.location.replace('/portal');
+        } else {
+          window.location.replace('/login');
+        }
+      } else if (
+        // If navigating to marketing pages while on app.optenary.in, send to main site
+        p === '/services' ||
+        p.startsWith('/services/') ||
+        p === '/work' ||
+        p.startsWith('/work/') ||
+        p === '/about' ||
+        p === '/pricing' ||
+        p === '/contact' ||
+        p === '/blog' ||
+        p.startsWith('/blog/') ||
+        p === '/faq' ||
+        p === '/integrations'
+      ) {
+        window.location.replace(`https://optenary.in${location.pathname}${location.search}${location.hash}`);
+      }
+    }
+  }, [location.pathname, location.search, location.hash, currentUser]);
+
+  return null;
+}
+
 // ─── Animated Routes (page transitions) ──────────────────────────────────────
 function AnimatedRoutes() {
   const location = useLocation();
+  const isApp = isAppSubdomain();
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Suspense fallback={<PageSkeleton />}>
         <Routes location={location} key={location.pathname}>
           {/* Home */}
-          <Route path="/"     element={<PageTransition><HomePage /></PageTransition>} />
-          <Route path="/home" element={<PageTransition><HomePage /></PageTransition>} />
+          <Route
+            path="/"
+            element={
+              isApp ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <PageTransition><HomePage /></PageTransition>
+              )
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              isApp ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <PageTransition><HomePage /></PageTransition>
+              )
+            }
+          />
 
           {/* Core pages */}
           <Route path="/services"             element={<PageTransition><ServicesPage /></PageTransition>} />
@@ -169,6 +244,9 @@ function App() {
 
               {/* Scroll restoration */}
               <ScrollToHash />
+
+              {/* Subdomain & domain router */}
+              <DomainSubdomainRouter />
 
               {/* Interactive signature cursor for mobile & desktop */}
               <OptenaryCursor />

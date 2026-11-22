@@ -61,6 +61,72 @@
       ],
       "destination": "https://optenary.in/:path*",
       "permanent": true
+    },
+    {
+      "source": "/admin/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/admin/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/admin",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/admin",
+      "permanent": false
+    },
+    {
+      "source": "/portal/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/portal/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/portal",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/portal",
+      "permanent": false
+    },
+    {
+      "source": "/login",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/login",
+      "permanent": false
+    },
+    {
+      "source": "/onboarding",
+      "has": [
+        {
+          "type": "host",
+          "value": "optenary.in"
+        }
+      ],
+      "destination": "https://app.optenary.in/onboarding",
+      "permanent": false
     }
   ],
   "rewrites": [
