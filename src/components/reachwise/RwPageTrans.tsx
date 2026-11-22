@@ -98,6 +98,12 @@ export function resolveTransitionRoute(href: string): string {
   if (cleanPath === '/faq') return '/faq';
   if (cleanPath === '/terms-of-service') return '/terms';
   if (cleanPath === '/privacy-policy') return '/privacy';
+  if (cleanPath === '/portal') return '/portal';
+  if (cleanPath === '/portal/onboarding' || cleanPath === '/onboarding') return '/onboarding';
+  if (cleanPath === '/admin') return '/admin';
+  if (cleanPath === '/admin/projects') return '/projects';
+  if (cleanPath === '/admin/clients') return '/clients';
+  if (cleanPath === '/admin/crm') return '/crm';
 
   if (cleanPath.startsWith('/services/')) {
     const sub = cleanPath.replace('/services/', '');
@@ -182,6 +188,12 @@ export function resolveTransitionTitle(href: string, targetEl?: HTMLElement | nu
   if (cleanPath === '/faq') return 'FAQ';
   if (cleanPath === '/terms-of-service') return 'Terms';
   if (cleanPath === '/privacy-policy') return 'Privacy';
+  if (cleanPath === '/portal') return 'Client Portal';
+  if (cleanPath === '/portal/onboarding' || cleanPath === '/onboarding') return 'Onboarding';
+  if (cleanPath === '/admin') return 'Admin OS';
+  if (cleanPath === '/admin/projects') return 'Projects';
+  if (cleanPath === '/admin/clients') return 'Clients';
+  if (cleanPath === '/admin/crm') return 'Leads & CRM';
 
   if (cleanPath.startsWith('/services/')) return 'Services';
   if (cleanPath.startsWith('/blog/')) return 'Blog';

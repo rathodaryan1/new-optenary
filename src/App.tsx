@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import ErrorBoundary from './components/ErrorBoundary';
 import RwPageTrans from './components/reachwise/RwPageTrans';
 import { lazyWithRetry } from './utils/lazyWithRetry';
+import { PlatformProvider } from './platform/platformContext';
 
 const CookieConsent = lazyWithRetry(() => import('./components/CookieConsent'));
 
@@ -30,6 +31,14 @@ const NotFoundPage             = lazyWithRetry(() => import('./pages/NotFoundPag
 const WebDevIndiaPage          = lazyWithRetry(() => import('./pages/seo/WebDevIndiaPage'));
 const MobileAppSuratPage       = lazyWithRetry(() => import('./pages/seo/MobileAppSuratPage'));
 const AIAutomationIndiaPage    = lazyWithRetry(() => import('./pages/seo/AIAutomationIndiaPage'));
+
+// Optenary Operations Platform
+const ClientPortalPage         = lazyWithRetry(() => import('./platform/pages/ClientPortalPage'));
+const ClientOnboardingPage     = lazyWithRetry(() => import('./platform/pages/ClientOnboardingPage'));
+const AdminDashboardPage       = lazyWithRetry(() => import('./platform/pages/AdminDashboardPage'));
+const AdminProjectsPage        = lazyWithRetry(() => import('./platform/pages/AdminProjectsPage'));
+const AdminClientsPage         = lazyWithRetry(() => import('./platform/pages/AdminClientsPage'));
+const AdminLeadsCrmPage        = lazyWithRetry(() => import('./platform/pages/AdminLeadsCrmPage'));
 
 // Blog slug wrapper — reads :slug from URL and passes it to BlogPage
 function BlogSlugPage() {
@@ -110,6 +119,15 @@ function AnimatedRoutes() {
           <Route path="/mobile-app-developer-surat"    element={<PageTransition><MobileAppSuratPage /></PageTransition>} />
           <Route path="/ai-automation-agency-india"    element={<PageTransition><AIAutomationIndiaPage /></PageTransition>} />
 
+          {/* Optenary Operations Platform */}
+          <Route path="/portal"            element={<PageTransition><ClientPortalPage /></PageTransition>} />
+          <Route path="/portal/onboarding" element={<PageTransition><ClientOnboardingPage /></PageTransition>} />
+          <Route path="/onboarding"        element={<PageTransition><ClientOnboardingPage /></PageTransition>} />
+          <Route path="/admin"             element={<PageTransition><AdminDashboardPage /></PageTransition>} />
+          <Route path="/admin/projects"    element={<PageTransition><AdminProjectsPage /></PageTransition>} />
+          <Route path="/admin/clients"     element={<PageTransition><AdminClientsPage /></PageTransition>} />
+          <Route path="/admin/crm"         element={<PageTransition><AdminLeadsCrmPage /></PageTransition>} />
+
           {/* 404 */}
           <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
         </Routes>
@@ -123,21 +141,23 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <RwPageTrans>
-          {/* Vercel Analytics */}
-          <Analytics />
+        <PlatformProvider>
+          <RwPageTrans>
+            {/* Vercel Analytics */}
+            <Analytics />
 
-          {/* Scroll restoration */}
-          <ScrollToHash />
+            {/* Scroll restoration */}
+            <ScrollToHash />
 
-          {/* Animated route transitions */}
-          <AnimatedRoutes />
+            {/* Animated route transitions */}
+            <AnimatedRoutes />
 
-          {/* Global floating UI */}
-          <Suspense fallback={null}>
-            <CookieConsent />
-          </Suspense>
-        </RwPageTrans>
+            {/* Global floating UI */}
+            <Suspense fallback={null}>
+              <CookieConsent />
+            </Suspense>
+          </RwPageTrans>
+        </PlatformProvider>
       </BrowserRouter>
     </ErrorBoundary>
   );

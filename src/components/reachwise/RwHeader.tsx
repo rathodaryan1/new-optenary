@@ -84,6 +84,7 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
     { label: "About", href: "/about", key: "about" },
     { label: "Blog", href: "/blog", key: "blog" },
     { label: "Contact", href: "/contact", key: "contact" },
+    { label: "Portal", href: "/portal", key: "portal" },
   ]
 
   return (
