@@ -367,3 +367,4 @@ DROP TRIGGER IF EXISTS trg_recalc_project_progress ON public.milestones;
 CREATE TRIGGER trg_recalc_project_progress
 AFTER INSERT OR UPDATE OR DELETE ON public.milestones
 FOR EACH ROW EXECUTE FUNCTION public.calculate_project_progress();
+

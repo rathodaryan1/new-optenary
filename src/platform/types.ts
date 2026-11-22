@@ -156,6 +156,25 @@ export interface Proposal {
   validUntil: string;
 }
 
+export interface AuditLogEntry {
+  id: string;
+  timestamp: string;
+  actor: string;
+  action: string;
+  category: 'lead' | 'client' | 'project' | 'task' | 'file' | 'system';
+  details: string;
+}
+
+export interface NotificationItem {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: string;
+  isRead: boolean;
+  link?: string;
+  type: 'lead' | 'task' | 'milestone' | 'update';
+}
+
 export interface Lead {
   id: string;
   name: string;

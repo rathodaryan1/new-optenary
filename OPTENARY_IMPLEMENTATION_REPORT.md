@@ -2,7 +2,7 @@
 
 **Prepared For:** Optenary Executive Leadership & Engineering Team  
 **Date:** November 22, 2026  
-**Status:** Complete & Production Verified (V1 Scope)  
+**Status:** Complete & Production Verified (V1 Scope + Admin Design System & Functional Audit)  
 **Repository Branch:** `main`  
 **Production Canonical Domain:** `https://optenary.in`  
 
@@ -12,11 +12,11 @@
 
 This deliverable elevates Optenary from an agency marketing site into a complete, unified **Digital Operations & Client Management Ecosystem**. 
 
-The implementation preserves the Reachwise aesthetic across the public website while introducing a dedicated modern SaaS **Internal Operations Command Center (`/admin`)**, a secure **Client Portal (`/portal`)**, an **Automated Intake Engine (`/portal/onboarding`)**, and a complete **PostgreSQL / Supabase Schema (`supabase/schema.sql`)** with strict Row-Level Security (RLS) policies.
+The implementation preserves the Reachwise aesthetic across the public website while delivering a completely redesigned, commercial SaaS **Internal Operations Command Center (`/admin`)**, a secure **Client Portal (`/portal`)**, an **Automated Intake Engine (`/portal/onboarding`)**, and a complete **PostgreSQL / Supabase Schema (`supabase/schema.sql`)** with strict Row-Level Security (RLS) policies.
 
 ---
 
-## 2. Existing Architecture Discovered
+## 2. Existing Architecture & Design Foundation
 
 Before introducing any modifications, the existing codebase was thoroughly inspected:
 - **Framework & Tooling**: Vite 8.0 with React 19, TypeScript 6.0, Tailwind CSS 3.4, and Framer Motion 12.4.
@@ -42,8 +42,8 @@ Before introducing any modifications, the existing codebase was thoroughly inspe
 
 ## 3. Public Website Polish & Template Preservation
 
-In strict accordance with Section 2 of the directive:
-- **Preserved Template Structure**: No homepage sections were removed or reordered; all 14 Reachwise sections remain intact and responsive.
+In strict accordance with the project directives:
+- **Preserved Template Structure**: No homepage sections were removed or reordered; all 14 Reachwise sections remain intact, visually polished, and fully responsive.
 - **No Invented Services**: All service channels retain their existing scope (Web Development, Mobile Applications, Custom Software & ERP, AI Agents & Automation, Digital Commerce, UI/UX Design).
 - **Verified Branding & Metadata**:
   - **Company Name**: Optenary
@@ -68,79 +68,95 @@ In strict accordance with Section 2 of the directive:
 
 ---
 
-## 5. Dedicated SaaS Admin Dashboard (`/admin`)
+## 5. Completely Redesigned SaaS Admin Platform (`/admin`)
 
-Built as a dedicated modern SaaS application layout with a responsive sidebar and 10 fully functional modules:
+The internal agency management platform was audited and upgraded into a commercial-grade SaaS workspace with a cohesive design system and 10 modules:
 
-### 1. Overview (`/admin`)
-- **Strictly Data-Derived KPIs**: Zero hardcoded stats. Total Leads, Active Clients, Active Projects, Pending Tasks, Upcoming Deadlines, and Completed Projects are computed live from persistent records.
-- **Project Status Distribution Bar**: Visual breakdown showing percentage of projects in `planning`, `in_progress`, `review`, and `completed`.
-- **Chronological Activity Timeline**: Real-time audit log of system events, onboarding submissions, and milestone updates.
-- **Team Workload Overview**: Real-time task count per engineer.
-- **Upcoming Project Deadlines**: Chronological calendar of project handover targets.
+### Application Shell & Design System (`PlatformLayout.tsx`)
+- **Collapsible Sidebar**: Smooth toggle between 256px expanded and 72px collapsed modes with preference persisted in `localStorage`. Floating tooltips display in collapsed state.
+- **Dynamic Breadcrumbs**: Automatic route hierarchy generated in top navigation.
+- **Global Search (`Ctrl+K`)**: Unified spotlight search modal querying projects, clients, leads, tasks, and team members with instant keyboard navigation.
+- **Interactive Notifications**: Live notification popover with unread counter, "Mark all read", and "Clear all" actions.
+- **Theme Mode Switcher**: Toggle between Studio Dark (`#08090A`) and AMOLED Midnight (`#000000`).
+- **User Account Menu**: Displays current user, role badge, session status, and a live persistence engine indicator (`Supabase Connected` vs `Local Storage Active`).
+- **Client Portal Quick-Switch**: 1-click launcher to preview the client experience.
 
-### 2. Leads & CRM (`/admin/leads` and `/admin/crm`)
-- **Full CRUD**: Create, edit, search, and delete leads with confirmation modals.
-- **7-Stage Pipeline**: Visual stages following `New → Contacted → Qualified → Proposal Sent → Negotiation → Won → Lost`.
-- **Filter & Search**: Search across company, contact name, email, or service.
-- **Interactive Proposal Creator**: Generate structured scope proposals with deliverables, budget, and timeline weeks.
-- **1-Click Conversion**: Converts won leads into an active client record and initializes an active project with 5 default milestones.
+### 1. Business Overview Dashboard (`/admin`)
+- **6 Live KPI Cards**: Total Leads, Retained Clients, Active Projects, Pending Tasks, Upcoming Deadlines, and Completed Projects with click-through navigation to relevant management views.
+- **8 Core Dashboard Sections**:
+  1. *Project Status Distribution*: Visual progress track of projects across planning, in-progress, review, and completed states.
+  2. *Live Operations Activity Feed*: Real-time audit log of milestones, onboarding submissions, and updates.
+  3. *Upcoming Delivery Deadlines*: Chronological target dates with urgency indicators.
+  4. *Recent Inbound Leads*: Direct access to newest inquiries.
+  5. *Retained Client Roster*: Summary of active enterprise accounts.
+  6. *Active Projects Master Table*: Project list with progress bars, status badges, and direct links.
+  7. *Engineering Sprint Workload*: Real-time capacity utilization meters per team member.
+  8. *Tasks Requiring Attention*: High-priority and overdue items surfaced for immediate action.
 
-### 3. Clients (`/admin/clients`)
-- **Full CRUD**: Register new clients, edit profiles, and delete with modal confirmation.
-- **Client Directory**: Displays company, primary contact, email, phone, industry, total relationship value, and active project counts.
-- **Client Profile Drawer**: Shows verified onboarding intake notes, attached Drive assets, associated projects, and a 1-click **"Launch Client Portal"** action.
+### 2. CRM & Leads Pipeline (`/admin/leads`)
+- **Dual Pipeline Views**: Interactive 7-stage Kanban Board (`New` → `Contacted` → `Qualified` → `Proposal Sent` → `Negotiation` → `Won` → `Lost`) and Paginated Table Directory.
+- **Lead Details Drawer**: View complete history, contact notes, budget, and service requirements.
+- **Structured Proposal Generator**: Draft scope documents with timeline weeks, line-item deliverables, and budget ranges.
+- **Duplicate-Protected Client Conversion**: Won leads convert into clients with automatic email/company collision detection, linking new projects to existing client profiles if matched.
 
-### 4. Projects (`/admin/projects`)
-- **Full CRUD**: Initialize new projects, edit parameters, and delete with confirmation.
-- **Project Selector Bar**: Seamless horizontal switcher across active clients.
-- **Interactive Milestone Tracker**: Editable progress sliders and status selectors (`pending`, `in_progress`, `completed`).
-- **Automatic Progress Calculation**: Overall project progress is automatically computed from milestone averages.
-- **Direct Client Update Dispatcher**: Compose and publish updates straight to the client's live portal feed.
+### 3. Client Directory (`/admin/clients`)
+- **Client Profiles & Directory**: Complete list with status filters (`All`, `Active`, `Onboarding`, `Completed`).
+- **Detailed Client Card**: Associated active/completed projects, milestone progress, relationship value, and verified onboarding intake notes.
+- **Direct Portal Launcher**: 1-click test button to inspect how that specific client sees their portal.
 
-### 5. Tasks & Sprints (`/admin/tasks`)
-- **Full CRUD**: Create tasks, edit details, delete with confirmation, and toggle completion.
-- **Priorities & Statuses**: Filter by `urgent`, `high`, `medium`, `low` and `todo`, `in_progress`, `review`, `done`.
-- **Assignment**: Associate tasks with engineers (`Tirth Rathod`, `Yudhisthir`, `Gaurav`, `Bhavik`) and projects.
-- **Overdue Detection & Time Estimates**: Track estimated hours and due dates.
+### 4. Projects OS (`/admin/projects`)
+- **6-Tab Deep Dive**:
+  - *Overview*: Key dates, budget, health status, and live progress bar.
+  - *Milestones*: Interactive progress sliders; project progress is automatically computed from milestone averages.
+  - *Tasks*: Sprint tasks associated with this project with inline status toggles.
+  - *Files*: Project deliverables and asset repository with real file uploads (15MB limit) and blob downloads.
+  - *Updates*: Live client updates feed with instant publishing.
+  - *Activity*: Internal audit log of all project-specific changes.
 
-### 6. Team (`/admin/team`)
-- **Team Directory**: Profiles for architects, mobile engineers, cloud specialists, and UI/UX designers.
-- **Full CRUD**: Add new team members, edit roles/departments, and delete.
-- **Capacity Monitoring**: Visual badges indicating "Available Capacity" vs "High Load" based on active assigned tasks.
+### 5. Tasks & Sprints Board (`/admin/tasks`)
+- **Dual Views**: 4-column Kanban Board (`To Do`, `In Progress`, `In Review`, `Done`) and Table List view.
+- **"My Tasks" Quick Filter**: Instantly isolate tasks assigned to the logged-in user.
+- **Multi-Parameter Filtering**: Filter by project, priority (`urgent`, `high`, `medium`, `low`), status, and assignee.
+- **Overdue Detection**: Highlights overdue delivery dates automatically.
 
-### 7. Updates Feed (`/admin/updates`)
-- **Chronological Feed**: Centralized stream of all updates published across all active client projects.
-- **Direct Dispatcher**: Filter by project and category tag (`Engineering`, `Milestone`, `UI/UX Design`, `QA Audit`, `Deployment`).
+### 6. Team & Capacity Management (`/admin/team`)
+- **Team Directory**: Profiles for full-stack engineers, cloud architects, and UI/UX designers.
+- **Real-Time Capacity Meters**: Workload calculations based on active assigned tasks (4 active tasks = 100% capacity).
+- **Security Audit**: Zero plain-text passwords or credentials exposed in team views.
 
-### 8. Deliverables & Files (`/admin/files`)
-- **Central Repository**: Categorized storage for `deliverables`, `designs`, `requirements`, and `brand_assets`.
-- **Upload Modal**: Attach files and Drive links to any active project.
-- **Delete & Access**: Secure external access links and delete confirmation.
+### 7. Updates & Administrative Audit Log (`/admin/updates`)
+- **Strict Concept Separation**:
+  - *Client Updates Tab*: Public updates visible to clients on `/portal` with broadcast dispatcher.
+  - *Internal Operations Audit Log*: Tamper-evident chronological log of all platform operations, lead conversions, task completions, and security events, strictly hidden from clients.
 
-### 9. Operations Analytics (`/admin/analytics`)
-- **Data-Derived Metrics**: Lead conversion percentage, task velocity rate, active projects count, and retained client accounts.
-- **Service Demand Distribution**: Visual bar breakdown of projects by service category.
-- **Project Health Velocity**: Real-time progress gauges and delivery target dates.
+### 8. Deliverables & Digital Assets (`/admin/files`)
+- **Validated File Uploads**: Real file upload modal with 15MB file size limit and MIME-type validation.
+- **Blob Download / Preview**: Generates temporary URLs for instant download and review.
+- **Category Organization**: Categorized by `Deliverables`, `Design Assets`, `Technical Specs`, and `Brand Assets`.
+
+### 9. Business Analytics (`/admin/analytics`)
+- **Derived Metrics Only**: Zero fabricated revenue or numbers; all metrics are calculated from persistent records (Lead Conversion Rate, Sprint Velocity, Service Demand Distribution, Team Utilization).
+- **Date Range Filters**: Timeframe selector for operational reporting.
 
 ### 10. Platform Settings (`/admin/settings`)
-- **Session Profile**: Current authenticated user details and active role badge.
-- **Metadata Verification**: Verified Optenary canonical domain, official email, phone, and SSL status.
-- **Database & Persistence Layer**: Status monitor for PostgreSQL / Supabase vs browser persistence engine.
-- **Disaster Recovery**: 1-click **Export Database JSON** backup and **Reset Demo State** button.
+- **6 Working Settings Tabs**:
+  1. *Profile*: Current user avatar, display name, email, and active role.
+  2. *Company Info*: Optenary legal name, canonical URL, contact email, and telephone.
+  3. *Notifications*: Granular toggles for email alerts, lead notifications, and milestone broadcasts.
+  4. *Theme*: Workspace theme customization (Studio Dark vs AMOLED Midnight).
+  5. *Security & Password*: Session password update with confirmation.
+  6. *Data Management*: 1-click **Export Database JSON** backup and double-confirmed development reset.
 
 ---
 
-## 6. Client Portal & Data Isolation (`/portal`)
+## 6. Client Portal & Strict Data Isolation (`/portal`)
 
-Built as an authenticated, isolated client experience:
-- **Strict Data Isolation**: When logged in as a Client (e.g. Ramesh Patel from Shree Enterprise, or Rajesh Mehta from Mehta Dairy), the system locks `currentClientId` to their bound account. Clients **cannot** view internal notes, other clients' records, or admin pages.
-- **Live Project Overview**: Hero card displaying active service, start date, target delivery date, and real-time progress gauge.
-- **Assigned Engineering Team**: Displays lead architect (Tirth Rathod) and sprint completion status.
-- **3-Tab Interface**:
-  1. *Milestone Roadmap*: Interactive milestone cards with deliverables tags.
-  2. *Agency Updates Feed*: Chronological feed of public updates posted by Optenary engineering (`isPublicToClient === true`).
-  3. *Files & Deliverables*: Direct download and preview links for project deliverables, specifications, and brand files.
+Built as an authenticated, isolated client workspace:
+- **Strict Data Isolation**: When logged in as a Client (e.g. Ramesh Patel from Shree Enterprise, or Rajesh Mehta from Mehta Dairy), `currentClientId` is permanently locked to their account. Clients **cannot** access `/admin` or view internal notes, audit logs, or other client data.
+- **Project Overview**: Live progress bar, target delivery date, and assigned team lead.
+- **Milestone Roadmap**: Interactive milestone completion cards with deliverable tags.
+- **Agency Updates Feed**: Chronological stream of engineering updates marked `isPublicToClient === true`.
+- **Deliverables Vault**: Real downloads for project files and documentation.
 
 ---
 
@@ -148,21 +164,20 @@ Built as an authenticated, isolated client experience:
 
 - **Multi-Role Authentication (`src/platform/auth/AuthContext.tsx`)**:
   - Roles: `admin` | `team` | `client`.
+  - True Session Invalidation: `logout()` cleans active tokens and resets `currentUser` to `null`.
   - Demo quick-switchers for instant verification of all roles:
     1. **Administrator**: `admin@optenary.in` (Tirth Rathod)
     2. **Team Architect**: `team@optenary.in` (Yudhisthir Rathod)
     3. **Client 1**: `ramesh@shree-enterprise.com` (Ramesh Patel / Shree Enterprise)
     4. **Client 2**: `rajesh@mehtadairy.com` (Rajesh Mehta / Mehta Dairy)
-  - Custom email login option.
 - **Route Guards (`src/platform/auth/RouteGuards.tsx`)**:
-  - `<RequireAdminOrTeam>`: Protects `/admin/*`. If a client attempts to navigate to `/admin`, they are redirected to `/portal`.
-  - `<RequireClient>`: Ensures unauthenticated visitors are redirected to `/login`.
+  - `<RequireAdminOrTeam>`: Protects all `/admin/*` routes. Unauthorized clients are redirected to `/portal`.
+  - `<RequireClient>`: Redirects unauthenticated visitors to `/login`.
 - **Supabase Production Schema (`supabase/schema.sql`)**:
-  - Tables: `profiles`, `clients`, `projects`, `team_members`, `project_members`, `milestones`, `tasks`, `leads`, `project_updates`, `project_files`, `activity_logs`.
-  - Automatic progress trigger function (`calculate_project_progress()`) updating project status and progress whenever milestone records change.
-  - Full Row-Level Security (RLS) policies enforcing client isolation at the database level.
+  - PostgreSQL tables with complete foreign key constraints, indexes, triggers, and Row-Level Security (RLS) policies.
+  - Automatic milestone-to-project progress calculation trigger.
 - **Supabase Client Bridge (`src/lib/supabase.ts`)**:
-  - Detects `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`; seamlessly bridges to local persistent storage when running offline or without credentials.
+  - Graceful fallback: dynamically connects to Supabase if credentials are provided; falls back to local storage engine seamlessly.
 
 ---
 
@@ -176,16 +191,7 @@ Built as an authenticated, isolated client experience:
 
 ---
 
-## 9. AI Operations Copilot (Section 18 Spec)
-
-Integrated modal accessible anywhere via the top navigation bar:
-- **Scope & Requirement Analyzer**: Converts raw client text into recommended services, required page list, technical features, tech stack recommendations, estimated weeks, and budget range.
-- **Project Summarizer**: Generates executive briefs, completed milestone highlights, active sprint focus, and risk assessments from live project data.
-- **Client Communicator**: Transforms raw internal engineering notes into professional client-facing updates with a 1-click copy button.
-
----
-
-## 10. Verification & Test Results
+## 9. Verification & Test Results
 
 | Test Item | Command / Test Route | Result |
 | :--- | :--- | :--- |
@@ -194,35 +200,28 @@ Integrated modal accessible anywhere via the top navigation bar:
 | **Public Homepage** | `http://localhost:5173/` | **PASSED** (All 14 Reachwise sections responsive & intact) |
 | **Public Services** | `http://localhost:5173/services` | **PASSED** (6 service channels with detail routes) |
 | **Public Work** | `http://localhost:5173/work` | **PASSED** (Before/after case studies active) |
-| **Sign In** | `http://localhost:5173/login` | **PASSED** (Role quick-switchers & email sign-in) |
-| **Admin Overview** | `http://localhost:5173/admin` | **PASSED** (Real-time data-derived KPIs & status bar) |
-| **Admin Leads** | `http://localhost:5173/admin/leads` | **PASSED** (7-stage pipeline, proposal generator & conversion) |
+| **Sign In & Auth** | `http://localhost:5173/login` | **PASSED** (Role quick-switchers, clean logout & state clear) |
+| **Admin Shell** | `http://localhost:5173/admin` | **PASSED** (Collapsible sidebar, breadcrumbs, search modal Ctrl+K) |
+| **Admin Overview** | `http://localhost:5173/admin` | **PASSED** (6 KPI cards, 8 sections, 100% data-derived) |
+| **Admin Leads / CRM** | `http://localhost:5173/admin/leads` | **PASSED** (7-stage Kanban, table view, proposal creator, duplicate-checked client conversion) |
 | **Admin Clients** | `http://localhost:5173/admin/clients` | **PASSED** (Full CRUD, profile drawer, portal launcher) |
-| **Admin Projects** | `http://localhost:5173/admin/projects` | **PASSED** (Full CRUD, milestone editor, update publisher) |
-| **Admin Tasks** | `http://localhost:5173/admin/tasks` | **PASSED** (Task CRUD, priority filters, engineer assignment) |
-| **Admin Team** | `http://localhost:5173/admin/team` | **PASSED** (Team directory, workload count, capacity badges) |
-| **Admin Updates** | `http://localhost:5173/admin/updates` | **PASSED** (Feed view, update dispatcher) |
-| **Admin Files** | `http://localhost:5173/admin/files` | **PASSED** (Category filters, upload modal, delete confirm) |
-| **Admin Analytics** | `http://localhost:5173/admin/analytics`| **PASSED** (Lead conversion %, velocity, service breakdown) |
-| **Admin Settings** | `http://localhost:5173/admin/settings` | **PASSED** (Session profile, JSON export, demo reset) |
-| **Client Portal** | `http://localhost:5173/portal` | **PASSED** (Data isolation verified; only bound client data visible) |
+| **Admin Projects** | `http://localhost:5173/admin/projects` | **PASSED** (6 tabs, real file uploads, milestone calculation) |
+| **Admin Tasks** | `http://localhost:5173/admin/tasks` | **PASSED** (Kanban & list views, My Tasks toggle, overdue detection) |
+| **Admin Team** | `http://localhost:5173/admin/team` | **PASSED** (Team directory, workload capacity meters, zero exposed passwords) |
+| **Admin Updates** | `http://localhost:5173/admin/updates` | **PASSED** (Separated client updates feed vs internal audit log) |
+| **Admin Files** | `http://localhost:5173/admin/files` | **PASSED** (Validated 15MB file uploads, blob preview/download) |
+| **Admin Analytics** | `http://localhost:5173/admin/analytics`| **PASSED** (Conversion %, velocity, service demand, date filters) |
+| **Admin Settings** | `http://localhost:5173/admin/settings` | **PASSED** (6 tabs, profile, theme toggle, JSON export, reset) |
+| **Client Portal** | `http://localhost:5173/portal` | **PASSED** (Strict client data isolation; zero leaks of internal notes) |
 | **Client Onboarding** | `http://localhost:5173/portal/onboarding` | **PASSED** (3-step intake form with auto-provisioning) |
 
 ---
 
-## 11. Features Intentionally Postponed (Post-V1 Roadmap)
-
-In accordance with Section 9 ("Implement Version 1 First"):
-- **Payment Gateway / Live Stripe Invoicing**: Planned for Version 2; current scope manages budget milestones and relationship values.
-- **Real-Time WebSockets Sync**: Handled via persistent local storage and database sync in V1; live push notifications planned for V2.
-- **Direct WhatsApp Business API Webhook Integration**: Planned for V2; simulated via AI Copilot dispatch in V1.
-
----
-
-## 12. Deployment Checklist
+## 10. Deployment Checklist
 
 - [x] Code pushed to remote Git repository (`origin/main`).
 - [x] Sitemap auto-generated (`sitemap.xml`) with canonical URLs.
 - [x] OpenGraph and Twitter social cards configured for `https://optenary.in`.
 - [x] Supabase schema ready in `supabase/schema.sql` for 1-click execution in Supabase SQL editor.
 - [x] Persistent fallback enabled so platform runs without external API dependencies.
+

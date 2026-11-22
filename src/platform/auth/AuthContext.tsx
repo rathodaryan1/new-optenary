@@ -53,7 +53,7 @@ const AUTH_STORAGE_KEY = 'optenary_auth_session_v1';
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [currentUser, setCurrentUser] = useState<AuthUser>(() => {
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => {
     try {
       const saved = localStorage.getItem(AUTH_STORAGE_KEY);
       if (saved) return JSON.parse(saved);
@@ -103,9 +103,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
-    // Reset to demo client or null
     localStorage.removeItem(AUTH_STORAGE_KEY);
-    setCurrentUser(DEMO_USERS.admin);
+    setCurrentUser(null);
   };
 
   const updateCurrentUser = (updates: Partial<AuthUser>) => {
@@ -136,3 +135,4 @@ export function useAuth() {
   }
   return context;
 }
+

@@ -34,3 +34,4 @@ export function RequireClient({ children }: { children: ReactNode }) {
 
   return <>{children}</>;
 }
+

@@ -11,6 +11,8 @@ import type {
   UserRole,
   OnboardingData,
   Proposal,
+  AuditLogEntry,
+  NotificationItem,
 } from './types';
 import { useAuth } from './auth/AuthContext';
 
@@ -25,6 +27,15 @@ interface PlatformContextType {
   leads: Lead[];
   tasks: Task[];
   teamMembers: TeamMember[];
+  auditLogs: AuditLogEntry[];
+  notifications: NotificationItem[];
+
+  // Audit & Notifications
+  addAuditLog: (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => void;
+  addNotification: (notif: Omit<NotificationItem, 'id' | 'timestamp' | 'isRead'>) => void;
+  markNotificationRead: (id: string) => void;
+  markAllNotificationsRead: () => void;
+  clearNotifications: () => void;
 
   // Client CRUD
   addClient: (client: Omit<Client, 'id' | 'joinedDate' | 'activeProjectsCount'>) => Client;
@@ -508,6 +519,71 @@ const INITIAL_LEADS: Lead[] = [
   },
 ];
 
+const INITIAL_AUDIT_LOGS: AuditLogEntry[] = [
+  {
+    id: 'log-1',
+    timestamp: 'Today, 10:30 AM',
+    actor: 'Tirth Rathod',
+    action: 'Milestone Updated',
+    category: 'project',
+    details: 'Sprint 0: Architecture & Data Schema set to 100% completed for Shree Enterprise.',
+  },
+  {
+    id: 'log-2',
+    timestamp: 'Yesterday, 4:15 PM',
+    actor: 'Tirth Rathod',
+    action: 'Lead Created',
+    category: 'lead',
+    details: 'New inbound lead registered for Radhika Export (Surat).',
+  },
+  {
+    id: 'log-3',
+    timestamp: 'Nov 20, 2026',
+    actor: 'Yudhisthir Rathod',
+    action: 'Task Completed',
+    category: 'task',
+    details: 'Edge routing & Supabase RLS security policies verified.',
+  },
+  {
+    id: 'log-4',
+    timestamp: 'Nov 18, 2026',
+    actor: 'Tirth Rathod',
+    action: 'Client Onboarded',
+    category: 'client',
+    details: 'Mehta Dairy digital commerce project launched on staging.',
+  },
+];
+
+const INITIAL_NOTIFICATIONS: NotificationItem[] = [
+  {
+    id: 'notif-1',
+    title: 'New Inbound Lead',
+    description: 'Surat Diamond Craft submitted inquiry for Custom Software & ERP.',
+    timestamp: '2 hours ago',
+    isRead: false,
+    link: '/admin/leads',
+    type: 'lead',
+  },
+  {
+    id: 'notif-2',
+    title: 'Milestone Ready for Review',
+    description: 'Shree Enterprise Sprint 1: Catalog Search Engine deployed.',
+    timestamp: '5 hours ago',
+    isRead: false,
+    link: '/admin/projects',
+    type: 'milestone',
+  },
+  {
+    id: 'notif-3',
+    title: 'High Priority Task Assigned',
+    description: 'Optimize Sub-Second TTFB on Vercel Edge assigned to Yudhisthir.',
+    timestamp: '1 day ago',
+    isRead: true,
+    link: '/admin/tasks',
+    type: 'task',
+  },
+];
+
 const PlatformContext = createContext<PlatformContextType | undefined>(undefined);
 
 export function PlatformProvider({ children }: { children: ReactNode }) {
@@ -553,6 +629,22 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     return INITIAL_TEAM_MEMBERS;
   });
 
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_audit`);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return INITIAL_AUDIT_LOGS;
+  });
+
+  const [notifications, setNotifications] = useState<NotificationItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${STORAGE_KEY}_notifs`);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return INITIAL_NOTIFICATIONS;
+  });
+
   // Client ID selection: strictly isolated if logged in as client!
   const [selectedClientId, setSelectedClientId] = useState<string>('c-shree');
 
@@ -567,8 +659,44 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       localStorage.setItem(`${STORAGE_KEY}_leads`, JSON.stringify(leads));
       localStorage.setItem(`${STORAGE_KEY}_tasks`, JSON.stringify(tasks));
       localStorage.setItem(`${STORAGE_KEY}_team`, JSON.stringify(teamMembers));
+      localStorage.setItem(`${STORAGE_KEY}_audit`, JSON.stringify(auditLogs));
+      localStorage.setItem(`${STORAGE_KEY}_notifs`, JSON.stringify(notifications));
     } catch {}
-  }, [clients, projects, leads, tasks, teamMembers]);
+  }, [clients, projects, leads, tasks, teamMembers, auditLogs, notifications]);
+
+  // AUDIT & NOTIFICATION HANDLERS
+  const addAuditLog = (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => {
+    const newLog: AuditLogEntry = {
+      ...entry,
+      id: `log-${Date.now()}`,
+      timestamp: 'Just now',
+    };
+    setAuditLogs((prev) => [newLog, ...prev]);
+  };
+
+  const addNotification = (notif: Omit<NotificationItem, 'id' | 'timestamp' | 'isRead'>) => {
+    const newNotif: NotificationItem = {
+      ...notif,
+      id: `notif-${Date.now()}`,
+      timestamp: 'Just now',
+      isRead: false,
+    };
+    setNotifications((prev) => [newNotif, ...prev]);
+  };
+
+  const markNotificationRead = (id: string) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n))
+    );
+  };
+
+  const markAllNotificationsRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+  };
+
+  const clearNotifications = () => {
+    setNotifications([]);
+  };
 
   // Recalculate Project Progress Automatically from Milestones or Tasks
   const recalculateProgress = (milestones: Milestone[]): number => {
@@ -850,21 +978,41 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return null;
 
-    const clientId = `c-${Date.now().toString(36)}`;
+    // Duplicate client prevention: check if client with same email or company already exists
+    const existingClient = clients.find(
+      (c) =>
+        c.email.trim().toLowerCase() === lead.email.trim().toLowerCase() ||
+        c.company.trim().toLowerCase() === lead.company.trim().toLowerCase()
+    );
+
+    const clientId = existingClient ? existingClient.id : `c-${Date.now().toString(36)}`;
     const projectId = `proj-${Date.now().toString(36)}`;
 
-    const newClient: Client = {
-      id: clientId,
-      name: lead.name,
-      company: lead.company,
-      email: lead.email,
-      phone: lead.phone,
-      joinedDate: 'Today',
-      activeProjectsCount: 1,
-      totalValue: lead.proposal?.totalAmount || lead.budget,
-      status: 'active',
-      isDemo: false,
-    };
+    let targetClient: Client;
+
+    if (existingClient) {
+      targetClient = {
+        ...existingClient,
+        activeProjectsCount: existingClient.activeProjectsCount + 1,
+      };
+      setClients((prev) =>
+        prev.map((c) => (c.id === existingClient.id ? targetClient : c))
+      );
+    } else {
+      targetClient = {
+        id: clientId,
+        name: lead.name,
+        company: lead.company,
+        email: lead.email,
+        phone: lead.phone,
+        joinedDate: 'Today',
+        activeProjectsCount: 1,
+        totalValue: lead.proposal?.totalAmount || lead.budget,
+        status: 'active',
+        isDemo: false,
+      };
+      setClients((prev) => [targetClient, ...prev]);
+    }
 
     const newProject: Project = {
       id: projectId,
@@ -905,19 +1053,32 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
           id: `ev-${Date.now()}`,
           date: 'Today',
           title: 'Contract Approved & Client Onboarded',
-          description: `Converted from lead with scope value ${newClient.totalValue}.`,
+          description: `Converted from lead with scope value ${targetClient.totalValue}.`,
           type: 'onboarding',
         },
       ],
       isDemo: false,
     };
 
-    setClients((prev) => [newClient, ...prev]);
     setProjects((prev) => [newProject, ...prev]);
     setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: 'won' } : l)));
     setSelectedClientId(clientId);
 
-    return { client: newClient, project: newProject };
+    addAuditLog({
+      actor: currentUser?.name || 'Administrator',
+      action: 'Lead Converted to Client',
+      category: 'client',
+      details: `${lead.company} converted to client. Provisioned project ${newProject.title}.`,
+    });
+
+    addNotification({
+      title: 'Lead Converted & Project Launched',
+      description: `${lead.company} is now an active account with project ${newProject.title}.`,
+      link: '/admin/projects',
+      type: 'lead',
+    });
+
+    return { client: targetClient, project: newProject };
   };
 
   const submitOnboarding = (data: OnboardingData) => {
@@ -1016,12 +1177,16 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(`${STORAGE_KEY}_leads`);
     localStorage.removeItem(`${STORAGE_KEY}_tasks`);
     localStorage.removeItem(`${STORAGE_KEY}_team`);
+    localStorage.removeItem(`${STORAGE_KEY}_audit`);
+    localStorage.removeItem(`${STORAGE_KEY}_notifs`);
 
     setClients(INITIAL_CLIENTS);
     setProjects(INITIAL_PROJECTS);
     setLeads(INITIAL_LEADS);
     setTasks(INITIAL_TASKS);
     setTeamMembers(INITIAL_TEAM_MEMBERS);
+    setAuditLogs(INITIAL_AUDIT_LOGS);
+    setNotifications(INITIAL_NOTIFICATIONS);
     setSelectedClientId('c-shree');
   };
 
@@ -1035,6 +1200,8 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       leads,
       tasks,
       teamMembers,
+      auditLogs,
+      notifications,
     };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -1131,6 +1298,13 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         leads,
         tasks,
         teamMembers,
+        auditLogs,
+        notifications,
+        addAuditLog,
+        addNotification,
+        markNotificationRead,
+        markAllNotificationsRead,
+        clearNotifications,
         addClient,
         updateClient,
         deleteClient,
