@@ -2208,8 +2208,12 @@ html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
   }
 
   /* Prevent text and headlines from clipping screen edges */
-  .rw, .rw * {
+  .rw p, .rw h1, .rw h2, .rw h3, .rw h4, .rw h5, .rw h6, .rw .rw-sub, .rw .rw-desc, .rw .rw-lead {
     overflow-wrap: break-word !important;
+  }
+  .rwrv-nm, .rwrv-nm b, .rwrv-nm span, .rwrv-res, .rw-badge, .rw-chip, .rwpr-name {
+    word-break: normal !important;
+    overflow-wrap: normal !important;
   }
   .rw-hd, .rwh-h1, .rwwk-title, .rwwg-title, .rwpr-name {
     text-wrap: balance !important;
@@ -2317,6 +2321,47 @@ html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
   }
   .rwrv .rwrv-big {
     font-size: clamp(64px, 18vw, 96px) !important;
+  }
+  .rwrv .rwrv-who {
+    display: grid !important;
+    grid-template-columns: 36px 1fr !important;
+    align-items: start !important;
+    column-gap: 10px !important;
+    row-gap: 6px !important;
+  }
+  .rwrv .rwrv-av {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .rwrv .rwrv-nm {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+  .rwrv .rwrv-nm b {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-break: normal !important;
+  }
+  .rwrv .rwrv-nm span {
+    display: block !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+    word-break: normal !important;
+  }
+  .rwrv .rwrv-res {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    justify-self: start !important;
+    margin-left: 0 !important;
+    font-size: 11.5px !important;
+    padding: 3px 8px !important;
   }
 
   /* FAQ Accordion Section */

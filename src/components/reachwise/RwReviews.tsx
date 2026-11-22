@@ -1962,7 +1962,13 @@ const CSS_REVIEWS = `
 /* tablet */
 .rwrv.is-tab .rwrv-panel{grid-template-columns:1fr;padding:48px 40px} .rwrv.is-tab .rwrv-lock{justify-self:center}
 /* phone */
-.rwrv.is-ph{padding:24px 0 80px} .rwrv.is-ph .rw-wrap{--pad:var(--g)} .rwrv.is-ph .rwrv-who{flex-wrap:wrap;row-gap:8px} .rwrv.is-ph .rwrv-res{order:3;margin-left:50px} .rwrv.is-ph .rwrv-nm{min-width:0}
+.rwrv.is-ph{padding:24px 0 80px} .rwrv.is-ph .rw-wrap{--pad:var(--g)}
+.rwrv.is-ph .rwrv-who{display:grid;grid-template-columns:36px 1fr;align-items:start;column-gap:10px;row-gap:6px}
+.rwrv.is-ph .rwrv-av{grid-column:1;grid-row:1;width:36px;height:36px}
+.rwrv.is-ph .rwrv-nm{grid-column:2;grid-row:1;min-width:0;word-break:normal;overflow-wrap:normal}
+.rwrv.is-ph .rwrv-nm b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal}
+.rwrv.is-ph .rwrv-nm span{display:block;white-space:normal;line-height:1.3;word-break:normal}
+.rwrv.is-ph .rwrv-res{grid-column:2;grid-row:2;justify-self:start;margin-left:0;font-size:11.5px;padding:3px 8px}
 .rwrv.is-ph .rwrv-panel{grid-template-columns:1fr;padding:40px 16px 16px;border-radius:26px;gap:40px} .rwrv.is-ph .rwrv-left{padding:0 6px}
 .rwrv.is-ph .rwrv-big{font-size:96px} .rwrv.is-ph .rwrv-sub{font-size:16px}
 .rwrv.is-ph .rwrv-lock{padding:12px 12px 14px;border-radius:40px;box-shadow:0 0 0 5px color-mix(in srgb,var(--rw-ink) 88%,var(--rw-stone)),0 40px 70px -40px rgba(13,14,16,.6)}
