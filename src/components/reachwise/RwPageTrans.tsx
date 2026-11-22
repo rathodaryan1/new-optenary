@@ -296,12 +296,11 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
 
       if (timerRef.current) clearTimeout(timerRef.current);
 
-      // Animation Timeline:
-      // 0ms -> 400ms: Circular Signal wavefront expands to cover screen
-      // 140ms: Top Capsule [ ◉ OPENING /work ] animates in
-      // 180ms: Lime badge [ Work ] animates in (fully intact, no clipping)
-      // 520ms -> 860ms: Complete badge is 100% displayed and held for user to read
-      // At 860ms: Navigate & reset scroll behind solid night mask
+      // Snappy, fluid mobile-optimized timeline:
+      // 0ms -> 320ms: Circular Signal wavefront expands to cover screen
+      // 100ms: Top Capsule [ ◉ OPENING /route ] animates in
+      // 140ms: Lime badge animates in
+      // 440ms: Navigate & reset scroll behind solid mask
       timerRef.current = setTimeout(() => {
         if (to.startsWith('#')) {
           const id = to.replace('#', '');
@@ -319,24 +318,32 @@ export default function RwPageTrans({ children }: { children?: ReactNode }) {
             setTimeout(() => {
               const el = document.getElementById(hash);
               if (el) el.scrollIntoView({ behavior: 'auto' });
-            }, 60);
+            }, 50);
           } else {
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           }
         }
 
-        // At 900ms: Smoothly switch to 'entering':
-        // Text & badge fade away cleanly (200ms) while iris contracts back to origin (520ms)
+        // At 480ms: Smoothly switch to 'entering':
+        // Iris contracts back cleanly
         timerRef.current = setTimeout(() => {
           setStatus('entering');
 
-          // At 1440ms (540ms after entering): Transition complete
+          // Transition complete: return to idle
           timerRef.current = setTimeout(() => {
             setStatus('idle');
             isTransitioningRef.current = false;
-          }, 540);
-        }, 40);
-      }, 860);
+          }, 380);
+        }, 30);
+      }, 440);
+
+      // Failsafe watchdog timer: guarantees the transition overlay never hangs on mobile
+      setTimeout(() => {
+        if (isTransitioningRef.current) {
+          setStatus('idle');
+          isTransitioningRef.current = false;
+        }
+      }, 1200);
     },
     [navigate]
   );

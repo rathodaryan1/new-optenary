@@ -293,24 +293,30 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="space-y-3">
-              {projects.slice(0, 4).map((p) => (
-                <div key={p.id} className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
-                  <div>
-                    <h4 className="font-semibold text-white">{p.companyName}</h4>
-                    <p className="text-[11px] text-white/50">{p.title}</p>
-                    <div className="mt-1 flex items-center gap-2">
-                      <div className="w-24 h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
-                        <div className="h-full bg-[#D4FF3A]" style={{ width: `${p.progress}%` }} />
+              {projects.length === 0 ? (
+                <div className="py-8 text-center text-white/40 italic font-mono text-xs">
+                  No active project deadlines scheduled yet.
+                </div>
+              ) : (
+                projects.slice(0, 4).map((p) => (
+                  <div key={p.id} className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
+                    <div>
+                      <h4 className="font-semibold text-white">{p.companyName}</h4>
+                      <p className="text-[11px] text-white/50">{p.title}</p>
+                      <div className="mt-1 flex items-center gap-2">
+                        <div className="w-24 h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
+                          <div className="h-full bg-[#D4FF3A]" style={{ width: `${p.progress}%` }} />
+                        </div>
+                        <span className="text-[10px] font-mono text-[#D4FF3A]">{p.progress}%</span>
                       </div>
-                      <span className="text-[10px] font-mono text-[#D4FF3A]">{p.progress}%</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] font-mono uppercase text-white/40 block">Target Deadline</span>
+                      <span className="font-mono text-xs font-bold text-white">{p.targetDeliveryDate}</span>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <span className="text-[10px] font-mono uppercase text-white/40 block">Target Deadline</span>
-                    <span className="font-mono text-xs font-bold text-white">{p.targetDeliveryDate}</span>
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>

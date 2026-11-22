@@ -6,7 +6,7 @@ interface AuthContextType {
   role: UserRole;
   isAuthenticated: boolean;
   login: (email: string, password?: string) => Promise<boolean>;
-  loginAsDemo: (presetKey: 'admin' | 'team' | 'client_shree' | 'client_mehta') => void;
+  loginAsDemo: (presetKey: 'admin' | 'team' | 'client' | string) => void;
   logout: () => void;
   updateCurrentUser: (updates: Partial<AuthUser>) => void;
 }
@@ -28,23 +28,13 @@ export const DEMO_USERS: Record<string, AuthUser> = {
     companyName: 'Optenary Engineering',
     avatar: 'YR',
   },
-  client_shree: {
-    id: 'usr-client-shree',
-    email: 'ramesh@shree-enterprise.com',
-    name: 'Ramesh Patel',
+  client: {
+    id: 'usr-client-01',
+    email: 'client@optenary.in',
+    name: 'Client Account',
     role: 'client',
-    clientId: 'c-shree',
-    companyName: 'Shree Enterprise',
-    avatar: 'RP',
-  },
-  client_mehta: {
-    id: 'usr-client-mehta',
-    email: 'rajesh@mehtadairy.com',
-    name: 'Rajesh Mehta',
-    role: 'client',
-    clientId: 'c-mehta',
-    companyName: 'Mehta Dairy',
-    avatar: 'RM',
+    companyName: 'Client Account',
+    avatar: 'CL',
   },
 };
 
@@ -95,8 +85,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
-  const loginAsDemo = (presetKey: 'admin' | 'team' | 'client_shree' | 'client_mehta') => {
-    const user = DEMO_USERS[presetKey];
+  const loginAsDemo = (presetKey: 'admin' | 'team' | 'client' | string) => {
+    const user = DEMO_USERS[presetKey] || DEMO_USERS.admin;
     if (user) {
       setCurrentUser(user);
     }

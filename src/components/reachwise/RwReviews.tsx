@@ -1844,14 +1844,14 @@ export default function RwReviews(props: Partial<ReviewsProps> = {}) {
                                                     decoding="async"
                                                     className="rwrv-av"
                                                 />
-                                                <p className="rwrv-nm">
+                                                <div className="rwrv-nm">
                                                     <b style={D}>{r.f1}</b>
                                                     <span>
                                                         {[r.f2, r.f3]
                                                             .filter(Boolean)
                                                             .join(" · ")}
                                                     </span>
-                                                </p>
+                                                </div>
                                                 {r.f5 && (
                                                     <span
                                                         className="rwrv-res"
@@ -1948,10 +1948,12 @@ const CSS_REVIEWS = `
 .rwrv-app{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--rw-ink) 78%,transparent)}
 .rwrv-ico{display:block;width:20px;height:20px;border-radius:6px;overflow:hidden} .rwrv-ico svg{display:block;width:100%;height:100%}
 .rwrv-when{margin-left:auto;letter-spacing:.04em;text-transform:none}
-.rwrv-who{display:flex;align-items:center;gap:10px}
-.rwrv-av{flex:none;width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:var(--rw-fog)}
-.rwrv-nm{display:flex;flex-direction:column;flex:1;margin:0;font-size:12.5px;line-height:1.3;color:var(--rw-mut)} .rwrv-nm b{font-size:15px;color:var(--rw-ink);font-weight:700;letter-spacing:-.01em}
-.rwrv-res{flex:none;padding:5px 10px;border-radius:999px;background:var(--rw-brass);color:var(--rw-ink);font-size:12px;letter-spacing:.02em;white-space:nowrap}
+.rwrv-who{display:grid;grid-template-columns:38px 1fr auto;grid-template-areas:"av nm res";align-items:center;gap:10px}
+.rwrv-av{grid-area:av;flex:none;width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:var(--rw-fog)}
+.rwrv-nm{grid-area:nm;display:flex;flex-direction:column;min-width:0;gap:2px;margin:0}
+.rwrv-nm b{font-size:15px;color:var(--rw-ink);font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal!important;overflow-wrap:normal!important}
+.rwrv-nm span{font-size:12px;color:var(--rw-mut);line-height:1.3;white-space:normal;word-break:normal!important;overflow-wrap:normal!important}
+.rwrv-res{grid-area:res;flex:none;padding:5px 10px;border-radius:999px;background:var(--rw-brass);color:var(--rw-ink);font-size:12px;letter-spacing:.02em;white-space:nowrap}
 .rwrv-q{margin:0;font-size:14.5px;line-height:1.42;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .rwrv-note.is-new .rwrv-ico{box-shadow:0 0 0 0 var(--rw-brass);animation:rwrv-ping 1.2s cubic-bezier(.2,.6,.3,1) .5s}
 @keyframes rwrv-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--rw-brass) 90%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
@@ -1963,23 +1965,23 @@ const CSS_REVIEWS = `
 .rwrv.is-tab .rwrv-panel{grid-template-columns:1fr;padding:48px 40px} .rwrv.is-tab .rwrv-lock{justify-self:center}
 /* phone */
 .rwrv.is-ph{padding:24px 0 80px} .rwrv.is-ph .rw-wrap{--pad:var(--g)}
-.rwrv.is-ph .rwrv-who{display:grid;grid-template-columns:36px 1fr;align-items:start;column-gap:10px;row-gap:6px}
-.rwrv.is-ph .rwrv-av{grid-column:1;grid-row:1;width:36px;height:36px}
-.rwrv.is-ph .rwrv-nm{grid-column:2;grid-row:1;min-width:0;word-break:normal;overflow-wrap:normal}
-.rwrv.is-ph .rwrv-nm b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:normal}
-.rwrv.is-ph .rwrv-nm span{display:block;white-space:normal;line-height:1.3;word-break:normal}
-.rwrv.is-ph .rwrv-res{grid-column:2;grid-row:2;justify-self:start;margin-left:0;font-size:11.5px;padding:3px 8px}
+.rwrv.is-ph .rwrv-who{display:grid!important;grid-template-columns:36px 1fr!important;grid-template-areas:"av nm" ". res"!important;row-gap:8px!important;column-gap:10px!important;align-items:center!important}
+.rwrv.is-ph .rwrv-av{grid-area:av!important;width:36px!important;height:36px!important}
+.rwrv.is-ph .rwrv-nm{grid-area:nm!important;min-width:0!important;word-break:normal!important;overflow-wrap:normal!important}
+.rwrv.is-ph .rwrv-nm b{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:normal!important;overflow-wrap:normal!important}
+.rwrv.is-ph .rwrv-nm span{display:block!important;white-space:normal!important;line-height:1.25!important;word-break:normal!important;overflow-wrap:normal!important}
+.rwrv.is-ph .rwrv-res{grid-area:res!important;justify-self:start!important;margin-left:0!important;font-size:11px!important;padding:3px 8px!important;white-space:nowrap!important}
 .rwrv.is-ph .rwrv-panel{grid-template-columns:1fr;padding:40px 16px 16px;border-radius:26px;gap:40px} .rwrv.is-ph .rwrv-left{padding:0 6px}
 .rwrv.is-ph .rwrv-big{font-size:96px} .rwrv.is-ph .rwrv-sub{font-size:16px}
 .rwrv.is-ph .rwrv-lock{padding:12px 12px 14px;border-radius:40px;box-shadow:0 0 0 5px color-mix(in srgb,var(--rw-ink) 88%,var(--rw-stone)),0 40px 70px -40px rgba(13,14,16,.6)}
-.rwrv.is-ph .rwrv-clock{font-size:78px} .rwrv.is-ph .rwrv-note{padding:13px 13px 14px;border-radius:22px} .rwrv.is-ph .rwrv-res{font-size:12px;padding:4px 8px} .rwrv.is-ph .rwrv-q{font-size:14px}
+.rwrv.is-ph .rwrv-clock{font-size:78px} .rwrv.is-ph .rwrv-note{padding:13px 13px 14px;border-radius:22px} .rwrv.is-ph .rwrv-q{font-size:14px}
 @media (max-width: 810px){
-  .rwrv-who{display:grid!important;grid-template-columns:36px 1fr!important;align-items:start!important;column-gap:10px!important;row-gap:6px!important}
-  .rwrv-av{grid-column:1!important;grid-row:1!important;width:36px!important;height:36px!important}
-  .rwrv-nm{grid-column:2!important;grid-row:1!important;min-width:0!important;word-break:normal!important;overflow-wrap:normal!important}
-  .rwrv-nm b{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:normal!important}
-  .rwrv-nm span{display:block!important;white-space:normal!important;line-height:1.3!important;word-break:normal!important}
-  .rwrv-res{grid-column:2!important;grid-row:2!important;justify-self:start!important;margin-left:0!important;font-size:11.5px!important;padding:3px 8px!important}
+  .rwrv-who{display:grid!important;grid-template-columns:36px 1fr!important;grid-template-areas:"av nm" ". res"!important;row-gap:8px!important;column-gap:10px!important;align-items:center!important}
+  .rwrv-av{grid-area:av!important;width:36px!important;height:36px!important}
+  .rwrv-nm{grid-area:nm!important;min-width:0!important;word-break:normal!important;overflow-wrap:normal!important}
+  .rwrv-nm b{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:normal!important;overflow-wrap:normal!important}
+  .rwrv-nm span{display:block!important;white-space:normal!important;line-height:1.25!important;word-break:normal!important;overflow-wrap:normal!important}
+  .rwrv-res{grid-area:res!important;justify-self:start!important;margin-left:0!important;font-size:11px!important;padding:3px 8px!important;white-space:nowrap!important}
 }
 @media (prefers-reduced-motion:reduce){.rwrv-note{transition:none}}
 `

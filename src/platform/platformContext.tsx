@@ -15,6 +15,7 @@ import type {
   NotificationItem,
 } from './types';
 import { useAuth } from './auth/AuthContext';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 interface PlatformContextType {
   role: UserRole;
@@ -29,6 +30,7 @@ interface PlatformContextType {
   teamMembers: TeamMember[];
   auditLogs: AuditLogEntry[];
   notifications: NotificationItem[];
+  isLoading: boolean;
 
   // Audit & Notifications
   addAuditLog: (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => void;
@@ -100,16 +102,17 @@ interface PlatformContextType {
   }>;
 }
 
-const STORAGE_KEY = 'optenary_platform_db_v2';
+const STORAGE_KEY = 'optenary_platform_db_v3';
 
-const INITIAL_TEAM_MEMBERS: TeamMember[] = [
+// Optenary Official Staff
+const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'tm-1',
     name: 'Tirth Rathod',
     email: 'tirth@optenary.in',
     roleTitle: 'Founder & Lead Architect',
     department: 'Engineering & Architecture',
-    activeTasksCount: 2,
+    activeTasksCount: 0,
     avatarUrl: 'TR',
   },
   {
@@ -118,7 +121,7 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     email: 'yudhisthir@optenary.in',
     roleTitle: 'Cloud Architect & Database Lead',
     department: 'Infrastructure',
-    activeTasksCount: 1,
+    activeTasksCount: 0,
     avatarUrl: 'YR',
   },
   {
@@ -127,7 +130,7 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     email: 'gaurav@optenary.in',
     roleTitle: 'Full-Stack & Mobile Engineer',
     department: 'Frontend & Mobile',
-    activeTasksCount: 2,
+    activeTasksCount: 0,
     avatarUrl: 'GV',
   },
   {
@@ -136,522 +139,263 @@ const INITIAL_TEAM_MEMBERS: TeamMember[] = [
     email: 'bhavik@optenary.in',
     roleTitle: 'UI/UX Design Systems Engineer',
     department: 'Design',
-    activeTasksCount: 1,
+    activeTasksCount: 0,
     avatarUrl: 'BH',
   },
 ];
 
-const INITIAL_CLIENTS: Client[] = [
-  {
-    id: 'c-shree',
-    name: 'Ramesh Patel',
-    company: 'Shree Enterprise',
-    email: 'ramesh@shree-enterprise.com',
-    phone: '+91 98251 44210',
-    joinedDate: 'Oct 12, 2026',
-    activeProjectsCount: 1,
-    totalValue: '₹48,000',
-    status: 'active',
-    industry: 'Industrial Hardware & Fasteners',
-    isDemo: true,
-  },
-  {
-    id: 'c-mehta',
-    name: 'Rajesh Mehta',
-    company: 'Mehta Dairy',
-    email: 'rajesh@mehtadairy.in',
-    phone: '+91 94268 77319',
-    joinedDate: 'Sep 15, 2026',
-    activeProjectsCount: 1,
-    totalValue: '₹85,000',
-    status: 'active',
-    industry: 'Dairy & Agritech Logistics',
-    isDemo: true,
-  },
-  {
-    id: 'c-vishal',
-    name: 'Vishal Shah',
-    company: 'Vishal Masala',
-    email: 'vishal@vishalmasala.com',
-    phone: '+91 97243 11802',
-    joinedDate: 'Aug 04, 2026',
-    activeProjectsCount: 1,
-    totalValue: '₹36,000',
-    status: 'completed',
-    industry: 'FMCG & Spices',
-    isDemo: true,
-  },
-  {
-    id: 'c-urban',
-    name: 'Priya Dave',
-    company: 'Urban Nest',
-    email: 'priya@urbannestpg.com',
-    phone: '+91 98980 55140',
-    joinedDate: 'Oct 28, 2026',
-    activeProjectsCount: 1,
-    totalValue: '₹42,000',
-    status: 'active',
-    industry: 'Hospitality & Real Estate',
-    isDemo: true,
-  },
-];
+// Helper to filter out any old demo data from storage
+function getCleanLocalStorage<T>(key: string, fallback: T[]): T[] {
+  try {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_${key}`);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) {
+        return parsed.filter((item: any) => !item.isDemo && item.id !== 'c-shree' && item.id !== 'c-mehta' && item.id !== 'proj-shree');
+      }
+    }
+  } catch {}
+  return fallback;
+}
 
-const INITIAL_PROJECTS: Project[] = [
-  {
-    id: 'proj-shree',
-    clientId: 'c-shree',
-    clientName: 'Ramesh Patel',
-    companyName: 'Shree Enterprise',
-    title: 'Instant Industrial Fastener Catalog & B2B Search Engine',
-    service: 'Custom Software & Web Application',
-    progress: 75,
-    status: 'in_progress',
-    startDate: 'Oct 15, 2026',
-    targetDeliveryDate: 'Dec 10, 2026',
-    budget: '₹48,000',
-    requirementsSummary: 'Sub-second lookup across 10,000+ industrial hardware SKUs with instant category filters, live GST invoicing, and WhatsApp order dispatch.',
-    liveUrl: 'https://catalog.shree-enterprise.com',
-    isDemo: true,
-    teamMembers: [
-      { name: 'Tirth Rathod', role: 'Lead Architect & Engineering' },
-      { name: 'Gaurav', role: 'Full-Stack Developer' },
-      { name: 'Yudhisthir', role: 'Cloud & Database Optimization' },
-    ],
-    milestones: [
-      {
-        id: 'm-1',
-        name: 'Planning & Data Architecture',
-        status: 'completed',
-        progress: 100,
-        dueDate: 'Oct 22, 2026',
-        completedAt: 'Oct 21, 2026',
-        deliverables: ['Schema design', '10,000 SKU indexing roadmap', 'API contracts'],
-      },
-      {
-        id: 'm-2',
-        name: 'UI/UX Design Systems',
-        status: 'completed',
-        progress: 100,
-        dueDate: 'Nov 02, 2026',
-        completedAt: 'Nov 01, 2026',
-        deliverables: ['Figma design', 'Mobile search ergonomics', 'Specs'],
-      },
-      {
-        id: 'm-3',
-        name: 'Frontend Search & Core Engine',
-        status: 'in_progress',
-        progress: 75,
-        dueDate: 'Nov 26, 2026',
-        deliverables: ['Sub-second query cache', 'Faceted filters', 'Cart preview'],
-      },
-      {
-        id: 'm-4',
-        name: 'Testing, QA & GST Flow',
-        status: 'pending',
-        progress: 0,
-        dueDate: 'Dec 04, 2026',
-        deliverables: ['Stress testing', 'ERP synchronization', 'Cross-device audit'],
-      },
-      {
-        id: 'm-5',
-        name: 'Production Deployment & Launch',
-        status: 'pending',
-        progress: 0,
-        dueDate: 'Dec 10, 2026',
-        deliverables: ['Cloudflare Edge routing', 'SSL certification', 'Staff walkthrough'],
-      },
-    ],
-    updates: [
-      {
-        id: 'up-1',
-        projectId: 'proj-shree',
-        date: 'Today, 11:20 AM',
-        title: 'Instant Fastener Filter Engine is Live on Staging',
-        content: 'We integrated the memory-cached search index. Searching across 10,400 bolt and fastener specifications now returns results in under 0.4s on both 4G mobile and desktop.',
-        author: 'Tirth Rathod',
-        isPublicToClient: true,
-        tag: 'Milestone',
-      },
-      {
-        id: 'up-2',
-        projectId: 'proj-shree',
-        date: 'Nov 18, 2026',
-        title: 'GST Invoice Calculation Module Completed',
-        content: 'Verified multi-tier tax computation for wholesale B2B invoices. Downloadable PDF receipts generated with matching HSN codes.',
-        author: 'Gaurav',
-        isPublicToClient: true,
-        tag: 'Engineering',
-      },
-    ],
-    files: [
-      {
-        id: 'f-1',
-        projectId: 'proj-shree',
-        name: 'Shree_Fastener_Catalog_Architecture_v1.pdf',
-        category: 'requirements',
-        size: '1.4 MB',
-        uploadedAt: 'Oct 16, 2026',
-        url: '#',
-        type: 'pdf',
-      },
-      {
-        id: 'f-2',
-        projectId: 'proj-shree',
-        name: 'Brand_Logo_Assets_HighRes.zip',
-        category: 'brand_assets',
-        size: '8.2 MB',
-        uploadedAt: 'Oct 18, 2026',
-        url: '#',
-        type: 'zip',
-      },
-      {
-        id: 'f-3',
-        projectId: 'proj-shree',
-        name: 'Figma_UI_Components_Specification.fig',
-        category: 'designs',
-        size: '14.5 MB',
-        uploadedAt: 'Nov 02, 2026',
-        url: '#',
-        type: 'figma',
-      },
-    ],
-    timeline: [
-      {
-        id: 'ev-1',
-        date: 'Oct 15, 2026',
-        title: 'Project Initiated',
-        description: 'Client onboarding completed and requirements approved.',
-        type: 'onboarding',
-      },
-      {
-        id: 'ev-2',
-        date: 'Oct 21, 2026',
-        title: 'Architecture Finalized',
-        description: 'PostgreSQL search index schema validated for 10k items.',
-        type: 'milestone',
-      },
-      {
-        id: 'ev-3',
-        date: 'Nov 01, 2026',
-        title: 'UI/UX Design Approved',
-        description: 'Mobile-first design approved by Ramesh Patel.',
-        type: 'milestone',
-      },
-    ],
-  },
-  {
-    id: 'proj-mehta',
-    clientId: 'c-mehta',
-    clientName: 'Rajesh Mehta',
-    companyName: 'Mehta Dairy',
-    title: 'Enterprise Milk Supply Chain & Route Logistics ERP',
-    service: 'Mobile & Cloud Architecture',
-    progress: 76,
-    status: 'in_progress',
-    startDate: 'Sep 18, 2026',
-    targetDeliveryDate: 'Nov 30, 2026',
-    budget: '₹85,000',
-    requirementsSummary: 'Real-time collection center milk intake tracking, fat/SNF rate calculation, automated payment slips, and morning delivery route dispatch.',
-    isDemo: true,
-    teamMembers: [
-      { name: 'Tirth Rathod', role: 'System Architect' },
-      { name: 'Gaurav', role: 'React Native & Mobile Lead' },
-    ],
-    milestones: [
-      { id: 'mm-1', name: 'Planning & Hardware Protocol', status: 'completed', progress: 100 },
-      { id: 'mm-2', name: 'Collection Center Tablet App', status: 'completed', progress: 100 },
-      { id: 'mm-3', name: 'Route Dispatch & Fleet Tracking', status: 'completed', progress: 100 },
-      { id: 'mm-4', name: 'UAT & Field Pilot Verification', status: 'in_progress', progress: 80, dueDate: 'Nov 27, 2026' },
-      { id: 'mm-5', name: 'Production Rollout', status: 'pending', progress: 0, dueDate: 'Nov 30, 2026' },
-    ],
-    updates: [
-      {
-        id: 'mup-1',
-        projectId: 'proj-mehta',
-        date: 'Nov 20, 2026',
-        title: 'Pilot testing across 12 collection centers completed',
-        content: 'Zero sync errors recorded during morning milk intake. Thermal receipts generated in 1.2s.',
-        author: 'Tirth Rathod',
-        isPublicToClient: true,
-      },
-    ],
-    files: [],
-    timeline: [
-      { id: 'mev-1', date: 'Sep 18, 2026', title: 'Onboarding Completed', description: 'Kickoff meeting held at Surat plant.', type: 'onboarding' },
-    ],
-  },
-];
+// Database to Domain Mappers
+function mapClientFromDb(r: any): Client {
+  return {
+    id: r.id,
+    name: r.name || '',
+    company: r.company || '',
+    email: r.email || '',
+    phone: r.phone || '',
+    joinedDate: r.joined_date || (r.created_at ? new Date(r.created_at).toLocaleDateString() : 'Today'),
+    activeProjectsCount: r.active_projects_count || 0,
+    totalValue: r.total_value || '₹0',
+    status: r.status || 'active',
+    industry: r.industry,
+    website: r.website,
+    notes: r.notes,
+    isDemo: false,
+  };
+}
 
-const INITIAL_TASKS: Task[] = [
-  {
-    id: 'tsk-1',
-    projectId: 'proj-shree',
-    title: 'Benchmark 10,000 SKU query response under 400ms',
-    description: 'Tune memory index and Postgres full-text indexing for hardware bolt specs.',
-    status: 'in_progress',
-    priority: 'urgent',
-    assignedTo: 'tm-1',
-    assignedToName: 'Tirth Rathod',
-    dueDate: 'Nov 25, 2026',
-    estimatedHours: 8,
-    isCompleted: false,
-    createdAt: 'Nov 18, 2026',
-    isDemo: true,
-  },
-  {
-    id: 'tsk-2',
-    projectId: 'proj-shree',
-    title: 'Mobile touch ergonomics for fastener selector',
-    description: 'Ensure filter pills and bottom modal sheets work smoothly on 360px viewport.',
-    status: 'in_progress',
-    priority: 'high',
-    assignedTo: 'tm-4',
-    assignedToName: 'Bhavik',
-    dueDate: 'Nov 26, 2026',
-    estimatedHours: 6,
-    isCompleted: false,
-    createdAt: 'Nov 19, 2026',
-    isDemo: true,
-  },
-  {
-    id: 'tsk-3',
-    projectId: 'proj-shree',
-    title: 'GST wholesale tax breakdown in PDF quote output',
-    description: 'Validate CGST + SGST vs IGST for inter-state Gujarat hardware shipments.',
-    status: 'done',
-    priority: 'medium',
-    assignedTo: 'tm-3',
-    assignedToName: 'Gaurav',
-    dueDate: 'Nov 20, 2026',
-    estimatedHours: 12,
-    isCompleted: true,
-    createdAt: 'Nov 14, 2026',
-    isDemo: true,
-  },
-  {
-    id: 'tsk-4',
-    projectId: 'proj-mehta',
-    title: 'Stress-test offline sqlite sync on tablet devices',
-    description: 'Simulate connection drops during 6:00 AM rural milk collection rounds.',
-    status: 'in_progress',
-    priority: 'urgent',
-    assignedTo: 'tm-3',
-    assignedToName: 'Gaurav',
-    dueDate: 'Nov 27, 2026',
-    estimatedHours: 14,
-    isCompleted: false,
-    createdAt: 'Nov 16, 2026',
-    isDemo: true,
-  },
-  {
-    id: 'tsk-5',
-    projectId: 'proj-mehta',
-    title: 'Thermal Bluetooth printer handshake protocol',
-    description: 'Ensure 1-click receipt printing on Android 14 without Bluetooth disconnects.',
-    status: 'done',
-    priority: 'high',
-    assignedTo: 'tm-2',
-    assignedToName: 'Yudhisthir',
-    dueDate: 'Nov 19, 2026',
-    estimatedHours: 10,
-    isCompleted: true,
-    createdAt: 'Nov 12, 2026',
-    isDemo: true,
-  },
-];
+function mapProjectFromDb(r: any): Project {
+  return {
+    id: r.id,
+    clientId: r.client_id,
+    clientName: r.client_name || '',
+    companyName: r.company_name || '',
+    title: r.title || '',
+    service: r.service || 'Web Development',
+    description: r.description,
+    progress: r.progress || 0,
+    status: r.status || 'planning',
+    startDate: r.start_date || (r.created_at ? new Date(r.created_at).toLocaleDateString() : 'Today'),
+    targetDeliveryDate: r.target_delivery_date || 'TBD',
+    budget: r.budget || '₹0',
+    requirementsSummary: r.requirements_summary || '',
+    liveUrl: r.live_url,
+    repositoryUrl: r.repository_url,
+    isDemo: false,
+    teamMembers: Array.isArray(r.team_members) ? r.team_members : [{ name: 'Optenary Engineering', role: 'Full-Stack Team' }],
+    milestones: (r.milestones || []).map((m: any) => ({
+      id: m.id,
+      name: m.name,
+      status: m.status || 'pending',
+      progress: m.progress || 0,
+      dueDate: m.due_date,
+      completedAt: m.completed_at,
+      deliverables: m.deliverables || [],
+    })),
+    updates: (r.project_updates || []).map((u: any) => ({
+      id: u.id,
+      projectId: u.project_id,
+      date: u.date || (u.created_at ? new Date(u.created_at).toLocaleDateString() : 'Today'),
+      title: u.title,
+      content: u.content,
+      author: u.author || u.author_name || 'Optenary Team',
+      isPublicToClient: u.is_public_to_client ?? true,
+      tag: u.tag || 'Engineering',
+    })),
+    files: (r.project_files || []).map((f: any) => ({
+      id: f.id,
+      projectId: f.project_id,
+      name: f.name,
+      category: f.category || 'deliverables',
+      size: f.size || '1.0 MB',
+      uploadedAt: f.uploaded_at || 'Today',
+      url: f.url || f.file_url || '#',
+      type: f.type || f.file_type || 'document',
+      uploadedBy: f.uploaded_by,
+    })),
+    timeline: Array.isArray(r.timeline)
+      ? r.timeline.map((t: any) => ({
+          id: t.id || `ev-${Math.random()}`,
+          date: t.date || 'Today',
+          title: t.title,
+          description: t.description,
+          type: t.type || 'milestone',
+        }))
+      : [],
+  };
+}
 
-const INITIAL_LEADS: Lead[] = [
-  {
-    id: 'lead-1',
-    name: 'Karan Varma',
-    company: 'Apex Textile Mills',
-    email: 'karan@apextextiles.com',
-    phone: '+91 98240 12345',
-    service: 'AI Agents & Automation',
-    budget: '₹65,000',
-    source: 'Website Inbound',
-    status: 'proposal_sent',
-    notes: 'Interested in automated inventory forecasting and WhatsApp supplier quote bot.',
-    createdAt: 'Nov 19, 2026',
-    isDemo: true,
-    proposal: {
-      id: 'prop-apex',
-      title: 'Apex Mill Autonomous Inventory Agent',
-      totalAmount: '₹65,000',
-      scopeItems: [
-        'WhatsApp Supplier RFQ Dispatch Bot',
-        'Gemini Structured Reasoning Integration',
-        'Yarn Stock Threshold Alerts',
-        'Staff Dashboard & Audit Logging',
-      ],
-      timelineWeeks: 3,
-      status: 'sent',
-      validUntil: 'Dec 05, 2026',
-    },
-  },
-  {
-    id: 'lead-2',
-    name: 'Divya Patel',
-    company: 'Zenith Ceramics',
-    email: 'divya@zenithceramics.in',
-    phone: '+91 98795 33201',
-    service: 'Web Development & Catalog',
-    budget: '₹45,000',
-    source: 'Referral',
-    status: 'qualified',
-    notes: 'Tile & slab manufacturer needing high-res 3D tile visualizer and distributor portal.',
-    createdAt: 'Nov 21, 2026',
-    isDemo: true,
-  },
-  {
-    id: 'lead-3',
-    name: 'Nitin Desai',
-    company: 'Surat Diamond Craft',
-    email: 'nitin@diamondcraft.com',
-    phone: '+91 98250 88990',
-    service: 'Custom Software & ERP',
-    budget: '₹1,20,000',
-    source: 'Direct Inbound',
-    status: 'new',
-    notes: 'Inquiry received for custom rough-to-polish diamond tracking ERP.',
-    createdAt: 'Nov 22, 2026',
-    isDemo: true,
-  },
-];
+function mapLeadFromDb(r: any): Lead {
+  return {
+    id: r.id,
+    name: r.name || '',
+    company: r.company || '',
+    email: r.email || '',
+    phone: r.phone || '',
+    service: r.service || 'Web Development',
+    budget: r.budget || '₹35,000',
+    source: r.source || 'Website Inbound',
+    status: r.stage || r.status || 'new',
+    notes: r.notes || '',
+    followUpDate: r.follow_up_date,
+    createdAt: r.created_at ? new Date(r.created_at).toLocaleDateString() : 'Today',
+    proposal: r.proposal,
+    isDemo: false,
+  };
+}
 
-const INITIAL_AUDIT_LOGS: AuditLogEntry[] = [
-  {
-    id: 'log-1',
-    timestamp: 'Today, 10:30 AM',
-    actor: 'Tirth Rathod',
-    action: 'Milestone Updated',
-    category: 'project',
-    details: 'Sprint 0: Architecture & Data Schema set to 100% completed for Shree Enterprise.',
-  },
-  {
-    id: 'log-2',
-    timestamp: 'Yesterday, 4:15 PM',
-    actor: 'Tirth Rathod',
-    action: 'Lead Created',
-    category: 'lead',
-    details: 'New inbound lead registered for Radhika Export (Surat).',
-  },
-  {
-    id: 'log-3',
-    timestamp: 'Nov 20, 2026',
-    actor: 'Yudhisthir Rathod',
-    action: 'Task Completed',
-    category: 'task',
-    details: 'Edge routing & Supabase RLS security policies verified.',
-  },
-  {
-    id: 'log-4',
-    timestamp: 'Nov 18, 2026',
-    actor: 'Tirth Rathod',
-    action: 'Client Onboarded',
-    category: 'client',
-    details: 'Mehta Dairy digital commerce project launched on staging.',
-  },
-];
+function mapTaskFromDb(r: any): Task {
+  return {
+    id: r.id,
+    projectId: r.project_id,
+    milestoneId: r.milestone_id,
+    assignedTo: r.assigned_to,
+    assignedToName: r.assigned_to_name,
+    title: r.title,
+    description: r.description,
+    status: r.status || 'todo',
+    priority: r.priority || 'medium',
+    dueDate: r.due_date,
+    estimatedHours: r.estimated_hours,
+    isCompleted: r.is_completed ?? (r.status === 'done'),
+    createdAt: r.created_at ? new Date(r.created_at).toLocaleDateString() : 'Today',
+    isDemo: false,
+  };
+}
 
-const INITIAL_NOTIFICATIONS: NotificationItem[] = [
-  {
-    id: 'notif-1',
-    title: 'New Inbound Lead',
-    description: 'Surat Diamond Craft submitted inquiry for Custom Software & ERP.',
-    timestamp: '2 hours ago',
-    isRead: false,
-    link: '/admin/leads',
-    type: 'lead',
-  },
-  {
-    id: 'notif-2',
-    title: 'Milestone Ready for Review',
-    description: 'Shree Enterprise Sprint 1: Catalog Search Engine deployed.',
-    timestamp: '5 hours ago',
-    isRead: false,
-    link: '/admin/projects',
-    type: 'milestone',
-  },
-  {
-    id: 'notif-3',
-    title: 'High Priority Task Assigned',
-    description: 'Optimize Sub-Second TTFB on Vercel Edge assigned to Yudhisthir.',
-    timestamp: '1 day ago',
-    isRead: true,
-    link: '/admin/tasks',
-    type: 'task',
-  },
-];
+function mapTeamFromDb(r: any): TeamMember {
+  return {
+    id: r.id,
+    name: r.name,
+    email: r.email,
+    roleTitle: r.role_title,
+    department: r.department,
+    activeTasksCount: r.active_tasks_count || 0,
+    avatarUrl: r.avatar_url || r.name.slice(0, 2).toUpperCase(),
+  };
+}
+
+function mapLogFromDb(r: any): AuditLogEntry {
+  return {
+    id: r.id,
+    timestamp: r.timestamp || (r.created_at ? new Date(r.created_at).toLocaleString() : 'Just now'),
+    actor: r.actor || 'Administrator',
+    action: r.action || r.title || 'System Event',
+    category: r.category || r.log_type || 'system',
+    details: r.details || r.description || '',
+  };
+}
 
 const PlatformContext = createContext<PlatformContextType | undefined>(undefined);
 
 export function PlatformProvider({ children }: { children: ReactNode }) {
   const { currentUser, role } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [clients, setClients] = useState<Client[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_clients`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_CLIENTS;
-  });
+  // States initialized strictly empty (0 fake/mock records)
+  const [clients, setClients] = useState<Client[]>(() => getCleanLocalStorage<Client>('clients', []));
+  const [projects, setProjects] = useState<Project[]>(() => getCleanLocalStorage<Project>('projects', []));
+  const [leads, setLeads] = useState<Lead[]>(() => getCleanLocalStorage<Lead>('leads', []));
+  const [tasks, setTasks] = useState<Task[]>(() => getCleanLocalStorage<Task>('tasks', []));
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() =>
+    getCleanLocalStorage<TeamMember>('team', DEFAULT_TEAM_MEMBERS)
+  );
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() =>
+    getCleanLocalStorage<AuditLogEntry>('audit', [])
+  );
+  const [notifications, setNotifications] = useState<NotificationItem[]>(() =>
+    getCleanLocalStorage<NotificationItem>('notifs', [])
+  );
 
-  const [projects, setProjects] = useState<Project[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_projects`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_PROJECTS;
-  });
-
-  const [leads, setLeads] = useState<Lead[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_leads`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_LEADS;
-  });
-
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_tasks`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_TASKS;
-  });
-
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_team`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_TEAM_MEMBERS;
-  });
-
-  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_audit`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_AUDIT_LOGS;
-  });
-
-  const [notifications, setNotifications] = useState<NotificationItem[]>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_notifs`);
-      if (saved) return JSON.parse(saved);
-    } catch {}
-    return INITIAL_NOTIFICATIONS;
-  });
-
-  // Client ID selection: strictly isolated if logged in as client!
-  const [selectedClientId, setSelectedClientId] = useState<string>('c-shree');
+  const [selectedClientId, setSelectedClientId] = useState<string>('');
 
   const currentClientId =
-    role === 'client' && currentUser?.clientId ? currentUser.clientId : selectedClientId;
+    role === 'client' && currentUser?.clientId
+      ? currentUser.clientId
+      : selectedClientId || clients[0]?.id || '';
 
-  // Sync to localStorage
+  // 1. Initial Load: Fetch live records from Supabase
+  useEffect(() => {
+    // Clear old mock demo keys from previous storage versions
+    try {
+      localStorage.removeItem('optenary_platform_db_v2_clients');
+      localStorage.removeItem('optenary_platform_db_v2_projects');
+      localStorage.removeItem('optenary_platform_db_v2_leads');
+      localStorage.removeItem('optenary_platform_db_v2_tasks');
+    } catch {}
+
+    if (!isSupabaseConfigured || !supabase) return;
+
+    let isMounted = true;
+    setIsLoading(true);
+
+    async function fetchPlatformData() {
+      try {
+        // Query in parallel
+        const [
+          clientsRes,
+          projectsRes,
+          leadsRes,
+          tasksRes,
+          teamRes,
+          logsRes,
+        ] = await Promise.all([
+          supabase!.from('clients').select('*').order('created_at', { ascending: false }),
+          supabase!.from('projects').select('*, milestones(*), project_updates(*), project_files(*)').order('created_at', { ascending: false }),
+          supabase!.from('leads').select('*').order('created_at', { ascending: false }),
+          supabase!.from('tasks').select('*').order('created_at', { ascending: false }),
+          supabase!.from('team_members').select('*'),
+          supabase!.from('activity_logs').select('*').order('created_at', { ascending: false }).limit(50),
+        ]);
+
+        if (!isMounted) return;
+
+        if (clientsRes.data) {
+          setClients(clientsRes.data.map(mapClientFromDb));
+        }
+        if (projectsRes.data) {
+          setProjects(projectsRes.data.map(mapProjectFromDb));
+        }
+        if (leadsRes.data) {
+          setLeads(leadsRes.data.map(mapLeadFromDb));
+        }
+        if (tasksRes.data) {
+          setTasks(tasksRes.data.map(mapTaskFromDb));
+        }
+        if (teamRes.data && teamRes.data.length > 0) {
+          setTeamMembers(teamRes.data.map(mapTeamFromDb));
+        }
+        if (logsRes.data) {
+          setAuditLogs(logsRes.data.map(mapLogFromDb));
+        }
+      } catch (err) {
+        console.warn('Supabase synchronization fallback to local cache:', err);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    }
+
+    fetchPlatformData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // 2. Local Storage Persistence Sync
   useEffect(() => {
     try {
       localStorage.setItem(`${STORAGE_KEY}_clients`, JSON.stringify(clients));
@@ -672,6 +416,17 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       timestamp: 'Just now',
     };
     setAuditLogs((prev) => [newLog, ...prev]);
+
+    // Async write to Supabase
+    if (supabase) {
+      supabase.from('activity_logs').insert({
+        id: newLog.id,
+        actor: newLog.actor,
+        action: newLog.action,
+        category: newLog.category,
+        details: newLog.details,
+      }).then();
+    }
   };
 
   const addNotification = (notif: Omit<NotificationItem, 'id' | 'timestamp' | 'isRead'>) => {
@@ -698,7 +453,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     setNotifications([]);
   };
 
-  // Recalculate Project Progress Automatically from Milestones or Tasks
+  // Recalculate Project Progress Automatically from Milestones
   const recalculateProgress = (milestones: Milestone[]): number => {
     if (!milestones.length) return 0;
     const total = milestones.reduce((sum, m) => sum + m.progress, 0);
@@ -707,32 +462,79 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
 
   // CLIENT CRUD
   const addClient = (data: Omit<Client, 'id' | 'joinedDate' | 'activeProjectsCount'>): Client => {
+    const id = `c-${Date.now().toString(36)}`;
     const newClient: Client = {
       ...data,
-      id: `c-${Date.now().toString(36)}`,
+      id,
       joinedDate: 'Today',
       activeProjectsCount: 0,
       isDemo: false,
     };
     setClients((prev) => [newClient, ...prev]);
+
+    // Supabase write
+    if (supabase) {
+      supabase.from('clients').insert({
+        id,
+        name: newClient.name,
+        company: newClient.company,
+        email: newClient.email,
+        phone: newClient.phone,
+        industry: newClient.industry,
+        website: newClient.website,
+        status: newClient.status,
+        total_value: newClient.totalValue,
+        notes: newClient.notes,
+      }).then();
+    }
+
+    addAuditLog({
+      actor: currentUser?.name || 'Administrator',
+      action: 'Client Created',
+      category: 'client',
+      details: `Created client account for ${newClient.company} (${newClient.name}).`,
+    });
+
     return newClient;
   };
 
   const updateClient = (id: string, updates: Partial<Client>) => {
     setClients((prev) => prev.map((c) => (c.id === id ? { ...c, ...updates } : c)));
+
+    // Supabase update
+    if (supabase) {
+      const dbUpdates: Record<string, any> = {};
+      if (updates.name !== undefined) dbUpdates.name = updates.name;
+      if (updates.company !== undefined) dbUpdates.company = updates.company;
+      if (updates.email !== undefined) dbUpdates.email = updates.email;
+      if (updates.phone !== undefined) dbUpdates.phone = updates.phone;
+      if (updates.status !== undefined) dbUpdates.status = updates.status;
+      if (updates.totalValue !== undefined) dbUpdates.total_value = updates.totalValue;
+      if (updates.industry !== undefined) dbUpdates.industry = updates.industry;
+      if (updates.website !== undefined) dbUpdates.website = updates.website;
+      if (updates.notes !== undefined) dbUpdates.notes = updates.notes;
+
+      supabase.from('clients').update(dbUpdates).eq('id', id).then();
+    }
   };
 
   const deleteClient = (id: string) => {
     setClients((prev) => prev.filter((c) => c.id !== id));
     setProjects((prev) => prev.filter((p) => p.clientId !== id));
+
+    if (supabase) {
+      supabase.from('clients').delete().eq('id', id).then();
+    }
   };
 
   // PROJECT CRUD
   const addProject = (data: Omit<Project, 'id' | 'timeline' | 'updates' | 'files' | 'progress'>): Project => {
+    const id = `proj-${Date.now().toString(36)}`;
+    const progress = recalculateProgress(data.milestones || []);
     const newProject: Project = {
       ...data,
-      id: `proj-${Date.now().toString(36)}`,
-      progress: recalculateProgress(data.milestones || []),
+      id,
+      progress,
       status: 'planning',
       updates: [],
       files: [],
@@ -753,16 +555,81 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         c.id === data.clientId ? { ...c, activeProjectsCount: c.activeProjectsCount + 1 } : c
       )
     );
+
+    // Supabase write
+    if (supabase) {
+      supabase.from('projects').insert({
+        id,
+        client_id: data.clientId,
+        client_name: data.clientName,
+        company_name: data.companyName,
+        title: data.title,
+        service: data.service,
+        description: data.description,
+        requirements_summary: data.requirementsSummary,
+        status: 'planning',
+        progress,
+        start_date: data.startDate,
+        target_delivery_date: data.targetDeliveryDate,
+        budget: data.budget,
+        live_url: data.liveUrl,
+        repository_url: data.repositoryUrl,
+        team_members: data.teamMembers,
+        timeline: newProject.timeline,
+      }).then();
+
+      // Insert milestones
+      if (data.milestones && data.milestones.length > 0) {
+        const dbMilestones = data.milestones.map((m, idx) => ({
+          id: m.id || `m-${Date.now()}-${idx}`,
+          project_id: id,
+          name: m.name,
+          status: m.status,
+          progress: m.progress,
+          due_date: m.dueDate,
+          deliverables: m.deliverables || [],
+          order_index: idx,
+        }));
+        supabase.from('milestones').insert(dbMilestones).then();
+      }
+    }
+
+    addAuditLog({
+      actor: currentUser?.name || 'Administrator',
+      action: 'Project Initialized',
+      category: 'project',
+      details: `Provisioned project "${newProject.title}" for ${newProject.companyName}.`,
+    });
+
     return newProject;
   };
 
   const updateProject = (id: string, updates: Partial<Project>) => {
     setProjects((prev) => prev.map((p) => (p.id === id ? { ...p, ...updates } : p)));
+
+    if (supabase) {
+      const dbUpdates: Record<string, any> = {};
+      if (updates.title !== undefined) dbUpdates.title = updates.title;
+      if (updates.service !== undefined) dbUpdates.service = updates.service;
+      if (updates.status !== undefined) dbUpdates.status = updates.status;
+      if (updates.progress !== undefined) dbUpdates.progress = updates.progress;
+      if (updates.targetDeliveryDate !== undefined) dbUpdates.target_delivery_date = updates.targetDeliveryDate;
+      if (updates.budget !== undefined) dbUpdates.budget = updates.budget;
+      if (updates.liveUrl !== undefined) dbUpdates.live_url = updates.liveUrl;
+      if (updates.repositoryUrl !== undefined) dbUpdates.repository_url = updates.repositoryUrl;
+      if (updates.requirementsSummary !== undefined) dbUpdates.requirements_summary = updates.requirementsSummary;
+
+      supabase.from('projects').update(dbUpdates).eq('id', id).then();
+    }
   };
 
   const deleteProject = (id: string) => {
     setProjects((prev) => prev.filter((p) => p.id !== id));
     setTasks((prev) => prev.filter((t) => t.projectId !== id));
+
+    if (supabase) {
+      supabase.from('projects').delete().eq('id', id).then();
+    }
   };
 
   const updateMilestone = (
@@ -806,18 +673,45 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         };
       })
     );
+
+    if (supabase) {
+      supabase.from('milestones').update({
+        status,
+        progress,
+        completed_at: status === 'completed' ? new Date().toISOString() : null,
+      }).eq('id', milestoneId).then();
+    }
   };
 
   // TASK CRUD
   const addTask = (taskData: Omit<Task, 'id' | 'createdAt' | 'isCompleted'>): Task => {
+    const id = `tsk-${Date.now().toString(36)}`;
     const newTask: Task = {
       ...taskData,
-      id: `tsk-${Date.now().toString(36)}`,
+      id,
       createdAt: 'Today',
       isCompleted: taskData.status === 'done',
       isDemo: false,
     };
     setTasks((prev) => [newTask, ...prev]);
+
+    if (supabase) {
+      supabase.from('tasks').insert({
+        id,
+        project_id: taskData.projectId,
+        milestone_id: taskData.milestoneId,
+        assigned_to: taskData.assignedTo,
+        assigned_to_name: taskData.assignedToName,
+        title: taskData.title,
+        description: taskData.description,
+        status: taskData.status,
+        priority: taskData.priority,
+        due_date: taskData.dueDate,
+        estimated_hours: taskData.estimatedHours || 0,
+        is_completed: newTask.isCompleted,
+      }).then();
+    }
+
     return newTask;
   };
 
@@ -833,44 +727,84 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         };
       })
     );
+
+    if (supabase) {
+      const dbUpdates: Record<string, any> = {};
+      if (updates.title !== undefined) dbUpdates.title = updates.title;
+      if (updates.status !== undefined) {
+        dbUpdates.status = updates.status;
+        dbUpdates.is_completed = updates.status === 'done';
+      }
+      if (updates.priority !== undefined) dbUpdates.priority = updates.priority;
+      if (updates.assignedTo !== undefined) dbUpdates.assigned_to = updates.assignedTo;
+      if (updates.assignedToName !== undefined) dbUpdates.assigned_to_name = updates.assignedToName;
+      if (updates.dueDate !== undefined) dbUpdates.due_date = updates.dueDate;
+      if (updates.description !== undefined) dbUpdates.description = updates.description;
+
+      supabase.from('tasks').update(dbUpdates).eq('id', id).then();
+    }
   };
 
   const deleteTask = (id: string) => {
     setTasks((prev) => prev.filter((t) => t.id !== id));
+
+    if (supabase) {
+      supabase.from('tasks').delete().eq('id', id).then();
+    }
   };
 
   const toggleTaskStatus = (id: string) => {
-    setTasks((prev) =>
-      prev.map((t) => {
-        if (t.id !== id) return t;
-        const nextStatus = t.status === 'done' ? 'todo' : 'done';
-        return {
-          ...t,
-          status: nextStatus,
-          isCompleted: nextStatus === 'done',
-        };
-      })
-    );
+    const task = tasks.find((t) => t.id === id);
+    if (!task) return;
+    const nextStatus = task.status === 'done' ? 'todo' : 'done';
+    updateTask(id, { status: nextStatus });
   };
 
   // TEAM CRUD
   const addTeamMember = (data: Omit<TeamMember, 'id' | 'activeTasksCount'>): TeamMember => {
+    const id = `tm-${Date.now().toString(36)}`;
     const newMember: TeamMember = {
       ...data,
-      id: `tm-${Date.now().toString(36)}`,
+      id,
       activeTasksCount: 0,
       avatarUrl: data.name.slice(0, 2).toUpperCase(),
     };
     setTeamMembers((prev) => [...prev, newMember]);
+
+    if (supabase) {
+      supabase.from('team_members').insert({
+        id,
+        name: newMember.name,
+        email: newMember.email,
+        role_title: newMember.roleTitle,
+        department: newMember.department,
+        avatar_url: newMember.avatarUrl,
+      }).then();
+    }
+
     return newMember;
   };
 
   const updateTeamMember = (id: string, updates: Partial<TeamMember>) => {
     setTeamMembers((prev) => prev.map((tm) => (tm.id === id ? { ...tm, ...updates } : tm)));
+
+    if (supabase) {
+      const dbUpdates: Record<string, any> = {};
+      if (updates.name !== undefined) dbUpdates.name = updates.name;
+      if (updates.email !== undefined) dbUpdates.email = updates.email;
+      if (updates.roleTitle !== undefined) dbUpdates.role_title = updates.roleTitle;
+      if (updates.department !== undefined) dbUpdates.department = updates.department;
+
+      supabase.from('team_members').update(dbUpdates).eq('id', id).then();
+    }
   };
 
   const deleteTeamMember = (id: string) => {
     setTeamMembers((prev) => prev.filter((tm) => tm.id !== id));
+
+    if (supabase) {
+      supabase.from('team_members').delete().eq('id', id).then();
+    }
   };
 
   // UPDATES & FILES
@@ -878,9 +812,10 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     projectId: string,
     updateData: Omit<ProjectUpdate, 'id' | 'date' | 'projectId'>
   ) => {
+    const id = `up-${Date.now()}`;
     const newUpdate: ProjectUpdate = {
       ...updateData,
-      id: `up-${Date.now()}`,
+      id,
       projectId,
       date: 'Today, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
@@ -904,15 +839,28 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         };
       })
     );
+
+    if (supabase) {
+      supabase.from('project_updates').insert({
+        id,
+        project_id: projectId,
+        title: updateData.title,
+        content: updateData.content,
+        author: updateData.author,
+        tag: updateData.tag || 'Engineering',
+        is_public_to_client: updateData.isPublicToClient,
+      }).then();
+    }
   };
 
   const addProjectFile = (
     projectId: string,
     fileData: Omit<FileItem, 'id' | 'uploadedAt' | 'projectId'>
   ) => {
+    const id = `f-${Date.now()}`;
     const newFile: FileItem = {
       ...fileData,
-      id: `f-${Date.now()}`,
+      id,
       projectId,
       uploadedAt: 'Today',
     };
@@ -926,6 +874,18 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         };
       })
     );
+
+    if (supabase) {
+      supabase.from('project_files').insert({
+        id,
+        project_id: projectId,
+        name: fileData.name,
+        category: fileData.category,
+        size: fileData.size,
+        type: fileData.type,
+        url: fileData.url,
+      }).then();
+    }
   };
 
   const deleteProjectFile = (projectId: string, fileId: string) => {
@@ -938,29 +898,79 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         };
       })
     );
+
+    if (supabase) {
+      supabase.from('project_files').delete().eq('id', fileId).then();
+    }
   };
 
   // LEADS & ONBOARDING
   const addLead = (leadData: Omit<Lead, 'id' | 'createdAt'>) => {
+    const id = `lead-${Date.now().toString(36)}`;
     const newLead: Lead = {
       ...leadData,
-      id: `lead-${Date.now().toString(36)}`,
+      id,
       createdAt: 'Today',
       isDemo: false,
     };
     setLeads((prev) => [newLead, ...prev]);
+
+    if (supabase) {
+      supabase.from('leads').insert({
+        id,
+        name: leadData.name,
+        company: leadData.company,
+        email: leadData.email,
+        phone: leadData.phone,
+        service: leadData.service,
+        budget: leadData.budget,
+        source: leadData.source,
+        status: leadData.status,
+        notes: leadData.notes,
+        follow_up_date: leadData.followUpDate,
+      }).then();
+    }
+
+    addAuditLog({
+      actor: currentUser?.name || 'Administrator',
+      action: 'Lead Registered',
+      category: 'lead',
+      details: `New inbound lead from ${newLead.company} (${newLead.name}) for ${newLead.service}.`,
+    });
   };
 
   const updateLead = (id: string, updates: Partial<Lead>) => {
     setLeads((prev) => prev.map((l) => (l.id === id ? { ...l, ...updates } : l)));
+
+    if (supabase) {
+      const dbUpdates: Record<string, any> = {};
+      if (updates.name !== undefined) dbUpdates.name = updates.name;
+      if (updates.company !== undefined) dbUpdates.company = updates.company;
+      if (updates.email !== undefined) dbUpdates.email = updates.email;
+      if (updates.phone !== undefined) dbUpdates.phone = updates.phone;
+      if (updates.service !== undefined) dbUpdates.service = updates.service;
+      if (updates.budget !== undefined) dbUpdates.budget = updates.budget;
+      if (updates.status !== undefined) {
+        dbUpdates.status = updates.status;
+        dbUpdates.stage = updates.status;
+      }
+      if (updates.notes !== undefined) dbUpdates.notes = updates.notes;
+      if (updates.proposal !== undefined) dbUpdates.proposal = updates.proposal;
+
+      supabase.from('leads').update(dbUpdates).eq('id', id).then();
+    }
   };
 
   const deleteLead = (id: string) => {
     setLeads((prev) => prev.filter((l) => l.id !== id));
+
+    if (supabase) {
+      supabase.from('leads').delete().eq('id', id).then();
+    }
   };
 
   const updateLeadStatus = (leadId: string, status: Lead['status']) => {
-    setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status } : l)));
+    updateLead(leadId, { status });
   };
 
   const createProposal = (leadId: string, proposalData: Omit<Proposal, 'id'>) => {
@@ -969,16 +979,14 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       id: `prop-${Date.now().toString(36)}`,
     };
 
-    setLeads((prev) =>
-      prev.map((l) => (l.id === leadId ? { ...l, status: 'proposal_sent', proposal: newProposal } : l))
-    );
+    updateLead(leadId, { status: 'proposal_sent', proposal: newProposal });
   };
 
   const convertLeadToClient = (leadId: string) => {
     const lead = leads.find((l) => l.id === leadId);
     if (!lead) return null;
 
-    // Duplicate client prevention: check if client with same email or company already exists
+    // Check existing client
     const existingClient = clients.find(
       (c) =>
         c.email.trim().toLowerCase() === lead.email.trim().toLowerCase() ||
@@ -998,6 +1006,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       setClients((prev) =>
         prev.map((c) => (c.id === existingClient.id ? targetClient : c))
       );
+      updateClient(existingClient.id, { activeProjectsCount: targetClient.activeProjectsCount });
     } else {
       targetClient = {
         id: clientId,
@@ -1012,6 +1021,18 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         isDemo: false,
       };
       setClients((prev) => [targetClient, ...prev]);
+
+      if (supabase) {
+        supabase.from('clients').insert({
+          id: clientId,
+          name: targetClient.name,
+          company: targetClient.company,
+          email: targetClient.email,
+          phone: targetClient.phone,
+          status: 'active',
+          total_value: targetClient.totalValue,
+        }).then();
+      }
     }
 
     const newProject: Project = {
@@ -1029,11 +1050,11 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
       requirementsSummary: lead.notes || `Contracted via lead conversion: ${lead.service}`,
       teamMembers: [{ name: 'Tirth Rathod', role: 'Lead Architect' }],
       milestones: [
-        { id: 'm-1', name: 'Scope Confirmation & Requirements', status: 'completed', progress: 100, completedAt: 'Today' },
-        { id: 'm-2', name: 'UI/UX Interactive System', status: 'in_progress', progress: 20, dueDate: 'Sprint 1' },
-        { id: 'm-3', name: 'Core Engine & Architecture', status: 'pending', progress: 0, dueDate: 'Sprint 2' },
-        { id: 'm-4', name: 'QA Testing & Client Review', status: 'pending', progress: 0, dueDate: 'Sprint 3' },
-        { id: 'm-5', name: 'Production Launch & Go-Live', status: 'pending', progress: 0, dueDate: 'Sprint 4' },
+        { id: `m-${Date.now()}-1`, name: 'Scope Confirmation & Requirements', status: 'completed', progress: 100, completedAt: 'Today' },
+        { id: `m-${Date.now()}-2`, name: 'UI/UX Interactive System', status: 'in_progress', progress: 20, dueDate: 'Sprint 1' },
+        { id: `m-${Date.now()}-3`, name: 'Core Engine & Architecture', status: 'pending', progress: 0, dueDate: 'Sprint 2' },
+        { id: `m-${Date.now()}-4`, name: 'QA Testing & Client Review', status: 'pending', progress: 0, dueDate: 'Sprint 3' },
+        { id: `m-${Date.now()}-5`, name: 'Production Launch & Go-Live', status: 'pending', progress: 0, dueDate: 'Sprint 4' },
       ],
       updates: [
         {
@@ -1061,8 +1082,26 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     };
 
     setProjects((prev) => [newProject, ...prev]);
-    setLeads((prev) => prev.map((l) => (l.id === leadId ? { ...l, status: 'won' } : l)));
+    updateLead(leadId, { status: 'won' });
     setSelectedClientId(clientId);
+
+    if (supabase) {
+      supabase.from('projects').insert({
+        id: projectId,
+        client_id: clientId,
+        client_name: newProject.clientName,
+        company_name: newProject.companyName,
+        title: newProject.title,
+        service: newProject.service,
+        progress: 20,
+        status: 'in_progress',
+        budget: newProject.budget,
+        requirements_summary: newProject.requirementsSummary,
+        target_delivery_date: newProject.targetDeliveryDate,
+        team_members: newProject.teamMembers,
+        timeline: newProject.timeline,
+      }).then();
+    }
 
     addAuditLog({
       actor: currentUser?.name || 'Administrator',
@@ -1119,11 +1158,11 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         { name: 'Optenary Engineering', role: 'Full-Stack Team' },
       ],
       milestones: [
-        { id: 'm-1', name: 'Onboarding & Requirement Verification', status: 'completed', progress: 100, completedAt: 'Today' },
-        { id: 'm-2', name: 'UI/UX & Interactive Prototypes', status: 'in_progress', progress: 25, dueDate: 'Week 1' },
-        { id: 'm-3', name: 'Core Architecture & API Integration', status: 'pending', progress: 0, dueDate: 'Week 2' },
-        { id: 'm-4', name: 'QA Testing & User Acceptance', status: 'pending', progress: 0, dueDate: 'Week 3' },
-        { id: 'm-5', name: 'Production Launch & Go-Live', status: 'pending', progress: 0, dueDate: 'Week 4' },
+        { id: `m-${Date.now()}-1`, name: 'Onboarding & Requirement Verification', status: 'completed', progress: 100, completedAt: 'Today' },
+        { id: `m-${Date.now()}-2`, name: 'UI/UX & Interactive Prototypes', status: 'in_progress', progress: 25, dueDate: 'Week 1' },
+        { id: `m-${Date.now()}-3`, name: 'Core Architecture & API Integration', status: 'pending', progress: 0, dueDate: 'Week 2' },
+        { id: `m-${Date.now()}-4`, name: 'QA Testing & User Acceptance', status: 'pending', progress: 0, dueDate: 'Week 3' },
+        { id: `m-${Date.now()}-5`, name: 'Production Launch & Go-Live', status: 'pending', progress: 0, dueDate: 'Week 4' },
       ],
       updates: [
         {
@@ -1167,10 +1206,40 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     setProjects((prev) => [newProject, ...prev]);
     setSelectedClientId(clientId);
 
+    if (supabase) {
+      supabase.from('clients').insert({
+        id: clientId,
+        name: newClient.name,
+        company: newClient.company,
+        email: newClient.email,
+        phone: newClient.phone,
+        industry: newClient.industry,
+        website: newClient.website,
+        status: 'active',
+        total_value: newClient.totalValue,
+      }).then();
+
+      supabase.from('projects').insert({
+        id: projectId,
+        client_id: clientId,
+        client_name: newProject.clientName,
+        company_name: newProject.companyName,
+        title: newProject.title,
+        service: newProject.service,
+        progress: 20,
+        status: 'in_progress',
+        budget: newProject.budget,
+        requirements_summary: newProject.requirementsSummary,
+        target_delivery_date: newProject.targetDeliveryDate,
+        team_members: newProject.teamMembers,
+        timeline: newProject.timeline,
+      }).then();
+    }
+
     return { client: newClient, project: newProject };
   };
 
-  // RESET & BACKUP
+  // RESET & EXPORT
   const resetToDefaults = () => {
     localStorage.removeItem(`${STORAGE_KEY}_clients`);
     localStorage.removeItem(`${STORAGE_KEY}_projects`);
@@ -1180,21 +1249,21 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(`${STORAGE_KEY}_audit`);
     localStorage.removeItem(`${STORAGE_KEY}_notifs`);
 
-    setClients(INITIAL_CLIENTS);
-    setProjects(INITIAL_PROJECTS);
-    setLeads(INITIAL_LEADS);
-    setTasks(INITIAL_TASKS);
-    setTeamMembers(INITIAL_TEAM_MEMBERS);
-    setAuditLogs(INITIAL_AUDIT_LOGS);
-    setNotifications(INITIAL_NOTIFICATIONS);
-    setSelectedClientId('c-shree');
+    setClients([]);
+    setProjects([]);
+    setLeads([]);
+    setTasks([]);
+    setTeamMembers(DEFAULT_TEAM_MEMBERS);
+    setAuditLogs([]);
+    setNotifications([]);
+    setSelectedClientId('');
   };
 
   const exportDatabaseJSON = () => {
     const data = {
       exportedAt: new Date().toISOString(),
       platform: 'Optenary Digital Operations Platform',
-      version: '2.0.0',
+      version: '3.0.0',
       clients,
       projects,
       leads,
@@ -1217,7 +1286,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
   const aiAnalyzeRequirements = async (rawText: string) => {
     await new Promise((r) => setTimeout(r, 600));
 
-    const isEcommerce = /store|shop|product|sell|order|fastener|catalog/i.test(rawText);
+    const isEcommerce = /store|shop|product|sell|order|catalog/i.test(rawText);
     const isMobile = /mobile|app|ios|android|flutter/i.test(rawText);
     const isAutomation = /ai|agent|bot|whatsapp|scrape|automate/i.test(rawText);
 
@@ -1266,6 +1335,16 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
     await new Promise((r) => setTimeout(r, 600));
     const proj = projects.find((p) => p.id === projectId) || projects[0];
 
+    if (!proj) {
+      return {
+        headline: 'No active project selected.',
+        completedHighlights: ['Awaiting project initiation'],
+        activeFocus: 'Provision a project from the admin panel.',
+        risksAndBlockers: 'None',
+        nextMilestoneDeadline: 'TBD',
+      };
+    }
+
     const completed = proj.milestones.filter((m) => m.status === 'completed').map((m) => m.name);
     const active = proj.milestones.find((m) => m.status === 'in_progress')?.name || 'Sprint Execution';
 
@@ -1300,6 +1379,7 @@ export function PlatformProvider({ children }: { children: ReactNode }) {
         teamMembers,
         auditLogs,
         notifications,
+        isLoading,
         addAuditLog,
         addNotification,
         markNotificationRead,

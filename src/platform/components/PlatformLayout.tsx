@@ -512,17 +512,17 @@ export default function PlatformLayout({
 
                   <button
                     onClick={() => {
-                      loginAsDemo('client_shree');
+                      loginAsDemo('client');
                       setDemoDropdownOpen(false);
                       navigate('/portal');
                     }}
                     className={`w-full text-left px-2.5 py-1.5 rounded-lg flex items-center justify-between ${
-                      role === 'client' && currentClientId === 'c-shree'
+                      role === 'client'
                         ? 'bg-[#D4FF3A]/10 text-[#D4FF3A]'
                         : 'text-white/80 hover:bg-white/[0.05]'
                     }`}
                   >
-                    <span>{DEMO_USERS.client_shree.name}</span>
+                    <span>Client Portal</span>
                     <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Client</span>
                   </button>
                 </div>

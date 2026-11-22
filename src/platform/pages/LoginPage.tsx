@@ -35,9 +35,9 @@ export default function LoginPage() {
     }
   };
 
-  const handleDemoLogin = (preset: 'admin' | 'team' | 'client_shree' | 'client_mehta') => {
+  const handleDemoLogin = (preset: 'admin' | 'team' | 'client') => {
     loginAsDemo(preset);
-    if (preset === 'client_shree' || preset === 'client_mehta') {
+    if (preset === 'client') {
       navigate('/portal', { replace: true });
     } else {
       navigate('/admin', { replace: true });
@@ -93,7 +93,7 @@ export default function LoginPage() {
               Instant Demo Access (Click to test roles)
             </span>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => handleDemoLogin('admin')}
@@ -101,7 +101,7 @@ export default function LoginPage() {
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Administrator</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#D4FF3A]/20 text-[#D4FF3A]">All OS</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#D4FF3A]/20 text-[#D4FF3A]">Admin</span>
                 </div>
                 <div className="text-[11px] text-white/50 font-mono truncate">{DEMO_USERS.admin.email}</div>
               </button>
@@ -112,7 +112,7 @@ export default function LoginPage() {
                 className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-all group"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Team Architect</span>
+                  <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Team Staff</span>
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300">Staff</span>
                 </div>
                 <div className="text-[11px] text-white/50 font-mono truncate">{DEMO_USERS.team.email}</div>
@@ -120,26 +120,14 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => handleDemoLogin('client_shree')}
+                onClick={() => handleDemoLogin('client')}
                 className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-all group"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Client: Shree Ent.</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Portal</span>
+                  <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Client Portal</span>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Client</span>
                 </div>
-                <div className="text-[11px] text-white/50 font-mono truncate">Ramesh Patel</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('client_mehta')}
-                className="p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-left transition-all group"
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-white group-hover:text-[#D4FF3A]">Client: Mehta Dairy</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Portal</span>
-                </div>
-                <div className="text-[11px] text-white/50 font-mono truncate">Rajesh Mehta</div>
+                <div className="text-[11px] text-white/50 font-mono truncate">{DEMO_USERS.client.email}</div>
               </button>
             </div>
           </div>
