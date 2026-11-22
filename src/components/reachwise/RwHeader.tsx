@@ -23,11 +23,42 @@ export default function RwHeader({ active, ground }: RwHeaderProps) {
       const w = window.innerWidth
       setIsPhone(w < 810)
       setIsCompact(w < 1024)
+      if (w >= 1024) {
+        setOpen(false)
+      }
     }
     handleResize()
     window.addEventListener("resize", handleResize, { passive: true })
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  // Auto-close mobile drawer on route transition
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
+
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [open])
+
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) {
+        setOpen(false)
+      }
+    }
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
+  }, [open])
 
   // Determine active route if not explicitly passed
   const currentActive =

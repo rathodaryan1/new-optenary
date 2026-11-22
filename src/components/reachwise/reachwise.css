@@ -2450,6 +2450,8 @@ html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
   }
   .rwwk-view {
     border-radius: 18px !important;
+    aspect-ratio: 4/3 !important;
+    max-height: 55svh !important;
   }
   .rwco-form {
     padding: 20px 14px !important;
@@ -2461,4 +2463,124 @@ html.rwtr-arrive .rwtr-ssr{display:block;animation:rwtr-fb .4s ease 3.4s both}
     font-size: clamp(48px, 18vw, 80px) !important;
   }
 }
+
+/* ========================================================
+   COMPREHENSIVE TOUCH & ULTRA-MOBILE (320px - 430px) SUITE
+   ======================================================== */
+@media (hover: none), (pointer: coarse) {
+  /* Suppress desktop-only cursor tracking elements on touchscreens */
+  .rwh-cur,
+  .rw-cur,
+  .rwwk-cur,
+  .rwsv-cur,
+  [data-cur] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Ensure touchable targets have accessible hit areas */
+  .rw-btn,
+  .rwhd-bg,
+  .rwh-links a,
+  .rwwk-tab,
+  .rwbl-chip,
+  .rwhd-dl a {
+    min-height: 44px !important;
+    touch-action: manipulation !important;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Ultra-compact viewport safeguards (320px - 360px) */
+  :root {
+    --g: 14px !important;
+  }
+  .rw-wrap {
+    --pad: 14px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .rwh-h1 {
+    font-size: clamp(28px, 9.2vw, 36px) !important;
+    line-height: 1.08 !important;
+  }
+  .rw-hd {
+    font-size: clamp(26px, 8.8vw, 34px) !important;
+    line-height: 1.1 !important;
+  }
+  .rwh-ann,
+  .rwh-hint {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+  }
+  .rwcl .rwcl-scope {
+    width: min(260px, 86vw) !important;
+    --nm: 9.5px !important;
+  }
+  .rwin .rwin-field {
+    height: 300px !important;
+  }
+  .rwin .rwin-ratio-n {
+    font-size: 44px !important;
+  }
+  .rwrv .rwrv-lock {
+    padding: 10px 8px 12px !important;
+    border-radius: 32px !important;
+  }
+  .rwrv .rwrv-clock {
+    font-size: 64px !important;
+  }
+  .rwrv .rwrv-note {
+    padding: 11px 10px 12px !important;
+    border-radius: 18px !important;
+  }
+  .rwrv .rwrv-q {
+    font-size: 13px !important;
+  }
+  .rwnm-tile {
+    padding: 16px 12px !important;
+  }
+  .rwft-top {
+    gap: 32px !important;
+  }
+  .rwft-cols {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+/* Native hardware-accelerated touch scroll for all containers */
+.overflow-x-auto,
+.overflow-y-auto,
+.rwwk-tabs,
+.rwwg-chips,
+.rwtm-row,
+.rwbl-chips,
+.rw-chips,
+.rwhd-dr-in,
+.rwhd-drw {
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-x: contain;
+}
+
+/* Respect user preference for reduced motion without breaking visibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .rwh-cur,
+  .rw-cur,
+  .rwwk-cur {
+    display: none !important;
+  }
+  .rwhd-drw {
+    clip-path: none !important;
+  }
+}
+
 

@@ -123,7 +123,7 @@ export default function AIAssistantModal({
         </div>
 
         {/* Tab Navigator */}
-        <div className="flex border-b border-white/[0.08] bg-[#0A0B0D] px-6">
+        <div className="flex border-b border-white/[0.08] bg-[#0A0B0D] px-4 sm:px-6 overflow-x-auto whitespace-nowrap flex-nowrap">
           <button
             onClick={() => setActiveTab('scope')}
             className={`py-3 px-4 text-xs font-semibold flex items-center gap-2 border-b-2 transition-colors ${

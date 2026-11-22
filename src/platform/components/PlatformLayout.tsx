@@ -109,19 +109,48 @@ export default function PlatformLayout({
     });
   };
 
+  // Auto-close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close mobile drawer on desktop resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Keyboard shortcut for search (Ctrl+K / Cmd+K)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         setSearchModalOpen((prev) => !prev);
-      } else if (e.key === 'Escape' && searchModalOpen) {
-        setSearchModalOpen(false);
+      } else if (e.key === 'Escape') {
+        if (searchModalOpen) setSearchModalOpen(false);
+        if (mobileMenuOpen) setMobileMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [searchModalOpen]);
+  }, [searchModalOpen, mobileMenuOpen]);
 
   const currentClient = clients.find((c) => c.id === currentClientId) || clients[0];
   const unreadNotifications = notifications.filter((n) => !n.isRead);
@@ -541,7 +570,16 @@ export default function PlatformLayout({
       </header>
 
       {/* Main Container with Sidebar + Content */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Mobile Navigation Drawer Backdrop */}
+        {role !== 'client' && mobileMenuOpen && (
+          <div
+            onClick={() => setMobileMenuOpen(false)}
+            className="fixed inset-0 z-20 bg-black/70 backdrop-blur-sm lg:hidden transition-opacity"
+            aria-hidden="true"
+          />
+        )}
+
         {/* Admin Sidebar Navigation */}
         {role !== 'client' && (
           <aside

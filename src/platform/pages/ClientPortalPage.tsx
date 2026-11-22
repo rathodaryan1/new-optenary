@@ -144,7 +144,7 @@ export default function ClientPortalPage() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-white/[0.08] gap-6 text-sm">
+        <div className="flex border-b border-white/[0.08] gap-6 text-sm overflow-x-auto whitespace-nowrap flex-nowrap scrollbar-none pb-1">
           <button
             onClick={() => setActiveTab('milestones')}
             className={`pb-3 font-semibold transition-all relative ${
